@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RayshiftTranslateFGO.Views.ManagerPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <RefreshView x:Name="Refresh">
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout x:Name="LoadingLayout">
+                        <Label x:Name="LoadingText" Text="Loading, please wait..."
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand" />
+                        <ActivityIndicator x:Name="ActivityIndicatorLoading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="True"/>
+                        <Button x:Name="RetryButton" Text="Retry" IsVisible="False"></Button>
+                    </StackLayout>
+                    <StackLayout x:Name="ManagerLayout" IsVisible="False" Margin="5, 5, 5, 5">
+                        <Label FontAttributes="Bold" FontSize="22" Margin="0, 0, 0, 3">Rayshift.io Translation Manager</Label>
+                        <Grid HorizontalOptions="StartAndExpand"  Padding="0, 5, 0, 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="18" />
+                                <RowDefinition Height="18" />
+                                <RowDefinition Height="18" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0">Fate/Grand Order app version required:</Label>
+                            <Label x:Name="AppVersion" Grid.Row="0" Grid.Column="1">unknown</Label>
+                            <Label Grid.Row="1" Grid.Column="0">Fate/Grand Order app version installed:</Label>
+                            <Label x:Name="AppVersionInstalled" Grid.Row="1" Grid.Column="1">unknown</Label>
+                            <Label Grid.Row="2" Grid.Column="0">Program status:</Label>
+                            <Label x:Name="ProgramStatus" Grid.Row="2" Grid.Column="1">unknown</Label>
+                        </Grid>
+                        <Label x:Name="ManagerError" IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
+                        <Button Margin="0,10,0,0" Text="Open Wiki"
+                                BackgroundColor="{StaticResource Primary}"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="EndAndExpand"
+                                TextColor="White" IsVisible="False" x:Name="WikiButton"/>
+
+                        <StackLayout Orientation="Horizontal" x:Name="MasterButtons" IsVisible="False">
+                            <Button Text="Uninstall" HorizontalOptions="FillAndExpand"
+                                    x:Name="RevertButton" IsEnabled="True">
+                            </Button>
+                            <Button Text="Refresh" HorizontalOptions="FillAndExpand"
+                                    x:Name="RefreshButton" IsEnabled="True">
+                            </Button>
+                        </StackLayout>
+                        <CollectionView Margin="0,20,0,0" x:Name="TranslationListView">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Label FontAttributes="Bold" FontSize="18" Text="{Binding Name}" />
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Last updated: " FontAttributes="Bold"/>
+                                                    <Span Text="{Binding LastUpdated}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Status: " FontAttributes="Bold"/>
+                                                    <Span Text="{Binding Status}" TextColor="{Binding TextColor}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button Text="Install" HorizontalOptions="FillAndExpand"
+                                                IsEnabled="{Binding InstallEnabled}" Command="{Binding InstallClick}">
+                                        </Button>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
