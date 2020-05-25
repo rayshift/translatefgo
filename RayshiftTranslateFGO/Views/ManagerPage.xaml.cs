@@ -44,6 +44,7 @@ namespace RayshiftTranslateFGO.Views
 
         public ManagerPage()
         {
+
             InitializeComponent();
             EnableButtons(false);
             RetryButton.Clicked += HandshakeClick;
@@ -161,7 +162,16 @@ namespace RayshiftTranslateFGO.Views
                                 _firstLoad = false;
                             }
 
-                            await ProcessAssets(assetPath);
+                            try
+                            {
+                                await ProcessAssets(assetPath);
+                            }
+                            catch (Exception ex)
+                            {
+                                await DisplayAlert("Error", $"An exception has occurred:\n{ex.ToString()}", "OK");
+                                throw;
+                            }
+
                             return; 
                         }
                         ProgramStatus.Text = "no write access";
@@ -287,7 +297,9 @@ namespace RayshiftTranslateFGO.Views
                     scriptBundleSet.TotalSize = totalSize;
                     _translations.Add(i, scriptBundleSet);
                     var statusString = GenerateStatusString(scriptBundleSet.Scripts, i, scriptBundleSet.Group);
-                    var lastUpdated = DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime, DateTimeKind.Utc).Humanize();
+                    var timespan = DateTime.Now.Subtract(DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime,
+                        DateTimeKind.Utc));
+                    var lastUpdated = PeriodOfTimeOutput(timespan);
                     bool enableButton = statusString.Item1 != "installed";
                     var i1 = i;
                     _guiObjects.Add(new TranslationGUIObject()
@@ -659,6 +671,26 @@ namespace RayshiftTranslateFGO.Views
                 buttonText);
 
             afterHideCallback?.Invoke();
+        }
+
+        private string PeriodOfTimeOutput(TimeSpan tspan, int level = 0)
+        {
+            string how_long_ago = "ago";
+            if (level >= 2) return how_long_ago;
+            if (tspan.Days > 1)
+                how_long_ago = $"{tspan.Days} days ago";
+            else if (tspan.Days == 1)
+                how_long_ago =
+                    $"1 day {PeriodOfTimeOutput(new TimeSpan(tspan.Hours, tspan.Minutes, tspan.Seconds), level + 1)}";
+            else if (tspan.Hours >= 1)
+                how_long_ago =
+                    $"{tspan.Hours} {((tspan.Hours > 1) ? "hours" : "hour")} {PeriodOfTimeOutput(new TimeSpan(0, tspan.Minutes, tspan.Seconds), level + 1)}";
+            else if (tspan.Minutes >= 1)
+                how_long_ago =
+                    $"{tspan.Minutes} {((tspan.Minutes > 1) ? "minutes" : "minute")} {PeriodOfTimeOutput(new TimeSpan(0, 0, tspan.Seconds), level + 1)}";
+            else if (tspan.Seconds >= 1)
+                how_long_ago = $"{tspan.Seconds} {((tspan.Seconds > 1) ? "seconds" : "second")} ago";
+            return how_long_ago;
         }
     }
 }
