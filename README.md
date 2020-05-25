@@ -7,7 +7,9 @@ This application translates cutscenes in Fate/Grand Order JP into a variety of d
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, English is supported for Fuyuki to LB1 (including events older than 2 years), an English machine translation is available for Gudaguda 4 and Requiem, and a custom Spanish translation is available for Fuyuki and Orleans.
+Currently, English is supported for Fuyuki to LB1 (including events older than 2 years), an English machine translation is available for Gudaguda 4 and Requiem.
+
+A spanish translation for Fuyuki and Orleans will be available very soon.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
