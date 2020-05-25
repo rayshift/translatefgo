@@ -35,7 +35,7 @@ Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo
 ### Is this safe, will I get banned?
 As of patch 2.13.1, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
-1. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that.
+1. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card.
 2. The game does not and cannot detect anything this application does.
 3. It is not in the interests of the game's developers to ban people translating their game - it does not give an unfair advantage like cheating. Many other games have had similar modifications in use for years without issues. 
 
