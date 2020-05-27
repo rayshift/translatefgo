@@ -23,6 +23,11 @@ Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
 #### Updates
 The scripts will update on a regular basis. Please keep the app installed and check it regularly - the "installed" status will change to "update available" when an update is ready.
 
+To update after new content is added, you must do the following:
+1. Open Fate/Grand Order and accept the content download.
+2. Close Fate/Grand Order and click "Update" in the translation app.
+3. Reopen Fate/Grand Order.
+
 #### Uninstallation
 1. Close Fate/Grand Order.
 2. Open the application and click "Uninstall".
