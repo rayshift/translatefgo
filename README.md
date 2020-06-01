@@ -9,7 +9,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 
 Currently, English is supported for Fuyuki to LB1 (including events older than 2 years), an English machine translation is available for Gudaguda 4 and Requiem.
 
-A spanish translation for Fuyuki and Orleans will be available very soon.
+A spanish translation for Fuyuki and Orleans is also available.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
