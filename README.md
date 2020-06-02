@@ -20,6 +20,9 @@ Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
 4. Click "install" below the language you want to install.
 5. Reopen Fate/Grand Order.
 
+### Emulator support
+Only Nox is supported officially, Bluestacks is completely incompatible, other emulators may have mixed results.
+
 #### Updates
 The scripts will update on a regular basis. Please keep the app installed and check it regularly - the "installed" status will change to "update available" when an update is ready.
 
