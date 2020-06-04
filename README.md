@@ -41,10 +41,11 @@ To update after new content is added, you must do the following:
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.13.1, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.13.3, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
-1. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card.
-2. The game does not and cannot detect anything this application does.
+1. The game does not and cannot detect anything this application does.
+2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
+Note: Account suspension notices do mention that modifying game data is not allowed, however this is not reflected properly in the terms of service. You use this at your own risk, but please refer back to the first point in particular.
 3. It is not in the interests of the game's developers to ban people translating their game - it does not give an unfair advantage like cheating. Many other games have had similar modifications in use for years without issues. 
 
 Ultimately, you use this tool at your own discretion - we are not liable for any issues that could arise. Ensure you always have a bind code active. Ensure you only download the application from this repository or rayshift.io - do not trust other sources.
