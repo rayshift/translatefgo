@@ -28,17 +28,13 @@ namespace RayshiftTranslateFGO.Services
         public RestfulAPI()
         {
 #if DEBUG
-            //_client = new RestClient("http://appdev-k6vgq3acps.rayshift.io:34520/api/v1/");
-            _client = new RestClient("https://appdev-k6vgq3acps.rayshift.io:44309/api/v1/");
-            //_client = new RestClient("https://rayshift.io/api/v1/");
+            _client = new RestClient($"{EndpointURL.EndPoint}/api/v1/");
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, certificate, chain, sslPolicyErrors) => true;
-            //_client.Proxy = new WebProxy("http://appdev-k6vgq3acps.rayshift.io:8080");
+
+            //_client.Proxy = new WebProxy("");
 #else
-            _client = new RestClient("https://rayshift.io/api/v1/");
-            //ServicePointManager.ServerCertificateValidationCallback +=
-                //(sender, certificate, chain, sslPolicyErrors) => true;
-            //_client = new RestClient("https://appdev-k6vgq3acps.rayshift.io:44309/api/v1/");
+            _client = new RestClient($"{EndpointURL.EndPoint}/api/v1/");
 #endif
             var userAgent = Java.Lang.JavaSystem.GetProperty("http.agent");
             _client.UserAgent = $"TranslateFGO {ScriptUtil.GetBuild()} {userAgent}";
