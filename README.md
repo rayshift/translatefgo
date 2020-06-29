@@ -41,7 +41,7 @@ To update after new content is added, you must do the following:
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.13.5, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.13.6, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
