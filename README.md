@@ -11,7 +11,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 
 Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, and Summer 4 (Las Vegas).
 
-A spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
+A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
