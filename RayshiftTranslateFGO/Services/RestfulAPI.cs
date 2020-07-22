@@ -9,7 +9,6 @@ using RayshiftTranslateFGO.Util;
 using RestSharp;
 using RestSharp.Serialization.Json;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace RayshiftTranslateFGO.Services
 {
@@ -38,10 +37,8 @@ namespace RayshiftTranslateFGO.Services
 #endif
             var userAgent = Java.Lang.JavaSystem.GetProperty("http.agent");
             _client.UserAgent = $"TranslateFGO {ScriptUtil.GetBuild()} {userAgent}";
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                _assets = Android.App.Application.Context.Assets;
-            }
+            _assets = Android.App.Application.Context.Assets;
+            
         }
 
         /// <summary>
@@ -133,6 +130,24 @@ namespace RayshiftTranslateFGO.Services
             request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
 
             return await ExecuteAsync<AssetListAPIResponse>(request);
+        }
+
+        public async Task<BaseAPIResponse> SendRegistrationToken(string token)
+        {
+            var request = new RestRequest("translate/firebasetoken")
+            {
+                Method = Method.POST
+            };
+
+            request.AddHeader("Content-type", "application/json");
+            var sendObject = new Dictionary<string, object>()
+            {
+                {"token", token}
+            };
+
+            request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
+
+            return await ExecuteAsync<BaseAPIResponse>(request);
         }
     }
 }

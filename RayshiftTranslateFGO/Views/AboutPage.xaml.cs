@@ -17,6 +17,7 @@ namespace RayshiftTranslateFGO.Views
         {
             InitializeComponent();
             ShowCorrectAuthenticationButton();
+            ShowCorrectAutoUpdateButton();
         }
 
         public void ShowCorrectAuthenticationButton()
@@ -30,6 +31,20 @@ namespace RayshiftTranslateFGO.Views
             {
                 Authentication.Command = new Command(async () => await Authenticate());
                 Authentication.Text = "Enter pre-release key";
+            }
+        }
+
+        public void ShowCorrectAutoUpdateButton()
+        {
+            if (Preferences.ContainsKey("DisableAutoUpdate"))
+            {
+                AutoUpdate.Command = new Command(EnableAutoUpdate);
+                AutoUpdate.Text = "Enable auto update";
+            }
+            else
+            {
+                AutoUpdate.Command = new Command(DisableAutoUpdate);
+                AutoUpdate.Text = "Disable auto update";
             }
         }
 
@@ -59,6 +74,18 @@ namespace RayshiftTranslateFGO.Views
                 Preferences.Remove("AuthKey");
                 ShowCorrectAuthenticationButton();
             }
+        }
+
+        public void EnableAutoUpdate()
+        {
+            Preferences.Remove("DisableAutoUpdate");
+            ShowCorrectAutoUpdateButton();
+        }
+
+        public void DisableAutoUpdate()
+        {
+            Preferences.Set("DisableAutoUpdate", 1);
+            ShowCorrectAutoUpdateButton();
         }
     }
 }

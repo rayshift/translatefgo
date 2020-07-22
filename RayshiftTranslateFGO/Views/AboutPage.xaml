@@ -76,8 +76,8 @@
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
-                <Button Margin="0,10,0,0" Text="Open GitHub"
-                        Command="{Binding OpenGithub}"
+                <Button Margin="0,10,0,0" Text="Disable auto-update"
+                        x:Name="AutoUpdate"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
                 <Button Margin="0,10,0,0" Text="Enter pre-release key"

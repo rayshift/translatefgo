@@ -36,7 +36,7 @@ namespace RayshiftTranslateFGO.Views
         private readonly ObservableCollection<TranslationGUIObject> _guiObjects = new ObservableCollection<TranslationGUIObject>();
         private readonly Dictionary<int, bool> _assetSubmitRequired = new Dictionary<int, bool>();
 
-        private const string _assetList = "cfb1d36393fd67385e046b084b7cf7ed";
+        public const string _assetList = "cfb1d36393fd67385e046b084b7cf7ed";
 
         private TranslationList installedBundle { get; set; }
 
