@@ -3,13 +3,13 @@
 
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
-**New (8th July):** Lostbelt 3 is now available in English.
+**New (22nd July):** Ooku is fully translated using a manual translation by PkFreeze.
 
 ![Example](https://i.imgur.com/dNLFbxG.png)
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, and Summer 4 (Las Vegas).
+Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, and Summer 4 (Las Vegas). A manual translation is available for Ooku.
 
 A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
