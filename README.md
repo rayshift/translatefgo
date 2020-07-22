@@ -33,6 +33,8 @@ To update after new content is added, you must do the following:
 2. Close Fate/Grand Order and click "Update" in the translation app.
 3. Reopen Fate/Grand Order.
 
+The application will also auto-update an installed set of scripts when they have minor changes, provided your device is compatible. This can be disabled in the About tab.
+
 #### Uninstallation
 1. Close Fate/Grand Order.
 2. Open the application and click "Uninstall".
