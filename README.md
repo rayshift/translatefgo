@@ -3,6 +3,7 @@
 
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
+**New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
 **New (22nd July):** Ooku is fully translated using a manual translation by PkFreeze.
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases (such as LB4 that is currently being worked on, and LB5/5.5 in the future).
@@ -11,7 +12,7 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get acce
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, and Summer 4 (Las Vegas). A manual translation is available for Ooku.
+Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, Summer 4 (Las Vegas), and Summer 5 (Servant Summer Camp!). A manual translation is available for Ooku.
 
 A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
