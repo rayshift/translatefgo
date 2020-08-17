@@ -4,6 +4,7 @@
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
 **New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
+
 **New (22nd July):** Ooku is fully translated using a manual translation by PkFreeze.
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases (such as LB4 that is currently being worked on, and LB5/5.5 in the future).
