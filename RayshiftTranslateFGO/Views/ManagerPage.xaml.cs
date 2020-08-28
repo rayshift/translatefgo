@@ -87,6 +87,11 @@ namespace RayshiftTranslateFGO.Views
                 return;
             }
 
+            if (!string.IsNullOrEmpty(handshake.Response.Endpoint))
+            {
+                rest.SetEndpoint(handshake.Response.Endpoint);
+            }
+
             // Check for app updates
             var currentVersion = ScriptUtil.GetBuild();
             if (int.Parse(handshake.Response.UpdateVer) > currentVersion)

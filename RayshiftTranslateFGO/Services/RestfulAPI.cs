@@ -41,6 +41,12 @@ namespace RayshiftTranslateFGO.Services
             
         }
 
+        public void SetEndpoint(string endpoint)
+        {
+            _client.BaseUrl = new Uri($"{endpoint}/api/v1/");
+
+        }
+
         /// <summary>
         /// Execute request
         /// </summary>

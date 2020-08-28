@@ -19,6 +19,21 @@ namespace RayshiftTranslateFGO.Models
         public string UpdateVer { get; set; }
 
         public List<TranslationList> Translations { get; set; }
+
+        private string _endpoint;
+
+        public string Endpoint
+        {
+            get => _endpoint;
+            set
+            {
+                _endpoint = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    EndpointURL.EndPoint = value;
+                }
+            }
+        }
     }
 
     /// <summary>
