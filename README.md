@@ -1,7 +1,7 @@
 ﻿## Rayshift.io Translate Fate/Grand Order
 [![GitHub Release](https://img.shields.io/github/release/rayshift/translatefgo.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![Github All Releases](https://img.shields.io/github/downloads/rayshift/translatefgo/total.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![license: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/) [![Discord Chat](https://img.shields.io/discord/665980614998097941.svg)](https://discord.gg/6vncnjj)  
 
-This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Teams of translators are working on manual translations in various different languages.
+This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
 **New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
 
@@ -13,7 +13,7 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get acce
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, an English machine translation is available for LB3, Gudaguda 4, Requiem, Summer 4 (Las Vegas), and Summer 5 (Servant Summer Camp!). A manual translation is available for Ooku.
+Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, Summer 4 (Las Vegas), and Summer 5 (Servant Summer Camp!). A manual translation is available for Ooku.
 
 A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
