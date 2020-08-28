@@ -44,6 +44,7 @@ namespace RayshiftTranslateFGO.Droid
         {
             var rest = new RestfulAPI();
             var handshake = await rest.GetHandshakeApiResponse();
+
             _handshake = handshake;
 
             // Check for valid status
@@ -51,6 +52,11 @@ namespace RayshiftTranslateFGO.Droid
             {
                 Log.Warn(TAG, "Bad handshake for script update.");
                 return 0;
+            }
+
+            if (!string.IsNullOrEmpty(handshake.Response.Endpoint))
+            {
+                rest.SetEndpoint(handshake.Response.Endpoint);
             }
 
             // Check for app updates
