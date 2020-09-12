@@ -49,7 +49,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.17.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.18.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
@@ -108,3 +108,7 @@ If the change you are suggesting requires an API change, as the API is not open 
 
 ## Licence
 The code in this repository, the bundles from our API, and any android applications released are licenced under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence. This means it is forbidden to use or distribute any version of the application or any translated bundle for commercial purposes.
+
+Google Play and the Google Play logo are trademarks of Google LLC.
+
+Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. All images and names owned and trademarked by Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. are property of their respective owners.
