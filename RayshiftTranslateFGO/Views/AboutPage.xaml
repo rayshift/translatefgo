@@ -35,7 +35,7 @@
                             <FormattedString.Spans>
                                 <Span Text="Translate FGO" FontAttributes="Bold" FontSize="22" />
                                 <Span Text=" " />
-                                <Span Text="1.0.3" ForegroundColor="{StaticResource LightTextColor}" />
+                                <Span Text="1.0.4" ForegroundColor="{StaticResource LightTextColor}" />
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>

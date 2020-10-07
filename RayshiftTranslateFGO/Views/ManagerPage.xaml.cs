@@ -302,7 +302,7 @@ namespace RayshiftTranslateFGO.Views
                     scriptBundleSet.TotalSize = totalSize;
                     _translations.Add(i, scriptBundleSet);
                     var statusString = GenerateStatusString(scriptBundleSet.Scripts, i, scriptBundleSet.Group);
-                    var timespan = DateTime.Now.Subtract(DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime,
+                    var timespan = DateTime.UtcNow.Subtract(DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime,
                         DateTimeKind.Utc));
                     var lastUpdated = PeriodOfTimeOutput(timespan);
                     bool enableButton = statusString.Item1 != "installed";
