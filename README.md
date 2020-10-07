@@ -3,6 +3,8 @@
 
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
+### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
+
 **New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
 
 **New (22nd July):** Ooku is fully translated using a manual translation by PkFreeze.
@@ -27,7 +29,7 @@ Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
 5. Reopen Fate/Grand Order.
 
 #### Emulator support
-Only Nox is supported officially, Bluestacks is completely incompatible, other emulators may have mixed results.
+Only Nox is supported officially, other emulators may have mixed results.
 
 #### Updates
 The scripts will update on a regular basis. Please keep the app installed and check it regularly - the "installed" status will change to "update available" when an update is ready.
@@ -49,7 +51,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.17.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.19.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
@@ -108,3 +110,7 @@ If the change you are suggesting requires an API change, as the API is not open 
 
 ## Licence
 The code in this repository, the bundles from our API, and any android applications released are licenced under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence. This means it is forbidden to use or distribute any version of the application or any translated bundle for commercial purposes.
+
+Google Play and the Google Play logo are trademarks of Google LLC.
+
+Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. All images and names owned and trademarked by Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. are property of their respective owners.
