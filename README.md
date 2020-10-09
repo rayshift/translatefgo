@@ -3,7 +3,9 @@
 
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
-### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
+#### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
+
+**New (9th October):** Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
 
 **New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
 
@@ -15,7 +17,10 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get acce
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, English is supported for Fuyuki to LB2 (including events older than 2 years), an English machine translation is available for LB3, Gudaguda 4, Requiem, Summer 4 (Las Vegas), and Summer 5 (Servant Summer Camp!). A manual translation is available for Ooku.
+Currently, English is supported for:
+- Official: Fuyuki to LB2 (including events older than 2 years).
+- Machine & Edited: LB3, LB4 Gudaguda 4, Requiem, Summer 4 (Las Vegas), Summer 5 (Servant Summer Camp!). 
+- Manual: Ooku, 2nd half of LB4.
 
 A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
@@ -51,7 +56,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.19.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.20.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
