@@ -5,6 +5,8 @@ This application translates cutscenes in Fate/Grand Order JP into a variety of d
 
 #### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
 
+**New (9th October):** Gudaguda 5 is now translated with a machine translation.
+
 **New (9th October):** Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
 
 **New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
