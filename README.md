@@ -5,6 +5,8 @@ This application translates cutscenes in Fate/Grand Order JP into a variety of d
 
 #### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
 
+**New (11th November):** LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
+
 **New (9th October):** Gudaguda 5 is now translated with a machine translation.
 
 **New (9th October):** Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
@@ -58,7 +60,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.20.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.22.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
