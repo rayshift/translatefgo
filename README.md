@@ -122,4 +122,5 @@ Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and
 
 ## Old Changes
 17th August: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
+
 22nd July: Ooku is fully translated using a manual translation by PkFreeze.
