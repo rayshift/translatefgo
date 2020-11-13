@@ -11,10 +11,6 @@ This application translates cutscenes in Fate/Grand Order JP into a variety of d
 
 **New (9th October):** Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
 
-**New (17th August):** Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
-
-**New (22nd July):** Ooku is fully translated using a manual translation by PkFreeze.
-
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases.
 
 ![Example](https://i.imgur.com/dNLFbxG.png)
@@ -123,3 +119,7 @@ The code in this repository, the bundles from our API, and any android applicati
 Google Play and the Google Play logo are trademarks of Google LLC.
 
 Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. All images and names owned and trademarked by Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. are property of their respective owners.
+
+## Old Changes
+17th August: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
+22nd July: Ooku is fully translated using a manual translation by PkFreeze.
