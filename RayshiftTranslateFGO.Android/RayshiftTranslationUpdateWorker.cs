@@ -71,14 +71,37 @@ namespace RayshiftTranslateFGO.Droid
                 .GetInstalledApplications(PackageInfoFlags.MatchAll)
                 .FirstOrDefault(x => x.PackageName == "com.aniplex.fategrandorder");
 
-            if (existingFateApp == null)
+            var existingFateAppBetter = Android.App.Application.Context.PackageManager
+                .GetInstalledApplications(PackageInfoFlags.MatchAll)
+                .FirstOrDefault(x => x.PackageName == "io.rayshift.betterfgo");
+
+            bool installToBetter = false;
+
+            if (existingFateApp == null && existingFateAppBetter == null)
             {
                 Log.Warn(TAG, "FGO not installed for script update.");
                 return 0;
             }
+
+            if (existingFateAppBetter != null)
+            {
+                var packageVersion = Android.App.Application.Context.PackageManager
+                    .GetPackageInfo("io.rayshift.betterfgo", 0)
+                    ?.VersionName;
+                bool valid = ScriptUtil.IsValidAppVersion(handshake.Response.AppVer, packageVersion);
+                if (!valid)
+                {
+                    Log.Warn(TAG, "Better FGO App version not valid for script update.");
+                    return 0;
+                }
+
+                installToBetter = true;
+            }
             else
             {
-                var packageVersion = Android.App.Application.Context.PackageManager.GetPackageInfo("com.aniplex.fategrandorder", 0).VersionName;
+                var packageVersion = Android.App.Application.Context.PackageManager
+                    .GetPackageInfo("com.aniplex.fategrandorder", 0)
+                    ?.VersionName;
                 bool valid = ScriptUtil.IsValidAppVersion(handshake.Response.AppVer, packageVersion);
                 if (!valid)
                 {
@@ -86,38 +109,56 @@ namespace RayshiftTranslateFGO.Droid
                     return 0;
                 }
             }
+            
 
             var externalPath = System.IO.Directory.GetParent(Android.App.Application.Context.GetExternalFilesDir(null).Parent);
             if (await Permissions.CheckStatusAsync<Permissions.StorageWrite>() == PermissionStatus.Granted && externalPath.Exists)
             {
-                var assetPath = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
-                if (System.IO.Directory.Exists(assetPath))
+                var assetPathJp = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
+                var assetPathBetter = Path.Combine(externalPath.ToString(), "io.rayshift.betterfgo/files/data/d713/");
+
+                List<string> installPaths = new List<string> {assetPathJp};
+                if (installToBetter)
                 {
-                    var assetStorage = Path.Combine(assetPath, ManagerPage._assetList);
-                    if (File.Exists(assetStorage))
+                    installPaths.Add(assetPathBetter);
+                }
+
+                foreach (var assetPath in installPaths)
+                {
+                    if (System.IO.Directory.Exists(assetPath) && existingFateApp != null)
                     {
-                        await using var testFs = new System.IO.FileStream(assetStorage, FileMode.Open);
-                        if (testFs.CanRead && testFs.CanWrite)
+                        var assetStorage = Path.Combine(assetPath, ManagerPage._assetList);
+                        if (File.Exists(assetStorage))
                         {
-                            try
+                            await using var testFs = new System.IO.FileStream(assetStorage, FileMode.Open);
+                            if (!(testFs.CanRead && testFs.CanWrite))
                             {
-                                return await RunUpdate(assetPath);
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.Warn(TAG,
-                                    $"An exception occurred when trying to run an automatic update: {ex.ToString()}");
+                                Log.Warn(TAG, $"Can't write to {assetPath}, exiting early.");
                                 return 0;
                             }
                         }
                     }
                 }
+
+                try
+                {
+
+                    return await RunUpdate(installPaths);
+
+                }
+                catch (Exception ex)
+                {
+                    Log.Warn(TAG,
+                        $"An exception occurred when trying to run an automatic update: {ex.ToString()}");
+                    return 0;
+                }
+
             }
             Log.Warn(TAG, "Fallout error on BeginUpdate() for script update.");
             return 0;
         }
 
-        public async Task<int> RunUpdate(string assetPath)
+        public async Task<int> RunUpdate(List<string> installPaths)
         {
             List<string> _validSha = new List<string>();
 
@@ -171,13 +212,17 @@ namespace RayshiftTranslateFGO.Droid
                 {
                     throw new Exception($"Checksum failure.\nReal file length: {script.Length}\nDownload URL: {downloadUrl}");
                 }
-                filesToWrite.Add(items[i].Key, script);
+
+                foreach (var path in installPaths)
+                {
+                    filesToWrite.Add(Path.Combine(path, items[i].Key), script);
+                }
             }
 
             foreach (var file in filesToWrite)
             {
                 Log.Debug(TAG, $"Writing file {file.Key}");
-                await File.WriteAllBytesAsync(Path.Combine(assetPath, file.Key), file.Value);
+                await File.WriteAllBytesAsync(file.Key, file.Value);
             }
 
             Preferences.Set("InstalledScript", JsonConvert.SerializeObject(_translation));
