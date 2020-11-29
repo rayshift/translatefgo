@@ -114,8 +114,12 @@ namespace RayshiftTranslateFGO.Views
             var existingFateApp = Android.App.Application.Context.PackageManager
                 .GetInstalledApplications(PackageInfoFlags.MatchAll)
                 .FirstOrDefault(x => x.PackageName == "com.aniplex.fategrandorder");
+            var existingFateAppBetter = Android.App.Application.Context.PackageManager
+                .GetInstalledApplications(PackageInfoFlags.MatchAll)
+                .FirstOrDefault(x => x.PackageName == "io.rayshift.betterfgo");
 
-            if (existingFateApp == null)
+            bool installToBetter = false;
+            if (existingFateApp == null && existingFateAppBetter == null)
             {
                 AppVersionInstalled.Text = "not installed";
                 AppVersionInstalled.TextColor = Color.Crimson;
@@ -127,73 +131,121 @@ namespace RayshiftTranslateFGO.Views
             }
             else
             {
-                var packageVersion = Android.App.Application.Context.PackageManager.GetPackageInfo("com.aniplex.fategrandorder", 0).VersionName;
-                bool valid = ScriptUtil.IsValidAppVersion(handshake.Response.AppVer, packageVersion);
-                if (valid)
+                if (existingFateAppBetter == null)
                 {
-                    AppVersionInstalled.Text = packageVersion;
-                    AppVersionInstalled.TextColor = Color.LimeGreen;
+                    var packageVersion = Android.App.Application.Context.PackageManager
+                        .GetPackageInfo("com.aniplex.fategrandorder", 0)
+                        ?.VersionName;
+                    bool valid = ScriptUtil.IsValidAppVersion(handshake.Response.AppVer, packageVersion);
+                    if (valid)
+                    {
+                        AppVersionInstalled.Text = packageVersion;
+                        AppVersionInstalled.TextColor = Color.LimeGreen;
+                    }
+                    else
+                    {
+                        AppVersionInstalled.Text = packageVersion;
+                        AppVersionInstalled.TextColor = Color.Crimson;
+                        ManagerError.Text =
+                            "Your app version is out of date or you haven't installed Fate/Grand Order.";
+                        ManagerError.IsVisible = true;
+                        EnableButtons();
+                        return;
+                    }
                 }
                 else
                 {
-                    AppVersionInstalled.Text = packageVersion;
-                    AppVersionInstalled.TextColor = Color.Crimson;
-                    ManagerError.Text =
-                        "Your app version is out of date or you haven't installed Fate/Grand Order.";
-                    ManagerError.IsVisible = true;
-                    EnableButtons();
-                    return;
+                    var packageVersion = Android.App.Application.Context.PackageManager
+                        .GetPackageInfo("io.rayshift.betterfgo", 0)
+                        ?.VersionName;
+                    bool valid = ScriptUtil.IsValidAppVersion(handshake.Response.AppVer, packageVersion);
+                    if (valid)
+                    {
+                        AppVersionInstalled.Text = packageVersion;
+                        AppVersionInstalled.TextColor = Color.LimeGreen;
+                        installToBetter = true;
+                    }
+                    else
+                    {
+                        AppVersionInstalled.Text = packageVersion;
+                        AppVersionInstalled.TextColor = Color.Crimson;
+                        ManagerError.Text =
+                            "Your app version is out of date or you haven't installed Fate/Grand Order (BetterFGO).";
+                        ManagerError.IsVisible = true;
+                        EnableButtons();
+                        return;
+                    }
                 }
             }
 
             var externalPath = System.IO.Directory.GetParent(Android.App.Application.Context.GetExternalFilesDir(null).Parent);
             if (await Permissions.CheckStatusAsync<Permissions.StorageWrite>() == PermissionStatus.Granted && externalPath.Exists)
             {
-                var assetPath = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
-                if (System.IO.Directory.Exists(assetPath))
+                var assetPathJp = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
+                var assetPathBetter = Path.Combine(externalPath.ToString(), "io.rayshift.betterfgo/files/data/d713/");
+                List<string> installPaths = new List<string> { assetPathJp };
+                if (installToBetter)
                 {
-                    var assetStorage = Path.Combine(assetPath, _assetList);
-                    if (File.Exists(assetStorage))
+                    installPaths.Add(assetPathBetter);
+                }
+
+                bool assetPathErrors = false;
+                foreach (var assetPath in installPaths)
+                {
+                    if (System.IO.Directory.Exists(assetPath))
                     {
-                        using var testFs = new System.IO.FileStream(assetStorage, FileMode.Open);
-                        if (testFs.CanRead && testFs.CanWrite)
+                        var assetStorage = Path.Combine(assetPath, _assetList);
+                        if (File.Exists(assetStorage))
                         {
-                            ProgramStatus.Text = "ready";
-                            ProgramStatus.TextColor = Color.LimeGreen;
-                            if (_firstLoad)
+                            using var testFs = new System.IO.FileStream(assetStorage, FileMode.Open);
+                            if (!(testFs.CanRead && testFs.CanWrite))
                             {
-                                RevertButton.Clicked += async (object obj, EventArgs args) =>
-                                    await Uninstall(assetPath);
-                                _firstLoad = false;
+                                assetPathErrors = true;
+                                ProgramStatus.Text = "no write access";
+                                ProgramStatus.TextColor = Color.Crimson;
+                                assetPathErrors = true;
                             }
-
-                            try
-                            {
-                                await ProcessAssets(assetPath);
-                            }
-                            catch (Exception ex)
-                            {
-                                await DisplayAlert("Error", $"An exception has occurred:\n{ex.ToString()}", "OK");
-                                throw;
-                            }
-
-                            return; 
                         }
-                        ProgramStatus.Text = "no write access";
-                        ProgramStatus.TextColor = Color.Crimson;
-                        
+                        else
+                        {
+                            ProgramStatus.Text = "empty";
+                            ProgramStatus.TextColor = Color.Crimson;
+                            assetPathErrors = true;
+                            break;
+                        }
                     }
                     else
                     {
-                        ProgramStatus.Text = "empty";
+                        ProgramStatus.Text = "unreadable or missing";
                         ProgramStatus.TextColor = Color.Crimson;
+                        assetPathErrors = true;
+                        break;
                     }
                 }
-                else
+
+                if (!assetPathErrors)
                 {
-                    ProgramStatus.Text = "unreadable or missing";
-                    ProgramStatus.TextColor = Color.Crimson;
+                    ProgramStatus.Text = installToBetter ? "ready (+better)" : "ready";
+                    ProgramStatus.TextColor = Color.LimeGreen;
+                    if (_firstLoad)
+                    {
+                        RevertButton.Clicked += async (object obj, EventArgs args) =>
+                            await Uninstall(installPaths);
+                        _firstLoad = false;
+                    }
+
+                    try
+                    {
+                        await ProcessAssets(installPaths);
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Error", $"An exception has occurred:\n{ex.ToString()}", "OK");
+                        throw;
+                    }
                 }
+
+                return;
             }
             else
             {
@@ -214,9 +266,9 @@ namespace RayshiftTranslateFGO.Views
         /// <summary>
         /// Processes valid assets to know which buttons to display
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="paths"></param>
         /// <returns></returns>
-        public async Task ProcessAssets(string path)
+        public async Task ProcessAssets(List<string> paths)
         {
             List<string> _validSha = new List<string>();
 
@@ -250,7 +302,7 @@ namespace RayshiftTranslateFGO.Views
                     foreach (var scriptBundle in scriptBundleSet.Scripts)
                     {
                         // Check hashes
-                        var filename = Path.Combine(path, scriptBundle.Key);
+                        var filename = Path.Combine(paths.Last(), scriptBundle.Key);
 
                         if (scriptBundle.Key.Contains('/') || scriptBundle.Key.Contains('\\')) // for security purposes, don't allow directory traversal
                         {
@@ -311,7 +363,7 @@ namespace RayshiftTranslateFGO.Views
                     {
                         BundleID = i,
                         InstallEnabled = enableButton,
-                        InstallClick = new Command(async () => await Install(i1, path), () => enableButton && ButtonsEnabled),
+                        InstallClick = new Command(async () => await Install(i1, paths), () => enableButton && ButtonsEnabled),
                         Name = scriptBundleSet.Name,
                         Status = statusString.Item1,
                         TextColor = statusString.Item2,
@@ -404,9 +456,9 @@ namespace RayshiftTranslateFGO.Views
         /// Install
         /// </summary>
         /// <param name="typeToInstall">Type to install</param>
-        /// <param name="assetPath">Folder location on disk</param>
+        /// <param name="assetPaths">Folder locations on disk</param>
         /// <returns></returns>
-        public async Task Install(int toInstall, string assetPath)
+        public async Task Install(int toInstall, List<string> assetPaths)
         {
             // Warn user
             bool answer = await DisplayAlert("Warning", $"You are about to install a set of scripts to your game.\nEnsure you have made and written down your bind code before using this application.\n\nTotal download size: {_translations[toInstall].TotalSize.Bytes().Humanize("#.## MB")}\n\nDo you want to continue?", "Yes", "No");
@@ -425,11 +477,10 @@ namespace RayshiftTranslateFGO.Views
                 Dictionary<string, byte[]> filesToWrite = new Dictionary<string, byte[]>();
                 var rs = new RestfulAPI();
 
-                // If we need to modify the asset list - ie. the player has never loaded a cutscene from one or more files to install
-                // Seems this breaks after updates because the old files are still on disk but dl status set to 0 in asset list - maybe comparing sha1 would fix - TODO
-                //if (_assetSubmitRequired.ContainsKey(toInstall) && _assetSubmitRequired[toInstall])
-                //{
-                    ProgramStatus.Text = "grabbing new asset list...";
+                foreach (var assetPath in assetPaths)
+                {
+                    ProgramStatus.Text = assetPaths.Count > 1 ? "grabbing new asset lists (+better)..." : "grabbing new asset list...";
+
                     var assetStorage = Path.Combine(assetPath, _assetList);
                     if (File.Exists(assetStorage))
                     {
@@ -438,15 +489,18 @@ namespace RayshiftTranslateFGO.Views
 
                         if (list.Status != 200)
                         {
-                            throw new Exception($"API failure, please retry again later.\nCode: {list.Status}\nMessage: {list.Message}");
+                            throw new Exception(
+                                $"API failure, please retry again later.\nCode: {list.Status}\nMessage: {list.Message}");
                         }
-                        filesToWrite.Add(_assetList, Encoding.ASCII.GetBytes(list.Response["data"]));
+
+                        filesToWrite.Add(Path.Combine(assetPath, _assetList), Encoding.ASCII.GetBytes(list.Response["data"]));
                     }
                     else
                     {
                         throw new Exception("Asset storage doesn't exist any more.");
                     }
-                //}
+                }
+
 
                 // Get files to write
                 var items = _translations[toInstall].Scripts.ToList();
@@ -467,7 +521,11 @@ namespace RayshiftTranslateFGO.Views
                     {
                         throw new Exception($"Checksum failure.\nReal file length: {script.Length}\nDownload URL: {downloadUrl}");
                     }
-                    filesToWrite.Add(items[i].Key, script);
+
+                    foreach (var path in assetPaths)
+                    {
+                        filesToWrite.Add(Path.Combine(path, items[i].Key), script);
+                    }
                 }
 
                 filesModified = true;
@@ -476,8 +534,9 @@ namespace RayshiftTranslateFGO.Views
 
                 foreach (var file in filesToWrite)
                 {
-                    File.WriteAllBytes(Path.Combine(assetPath, file.Key), file.Value);
+                    File.WriteAllBytes(file.Key, file.Value);
                 }
+                
 
                 Preferences.Set("InstalledScript", JsonConvert.SerializeObject(_translations[toInstall]));  // SimpleJSON is broken here q_q
 
@@ -516,7 +575,7 @@ namespace RayshiftTranslateFGO.Views
         /// </summary>
         /// <param name="assetPath">Directory on disk</param>
         /// <returns></returns>
-        public async Task Uninstall(string assetPath)
+        public async Task Uninstall(List<string> assetPaths)
         {
             // Warn user
             bool answer = await DisplayAlert("Warning", "This will remove any altered scripts from your game.\nEnsure you have made and written down your bind code before using this application.\n\nDo you want to continue?", "Yes", "No");
@@ -545,20 +604,23 @@ namespace RayshiftTranslateFGO.Views
                     }
                 }
 
-                ProgramStatus.Text = $"checking {files.Count} files...";
+                ProgramStatus.Text = $"checking {files.Count * assetPaths.Count} files...";
                 ProgramStatus.TextColor = Color.Chocolate;
 
                 await Task.Delay(1000); // enough time to read the status
 
                 int deletedFiles = 0;
 
-                foreach (var file in files)
+                foreach (var assetPath in assetPaths)
                 {
-                    var filePath = Path.Combine(assetPath, file);
-                    if (File.Exists(filePath))
+                    foreach (var file in files)
                     {
-                        File.Delete(filePath); // game will re-download them
-                        deletedFiles += 1;
+                        var filePath = Path.Combine(assetPath, file);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath); // game will re-download them
+                            deletedFiles += 1;
+                        }
                     }
                 }
 
