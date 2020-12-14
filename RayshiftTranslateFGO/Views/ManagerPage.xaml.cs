@@ -119,6 +119,7 @@ namespace RayshiftTranslateFGO.Views
                 .FirstOrDefault(x => x.PackageName == "io.rayshift.betterfgo");
 
             bool installToBetter = false;
+            bool installToJp = false;
             if (existingFateApp == null && existingFateAppBetter == null)
             {
                 AppVersionInstalled.Text = "not installed";
@@ -131,7 +132,7 @@ namespace RayshiftTranslateFGO.Views
             }
             else
             {
-                if (existingFateAppBetter == null)
+                if (existingFateApp != null)
                 {
                     var packageVersion = Android.App.Application.Context.PackageManager
                         .GetPackageInfo("com.aniplex.fategrandorder", 0)
@@ -141,8 +142,9 @@ namespace RayshiftTranslateFGO.Views
                     {
                         AppVersionInstalled.Text = packageVersion;
                         AppVersionInstalled.TextColor = Color.LimeGreen;
+                        installToJp = true;
                     }
-                    else
+                    else if (existingFateAppBetter == null)
                     {
                         AppVersionInstalled.Text = packageVersion;
                         AppVersionInstalled.TextColor = Color.Crimson;
@@ -153,7 +155,7 @@ namespace RayshiftTranslateFGO.Views
                         return;
                     }
                 }
-                else
+                if (existingFateAppBetter != null)
                 {
                     var packageVersion = Android.App.Application.Context.PackageManager
                         .GetPackageInfo("io.rayshift.betterfgo", 0)
@@ -183,7 +185,12 @@ namespace RayshiftTranslateFGO.Views
             {
                 var assetPathJp = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
                 var assetPathBetter = Path.Combine(externalPath.ToString(), "io.rayshift.betterfgo/files/data/d713/");
-                List<string> installPaths = new List<string> { assetPathJp };
+                List<string> installPaths = new List<string>();
+                if (installToJp)
+                {
+                    installPaths.Add(assetPathJp);
+                }
+
                 if (installToBetter)
                 {
                     installPaths.Add(assetPathBetter);

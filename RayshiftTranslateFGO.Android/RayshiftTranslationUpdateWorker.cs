@@ -76,6 +76,7 @@ namespace RayshiftTranslateFGO.Droid
                 .FirstOrDefault(x => x.PackageName == "io.rayshift.betterfgo");
 
             bool installToBetter = false;
+            bool installToJp = false;
 
             if (existingFateApp == null && existingFateAppBetter == null)
             {
@@ -97,7 +98,7 @@ namespace RayshiftTranslateFGO.Droid
 
                 installToBetter = true;
             }
-            else
+            if (existingFateApp != null)
             {
                 var packageVersion = Android.App.Application.Context.PackageManager
                     .GetPackageInfo("com.aniplex.fategrandorder", 0)
@@ -106,8 +107,16 @@ namespace RayshiftTranslateFGO.Droid
                 if (!valid)
                 {
                     Log.Warn(TAG, "FGO App version not valid for script update.");
-                    return 0;
+                    if (!installToBetter)
+                    {
+                        return 0;
+                    }
                 }
+                else
+                {
+                    installToJp = true;
+                }
+
             }
             
 
@@ -117,7 +126,11 @@ namespace RayshiftTranslateFGO.Droid
                 var assetPathJp = Path.Combine(externalPath.ToString(), "com.aniplex.fategrandorder/files/data/d713/");
                 var assetPathBetter = Path.Combine(externalPath.ToString(), "io.rayshift.betterfgo/files/data/d713/");
 
-                List<string> installPaths = new List<string> {assetPathJp};
+                List<string> installPaths = new List<string>();
+                if (installToJp)
+                {
+                    installPaths.Add(assetPathJp);
+                }
                 if (installToBetter)
                 {
                     installPaths.Add(assetPathBetter);
