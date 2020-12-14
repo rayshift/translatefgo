@@ -5,6 +5,8 @@ This application translates cutscenes in Fate/Grand Order JP into a variety of d
 
 #### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
 
+**New (4th December):** LB5.5 is now available with a machine translation.
+
 **New (11th November):** LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
 
 **New (9th October):** Gudaguda 5 is now translated with a machine translation.
@@ -19,7 +21,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 
 Currently, English is supported for:
 - Official: Fuyuki to LB3 (including events older than 2 years).
-- Machine & Edited: LB4 Gudaguda 4, Requiem, Summer 4 (Las Vegas), Summer 5 (Servant Summer Camp!). 
+- Machine & Edited: LB4, LB5.5, Gudaguda 4, Requiem, Summer 4 (Las Vegas), Summer 5 (Servant Summer Camp!). 
 - Manual: Ooku, 2nd half of LB4.
 
 A Spanish translation for Fuyuki through to London is also available through this app. Please see https://proyectograndorder.es/ for more information.
@@ -56,7 +58,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.22.0, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.24.1, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
