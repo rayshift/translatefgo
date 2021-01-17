@@ -3,7 +3,7 @@
 
 This application translates cutscenes in Fate/Grand Order JP into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
 
-#### IMPORTANT: This app is incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. No support for Android 11 is planned.
+#### IMPORTANT: This app is currently incompatible with Android 11. Do not upgrade your device if you wish to continue to use translations. A workaround is in development expected to release in the next few months.
 
 **New (4th January):** All remaining Japanese text is now translated, and Atlantis and Olympus are now available for non-patreons.
 
@@ -58,12 +58,13 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-As of patch 2.25.1, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
+As of patch 2.25.2, **yes, it is safe, no, you will not be banned**, for a number of reasons. 
 
 1. The game does not and cannot detect anything this application does.
 2. This application does not violate the current [terms of service](http://anonym.es/?http://webview.fate-go.jp/webview/userpolicy/index.html), which only specifically prevents modification of the APK. This application does not do that. Instead, it modifies cached text assets on your SD card. 
 Note: Account suspension notices do mention that modifying game data is not allowed, however this is not reflected properly in the terms of service. You use this at your own risk, but please refer back to the first point in particular.
 3. It is not in the interests of the game's developers to ban people translating their game - it does not give an unfair advantage like cheating. Many other games have had similar modifications in use for years without issues. 
+4. This app has 14,000+ downloads in 8+ months with 2,000+ active users and 0 reports of any sort of bans being issued.
 
 Ultimately, you use this tool at your own discretion - we are not liable for any issues that could arise. Ensure you always have a bind code active. Ensure you only download the application from this repository or rayshift.io - do not trust other sources.
 
