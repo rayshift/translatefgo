@@ -1,7 +1,7 @@
 ﻿## Rayshift.io Translate Fate/Grand Order
 [![GitHub Release](https://img.shields.io/github/release/rayshift/translatefgo.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![Github All Releases](https://img.shields.io/github/downloads/rayshift/translatefgo/total.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![license: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/) [![Discord Chat](https://img.shields.io/discord/665980614998097941.svg)](https://discord.gg/6vncnjj)  
 
-This application translates cutscenes in Fate/Grand Order JP & NA (coming soon) into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on manual translations in various different languages.
+This application translates cutscenes in Fate/Grand Order JP & NA (coming soon) into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
 ### Android 11 & NA support is currently in beta testing available to [Patreons](https://www.patreon.com/rayshift).
 
@@ -14,7 +14,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 Currently, English is supported for:
 - Official: Fuyuki to LB3 (including events older than 2 years).
 - Machine & Edited: Everything else
-- Manual: Ooku, 2nd half of LB4.
+- Human: Ooku, 2nd half of LB4.
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
@@ -119,4 +119,4 @@ Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and
 11th November 2020: LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
 9th October 2020: Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
 17th August 2020: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
-22nd July 2020: Ooku is fully translated using a manual translation by PkFreeze.
+22nd July 2020: Ooku is fully translated using a human translation by PkFreeze.
