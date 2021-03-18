@@ -26,7 +26,7 @@ namespace RayshiftTranslateFGO.Util
         /// </summary>
         /// <param name="input">Input bytes</param>
         /// <returns>SHA</returns>
-        public static string Sha1(FileStream input)
+        public static string Sha1(Stream input)
         {
             using SHA1Managed sha1 = new SHA1Managed();
             var hash = sha1.ComputeHash(input);
@@ -66,7 +66,29 @@ namespace RayshiftTranslateFGO.Util
             PackageManager manager = context.PackageManager;
             PackageInfo info = manager.GetPackageInfo(context.PackageName, 0);
 
-            return info.VersionCode;
+            int code;
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+            {
+                code = (int)info.LongVersionCode;
+            }
+            else
+            {
+#pragma warning disable 618
+                code = info.VersionCode;
+#pragma warning restore 618
+            }
+            return code;
+        }
+
+        public static string GetVersionName()
+        {
+            var context = global::Android.App.Application.Context;
+            PackageManager manager = context.PackageManager;
+            PackageInfo info = manager.GetPackageInfo(context.PackageName, 0);
+
+            return info.VersionName;
+
         }
     }
     public enum TranslationFileStatus

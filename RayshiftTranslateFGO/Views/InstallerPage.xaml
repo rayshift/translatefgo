@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:RayshiftTranslateFGO;assembly=RayshiftTranslateFGO"
+             x:Class="RayshiftTranslateFGO.Views.InstallerPage">
+    <ContentPage.Content>
+        <RefreshView x:Name="Refresh">
+            <StackLayout Padding="16,10,16,10">
+                <StackLayout x:Name="LoadingLayout">
+                    <Label x:Name="LoadingText" Text="{x:Static resources:AppResources.LoadingPleaseWait}"
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand" />
+                    <ActivityIndicator x:Name="ActivityIndicatorLoading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="True"/>
+                    <Button x:Name="RetryButton" Text="{x:Static resources:AppResources.RetryText}" IsVisible="False"></Button>
+                </StackLayout>
+                <CollectionView x:Name="TranslationListView" IsVisible="False">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label FontAttributes="Bold" FontSize="18" Text="{Binding Name}" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static resources:AppResources.LastUpdatedText}" FontAttributes="Bold"/>
+                                            <Span Text="{Binding LastUpdated}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static resources:AppResources.StatusText}" FontAttributes="Bold"/>
+                                            <Span Text="{Binding Status}" TextColor="{Binding TextColor}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Button Text="{Binding ButtonInstallText}" HorizontalOptions="FillAndExpand"
+                                            IsEnabled="{Binding InstallEnabled}" Command="{Binding InstallClick}">
+                                </Button>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout Orientation="Horizontal" x:Name="MasterButtons" IsVisible="False">
+                    <Button Text="{x:Static resources:AppResources.UninstallText}" HorizontalOptions="FillAndExpand"
+                            x:Name="RevertButton" IsEnabled="True">
+                    </Button>
+                    <Button Text="{x:Static resources:AppResources.RefreshText}" HorizontalOptions="FillAndExpand"
+                            x:Name="RefreshButton" IsEnabled="True">
+                    </Button>
+                </StackLayout>
+            </StackLayout>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

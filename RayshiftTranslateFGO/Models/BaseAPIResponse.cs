@@ -7,4 +7,12 @@
 
         public object Response { get; set; }
     }
+
+    public enum TranslationInstallType
+    {
+        Manual = 1,
+        Automatic = 2
+    }
+
+
 }

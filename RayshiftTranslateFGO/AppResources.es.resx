@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutArtworkCredit" xml:space="preserve">
+    <value>Crédito de la obra: 冬木 @</value>
+  </data>
+  <data name="AboutChangeLanguage" xml:space="preserve">
+    <value>Cambiar Idioma</value>
+  </data>
+  <data name="AboutFlavourText" xml:space="preserve">
+    <value>Esta aplicación te permite acceder a varias traducciones de historias para la versión Japonesa de</value>
+  </data>
+  <data name="AboutLearnMore" xml:space="preserve">
+    <value>Saber mas</value>
+  </data>
+  <data name="AboutRetrySetup" xml:space="preserve">
+    <value>Reconfigurar Configuracion Android 11</value>
+  </data>
+  <data name="AboutVisitText" xml:space="preserve">
+    <value>Visita rayshift.io para mas información</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Añadir Carpeta</value>
+  </data>
+  <data name="AddPreReleaseKey" xml:space="preserve">
+    <value>Ingresar código de acceso anticipado</value>
+  </data>
+  <data name="Android11Setup" xml:space="preserve">
+    <value>Más ajustes requeridos para Android 11</value>
+  </data>
+  <data name="Android11Setup0" xml:space="preserve">
+    <value>Debe añadir manualmente la ubicación de la carpeta de Android en donde FGO almacena los datos en caché. Este probablemente se encuentre en su almacenamiento interno o tarjeta SD. Si no está seguro, agregue ambos.</value>
+  </data>
+  <data name="Android11Setup1" xml:space="preserve">
+    <value>En la ventana que aparece, seleccione "Android", luego haga click en "Usar esta carpeta", y permita que el app acceda al contenido de la carpeta Android.</value>
+  </data>
+  <data name="Android11Setup2" xml:space="preserve">
+    <value>Este proceso podria tener que repetirse si actualizas TranslateFGO</value>
+  </data>
+  <data name="Android11SetupSuccessful" xml:space="preserve">
+    <value>Realizado con exito, redirigiendo...</value>
+  </data>
+  <data name="AndroidDataFolderEmpty" xml:space="preserve">
+    <value>La carpeta de datos está vacia o inaccesible. Por favor intente con otra carpeta de Android, o reinstale el app TranslateFGO.</value>
+  </data>
+  <data name="AndroidFolderNotSelected" xml:space="preserve">
+    <value>La carpeta "Android" no fue encontrada, se encontró "{0}" en cambio, por favor intente otra vez.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="DirectoryPermissionAccessBody" xml:space="preserve">
+    <value>Translate FGO requiere acceso a tu almacenamiento para funcionar. Por favor permita los accesos requeridos.</value>
+  </data>
+  <data name="DirectoryPermissionAccessTitle" xml:space="preserve">
+    <value>Se requiere acceso a almacenamiento.</value>
+  </data>
+  <data name="DirectoryPermissionDeniedBody" xml:space="preserve">
+    <value>La aplicación no puede acceder a tu almacenamiento. Intente reinstalar el app, o reporte el problema como un bug si persiste. ¿Reintentar?</value>
+  </data>
+  <data name="DirectoryPermissionDeniedTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EnableAutoScriptUpdate" xml:space="preserve">
+    <value>Habilitar actualización automática de paquetes</value>
+  </data>
+  <data name="EnterAuthKey" xml:space="preserve">
+    <value>Ingrese código de autenticación</value>
+  </data>
+  <data name="EnterAuthKeyClear" xml:space="preserve">
+    <value>¿Está seguro que quiere quitar el código de autenticación actual?</value>
+  </data>
+  <data name="EnterAuthKeyDescription" xml:space="preserve">
+    <value>Si tiene un código de autenticación para acceder al contenido en desarrollo, ingreselo aquí.</value>
+  </data>
+  <data name="EnterAuthKeyInvalid" xml:space="preserve">
+    <value>El formato de la clave es incorrecto</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="InstallAssetStorageAPIFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete. 
+
+Falla en el recurso de base de datos para {0}, código de error {1}. Mensaje de error: {2} 
+
+Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallChecksumFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete.
+
+Falla en la suma de comprobación {0}. Extensión de archivo real: {1} URL de descarga: {2}
+
+Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallDownloadingScripts" xml:space="preserve">
+    <value>descargando script {0} de {1}...</value>
+  </data>
+  <data name="InstallDownloadNewAssetStorage" xml:space="preserve">
+    <value>actualizando recursos de base de datos...</value>
+  </data>
+  <data name="InstalledText" xml:space="preserve">
+    <value>Instalado</value>
+  </data>
+  <data name="InstallEmptyAssetStorage" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete. 
+
+Falla en el recurso de base de datos para {0}, fuente {1} inaccesible o vacia. Error: {2}
+
+Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallEmptyFileFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete.
+
+El paquete {0} está vacio. URL: {1}
+
+Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallerTitle" xml:space="preserve">
+    <value>{0} Instalador</value>
+  </data>
+  <data name="InstallFinished" xml:space="preserve">
+    <value>completado!</value>
+  </data>
+  <data name="InstallHandshakeFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete. Server remoto no disponible, intente más tarde. Error: {0} Message: {1}. Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallingFetchingHandshake" xml:space="preserve">
+    <value>inicializando...</value>
+  </data>
+  <data name="InstallingText" xml:space="preserve">
+    <value>Instalando</value>
+  </data>
+  <data name="InstallMissingScriptFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba el paquete.
+
+El paquete {0} no está disponible.</value>
+  </data>
+  <data name="InstallScriptDownloadFailure" xml:space="preserve">
+    <value>Ocurrió un error mientras se instalaba un paquete.
+
+Falló la descarga para {0}. URL: {1} Message: {2}
+
+Por favor intente después, o reporte este bug si el problema persiste.</value>
+  </data>
+  <data name="InstallText" xml:space="preserve">
+    <value>Instalar</value>
+  </data>
+  <data name="InstallWarning" xml:space="preserve">
+    <value>Estás a punto de instalar un paquete de traducción al juego. Asegúrate de haber guardado y escrito tu bind code antes de usar esta aplicación. 
+
+Descarga total: {0}
+
+¿Quieres continuar?</value>
+  </data>
+  <data name="InstallWriteFile" xml:space="preserve">
+    <value>Escribiendo el archivo {0} de {1}</value>
+  </data>
+  <data name="InternalError" xml:space="preserve">
+    <value>Error Interno</value>
+  </data>
+  <data name="InternalErrorDetails" xml:space="preserve">
+    <value>Un error interno acaba de ocurrir, por favor reporte esto como un bug {0}</value>
+  </data>
+  <data name="LastUpdatedText" xml:space="preserve">
+    <value>Última Actualización: </value>
+  </data>
+  <data name="LoadingPleaseWait" xml:space="preserve">
+    <value>Cargando, espere por favor...</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoFGOFound" xml:space="preserve">
+    <value>{0} no fue encontrado en su sistema. Por favor instale el juego, y asegúrese de que lo haya abierto al menos una vez.
+
+Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pestaña. (error 1)</value>
+  </data>
+  <data name="NoFGOInstallationFound2" xml:space="preserve">
+    <value>{0} no fue encontrado en su sistema. Por favor instale el juego, y asegúrese de que lo haya abierto al menos una vez.
+
+Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pestaña. (error 1)</value>
+  </data>
+  <data name="NoFGOInstallationFoundToast" xml:space="preserve">
+    <value>No se ha encontrado alguna instalación de Fate/GO. Por favor intente con otra carpeta (como el de su almacenamiento interno o tarjeta SD), y asegúrese de haber abierto Fate/GO al menos una vez. </value>
+  </data>
+  <data name="NoScriptsAvailable" xml:space="preserve">
+    <value>Ningún paquete de traducción está disponible para descargar. Por favor intente más tarde.</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="RefreshText" xml:space="preserve">
+    <value>Actualiza</value>
+  </data>
+  <data name="RemoveAutoScriptUpdate" xml:space="preserve">
+    <value>Deshabilitar actualización automática de paquetes</value>
+  </data>
+  <data name="RemovePreReleaseKey" xml:space="preserve">
+    <value>Remover código de acceso anticipado</value>
+  </data>
+  <data name="RetryText" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Selecciona tu idioma:</value>
+  </data>
+  <data name="SetupButton" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="SetupFailedBody" xml:space="preserve">
+    <value>La configuración falló o se canceló. Punto de falla:</value>
+  </data>
+  <data name="SetupFailedTitle" xml:space="preserve">
+    <value>Ajuste Fallido</value>
+  </data>
+  <data name="StatusErrorTryReinstall" xml:space="preserve">
+    <value>error, intenta reinstalar</value>
+  </data>
+  <data name="StatusInstalled" xml:space="preserve">
+    <value>instalado</value>
+  </data>
+  <data name="StatusMismatch" xml:space="preserve">
+    <value>actualización requerida, abra el juego y descargue la actualización primero</value>
+  </data>
+  <data name="StatusNotInstalled" xml:space="preserve">
+    <value>no instalado</value>
+  </data>
+  <data name="StatusText" xml:space="preserve">
+    <value>Estado: </value>
+  </data>
+  <data name="StatusUnknown" xml:space="preserve">
+    <value>estado desconocido, intenta reinstalar</value>
+  </data>
+  <data name="StatusUpdateAvailable" xml:space="preserve">
+    <value>actualizacion disponible</value>
+  </data>
+  <data name="StatusUpdateRequired" xml:space="preserve">
+    <value>actualizacion requerida</value>
+  </data>
+  <data name="TimeAgo" xml:space="preserve">
+    <value>ago</value>
+  </data>
+  <data name="TranslateAPIError" xml:space="preserve">
+    <value>Las traducciones no están disponibles actualmente</value>
+  </data>
+  <data name="TryAgainLater" xml:space="preserve">
+    <value>La interfaz de traducción no está disponible actualmente, por favor intente mas tarde.</value>
+  </data>
+  <data name="UninstallFinished" xml:space="preserve">
+    <value>Completado!</value>
+  </data>
+  <data name="UninstallingText" xml:space="preserve">
+    <value>Desinstalando {0}/{1}...</value>
+  </data>
+  <data name="UninstallText" xml:space="preserve">
+    <value>Desinstalando</value>
+  </data>
+  <data name="UninstallWarning" xml:space="preserve">
+    <value>Estás a punto de desinstalar cualquier paquete de traducción que tengas instalado. Asegúrate de haber guardado y escrito tu bind code antes de usar esta aplicación.
+
+¿Quieres continuar?</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Ha ocurrido un error desconocido. {0}</value>
+  </data>
+  <data name="UpdateOptionalDescription" xml:space="preserve">
+    <value>Una actualización opcional está disponible para TranslateFGO. ¿Quieres descargarla e instalarla?</value>
+  </data>
+  <data name="UpdateOptionalTitle" xml:space="preserve">
+    <value>Actualizacion opcional disponible ({0} -&gt; {1})</value>
+  </data>
+  <data name="UpdateRequiredDescription" xml:space="preserve">
+    <value>Se requiere una actualización para seguir usando TranslateFGO. Por favor descarguelo e instalelo desde nuestra página web o GitHub.</value>
+  </data>
+  <data name="UpdateRequiredDownload" xml:space="preserve">
+    <value>Descargar ahora</value>
+  </data>
+  <data name="UpdateRequiredTitle" xml:space="preserve">
+    <value>Actualizacion requerida ({0} -&gt; {1})</value>
+  </data>
+  <data name="UpdateSkip" xml:space="preserve">
+    <value>Saltar esta version</value>
+  </data>
+  <data name="UpdateURL" xml:space="preserve">
+    <value>https://github.com/rayshift/translatefgo/releases</value>
+  </data>
+  <data name="VersionErrorMessage" xml:space="preserve">
+    <value>Un error ha ocurrido con el servidor de traduccion. Por favor, intente mas tarde.</value>
+  </data>
+  <data name="VersionErrorTitle" xml:space="preserve">
+    <value>Error de Servidor</value>
+  </data>
+  <data name="VersionExitButton" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="VersionRetryButton" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Importante</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Si</value>
+  </data>
+</root>

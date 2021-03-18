@@ -18,7 +18,6 @@ namespace RayshiftTranslateFGO.Services
     public class RestfulAPI
     {
         private RestClient _client;
-        public bool Mock = false;
         private AssetManager _assets;
 
         /// <summary>
@@ -53,40 +52,29 @@ namespace RayshiftTranslateFGO.Services
         /// <typeparam name="T">Type of response expected</typeparam>
         /// <param name="request">Request to send</param>
         /// <returns>API response struct</returns>
-        private async Task<T> ExecuteAsync<T>(RestRequest request) where T : new()
+        private async Task<IRestResponse<T>> ExecuteAsync<T>(RestRequest request) where T : new()
         {
-            if (Mock) {
-                var mockResponse = new RestResponse<T>();
-                var typeName = typeof(T).Name;
-
-                using StreamReader sr = new StreamReader(_assets.Open($"Mock/{typeName}.txt"));
-                mockResponse.Content = await sr.ReadToEndAsync();
-
-                // Deserialize mock content
-                JsonDeserializer deserializer = new RestSharp.Serialization.Json.JsonDeserializer();
-                return deserializer.Deserialize<T>(mockResponse);
-            }
             request.RequestFormat = DataFormat.Json; // doesn't work at all
 
             var response = await _client.ExecuteAsync<T>(request); // https://github.com/xamarin/xamarin-macios/issues/4380
 
-            return response.Data;
+            return response;
         }
 
         /// <summary>
         /// Get a handshake response
         /// </summary>
         /// <returns>Handshake API struct</returns>
-        public async Task<HandshakeAPIResponse> GetHandshakeApiResponse()
+        public async Task<IRestResponse<HandshakeAPIResponse>> GetHandshakeApiResponse(FGORegion region)
         {
             string endpoint;
             if (Preferences.ContainsKey("AuthKey"))
             {
-                endpoint = "translate/handshake/" + Preferences.Get("AuthKey", "")  + "?_ts=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                endpoint = $"translate/scripts/{(int)region}/" + Preferences.Get("AuthKey", "")  + "?_ts=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             }
             else
             {
-                endpoint = "translate/handshake" + "?_ts=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                endpoint = $"translate/scripts/{(int)region}" + "?_ts=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             }
             var request = new RestRequest(endpoint)
             {
@@ -96,18 +84,28 @@ namespace RayshiftTranslateFGO.Services
             return await ExecuteAsync<HandshakeAPIResponse>(request);
         }
 
+        public async Task<IRestResponse<VersionAPIResponse>> GetVersionAPIResponse()
+        {
+            var endpoint = $"translate/version/{ScriptUtil.GetBuild()}?_ts={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
+            var request = new RestRequest(endpoint)
+            {
+                Method = Method.POST
+            };
+            return await ExecuteAsync<VersionAPIResponse>(request);
+        }
+
         /// <summary>
         /// Get script
         /// </summary>
         /// <param name="path">Path to script</param>
         /// <returns></returns>
-        public async Task<byte[]> GetScript(string path)
+        public async Task<IRestResponse> GetScript(string path)
         {
             var request = new RestRequest(path);
 
             var response = await _client.ExecuteAsync(request);
 
-            return response.RawBytes;
+            return response;
         }
 
         /// <summary>
@@ -116,9 +114,9 @@ namespace RayshiftTranslateFGO.Services
         /// <param name="assetList">Existing asset list</param>
         /// <param name="bundleId">Bundle ID</param>
         /// <returns></returns>
-        public async Task<AssetListAPIResponse> SendAssetList(string assetList, int bundleId)
+        public async Task<IRestResponse<AssetListAPIResponse>> SendAssetList(string assetList, int bundleId, FGORegion region)
         {
-            var request = new RestRequest("translate/assetlist")
+            var request = new RestRequest("translate/update-asset-list")
             {
                 Method = Method.POST
             };
@@ -127,7 +125,8 @@ namespace RayshiftTranslateFGO.Services
             var sendObject = new Dictionary<string, object>()
             {
                 {"data", assetList},
-                {"group", bundleId}
+                {"group", bundleId},
+                {"region", (int)region}
             };
             if (Preferences.ContainsKey("AuthKey"))
             {
@@ -138,6 +137,11 @@ namespace RayshiftTranslateFGO.Services
             return await ExecuteAsync<AssetListAPIResponse>(request);
         }
 
+        /// <summary>
+        /// Send firebase registration token
+        /// </summary>
+        /// <param name="token">token</param>
+        /// <returns></returns>
         public async Task<BaseAPIResponse> SendRegistrationToken(string token)
         {
             var request = new RestRequest("translate/firebasetoken")
@@ -153,7 +157,32 @@ namespace RayshiftTranslateFGO.Services
 
             request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
 
-            return await ExecuteAsync<BaseAPIResponse>(request);
+            return (await ExecuteAsync<BaseAPIResponse>(request)).Data;
+        }
+
+        public async Task<BaseAPIResponse> SendSuccess(FGORegion region, int language, TranslationInstallType installType, int groupId, bool success, string errorMessage, bool isAndroid11Install)
+        {
+            var request = new RestRequest("translate/result")
+            {
+                Method = Method.POST
+            };
+
+            request.AddHeader("Content-type", "application/json");
+            var sendObject = new Dictionary<string, object>()
+            {
+
+                {"region", (int)region},
+                {"successful", success},
+                {"error", errorMessage},
+                {"language", language},
+                {"group", groupId},
+                {"installType", (int)installType},
+                {"android11Install", isAndroid11Install}
+            };
+
+            request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
+
+            return (await ExecuteAsync<BaseAPIResponse>(request)).Data;
         }
     }
 }

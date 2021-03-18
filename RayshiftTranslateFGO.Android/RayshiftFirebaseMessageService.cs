@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
@@ -38,13 +39,49 @@ namespace RayshiftTranslateFGO.Droid
                 SendNotification(message.GetNotification().Body, message.GetNotification().Title, message.Data);
             }
             else if (message.From == $"/topics/{MainActivity.UPDATE_CHANNEL_NAME}" && 
-                     !Preferences.ContainsKey("DisableAutoUpdate") && 
-                     Preferences.Get("InstalledScript", null) != null)
+                     !Preferences.ContainsKey("DisableAutoUpdate"))
             {
                 Log.Debug(TAG, "Received an update request.");
 
-                OneTimeWorkRequest request = OneTimeWorkRequest.Builder.From<RayshiftTranslationUpdateWorker>().Build();
+                if (!message.Data.ContainsKey("region") || !int.TryParse(message.Data["region"], out var region))
+                {
+                    Log.Warn(TAG, "Firebase message missing region.");
+                    return;
+                }
+
+                if (region < 1 || region > 2)
+                {
+                    Log.Warn(TAG, "Invalid region for update request.");
+                    return;
+                }
+
+                string preferencesKey = "";
+                switch (region)
+                {
+                    case 1: 
+                        preferencesKey = $"InstalledScript_{FGORegion.Jp}";
+                        break;
+                    case 2:
+                        preferencesKey = $"InstalledScript_{FGORegion.Na}";
+                        break;
+                }
+
+                if (Preferences.Get(preferencesKey, null) == null)
+                {
+                    Log.Warn(TAG, "User hasn't installed any script for this region.");
+                    return;
+                }
+
+                var data = new Data.Builder();
+                data.PutInt("region", region);
+                data.PutString("preferencesKey", preferencesKey);
+                var finalData = data.Build();
+                var builder = OneTimeWorkRequest.Builder.From<RayshiftTranslationUpdateWorker>();
+                builder.SetInputData(finalData);
+
+                OneTimeWorkRequest request = builder.Build();
                 WorkManager.Instance.Enqueue(request);
+
             }
         }
         void SendNotification(string messageBody, string messageTitle, IDictionary<string, string> data)
@@ -62,7 +99,8 @@ namespace RayshiftTranslateFGO.Droid
                 PendingIntentFlags.OneShot);
 
             var notificationBuilder = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
-                .SetSmallIcon(Resource.Drawable.ic_stat_ic_notification)
+                .SetSmallIcon(Resource.Drawable.ic_action_book)
+                .SetLargeIcon(BitmapFactory.DecodeResource(Resources, Resource.Drawable.ic_stat_ic_notification))
                 .SetContentTitle(messageTitle)
                 .SetContentText(messageBody)
                 .SetAutoCancel(true)

@@ -5,26 +5,32 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:RayshiftTranslateFGO.Views"
-            x:Class="RayshiftTranslateFGO.Views.MainPage">
+            xmlns:services="clr-namespace:RayshiftTranslateFGO.Services;assembly=RayshiftTranslateFGO"
+            x:Class="RayshiftTranslateFGO.Views.MainPage"
+           >
 
     <TabbedPage.Children>
-        <NavigationPage Title="Manager">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png"/>
-                </OnPlatform>
-            </NavigationPage.Icon>
+        <NavigationPage Title="JP Installer">
             <x:Arguments>
-                <views:ManagerPage />
+                <views:InstallerPage>
+                    <x:Arguments>
+                        <x:Int32>1
+                        </x:Int32>
+                    </x:Arguments>
+                </views:InstallerPage>
             </x:Arguments>
         </NavigationPage>
-        
+        <NavigationPage Title="NA Installer">
+            <x:Arguments>
+                <views:InstallerPage>
+                    <x:Arguments>
+                        <x:Int32>2
+                        </x:Int32>
+                    </x:Arguments>
+                </views:InstallerPage>
+            </x:Arguments>
+        </NavigationPage>
         <NavigationPage Title="About">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_about.png"/>
-                </OnPlatform>
-            </NavigationPage.Icon>
             <x:Arguments>
                 <views:AboutPage />
             </x:Arguments>

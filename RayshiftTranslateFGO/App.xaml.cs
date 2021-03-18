@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Views;
+using Xamarin.Essentials;
 using Application = Xamarin.Forms.Application;
 
 namespace RayshiftTranslateFGO
@@ -14,8 +15,21 @@ namespace RayshiftTranslateFGO
 
         public App()
         {
+            var language = Preferences.Get("Language", "en-US");
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(language);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(language);
             InitializeComponent();
-            MainPage = new MainPage();
+
+            if (Preferences.Get("SetupV2", false))
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new SetupPage());
+            }
+
+
         }
 
         protected override void OnStart()

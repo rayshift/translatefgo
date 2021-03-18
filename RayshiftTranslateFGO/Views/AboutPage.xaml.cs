@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,21 +17,37 @@ namespace RayshiftTranslateFGO.Views
         public AboutPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             ShowCorrectAuthenticationButton();
             ShowCorrectAutoUpdateButton();
+            this.Version.Text = ScriptUtil.GetVersionName();
+            RetryAndroid11.Clicked += RetryAndroid11OnClicked;
+            ChangeLanguage.Clicked += ChangeLanguageOnClicked;
         }
+
+        private void ChangeLanguageOnClicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_language");
+        }
+
+        private async void RetryAndroid11OnClicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+        }
+
+
 
         public void ShowCorrectAuthenticationButton()
         {
             if (Preferences.ContainsKey("AuthKey"))
             {
                 Authentication.Command = new Command(async () => await Deauthenticate());
-                Authentication.Text = "Remove pre-release key";
+                Authentication.Text = AppResources.RemovePreReleaseKey;
             }
             else
             {
                 Authentication.Command = new Command(async () => await Authenticate());
-                Authentication.Text = "Enter pre-release key";
+                Authentication.Text = AppResources.AddPreReleaseKey;
             }
         }
 
@@ -39,18 +56,18 @@ namespace RayshiftTranslateFGO.Views
             if (Preferences.ContainsKey("DisableAutoUpdate"))
             {
                 AutoUpdate.Command = new Command(EnableAutoUpdate);
-                AutoUpdate.Text = "Enable auto update";
+                AutoUpdate.Text = AppResources.EnableAutoScriptUpdate;
             }
             else
             {
                 AutoUpdate.Command = new Command(DisableAutoUpdate);
-                AutoUpdate.Text = "Disable auto update";
+                AutoUpdate.Text = AppResources.RemoveAutoScriptUpdate;
             }
         }
 
         public async Task Authenticate()
         {
-            string result = await DisplayPromptAsync("Enter authentication key", "If you have an authentication key to access content under development, enter it here.");
+            string result = await DisplayPromptAsync(AppResources.EnterAuthKey, AppResources.EnterAuthKeyDescription);
 
             if (result != null)
             {
@@ -59,7 +76,7 @@ namespace RayshiftTranslateFGO.Views
 
                 if (!isValid)
                 {
-                    await DisplayAlert("Error", "The format of the key is invalid.", "OK");
+                    await DisplayAlert(AppResources.Error, AppResources.EnterAuthKeyInvalid, AppResources.OK);
                     return;
                 }
 
@@ -69,9 +86,14 @@ namespace RayshiftTranslateFGO.Views
         }
         public async Task Deauthenticate()
         {
-            if (await DisplayAlert("Confirm", "Are you sure you would like to clear the current authentication key?", "Yes", "No"))
+            if (await DisplayAlert(AppResources.Confirm, AppResources.EnterAuthKeyClear, AppResources.Yes, AppResources.No))
             {
                 Preferences.Remove("AuthKey");
+                if (!string.IsNullOrEmpty(EndpointURL.OldEndPoint))
+                {
+                    EndpointURL.EndPoint = EndpointURL.OldEndPoint;
+                    EndpointURL.OldEndPoint = "";
+                }
                 ShowCorrectAuthenticationButton();
             }
         }
