@@ -1,9 +1,9 @@
 ﻿## Rayshift.io Translate Fate/Grand Order
 [![GitHub Release](https://img.shields.io/github/release/rayshift/translatefgo.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![Github All Releases](https://img.shields.io/github/downloads/rayshift/translatefgo/total.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![license: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/) [![Discord Chat](https://img.shields.io/discord/665980614998097941.svg)](https://discord.gg/6vncnjj)  
 
-This application translates cutscenes in Fate/Grand Order JP & NA (coming soon) into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
+This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Android 11 & NA support is currently in beta testing available to [Patreons](https://www.patreon.com/rayshift).
+### Android 11 & NA support is here! Download it from the [releases](https://github.com/rayshift/translatefgo/releases) page.
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases.
 
@@ -19,7 +19,7 @@ Currently, English is supported for:
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
 ### Installation
-Requirements: Android 5, 6, 7, 8, 9, 10 are supported. Root is not required.
+Requirements: Android 5, 6, 7, 8, 9, 10, 11 are supported. Root is not required.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
@@ -61,7 +61,7 @@ However, there are some things you should do before using this app to ensure the
 - Create and write down a bind code for your account before using the app.
 
 ### Does this work on NA?
-NA is supported for English to Spanish translations starting with Translate/FGO version 2.0.0, currently available to Patreons.
+NA is supported for English to Spanish translations starting with Translate/FGO version 2.0.0.
 
 ### Contact Information
 This tool operates in good faith to increase player accessibility to Fate/Grand Order. Please use the GitHub issues section for bug reports and suggestions. Should you wish to privately contact the creator of this application, please email webmaster at rayshift.io.
@@ -83,7 +83,7 @@ Run commands similar to these, changing the paths as required:
 ```
 msbuild /t:clean RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj
 msbuild /t:restore RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj
-msbuild /p:Configuration=Release /t:PackageForAndroid RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj /p:AndroidSdkDirectory=/path/to/android-toolchain/sdk
+msbuild /p:Configuration=Release /t:PackageForAndroid RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj /p:AndroidSdkDirectory=/path/to/android-toolchain/sdk /p:AndroidNdkDirectory=/path/to/android-toolchain/ndk
 ```
 
 You then need to sign and zipalign your APK (both applications are part of the Android SDK Tools):
@@ -112,7 +112,7 @@ Google Play and the Google Play logo are trademarks of Google LLC.
 
 Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. All images and names owned and trademarked by Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. are property of their respective owners.
 
-## Old Changes
+## Script Changelog
 
 4th January 2021: All remaining Japanese text is now translated, and Atlantis and Olympus are now available for non-patreons.
 4th December 2020: LB5.5 is now available with a machine translation.
