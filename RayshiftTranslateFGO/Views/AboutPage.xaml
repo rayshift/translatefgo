@@ -93,6 +93,10 @@
                         x:Name="ChangeLanguage"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+                <Button Margin="0,10,0,0" Text="{x:Static resources:AppResources.ResetApp}"
+                        x:Name="ResetApp"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>

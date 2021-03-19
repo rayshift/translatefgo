@@ -133,6 +133,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This device requires you to set up special access to write to Fate/Grand Order&apos;s files. Please click Yes to set this up now..
+        /// </summary>
+        internal static string Android11AskToSetup {
+            get {
+                return ResourceManager.GetString("Android11AskToSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Further setup required for Android 11.
         /// </summary>
         internal static string Android11Setup {
@@ -603,6 +612,24 @@ namespace RayshiftTranslateFGO {
         internal static string RemovePreReleaseKey {
             get {
                 return ResourceManager.GetString("RemovePreReleaseKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset application.
+        /// </summary>
+        internal static string ResetApp {
+            get {
+                return ResourceManager.GetString("ResetApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reset the application?.
+        /// </summary>
+        internal static string ResetAppText {
+            get {
+                return ResourceManager.GetString("ResetAppText", resourceCulture);
             }
         }
         

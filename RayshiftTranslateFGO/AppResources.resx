@@ -141,6 +141,9 @@
   <data name="AddPreReleaseKey" xml:space="preserve">
     <value>Enter pre-release key</value>
   </data>
+  <data name="Android11AskToSetup" xml:space="preserve">
+    <value>This device requires you to set up special access to write to Fate/Grand Order's files. Please click Yes to set this up now.</value>
+  </data>
   <data name="Android11Setup" xml:space="preserve">
     <value>Further setup required for Android 11</value>
   </data>
@@ -326,6 +329,12 @@ If you believe this is an error, try the "Android 11 Setup" in the about tab fir
   </data>
   <data name="RemovePreReleaseKey" xml:space="preserve">
     <value>Remove pre-release key</value>
+  </data>
+  <data name="ResetApp" xml:space="preserve">
+    <value>Reset application</value>
+  </data>
+  <data name="ResetAppText" xml:space="preserve">
+    <value>Are you sure you want to reset the application?</value>
   </data>
   <data name="RetryText" xml:space="preserve">
     <value>Retry</value>

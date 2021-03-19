@@ -141,6 +141,9 @@
   <data name="AddPreReleaseKey" xml:space="preserve">
     <value>Ingresar código de acceso anticipado</value>
   </data>
+  <data name="Android11AskToSetup" xml:space="preserve">
+    <value>Este dispositivo requiere que establezcas acceso especial para escribir en los archivos de Fate/Grand Order. Por favor, dale a Sí para establecerlo ahora.</value>
+  </data>
   <data name="Android11Setup" xml:space="preserve">
     <value>Más ajustes requeridos para Android 11</value>
   </data>
@@ -314,6 +317,12 @@ Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pest
   </data>
   <data name="RemovePreReleaseKey" xml:space="preserve">
     <value>Remover código de acceso anticipado</value>
+  </data>
+  <data name="ResetApp" xml:space="preserve">
+    <value>Reiniciar aplicación</value>
+  </data>
+  <data name="ResetAppText" xml:space="preserve">
+    <value>Seguro que quieres reiniciar la aplicación?</value>
   </data>
   <data name="RetryText" xml:space="preserve">
     <value>Reintentar</value>

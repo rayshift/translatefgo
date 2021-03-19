@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace RayshiftTranslateFGO.Views
             this.Version.Text = ScriptUtil.GetVersionName();
             RetryAndroid11.Clicked += RetryAndroid11OnClicked;
             ChangeLanguage.Clicked += ChangeLanguageOnClicked;
+            ResetApp.Clicked += ResetAppOnClicked;
         }
 
         private void ChangeLanguageOnClicked(object sender, EventArgs e)
@@ -35,7 +37,14 @@ namespace RayshiftTranslateFGO.Views
             MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
         }
 
-
+        private async void ResetAppOnClicked(object sender, EventArgs e)
+        {
+            if (await DisplayAlert(AppResources.Confirm, AppResources.ResetAppText, AppResources.Yes, AppResources.No))
+            {
+                Preferences.Clear();
+                DependencyService.Get<IIntentService>()?.ExitApplication();
+            }
+        }
 
         public void ShowCorrectAuthenticationButton()
         {

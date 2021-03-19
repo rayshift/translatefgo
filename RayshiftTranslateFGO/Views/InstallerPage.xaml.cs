@@ -176,8 +176,10 @@ namespace RayshiftTranslateFGO.Views
 
                     instance.LastModified = tryFindAssetStorage.LastModified;
                 }
+                var instanceDict =
+                    _installedFgoInstances.OrderByDescending(o => o.LastModified).FirstOrDefault(w => w.Region == Region);
 
-                if (_installedFgoInstances.Count == 0)
+                if (instanceDict == null)
                 {
                     LoadingText.Text = String.Format(AppResources.NoFGOInstallationFound2,
                         $"Fate/Grand Order {Region.ToString().ToUpper()}");
@@ -185,8 +187,7 @@ namespace RayshiftTranslateFGO.Views
                     return;
                 }
 
-                var instanceDict =
-                    _installedFgoInstances.OrderByDescending(o => o.LastModified).First(w => w.Region == Region);
+
                 var baseFilePath = _android11Access
                     ? $"data/{instanceDict.Path}/files/data/d713/"
                     : $"{instanceDict.Path}/files/data/d713/";
@@ -380,7 +381,32 @@ namespace RayshiftTranslateFGO.Views
                         true, "", _android11Access);
                     await Task.Delay(1000);
                 }
-                
+
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+                if (!_android11Access)
+                {
+
+                    successSendTask = rest.SendSuccess(region, language, TranslationInstallType.Manual, toInstall,
+                        false, "Unauthorized error handler: " + ex.ToString(), _android11Access);
+                    var retry = await DisplayAlert(AppResources.DirectoryPermissionDeniedTitle,
+                        AppResources.Android11AskToSetup, AppResources.Yes, AppResources.No);
+
+                    if (retry)
+                    {
+                        await successSendTask;
+                        MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+                        return;
+                    }
+
+                    await successSendTask;
+                    return;
+                }
+                else
+                {
+                    throw;
+                }
             }
             catch (Exception ex)
             {
