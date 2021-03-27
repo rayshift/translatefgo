@@ -18,6 +18,8 @@ namespace RayshiftTranslateFGO.Services
             byte[] contents);
 
         public Task<bool> RemoveFileIfExists(ContentType accessType, string filename, string storageLocationBase);
+
+        public void ClearCache();
     }
 
     public class InstalledFGOInstances

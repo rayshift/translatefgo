@@ -92,6 +92,7 @@ namespace RayshiftTranslateFGO.Views
 
         public async Task UpdateTranslationList()
         {
+            _cm.ClearCache();
             if (_isCurrentlyUpdating) return;
             _isCurrentlyUpdating = true;
 
@@ -347,6 +348,7 @@ namespace RayshiftTranslateFGO.Views
 
         public async Task Install(FGORegion region, int toInstall)
         {
+            _cm.ClearCache();
             bool answer = await DisplayAlert(AppResources.Warning, String.Format(AppResources.InstallWarning, _translations[toInstall].TotalSize.Bytes().Humanize("#.## MB")), AppResources.Yes, AppResources.No);
             if (!answer)
             {
@@ -424,7 +426,7 @@ namespace RayshiftTranslateFGO.Views
 
         public async Task Uninstall(FGORegion region)
         {
-
+            _cm.ClearCache();
             bool answer = await DisplayAlert(AppResources.Warning, AppResources.UninstallWarning, AppResources.Yes, AppResources.No);
             if (!answer)
             {
@@ -503,6 +505,7 @@ namespace RayshiftTranslateFGO.Views
 
             RevertButton.IsEnabled = status;
             RefreshButton.IsEnabled = status;
+            Refresh.IsEnabled = status;
             OnPropertyChanged();
         }
 

@@ -29,7 +29,7 @@ namespace RayshiftTranslateFGO.Droid
         public async Task<ScriptInstallStatus> InstallScript(ContentType contentType, FGORegion region, List<string> installPaths, string baseInstallPath, int installId,
             ObservableCollection<InstallerPage.TranslationGUIObject> translationGuiObjects = null)
         {
-
+            _cm.ClearCache();
             var gui = translationGuiObjects != null;
             var guiObject = gui ? translationGuiObjects.First(w => w.BundleID == installId) : null;
             if (guiObject != null)

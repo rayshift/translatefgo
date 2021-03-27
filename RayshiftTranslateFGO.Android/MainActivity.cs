@@ -112,6 +112,7 @@ namespace RayshiftTranslateFGO.Droid
                     return;
                 }
 
+                service.ClearCache();
                 var dataChildren = service.GetFolderChildren(uri, "data/"); // Get list of children to find FGO folders
 
                 if (dataChildren.Count == 0)

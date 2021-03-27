@@ -69,6 +69,7 @@ namespace RayshiftTranslateFGO.Droid
                     return 0;
                 }
 
+                cm.ClearCache();
                 var installedFgoInstances = !android11Access ? cm.GetInstalledGameApps(ContentType.DirectAccess) 
                     : cm.GetInstalledGameApps(ContentType.StorageFramework, storageLocation);
 

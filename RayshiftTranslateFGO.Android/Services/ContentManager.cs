@@ -32,7 +32,7 @@ namespace RayshiftTranslateFGO.Droid
             "io.rayshift.betterfgo.en",
         };
 
-
+        public Dictionary<string, List<FolderChildren>> _folderCache = new Dictionary<string, List<FolderChildren>>();
 
         public bool CheckBasicAccess()
         {
@@ -108,6 +108,11 @@ namespace RayshiftTranslateFGO.Droid
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
+        }
+
+        public void ClearCache()
+        {
+            _folderCache.Clear();
         }
 
         public async Task<FileContentsResult> GetFileContents(ContentType accessType, string filename, string storageLocationBase)
@@ -384,6 +389,26 @@ namespace RayshiftTranslateFGO.Droid
             var newPath = DocumentsContract.GetTreeDocumentId(uri) + $"/{path}";
             var children = DocumentsContract.BuildChildDocumentsUriUsingTree(uri, newPath);
             List<FolderChildren> folderChildren = new List<FolderChildren>();
+
+
+            //string fileSelectionQuery = null;
+            //Bundle? queryArgs = new Bundle();
+            /*if (fileSelection != null)
+            {
+                var sb = new StringBuilder();
+                foreach (var _ in fileSelection)
+                {
+                    sb.Append("?,");
+                }
+
+                var inQuery = sb.ToString().TrimEnd(',');
+                fileSelectionQuery = DocumentsContract.Document.ColumnDocumentId + $" IN ({inQuery})";
+                queryArgs.PutString(ContentResolver.QueryArgSqlSelection, fileSelectionQuery);
+                queryArgs.PutStringArray(ContentResolver.QueryArgSqlSelectionArgs, fileSelection);
+            }*/ // https://github.com/xamarin/xamarin-android/issues/5788
+
+            if (_folderCache.ContainsKey(children!.ToString())) return _folderCache[children.ToString()!];
+
             try
             {
                 var c = AppContentResolver.Query(children, projection, null, null, null);
@@ -393,11 +418,18 @@ namespace RayshiftTranslateFGO.Droid
                 while (c.MoveToNext())
                 {
                     var fPath = c.GetString(0);
+
+
+                    /*if (fileSelection != null)
+                    {
+                        if (!fileSelection.Contains(fPath?.Split("/").Last())) continue;
+                    }*/
+
                     var lastModified = c.GetString(1);
                     folderChildren.Add(new FolderChildren()
                     {
                         Path = fPath,
-                        LastModified = long.Parse(lastModified)
+                        LastModified = long.Parse(lastModified!)
                     });
                 }
 
@@ -407,6 +439,8 @@ namespace RayshiftTranslateFGO.Droid
                 Log.Warn("TranslateFGO", $"Exception on GetFolderChildren: {ex}");
                 return new List<FolderChildren>();
             }
+
+            _folderCache.TryAdd(children.ToString()!, folderChildren);
 
             return folderChildren;
 
