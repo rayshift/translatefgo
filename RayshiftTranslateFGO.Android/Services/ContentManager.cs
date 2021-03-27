@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
+using Android.Database;
+using Android.OS;
 using Android.Provider;
 using Android.Support.V4.Provider;
 using Android.Util;
@@ -18,6 +21,7 @@ namespace RayshiftTranslateFGO.Droid
     public class ContentManager: IContentManager
     {
         public ContentResolver AppContentResolver { get; set; }
+
         public ContentManager()
         {
             var ctx = Android.App.Application.Context;
@@ -183,10 +187,11 @@ namespace RayshiftTranslateFGO.Droid
                     else return new FileMetadata();
 
                 case ContentType.StorageFramework:
-                    var folderChildren = this.GetFolderChildren(Android.Net.Uri.Parse(storageLocationBase),
-                        Path.GetDirectoryName(filename));
-
                     var fileNameOnly = Path.GetFileName(filename);
+
+                    var folderChildren = this.GetFolderChildren(Android.Net.Uri.Parse(storageLocationBase),
+                        Path.GetDirectoryName(filename), new string[] {fileNameOnly});
+
 
                     foreach (var file in folderChildren)
                     {
@@ -372,8 +377,9 @@ namespace RayshiftTranslateFGO.Droid
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="path">Optional path</param>
+        /// <param name="fileSelection"></param>
         /// <returns></returns>
-        public List<FolderChildren> GetFolderChildren(Uri uri, string path)
+        public List<FolderChildren> GetFolderChildren(Uri uri, string path, string[] fileSelection = null)
         {
 
             string[] projection = {
@@ -384,15 +390,42 @@ namespace RayshiftTranslateFGO.Droid
             var newPath = DocumentsContract.GetTreeDocumentId(uri) + $"/{path}";
             var children = DocumentsContract.BuildChildDocumentsUriUsingTree(uri, newPath);
             List<FolderChildren> folderChildren = new List<FolderChildren>();
+
+            string fileSelectionQuery = null;
+            //Bundle? queryArgs = new Bundle();
+            /*if (fileSelection != null)
+            {
+                var sb = new StringBuilder();
+                foreach (var _ in fileSelection)
+                {
+                    sb.Append("?,");
+                }
+
+                var inQuery = sb.ToString().TrimEnd(',');
+                fileSelectionQuery = DocumentsContract.Document.ColumnDocumentId + $" IN ({inQuery})";
+                queryArgs.PutString(ContentResolver.QueryArgSqlSelection, fileSelectionQuery);
+                queryArgs.PutStringArray(ContentResolver.QueryArgSqlSelectionArgs, fileSelection);
+            }*/ // https://github.com/xamarin/xamarin-android/issues/5788
+
             try
             {
-                var c = AppContentResolver.Query(children, projection, null, null, null);
+                //var c = string.IsNullOrEmpty(fileSelectionQuery) ? 
+                    //AppContentResolver.Query(children, projection, null, null, null) : 
+                    //AppContentResolver.Query(children, projection, queryArgs, new CancellationSignal());
+                    var c = AppContentResolver.Query(children, projection, null, null, null);
+
 
                 if (c == null) return new List<FolderChildren>(); // Return empty if the folder can't be accessed
-
+                
                 while (c.MoveToNext())
                 {
                     var fPath = c.GetString(0);
+
+                    if (fileSelection != null)
+                    {
+                        if (!fileSelection.Contains(fPath?.Split("/").Last())) continue;
+                    }
+
                     var lastModified = c.GetString(1);
                     folderChildren.Add(new FolderChildren()
                     {

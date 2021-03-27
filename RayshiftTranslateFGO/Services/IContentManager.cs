@@ -7,7 +7,7 @@ namespace RayshiftTranslateFGO.Services
 {
     public interface IContentManager
     {
-        public List<FolderChildren> GetFolderChildren(Uri uri, string path);
+        public List<FolderChildren> GetFolderChildren(Uri uri, string path, string[] fileSelection = null);
         public bool CheckBasicAccess();
         public HashSet<InstalledFGOInstances> GetInstalledGameApps(ContentType accessType, string storageLocation = null);
 
