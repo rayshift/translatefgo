@@ -165,6 +165,18 @@
   <data name="AndroidFolderNotSelected" xml:space="preserve">
     <value>The selected folder was not "Android", instead found "{0}", please try again.</value>
   </data>
+  <data name="AssetWarningCorrupted" xml:space="preserve">
+    <value>Your asset database may be corrupted. Please try opening and closing Fate/Grand Order to fix the problem.</value>
+  </data>
+  <data name="AssetWarningFutureUnreleased" xml:space="preserve">
+    <value>Your asset database version is up to date, but the story scripts have not been released yet. Please try again later, or report this as a bug.</value>
+  </data>
+  <data name="AssetWarningOutOfDate" xml:space="preserve">
+    <value>Your game does not have the newest assets. Please open Fate/Grand Order and download the data update before installing story scripts.</value>
+  </data>
+  <data name="AssetWarningUnrecognised" xml:space="preserve">
+    <value>Your asset database version was not recognised. Story scripts may not work properly. Please try again later, or report this as a bug.</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>

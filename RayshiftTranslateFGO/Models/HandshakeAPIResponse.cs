@@ -13,13 +13,13 @@ namespace RayshiftTranslateFGO.Models
     /// <summary>
     /// Handshake response
     /// </summary>
-    public struct HandshakeResponse
+    public class HandshakeResponse
     {
         public string Region { get; set; }
         public string AppVer { get; set; }
 
         public List<TranslationList> Translations { get; set; }
-
+        public HandshakeAssetStatus AssetStatus { get; set; } = HandshakeAssetStatus.Missing;
         private string _endpoint;
 
         public string Endpoint
@@ -63,5 +63,15 @@ namespace RayshiftTranslateFGO.Models
         public Dictionary<string, TranslationHandshakeList> Scripts { get; set; }
         public long TotalSize { get; set; }
         public FGORegion Region { get; set; }
+    }
+
+    public enum HandshakeAssetStatus
+    {
+        Missing = 0,
+        UpToDate = 1,
+        UpdateRequired = 2,
+        TimeTraveler = 4,
+        Unrecognized = 8,
+        Corrupt = 16
     }
 }

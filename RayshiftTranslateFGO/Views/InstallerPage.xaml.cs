@@ -78,6 +78,32 @@ namespace RayshiftTranslateFGO.Views
         /// </summary>
         protected override async void OnAppearing()
         {
+            switch (Region)
+            {
+                case FGORegion.Jp:
+                    MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "jp_initial_load", async (sender) =>
+                    {
+                        await InitialLoad();
+                    });
+                    break;
+                case FGORegion.Na:
+                    MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "na_initial_load", async (sender) =>
+                    {
+                        await InitialLoad();
+                    });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (Region == FGORegion.Jp)
+            {
+                await InitialLoad();
+            }
+        }
+
+        public async Task InitialLoad()
+        {
             if (!_pageOpened)
             {
                 _pageOpened = true;
@@ -118,9 +144,6 @@ namespace RayshiftTranslateFGO.Views
                 //await Task.Delay(1000);
 
 
-                var rest = new RestfulAPI();
-                var handshake = await rest.GetHandshakeApiResponse(Region);
-                _handshake = handshake.Data;
                 _storageLocation = Preferences.Get("StorageLocation", "");
 
                 if (!string.IsNullOrEmpty(_storageLocation) || !_cm.CheckBasicAccess())
@@ -136,15 +159,6 @@ namespace RayshiftTranslateFGO.Views
                 else
                 {
                     _installedFgoInstances = _cm.GetInstalledGameApps(ContentType.StorageFramework, _storageLocation);
-                }
-
-                if (handshake.Data == null || handshake.Data.Status != 200)
-                {
-                    LoadingText.Text = handshake.Data == null
-                        ? AppResources.TryAgainLater
-                        : $"{AppResources.TranslateAPIError}\n{handshake.Data?.Message}";
-                    SwitchErrorObjects(true);
-                    return;
                 }
 
                 //TranslationName.Text = Region == FGORegion.Jp
@@ -165,18 +179,28 @@ namespace RayshiftTranslateFGO.Views
                     var filePath = _android11Access
                         ? $"data/{instance.Path}/files/data/d713/{_assetList}"
                         : $"{instance.Path}/files/data/d713/{_assetList}";
-                    var tryFindAssetStorage = await _cm.GetFileContents(
+                    var assetStorage = await _cm.GetFileContents(
                         _android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
                         filePath, _storageLocation);
 
 
-                    if (!tryFindAssetStorage.Successful)
+                    if (!assetStorage.Successful)
                     {
                         _installedFgoInstances.Remove(instance);
                     }
 
-                    instance.LastModified = tryFindAssetStorage.LastModified;
+                    instance.LastModified = assetStorage.LastModified;
+
+                    var base64 = "";
+                    using var inputStream = new MemoryStream(assetStorage.FileContents);
+                    using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                    {
+                        base64 = await reader.ReadToEndAsync();
+                    }
+
+                    instance.AssetStorage = base64;
                 }
+
                 var instanceDict =
                     _installedFgoInstances.OrderByDescending(o => o.LastModified).FirstOrDefault(w => w.Region == Region);
 
@@ -188,6 +212,46 @@ namespace RayshiftTranslateFGO.Views
                     return;
                 }
 
+                var rest = new RestfulAPI();
+                var handshake = await rest.GetHandshakeApiResponse(Region, instanceDict.AssetStorage);
+                _handshake = handshake.Data;
+
+
+                if (handshake.Data == null || handshake.Data.Status != 200)
+                {
+                    LoadingText.Text = handshake.Data == null
+                        ? AppResources.TryAgainLater
+                        : $"{AppResources.TranslateAPIError}\n{handshake.Data?.Message}";
+                    SwitchErrorObjects(true);
+                    return;
+                }
+
+                if (handshake.Data.Response.AssetStatus != HandshakeAssetStatus.Missing &&
+                    handshake.Data.Response.AssetStatus != HandshakeAssetStatus.UpToDate)
+                {
+                    var warningTitle = AppResources.Warning + $" ({Region.ToString().ToUpper()})";
+                    switch (handshake.Data.Response.AssetStatus)
+                    {
+                        case HandshakeAssetStatus.Missing:
+                            break;
+                        case HandshakeAssetStatus.UpToDate:
+                            break;
+                        case HandshakeAssetStatus.UpdateRequired:
+                            await DisplayAlert(warningTitle, AppResources.AssetWarningOutOfDate, AppResources.OK);
+                            break;
+                        case HandshakeAssetStatus.TimeTraveler:
+                            await DisplayAlert(warningTitle, AppResources.AssetWarningFutureUnreleased, AppResources.OK);
+                            break;
+                        case HandshakeAssetStatus.Unrecognized:
+                            await DisplayAlert(warningTitle, AppResources.AssetWarningUnrecognised, AppResources.OK);
+                            break;
+                        case HandshakeAssetStatus.Corrupt:
+                            await DisplayAlert(warningTitle, AppResources.AssetWarningCorrupted, AppResources.OK);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
 
                 var baseFilePath = _android11Access
                     ? $"data/{instanceDict.Path}/files/data/d713/"

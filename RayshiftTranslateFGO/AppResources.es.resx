@@ -165,6 +165,18 @@
   <data name="AndroidFolderNotSelected" xml:space="preserve">
     <value>La carpeta "Android" no fue encontrada, se encontró "{0}" en cambio, por favor intente otra vez.</value>
   </data>
+  <data name="AssetWarningCorrupted" xml:space="preserve">
+    <value>Los recursos de su base de datos pueden estar corruptos. Por favor intente abrir y cerrar Fate/Grand Order para solucionar el problema.</value>
+  </data>
+  <data name="AssetWarningFutureUnreleased" xml:space="preserve">
+    <value>Los recursos de la versión de su base de datos están actualizados, pero los archivos de historia no han sido liberados aún. Por favor intente de nuevo, o reporte este problema.</value>
+  </data>
+  <data name="AssetWarningOutOfDate" xml:space="preserve">
+    <value>Su juego no tiene los recursos mas recientes. Por favor abra Fate/Grand Order y descargue la actualización antes de instalar los archivos de historia.</value>
+  </data>
+  <data name="AssetWarningUnrecognised" xml:space="preserve">
+    <value>Los recursos de su base de datos no fueron reconocidos. Los archivos de historia no funcionaran correctamente. Por favor intente de nuevo, o reporte este problema.</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirmar</value>
   </data>

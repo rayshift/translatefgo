@@ -38,6 +38,22 @@ namespace RayshiftTranslateFGO.Views
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToLanguage());
             });
+
+            this.CurrentPageChanged += OnCurrentPageChanged;
+        }
+
+        private void OnCurrentPageChanged(object sender, EventArgs e)
+        {
+            var title = ((TabbedPage)sender).CurrentPage?.Title;
+
+            if (title.StartsWith("NA"))
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "na_initial_load");
+            }
+            else if (title.StartsWith("JP"))
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "jp_initial_load");
+            }
         }
 
         public void Unsubscribe()
@@ -136,12 +152,7 @@ namespace RayshiftTranslateFGO.Views
                     });
                 }
             }
-
-               // var apps = cm.GetInstalledGameApps(ContentType.StorageFramework,
-                 //   Preferences.Get("StorageLocation", ""));
-
-
-            }
+        }
 
         public async Task<Page> GotoUpdatePage(VersionAPIResponse.TranslationUpdateDetails details)
         {

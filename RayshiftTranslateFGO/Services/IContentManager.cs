@@ -27,6 +27,7 @@ namespace RayshiftTranslateFGO.Services
         public long LastModified { get; set; } = 0;
         public string Path { get; set; }
         public FGORegion Region { get; set; }
+        public string AssetStorage { get; set; }
     }
     public class FolderChildren
     {

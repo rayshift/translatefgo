@@ -65,7 +65,7 @@ namespace RayshiftTranslateFGO.Services
         /// Get a handshake response
         /// </summary>
         /// <returns>Handshake API struct</returns>
-        public async Task<IRestResponse<HandshakeAPIResponse>> GetHandshakeApiResponse(FGORegion region)
+        public async Task<IRestResponse<HandshakeAPIResponse>> GetHandshakeApiResponse(FGORegion region, string assetStorage = null)
         {
             string endpoint;
             if (Preferences.ContainsKey("AuthKey"))
@@ -81,6 +81,16 @@ namespace RayshiftTranslateFGO.Services
                 Method = Method.POST
             };
 
+            if (!string.IsNullOrWhiteSpace(assetStorage))
+            {
+                request.AddHeader("Content-type", "application/json");
+                var sendObject = new Dictionary<string, object>()
+                {
+                    {"assetstorage", assetStorage}
+                };
+                request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
+            }
+            
             return await ExecuteAsync<HandshakeAPIResponse>(request);
         }
 

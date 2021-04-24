@@ -205,6 +205,42 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your asset database may be corrupted. Please try opening and closing Fate/Grand Order to fix the problem..
+        /// </summary>
+        internal static string AssetWarningCorrupted {
+            get {
+                return ResourceManager.GetString("AssetWarningCorrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your asset database version is up to date, but the story scripts have not been released yet. Please try again later, or report this as a bug..
+        /// </summary>
+        internal static string AssetWarningFutureUnreleased {
+            get {
+                return ResourceManager.GetString("AssetWarningFutureUnreleased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your game does not have the newest assets. Please open Fate/Grand Order and download the data update before installing story scripts..
+        /// </summary>
+        internal static string AssetWarningOutOfDate {
+            get {
+                return ResourceManager.GetString("AssetWarningOutOfDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your asset database version was not recognised. Story scripts may not work properly. Please try again later, or report this as a bug..
+        /// </summary>
+        internal static string AssetWarningUnrecognised {
+            get {
+                return ResourceManager.GetString("AssetWarningUnrecognised", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         internal static string Confirm {
