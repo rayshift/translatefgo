@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Content.PM;
@@ -73,7 +74,32 @@ namespace RayshiftTranslateFGO.Droid
                 var installedFgoInstances = !android11Access ? cm.GetInstalledGameApps(ContentType.DirectAccess) 
                     : cm.GetInstalledGameApps(ContentType.StorageFramework, storageLocation);
 
+                foreach (var instance in installedFgoInstances.ToList())
+                {
+                    var filePath = android11Access
+                        ? $"data/{instance.Path}/files/data/d713/{InstallerPage._assetList}"
+                        : $"{instance.Path}/files/data/d713/{InstallerPage._assetList}";
+                    var assetStorage = await cm.GetFileContents(
+                        android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
+                        filePath, storageLocation);
 
+
+                    if (!assetStorage.Successful)
+                    {
+                        installedFgoInstances.Remove(instance);
+                    }
+
+                    instance.LastModified = assetStorage.LastModified;
+
+                    var base64 = "";
+                    using var inputStream = new MemoryStream(assetStorage.FileContents);
+                    using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                    {
+                        base64 = await reader.ReadToEndAsync();
+                    }
+
+                    instance.AssetStorage = base64;
+                }
 
                 installedBundle = JsonConvert.DeserializeObject<TranslationList>(installedScriptString);
 
@@ -83,6 +109,7 @@ namespace RayshiftTranslateFGO.Droid
                     installedFgoInstances.Where(w => w.Region == (FGORegion)region).Select(s => s.Path).ToList(),
                     storageLocation,
                     installedBundle.Group,
+                    installedFgoInstances.OrderByDescending(o => o.LastModified)?.First()?.AssetStorage,
                     null
                 );
 

@@ -430,6 +430,7 @@ namespace RayshiftTranslateFGO.Views
                     _installedFgoInstances.Where(w => w.Region == region).Select(s => s.Path).ToList(),
                     _storageLocation,
                     toInstall,
+                    null,
                     _guiObjects
                 );
 

@@ -15,7 +15,6 @@ using Android.Widget;
 using Android.OS;
 using Android.Gms.Common;
 using Android.Provider;
-using Android.Support.V4.Provider;
 using Android.Util;
 using Firebase.Messaging;
 using Java.Interop;

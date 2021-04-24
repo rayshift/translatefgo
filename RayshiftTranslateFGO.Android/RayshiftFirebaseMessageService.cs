@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -38,7 +39,7 @@ namespace RayshiftTranslateFGO.Droid
                 Log.Debug(TAG, "Received an announcement.");
                 SendNotification(message.GetNotification().Body, message.GetNotification().Title, message.Data);
             }
-            else if (message.From == $"/topics/{MainActivity.UPDATE_CHANNEL_NAME}" && 
+            else if (message.From == $"/topics/{MainActivity.UPDATE_CHANNEL_NAME}" &&
                      !Preferences.ContainsKey("DisableAutoUpdate"))
             {
                 Log.Debug(TAG, "Received an update request.");
@@ -58,7 +59,7 @@ namespace RayshiftTranslateFGO.Droid
                 string preferencesKey = "";
                 switch (region)
                 {
-                    case 1: 
+                    case 1:
                         preferencesKey = $"InstalledScript_{FGORegion.Jp}";
                         break;
                     case 2:

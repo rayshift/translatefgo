@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AndroidX.AppCompat.Content.Res;
 using Dasync.Collections;
 using Newtonsoft.Json;
+using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using RayshiftTranslateFGO.Views;
@@ -26,7 +27,7 @@ namespace RayshiftTranslateFGO.Droid
             _cm = new ContentManager();
         }
 
-        public async Task<ScriptInstallStatus> InstallScript(ContentType contentType, FGORegion region, List<string> installPaths, string baseInstallPath, int installId,
+        public async Task<ScriptInstallStatus> InstallScript(ContentType contentType, FGORegion region, List<string> installPaths, string baseInstallPath, int installId, string assetStorageCheck = null,
             ObservableCollection<InstallerPage.TranslationGUIObject> translationGuiObjects = null)
         {
             _cm.ClearCache();
@@ -41,7 +42,7 @@ namespace RayshiftTranslateFGO.Droid
             }
             // fetch new translation list to ensure it is up to date
             var restful = new RestfulAPI();
-            var translationList = await restful.GetHandshakeApiResponse(region);
+            var translationList = await restful.GetHandshakeApiResponse(region, assetStorageCheck);
 
             if (!translationList.IsSuccessful || translationList.Data.Status != 200)
             {
@@ -50,6 +51,21 @@ namespace RayshiftTranslateFGO.Droid
                     IsSuccessful = false,
                     ErrorMessage = String.Format(UIFunctions.GetResourceString("InstallHandshakeFailure"), translationList.StatusCode, translationList.Data?.Message)
                 };
+            }
+
+            if (assetStorageCheck != null)
+            {
+                switch (translationList.Data.Response.AssetStatus)
+                {
+                    case HandshakeAssetStatus.UpdateRequired:
+                        return new ScriptInstallStatus()
+                        {
+                            IsSuccessful = false,
+                            ErrorMessage = String.Format("AssetStorage.txt out of date.", translationList.StatusCode, translationList.Data?.Message)
+                        };
+                    default:
+                        break;
+                }
             }
 
             // download required scripts
@@ -198,6 +214,17 @@ namespace RayshiftTranslateFGO.Droid
             int tot = filesToWrite.Count;
             foreach (var file in filesToWrite)
             {
+
+                if (file.Key.EndsWith(".bin"))
+                {
+                    await _cm.RemoveFileIfExists(contentType,
+                        file.Key, baseInstallPath);
+                }
+            }
+            _cm.ClearCache();
+
+            foreach (var file in filesToWrite)
+            {
                 if (guiObject != null)
                 {
                     guiObject.Status =
@@ -227,7 +254,7 @@ namespace RayshiftTranslateFGO.Droid
 
         public Task<bool> UninstallScripts(ContentType contentType, FGORegion region, List<string> installPaths, string baseInstallPath)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException(); // implemented locally
         }
     }
 
