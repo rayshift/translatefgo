@@ -12,9 +12,9 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get acce
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English is supported for:
-- Official: Fuyuki to LB3 (including events older than 2 years).
+- Official: Fuyuki to LB3 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: Ooku, 2nd half of LB4.
+- Human: 2nd half of LB4, LB5 (WIP, see app for status).
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
@@ -114,9 +114,9 @@ Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and
 
 ## Script Changelog
 
-4th January 2021: All remaining Japanese text is now translated, and Atlantis and Olympus are now available for non-patreons.
-4th December 2020: LB5.5 is now available with a machine translation.
-11th November 2020: LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
-9th October 2020: Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
-17th August 2020: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
-22nd July 2020: Ooku is fully translated using a human translation by PkFreeze.
+- 4th January 2021: All remaining Japanese text is now translated, and Atlantis and Olympus are now available for non-patreons.
+- 4th December 2020: LB5.5 is now available with a machine translation.
+- 11th November 2020: LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
+- 9th October 2020: Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
+- 17th August 2020: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
+- 22nd July 2020: Ooku is fully translated using a human translation by PkFreeze.
