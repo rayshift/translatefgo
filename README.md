@@ -5,6 +5,8 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 
 ### Android 11 & NA support is here! Download it from the [releases](https://github.com/rayshift/translatefgo/releases) page.
 
+#### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
+
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases.
 
 ![Example](https://i.imgur.com/dNLFbxG.png)
