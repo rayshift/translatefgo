@@ -109,7 +109,7 @@ namespace RayshiftTranslateFGO.Droid
                     installedFgoInstances.Where(w => w.Region == (FGORegion)region).Select(s => s.Path).ToList(),
                     storageLocation,
                     installedBundle.Group,
-                    installedFgoInstances.OrderByDescending(o => o.LastModified)?.First()?.AssetStorage,
+                    installedFgoInstances.OrderByDescending(o => o.LastModified)?.First(o => o.Region == (FGORegion)region)?.AssetStorage,
                     null
                 );
 

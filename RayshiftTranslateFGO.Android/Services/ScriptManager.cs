@@ -61,7 +61,7 @@ namespace RayshiftTranslateFGO.Droid
                         return new ScriptInstallStatus()
                         {
                             IsSuccessful = false,
-                            ErrorMessage = String.Format("AssetStorage.txt out of date.", translationList.StatusCode, translationList.Data?.Message)
+                            ErrorMessage = String.Format("AssetStorage.txt out of date, skipping update.")
                         };
                     default:
                         break;
