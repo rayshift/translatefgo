@@ -91,14 +91,21 @@ namespace RayshiftTranslateFGO.Droid
 
                     instance.LastModified = assetStorage.LastModified;
 
-                    var base64 = "";
-                    using var inputStream = new MemoryStream(assetStorage.FileContents);
-                    using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                    if (assetStorage?.FileContents != null)
                     {
-                        base64 = await reader.ReadToEndAsync();
-                    }
+                        var base64 = "";
+                        await using var inputStream = new MemoryStream(assetStorage.FileContents);
+                        using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                        {
+                            base64 = await reader.ReadToEndAsync();
+                        }
 
-                    instance.AssetStorage = base64;
+                        instance.AssetStorage = base64;
+                    }
+                    else
+                    {
+                        instance.AssetStorage = null;
+                    }
                 }
 
                 installedBundle = JsonConvert.DeserializeObject<TranslationList>(installedScriptString);
