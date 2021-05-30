@@ -21,7 +21,7 @@ Currently, English is supported for:
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
 ### Installation
-Requirements: Android 5, 6, 7, 8, 9, 10, 11 are supported. Root is not required.
+Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12 are supported. Root is not required.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
