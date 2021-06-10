@@ -25,6 +25,22 @@ namespace RayshiftTranslateFGO.Views
             RetryAndroid11.Clicked += RetryAndroid11OnClicked;
             ChangeLanguage.Clicked += ChangeLanguageOnClicked;
             ResetApp.Clicked += ResetAppOnClicked;
+
+        }
+
+        protected override void OnAppearing()
+        {
+            var announcementJson = Preferences.Get("AnnouncementData", null);
+
+            if (announcementJson == null)
+            {
+                ReopenAnnouncement.IsEnabled = false;
+            }
+            else
+            {
+                ReopenAnnouncement.Clicked += OpenAnnouncementOnClicked;
+            }
+
         }
 
         private void ChangeLanguageOnClicked(object sender, EventArgs e)
@@ -35,6 +51,10 @@ namespace RayshiftTranslateFGO.Views
         private async void RetryAndroid11OnClicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+        }
+        private async void OpenAnnouncementOnClicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
         }
 
         private async void ResetAppOnClicked(object sender, EventArgs e)

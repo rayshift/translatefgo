@@ -652,6 +652,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reopen Announcement.
+        /// </summary>
+        internal static string ReopenAnnouncement {
+            get {
+                return ResourceManager.GetString("ReopenAnnouncement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset application.
         /// </summary>
         internal static string ResetApp {

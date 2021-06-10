@@ -342,6 +342,9 @@ If you believe this is an error, try the "Android 11 Setup" in the about tab fir
   <data name="RemovePreReleaseKey" xml:space="preserve">
     <value>Remove pre-release key</value>
   </data>
+  <data name="ReopenAnnouncement" xml:space="preserve">
+    <value>Reopen Announcement</value>
+  </data>
   <data name="ResetApp" xml:space="preserve">
     <value>Reset application</value>
   </data>

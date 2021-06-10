@@ -260,7 +260,10 @@ namespace RayshiftTranslateFGO.Droid
 
     public class EndEarlyException : Exception
     {
-        public EndEarlyException(string format)
+        public EndEarlyException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+        public EndEarlyException(string message) : base(message)
         {
         }
     }

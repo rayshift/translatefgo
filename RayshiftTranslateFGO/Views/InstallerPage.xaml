@@ -5,14 +5,44 @@
              x:Class="RayshiftTranslateFGO.Views.InstallerPage">
     <ContentPage.Content>
         <RefreshView x:Name="Refresh">
-            <StackLayout Padding="16,10,16,10">
-                <StackLayout x:Name="LoadingLayout">
+            <StackLayout>
+                <StackLayout BackgroundColor="#191919" x:Name="ReleaseScheduleLayout" VerticalOptions="Center" Spacing="0" Padding="10,10,10,10" IsVisible="False">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="ReleaseTap"/>
+                    </StackLayout.GestureRecognizers>
+                    <Label FontAttributes="Bold" FontFamily="Cabin-Semibold" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span x:Name="ReleaseScheduleTitle" Text="Placeholder " FontSize="20" TextColor="White"/>
+                                <Span x:Name="ReleaseSchedulePercent" Text="0%" FontSize="20" TextColor="#4e88c7"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontAttributes="Bold" FontFamily="Cabin-Semibold" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Latest chapter released: " FontSize="16" TextColor="White"/>
+                                <Span x:Name="ReleaseScheduleChapter" Text="?-?" FontSize="16" TextColor="#4e88c7"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontAttributes="Bold" FontFamily="Cabin-Semibold" HorizontalTextAlignment="Center" x:Name="DisplayNextUpdateTime">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Time until next update: " FontSize="16" TextColor="White"/>
+                                <Span Text="??:??:??" x:Name="ReleaseScheduleTimeRemaining" FontSize="16" TextColor="#4e88c7"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                <StackLayout x:Name="LoadingLayout" Padding="16,10,16,10">
                     <Label x:Name="LoadingText" Text="{x:Static resources:AppResources.LoadingPleaseWait}"
                            VerticalOptions="CenterAndExpand" 
                            HorizontalOptions="CenterAndExpand" />
                     <ActivityIndicator x:Name="ActivityIndicatorLoading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="True"/>
                     <Button x:Name="RetryButton" Text="{x:Static resources:AppResources.RetryText}" IsVisible="False"></Button>
                 </StackLayout>
+                <StackLayout  Padding="16,10,16,10">
                 <CollectionView x:Name="TranslationListView" IsVisible="False">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -41,7 +71,8 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <StackLayout Orientation="Horizontal" x:Name="MasterButtons" IsVisible="False">
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  Padding="8,10,8,10" x:Name="MasterButtons" IsVisible="False">
                     <Button Text="{x:Static resources:AppResources.UninstallText}" HorizontalOptions="FillAndExpand"
                             x:Name="RevertButton" IsEnabled="True">
                     </Button>

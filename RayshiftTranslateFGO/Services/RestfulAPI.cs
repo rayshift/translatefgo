@@ -112,6 +112,7 @@ namespace RayshiftTranslateFGO.Services
         public async Task<IRestResponse> GetScript(string path)
         {
             var request = new RestRequest(path);
+            _client.FollowRedirects = true;
 
             var response = await _client.ExecuteAsync(request);
 

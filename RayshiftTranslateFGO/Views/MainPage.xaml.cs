@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Webkit;
 using Android.Widget;
 using Java.Util;
+using Newtonsoft.Json;
 using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
 using Xamarin.Essentials;
@@ -38,6 +39,10 @@ namespace RayshiftTranslateFGO.Views
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToLanguage());
             });
+            MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement", async (sender) =>
+            {
+                Device.BeginInvokeOnMainThread(async () => await GotoAnnouncementPage());
+            });
 
             this.CurrentPageChanged += OnCurrentPageChanged;
         }
@@ -60,6 +65,7 @@ namespace RayshiftTranslateFGO.Views
         {
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_language");
+            MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
         }
         public async Task ReturnToAndroid11Setup()
         {
@@ -82,6 +88,8 @@ namespace RayshiftTranslateFGO.Views
             var rest = new RestfulAPI();
             var response = await rest.GetVersionAPIResponse();
 
+            bool addAnnouncementPage = false;
+
             while (!response.IsSuccessful)
             {
                 string errorMessage;
@@ -102,6 +110,16 @@ namespace RayshiftTranslateFGO.Views
 
             bool gotoUpdate = response.Data.Response.Action == "update" && Preferences.Get("IgnoreUpdate", 0) < response.Data.Response.Update.AppVer;
 
+            // announcements
+            if (response.Data.Response.Announcement != null)
+            {
+                Preferences.Set("AnnouncementData", JsonConvert.SerializeObject(response.Data.Response.Announcement));
+                if (Preferences.Get("AnnouncementRead", 0) < response.Data.Response.Announcement.id)
+                {
+                    addAnnouncementPage = true;
+                }
+            }
+
             var cm = DependencyService.Get<IContentManager>();
 
             if (cm.CheckBasicAccess())
@@ -110,11 +128,14 @@ namespace RayshiftTranslateFGO.Views
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await GotoUpdatePage(response.Data.Response.Update);
+                        await GotoUpdatePage(response.Data.Response.Update); // update takes priority over announcement
                     });
 
                 }
-                //var apps = cm.GetInstalledGameApps(ContentType.DirectAccess);
+                else if (addAnnouncementPage)
+                {
+                    await GotoAnnouncementPage();
+                }
 
             }
             else if (string.IsNullOrWhiteSpace(Preferences.Get("StorageLocation", "")))
@@ -151,7 +172,12 @@ namespace RayshiftTranslateFGO.Views
                         await GotoUpdatePage(response.Data.Response.Update);
                     });
                 }
+                else if (addAnnouncementPage)
+                {
+                    await GotoAnnouncementPage();
+                }
             }
+
         }
 
         public async Task<Page> GotoUpdatePage(VersionAPIResponse.TranslationUpdateDetails details)
@@ -163,6 +189,14 @@ namespace RayshiftTranslateFGO.Views
                 Unsubscribe();
                 Navigation.RemovePage(this);
             }
+
+            return page;
+        }
+
+        public async Task<Page> GotoAnnouncementPage()
+        {
+            var page = new AnnouncementPage();
+            await Navigation.PushAsync(page);
 
             return page;
         }

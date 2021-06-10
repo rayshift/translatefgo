@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using RayshiftTranslateFGO.Views;
@@ -17,6 +18,8 @@ namespace RayshiftTranslateFGO.Models
     {
         public string Region { get; set; }
         public string AppVer { get; set; }
+
+        public ScriptLiveUpdate LiveStatus { get; set; }
 
         public List<TranslationList> Translations { get; set; }
         public HandshakeAssetStatus AssetStatus { get; set; } = HandshakeAssetStatus.Missing;
@@ -63,6 +66,15 @@ namespace RayshiftTranslateFGO.Models
         public Dictionary<string, TranslationHandshakeList> Scripts { get; set; }
         public long TotalSize { get; set; }
         public FGORegion Region { get; set; }
+    }
+
+    public class ScriptLiveUpdate
+    {
+        public bool Enabled { get; set; }
+        public string Title { get; set; }
+        public string CurrentRelease { get; set; }
+        public DateTime NextReleaseDate { get; set; }
+        public string PercentDone { get; set; }
     }
 
     public enum HandshakeAssetStatus

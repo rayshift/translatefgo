@@ -60,23 +60,23 @@ namespace RayshiftTranslateFGO.Util
             return new Tuple<string, Color>(AppResources.StatusUnknown, Color.Crimson);
         }
 
-        public static string PeriodOfTimeOutput(TimeSpan tspan, int level = 0)
+        public static string PeriodOfTimeOutput(TimeSpan tspan, int level = 0, string ago = " ago")
         {
-            string how_long_ago = "ago";
+            string how_long_ago = ago.Trim();
             if (level >= 2) return how_long_ago;
             if (tspan.Days > 1)
-                how_long_ago = $"{tspan.Days} days ago";
+                how_long_ago = $"{tspan.Days} days{ago}";
             else if (tspan.Days == 1)
                 how_long_ago =
-                    $"1 day {PeriodOfTimeOutput(new TimeSpan(tspan.Hours, tspan.Minutes, tspan.Seconds), level + 1)}";
+                    $"1 day {PeriodOfTimeOutput(new TimeSpan(tspan.Hours, tspan.Minutes, tspan.Seconds), level + 1, ago)}";
             else if (tspan.Hours >= 1)
                 how_long_ago =
-                    $"{tspan.Hours} {((tspan.Hours > 1) ? "hours" : "hour")} {PeriodOfTimeOutput(new TimeSpan(0, tspan.Minutes, tspan.Seconds), level + 1)}";
+                    $"{tspan.Hours} {((tspan.Hours > 1) ? "hours" : "hour")} {PeriodOfTimeOutput(new TimeSpan(0, tspan.Minutes, tspan.Seconds), level + 1, ago)}";
             else if (tspan.Minutes >= 1)
                 how_long_ago =
-                    $"{tspan.Minutes} {((tspan.Minutes > 1) ? "minutes" : "minute")} {PeriodOfTimeOutput(new TimeSpan(0, 0, tspan.Seconds), level + 1)}";
+                    $"{tspan.Minutes} {((tspan.Minutes > 1) ? "minutes" : "minute")} {PeriodOfTimeOutput(new TimeSpan(0, 0, tspan.Seconds), level + 1, ago)}";
             else if (tspan.Seconds >= 1)
-                how_long_ago = $"{tspan.Seconds} {((tspan.Seconds > 1) ? "seconds" : "second")} ago";
+                how_long_ago = $"{tspan.Seconds} {((tspan.Seconds > 1) ? "seconds" : "second")}{ago}";
             return how_long_ago;
         }
     }

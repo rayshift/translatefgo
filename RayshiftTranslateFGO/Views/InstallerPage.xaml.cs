@@ -124,6 +124,7 @@ namespace RayshiftTranslateFGO.Views
 
             try
             {
+                ReleaseScheduleLayout.IsVisible = false;
                 RetryButton.IsVisible = false;
                 LoadingLayout.IsVisible = true;
                 TranslationListView.IsVisible = false;
@@ -267,6 +268,40 @@ namespace RayshiftTranslateFGO.Views
 
                 await ProcessAssets(_android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
                     baseFilePath, _storageLocation, Region);
+
+                // Add top bar
+                if (_handshake.Response.LiveStatus != null && _handshake.Response.LiveStatus.Enabled)
+                {
+                    ReleaseScheduleLayout.IsVisible = true;
+                    ReleaseScheduleChapter.Text = _handshake.Response.LiveStatus.CurrentRelease;
+                    if (_handshake.Response.LiveStatus.NextReleaseDate < DateTime.UtcNow)
+                    {
+                        DisplayNextUpdateTime.IsVisible = false;
+                    }
+                    else
+                    {
+                        var timespan = _handshake.Response.LiveStatus.NextReleaseDate.Subtract(DateTime.UtcNow);
+                        var lastUpdated = InstallerUtil.PeriodOfTimeOutput(timespan, 0, "");
+                        ReleaseScheduleTimeRemaining.Text = lastUpdated;
+                    }
+
+                    ReleaseSchedulePercent.Text = _handshake.Response.LiveStatus.PercentDone;
+                    ReleaseScheduleTitle.Text = _handshake.Response.LiveStatus.Title;
+
+                    var announcementJson = Preferences.Get("AnnouncementData", null);
+
+                    if (announcementJson != null)
+                    {
+                        var json =
+                            JsonConvert.DeserializeObject<VersionAPIResponse.TranslationAnnouncements>(
+                                announcementJson);
+
+                        if (json.IsSpecialAnnouncement)
+                        {
+                            ReleaseTap.Tapped += OpenAnnouncementOnClicked;
+                        }
+                    }
+                }
 
 
                 LoadingLayout.IsVisible = false;
@@ -590,6 +625,11 @@ namespace RayshiftTranslateFGO.Views
             Refresh.IsRefreshing = !status;
             ButtonsEnabled = status;
             _isCurrentlyUpdating = !status;
+        }
+
+        private async void OpenAnnouncementOnClicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
         }
         public class TranslationGUIObject: INotifyPropertyChanged
         {
