@@ -4,7 +4,7 @@
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
 ### Lostbelt 6's human translation is in progress! Download the app from the [releases](https://github.com/rayshift/translatefgo/releases) page.
-Translators: Gaius, Louay, Neo, anonymous
+Translators: Gaius, Louay, Neo, fumei anonymous
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
