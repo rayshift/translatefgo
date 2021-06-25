@@ -11398,16 +11398,19 @@ namespace RayshiftTranslateFGO.Droid
 			public const int notify_panel_notification_icon_bg = 2131165349;
 			
 			// aapt resource value: 0x7F0700A6
-			public const int spanish = 2131165350;
+			public const int ptbr = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int test_custom_background = 2131165351;
+			public const int spanish = 2131165351;
 			
 			// aapt resource value: 0x7F0700A8
-			public const int tooltip_frame_dark = 2131165352;
+			public const int test_custom_background = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int tooltip_frame_light = 2131165353;
+			public const int tooltip_frame_dark = 2131165353;
+			
+			// aapt resource value: 0x7F0700AA
+			public const int tooltip_frame_light = 2131165354;
 			
 			static Drawable()
 			{

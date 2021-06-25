@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RayshiftTranslateFGO.Models;
@@ -50,7 +51,6 @@ namespace RayshiftTranslateFGO.Views
                 this.AnnouncementImage.Source = _announcementDetails.ImageUrl;
                 this.ImageLogo.IsVisible = true;
             }
-
         }
 
         private void CloseAnnouncementButtonOnClicked(object sender, EventArgs e)

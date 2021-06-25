@@ -28,6 +28,9 @@ namespace RayshiftTranslateFGO.Views
                 case "es":
                     LanguageSpanish.IsChecked = true;
                     break;
+                case "pt-BR":
+                    LanguagePtBr.IsChecked = true;
+                    break;
             }
 
 
