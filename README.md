@@ -3,20 +3,21 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Android 11 & NA support is here! Download it from the [releases](https://github.com/rayshift/translatefgo/releases) page.
+### Lostbelt 6's human translation is in progress! Download the app from the [releases](https://github.com/rayshift/translatefgo/releases) page.
+Translators: Gaius, Louay, Neo, fumei, anonymous
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to get access to pre-releases.
 
-![Example](https://i.imgur.com/dNLFbxG.png)
+![Example](https://i.imgur.com/1fO8L8Y.png)
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English is supported for:
-- Official: Fuyuki to LB3 & Ooku (including events older than 2 years).
+- Official: Fuyuki to LB4 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: 2nd half of LB4, LB5 (WIP, see app for status).
+- Human: LB5 (WIP, see app for status), LB6 (WIP, see app for status).
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
