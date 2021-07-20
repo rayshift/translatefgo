@@ -36,18 +36,19 @@ namespace RayshiftTranslateFGO.Droid
 
         public bool CheckBasicAccess()
         {
-            var ctx = Android.App.Application.Context;
-            var directories = ctx.GetExternalFilesDirs("");
+            try
+            { 
+                var ctx = Android.App.Application.Context;
+                var directories = ctx.GetExternalFilesDirs("");
 
-            if (directories != null)
-            {
-                foreach (var directory in directories)
+                if (directories != null)
                 {
-                    var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
-                    if (filesystem != null)
+                    foreach (var directory in directories)
                     {
-                        try
+                        var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
+                        if (filesystem != null)
                         {
+
                             var path = filesystem.ToString();
                             var directoryContents = Directory.GetDirectories(path);
                             if (directoryContents.Length > 0)
@@ -55,12 +56,13 @@ namespace RayshiftTranslateFGO.Droid
                                 return true;
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            
-                        }
                     }
                 }
+            }
+            
+            catch (Exception)
+            {
+                return false;
             }
 
             return false;
