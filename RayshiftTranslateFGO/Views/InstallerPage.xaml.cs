@@ -429,17 +429,24 @@ namespace RayshiftTranslateFGO.Views
                     bool enableButton = statusString.Item1 != AppResources.StatusInstalled;
                     var i1 = scriptBundleSet.Group;
 
-                    _guiObjects.Add(new TranslationGUIObject()
+                    if (!scriptBundleSet.Hidden)
                     {
-                        BundleID = scriptBundleSet.Group,
-                        InstallEnabled = enableButton,
-                        InstallClick = new Command(async () => await Install(region, i1), () => enableButton && ButtonsEnabled),
-                        Name = scriptBundleSet.Name,
-                        Status = statusString.Item1,
-                        TextColor = statusString.Item2,
-                        LastUpdated = lastUpdated,
-                        ButtonInstallText = statusString.Item1 != AppResources.StatusInstalled ? AppResources.InstallText : AppResources.InstalledText
-                    });
+                        _guiObjects.Add(new TranslationGUIObject()
+                        {
+                            BundleID = scriptBundleSet.Group,
+                            BundleHidden = scriptBundleSet.Hidden,
+                            InstallEnabled = enableButton,
+                            InstallClick = new Command(async () => await Install(region, i1),
+                                () => enableButton && ButtonsEnabled),
+                            Name = scriptBundleSet.Name,
+                            Status = statusString.Item1,
+                            TextColor = statusString.Item2,
+                            LastUpdated = lastUpdated,
+                            ButtonInstallText = statusString.Item1 != AppResources.StatusInstalled
+                                ? AppResources.InstallText
+                                : AppResources.InstalledText
+                        });
+                    }
                 }
 
                 LoadTranslationList();
@@ -672,6 +679,9 @@ namespace RayshiftTranslateFGO.Views
                     RaisePropertyChanged(nameof(ButtonInstallText));
                 }
             }
+
+            public bool BundleHidden { get; set; } = false;
+
             private string _buttonInstallText = AppResources.InstallText;
             public event PropertyChangedEventHandler PropertyChanged;
 

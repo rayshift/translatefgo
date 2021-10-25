@@ -79,6 +79,15 @@ namespace RayshiftTranslateFGO.Droid
                 };
             }
 
+            if (!gui && groupToInstall.Hidden)
+            {
+                return new ScriptInstallStatus()
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = String.Format(UIFunctions.GetResourceString("InstallHiddenScriptFailure"), installId)
+                };
+            }
+
             var totalScripts = groupToInstall.Scripts.Count;
 
             if (guiObject != null)

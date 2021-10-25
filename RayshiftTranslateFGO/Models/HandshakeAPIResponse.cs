@@ -66,6 +66,7 @@ namespace RayshiftTranslateFGO.Models
         public Dictionary<string, TranslationHandshakeList> Scripts { get; set; }
         public long TotalSize { get; set; }
         public FGORegion Region { get; set; }
+        public bool Hidden { get; set; } = false;
     }
 
     public class ScriptLiveUpdate

@@ -110,6 +110,7 @@ namespace RayshiftTranslateFGO.Droid
 
                 installedBundle = JsonConvert.DeserializeObject<TranslationList>(installedScriptString);
 
+
                 var installResult = await sm.InstallScript(
                     android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
                     (FGORegion)region,

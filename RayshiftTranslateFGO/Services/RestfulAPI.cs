@@ -178,6 +178,11 @@ namespace RayshiftTranslateFGO.Services
                 Method = Method.POST
             };
 
+            if (!Preferences.ContainsKey("InstallID"))
+            {
+                Preferences.Set("InstallID", Guid.NewGuid().ToString());
+            }
+
             request.AddHeader("Content-type", "application/json");
             var sendObject = new Dictionary<string, object>()
             {
@@ -188,7 +193,8 @@ namespace RayshiftTranslateFGO.Services
                 {"language", language},
                 {"group", groupId},
                 {"installType", (int)installType},
-                {"android11Install", isAndroid11Install}
+                {"android11Install", isAndroid11Install},
+                {"guid", Preferences.Get("InstallID", "")}
             };
 
             request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);

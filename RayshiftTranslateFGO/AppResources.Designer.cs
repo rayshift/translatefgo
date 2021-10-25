@@ -454,6 +454,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This script is not currently available for install..
+        /// </summary>
+        internal static string InstallHiddenScriptFailure {
+            get {
+                return ResourceManager.GetString("InstallHiddenScriptFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to initializing....
         /// </summary>
         internal static string InstallingFetchingHandshake {

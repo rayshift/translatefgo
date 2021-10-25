@@ -264,6 +264,9 @@ Message: {1}.
 
 Please try again later, or report as a bug if the issue persists.</value>
   </data>
+  <data name="InstallHiddenScriptFailure" xml:space="preserve">
+    <value>This script is not currently available for install.</value>
+  </data>
   <data name="InstallingFetchingHandshake" xml:space="preserve">
     <value>initializing...</value>
   </data>
