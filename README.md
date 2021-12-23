@@ -3,7 +3,9 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Lostbelt 6's human translation is FINISHED! Download the app from the [releases](https://github.com/rayshift/translatefgo/releases) page. (Android only, sorry.)
+### Tunguska Sanctuary is currently being translated.
+### This app does not and will not support Android 12.
+
 Translators: Gaius, Louay, Neo, fumei, anonymous
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
@@ -22,7 +24,7 @@ Currently, English is supported for:
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
 ### Installation
-Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12 are supported. Root is not required.
+Requirements: Android 5, 6, 7, 8, 9, 10, 11 are supported. Root is not required.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
