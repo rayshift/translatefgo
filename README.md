@@ -17,9 +17,9 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help sup
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English is supported for:
-- Official: Fuyuki to LB4 & Ooku (including events older than 2 years).
+- Official: Fuyuki to LB5 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: LB5 (WIP, see app for status), LB6 (WIP, see app for status).
+- Human: LB6 (Finished), Tunguska Sanctuary (Underway).
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 
