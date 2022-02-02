@@ -7,7 +7,7 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
-If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the app. There aren't currently any pre-releases available for the English translation while LB6 is underway.
+If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the app. There aren't currently any pre-releases available for the English translation.
 
 ![Example](https://i.imgur.com/1fO8L8Y.png)
 
