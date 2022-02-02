@@ -3,10 +3,7 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Tunguska Sanctuary is currently being translated.
-### This app does not and will not support Android 12.
-
-Translators: Gaius, Louay, Neo, fumei, anonymous
+### This app does not support Android 12.
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
@@ -19,9 +16,10 @@ If the text is too fast or slow, you can change text speed in the [game settings
 Currently, English is supported for:
 - Official: Fuyuki to LB5 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: LB6 (Finished), Tunguska Sanctuary (Underway).
+- Human: LB6 (Finished), Tunguska Sanctuary (Finished).
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
+A Portuguese Brazilian translation is also available.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10, 11 are supported. Root is not required.
@@ -57,7 +55,7 @@ Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo
 Here is why:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
 - The game does not and can not detect the modification of cached story scripts. 
-- The app has 17,000+ downloads with 2,000+ active users, and has been operating for nearly 1 year without any bans or warnings being issued because of the app. 
+- The app has 72,000+ downloads with 8,000+ active users, and has been operating for nearly 1 year without any bans or warnings being issued because of the app. 
 - It is not in the interest of the game's developers or publishers to ban or otherwise punish people for translating story text.
 - The app is open source, so you can vet what it does, and build it yourself if you are worried.
 
@@ -66,7 +64,7 @@ However, there are some things you should do before using this app to ensure the
 - Create and write down a bind code for your account before using the app.
 
 ### Does this work on NA?
-NA is supported for English to Spanish translations starting with Translate/FGO version 2.0.0.
+NA is supported for English to Spanish and PtBr translations starting with Translate/FGO version 2.0.0.
 
 ### Contact Information
 This tool operates in good faith to increase player accessibility to Fate/Grand Order. Please use the GitHub issues section for bug reports and suggestions. Should you wish to privately contact the creator of this application, please email webmaster at rayshift.io.
