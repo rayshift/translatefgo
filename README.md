@@ -3,7 +3,11 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Running on Android 12? You will need to downgrade your files app first: https://github.com/rayshift/translatefgo/issues/51#issuecomment-1045262930
+### Getting error "To protect your privacy, choose a different folder?"
+1. Access your phone with `adb` - requires a computer https://www.xda-developers.com/install-adb-windows-macos-linux/
+2. Download https://apk.rayshift.io/translatefgo/files-downgrade.apk
+3. Downgrade your files app using `adb install -d -r c:\location\files-downgrade.apk`
+4. Try again
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
