@@ -20,7 +20,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 Currently, English is supported for:
 - Official: Fuyuki to LB5 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: LB6 (Finished), Tunguska Sanctuary (Finished).
+- Human: LB6 (Finished), Tunguska Sanctuary (Finished), LB6.5: Traum (Underway).
 
 A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 A Portuguese Brazilian translation is also available.
