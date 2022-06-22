@@ -18,7 +18,7 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help sup
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English is supported for:
-- Official: Fuyuki to LB5 & Ooku (including events older than 2 years).
+- Official: Fuyuki to LB5.5 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
 - Human: LB6 (Finished), Tunguska Sanctuary (Finished), LB6.5: Traum (Underway).
 
@@ -61,7 +61,7 @@ Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo
 Here is why:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
 - The game does not and can not detect the modification of cached story scripts. 
-- The app has 72,000+ downloads with 8,000+ active users, and has been operating for nearly 1 year without any bans or warnings being issued because of the app. 
+- The app has 80,000+ downloads with 10,000+ active users, and has been operating for over 2 years without any bans or warnings being issued because of the app. 
 - It is not in the interest of the game's developers or publishers to ban or otherwise punish people for translating story text.
 - The app is open source, so you can vet what it does, and build it yourself if you are worried.
 
