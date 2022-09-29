@@ -8,6 +8,7 @@ using Android.Provider;
 using Android.Util;
 using AndroidX.DocumentFile.Provider;
 using RayshiftTranslateFGO.Services;
+using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Uri = Android.Net.Uri;
@@ -24,13 +25,7 @@ namespace RayshiftTranslateFGO.Droid
             AppContentResolver = ctx.ContentResolver;
         }
 
-        public static string[] ValidAppNames = new[]
-        {
-            "com.aniplex.fategrandorder",
-            "com.aniplex.fategrandorder.en",
-            "io.rayshift.betterfgo",
-            "io.rayshift.betterfgo.en",
-        };
+
 
         public Dictionary<string, List<FolderChildren>> _folderCache = new Dictionary<string, List<FolderChildren>>();
 
@@ -70,7 +65,7 @@ namespace RayshiftTranslateFGO.Droid
 
 
         public async Task<bool> WriteFileContents(ContentType accessType, string filename, string storageLocationBase,
-            byte[] contents)
+            byte[] contents, bool forceNew = false)
         {
             var ctx = Android.App.Application.Context;
 
@@ -82,7 +77,7 @@ namespace RayshiftTranslateFGO.Droid
                     return true;
 
                 case ContentType.StorageFramework:
-                    await WriteFileAsync(accessType, filename, storageLocationBase, contents);
+                    await WriteFileAsync(accessType, filename, storageLocationBase, contents, forceNew);
                     return true;
 
                 default:
@@ -99,7 +94,7 @@ namespace RayshiftTranslateFGO.Droid
             {
                 case ContentType.DirectAccess:
                     File.Delete(fileIfExists.Path);
-                    await Task.Delay(50);
+                    await Task.Delay(50); // why is this delay here?
                     return true;
 
                 case ContentType.StorageFramework:
@@ -243,7 +238,7 @@ namespace RayshiftTranslateFGO.Droid
             }
         }
 
-        private async Task<bool> WriteFileAsync(ContentType accessType, string filePath, string storageLocationBase, byte[] bytes)
+        private async Task<bool> WriteFileAsync(ContentType accessType, string filePath, string storageLocationBase, byte[] bytes, bool forceNew = false)
         {
             switch (accessType)
             {
@@ -252,25 +247,41 @@ namespace RayshiftTranslateFGO.Droid
                     return true;
                 case ContentType.StorageFramework:
                     // check file exists
-
-                    var fileExistPath = this.GetPathIfFileExists(accessType, filePath, storageLocationBase);
-
                     Uri contentPath;
-                    if (!fileExistPath.Exists)
-                    {
-                        var pathUri = Uri.Parse(storageLocationBase);
-                        //var treeId = DocumentsContract.GetTreeDocumentId(pathUri) + $"/{filePath}";
-                        var treeId = DocumentsContract.GetTreeDocumentId(pathUri) + $"/{Path.GetDirectoryName(filePath)}";
-                        var newPath = DocumentsContract.BuildDocumentUriUsingTree(pathUri, treeId);
-                        DocumentFile newFile = DocumentFile.FromTreeUri(Android.App.Application.Context, newPath);
-                        var documentFile = newFile.CreateFile("application/octet-stream", Path.GetFileName(filePath));
 
-                        contentPath = documentFile.Uri;
+                    if (!forceNew)
+                    {
+                        var fileExistPath = this.GetPathIfFileExists(accessType, filePath, storageLocationBase);
+
+                        if (!fileExistPath.Exists)
+                        {
+                            var pathUri = Uri.Parse(storageLocationBase);
+                            var treeId = DocumentsContract.GetTreeDocumentId(pathUri) +
+                                         $"/{Path.GetDirectoryName(filePath)}";
+                            var newPath = DocumentsContract.BuildDocumentUriUsingTree(pathUri, treeId);
+                            DocumentFile newFile = DocumentFile.FromTreeUri(Android.App.Application.Context, newPath);
+                            var documentFile =
+                                newFile.CreateFile("application/octet-stream", Path.GetFileName(filePath));
+
+                            contentPath = documentFile.Uri;
+                        }
+                        else
+                        {
+                            var baseUriParse = Uri.Parse(storageLocationBase);
+                            contentPath = DocumentsContract.BuildDocumentUriUsingTree(baseUriParse, fileExistPath.Path);
+                        }
                     }
                     else
                     {
-                        var baseUriParse = Uri.Parse(storageLocationBase);
-                        contentPath = DocumentsContract.BuildDocumentUriUsingTree(baseUriParse, fileExistPath.Path);
+                        var pathUri = Uri.Parse(storageLocationBase);
+                        var treeId = DocumentsContract.GetTreeDocumentId(pathUri) +
+                                     $"/{Path.GetDirectoryName(filePath)}";
+                        var newPath = DocumentsContract.BuildDocumentUriUsingTree(pathUri, treeId);
+                        DocumentFile newFile = DocumentFile.FromTreeUri(Android.App.Application.Context, newPath);
+                        var documentFile =
+                            newFile.CreateFile("application/octet-stream", Path.GetFileName(filePath));
+
+                        contentPath = documentFile.Uri;
                     }
 
                     var descriptor = AppContentResolver.OpenAssetFileDescriptor(contentPath!, "w");
@@ -292,7 +303,7 @@ namespace RayshiftTranslateFGO.Droid
             }
         }
 
-        public HashSet<InstalledFGOInstances> GetInstalledGameApps(ContentType accessType, string storageLocation = null)
+        public HashSet<InstalledFGOInstances> GetInstalledGameApps(ContentType accessType, Dictionary<string, string> storageLocations = null)
         {
             var ctx = Android.App.Application.Context;
             var apps = new HashSet<InstalledFGOInstances>();
@@ -315,7 +326,7 @@ namespace RayshiftTranslateFGO.Droid
                                     var directoryContents = Directory.GetDirectories(path);
                                     foreach (var foundDirectory in directoryContents)
                                     {
-                                        foreach(var validAppName in ValidAppNames) {
+                                        foreach(var validAppName in AppNames.ValidAppNames) {
                                             if (foundDirectory.Split("/").Last() == validAppName)
                                             {
                                                 var region = foundDirectory.EndsWith(".en")
@@ -331,7 +342,7 @@ namespace RayshiftTranslateFGO.Droid
                                         }
                                     }
                                 }
-                                catch (Exception ex)
+                                catch (Exception)
                                 {
 
                                 }
@@ -341,33 +352,31 @@ namespace RayshiftTranslateFGO.Droid
                     break;
 
                 case ContentType.StorageFramework:
-                    if (string.IsNullOrEmpty(storageLocation)) return apps;
+                    if (storageLocations == null || storageLocations.Count == 0) return apps;
 
-                    var folders = this.GetFolderChildren(Android.Net.Uri.Parse(storageLocation), "data/");
-
-                    if (folders.Count == 0) return apps;
-
-                    foreach (var folder in folders)
+                    foreach (var location in storageLocations)
                     {
-                        var package = folder.Path.Split("/").Last();
-                        foreach (var validAppName in ValidAppNames)
+                        var package = location.Key;
+                        foreach (var validAppName in AppNames.ValidAppNames)
                         {
                             if (package == validAppName)
                             {
+                                var childrenFolders = this.GetFolderChildren(Android.Net.Uri.Parse(location.Value), "");
+                                if (childrenFolders.Count == 0) continue; // app uninstalled
+
                                 var region = package.EndsWith(".en")
                                     ? FGORegion.Na
                                     : FGORegion.Jp;
 
-
                                 apps.Add(new InstalledFGOInstances()
                                 {
-                                    Path = package,
+                                    Path = location.Value,
                                     Region = region
                                 });
                             }
                         }
-
                     }
+
                     break;
             }
 

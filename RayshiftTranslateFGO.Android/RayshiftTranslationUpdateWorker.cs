@@ -53,11 +53,12 @@ namespace RayshiftTranslateFGO.Droid
                     return 0;
                 }
 
-                var storageLocation = Preferences.Get("StorageLocation", "");
+                var locationJson = Preferences.Get("StorageLocations", "{}");
+                var storageLocations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
 
-                android11Access = !string.IsNullOrEmpty(storageLocation) || !cm.CheckBasicAccess();
+                android11Access = storageLocations.Count > 0 || !cm.CheckBasicAccess();
 
-                if (string.IsNullOrEmpty(storageLocation) && android11Access)
+                if (storageLocations.Count == 0 && android11Access)
                 {
                     Log.Warn(TAG, "Not setup properly, android storage empty but android 11 mode required. Or no write access.");
                     return 0;
@@ -72,16 +73,16 @@ namespace RayshiftTranslateFGO.Droid
 
                 cm.ClearCache();
                 var installedFgoInstances = !android11Access ? cm.GetInstalledGameApps(ContentType.DirectAccess) 
-                    : cm.GetInstalledGameApps(ContentType.StorageFramework, storageLocation);
+                    : cm.GetInstalledGameApps(ContentType.StorageFramework, storageLocations);
 
                 foreach (var instance in installedFgoInstances.ToList())
                 {
                     var filePath = android11Access
-                        ? $"data/{instance.Path}/files/data/d713/{InstallerPage._assetList}"
+                        ? $"files/data/d713/{InstallerPage._assetList}"
                         : $"{instance.Path}/files/data/d713/{InstallerPage._assetList}";
                     var assetStorage = await cm.GetFileContents(
                         android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
-                        filePath, storageLocation);
+                        filePath, instance.Path);
 
 
                     if (!assetStorage.Successful)
@@ -115,7 +116,6 @@ namespace RayshiftTranslateFGO.Droid
                     android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
                     (FGORegion)region,
                     installedFgoInstances.Where(w => w.Region == (FGORegion)region).Select(s => s.Path).ToList(),
-                    storageLocation,
                     installedBundle.Group,
                     installedFgoInstances.OrderByDescending(o => o.LastModified)?.First(o => o.Region == (FGORegion)region)?.AssetStorage,
                     null

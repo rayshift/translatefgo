@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:RayshiftTranslateFGO;assembly=RayshiftTranslateFGO"
+             x:Class="RayshiftTranslateFGO.Views.ArtPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <RefreshView x:Name="Refresh">
+            <StackLayout>
+                <StackLayout x:Name="LoadingLayout" Padding="16,10,16,10">
+                    <Label x:Name="LoadingText" Text="{x:Static resources:AppResources.LoadingPleaseWait}"
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand" />
+                    <ActivityIndicator x:Name="ActivityIndicatorLoading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="True"/>
+                    <Button x:Name="RetryButton" Text="{x:Static resources:AppResources.RetryText}" IsVisible="False"></Button>
+                </StackLayout>
+                <StackLayout  Padding="16,10,16,10">
+                    <CollectionView x:Name="ArtListView" IsVisible="False">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label FontAttributes="Bold" FontSize="18" Text="{Binding Name}" />
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResources.ArtCount}" FontAttributes="Bold"/>
+                                                <Span Text="{Binding Status}" TextColor="{Binding TextColor}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static resources:AppResources.TotalSize}" FontAttributes="Bold"/>
+                                                <Span Text="{Binding SizeOfInstall}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Button Text="{Binding Button1InstallText}" HorizontalOptions="FillAndExpand"
+                                                IsEnabled="{Binding Install1Enabled}" Command="{Binding Install1Click}">
+                                        </Button>
+                                        <Button Text="{Binding Button2InstallText}" HorizontalOptions="FillAndExpand"
+                                                IsEnabled="{Binding Install2Enabled}" Command="{Binding Install2Click}">
+                                        </Button>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  Padding="8,10,8,10" x:Name="MasterButtons" IsVisible="False">
+                    <Button Text="{x:Static resources:AppResources.UninstallText}" HorizontalOptions="FillAndExpand"
+                            x:Name="RevertButton" IsEnabled="True">
+                    </Button>
+                    <Button Text="{x:Static resources:AppResources.RefreshText}" HorizontalOptions="FillAndExpand"
+                            x:Name="RefreshButton" IsEnabled="True">
+                    </Button>
+                </StackLayout>
+            </StackLayout>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

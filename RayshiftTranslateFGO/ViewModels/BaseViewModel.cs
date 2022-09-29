@@ -12,6 +12,12 @@ namespace RayshiftTranslateFGO.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public ICacheProvider Cache;
+
+        public BaseViewModel(ICacheProvider cache)
+        {
+            Cache = cache;
+        }
 
         bool isBusy = false;
         public bool IsBusy

@@ -28,6 +28,12 @@ namespace RayshiftTranslateFGO.Views
                 case "es":
                     LanguageSpanish.IsChecked = true;
                     break;
+                case "fr":
+                    LanguageFrench.IsChecked = true;
+                    break;
+                case "id":
+                    LanguageIndonesian.IsChecked = true;
+                    break;
                 case "pt-BR":
                     LanguagePtBr.IsChecked = true;
                     break;

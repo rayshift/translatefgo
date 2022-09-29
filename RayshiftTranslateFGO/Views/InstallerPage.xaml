@@ -48,7 +48,7 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label FontAttributes="Bold" FontSize="18" Text="{Binding Name}" />
-                                <Label>
+                                    <Label IsVisible="{Binding NotPromotional}">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{x:Static resources:AppResources.LastUpdatedText}" FontAttributes="Bold"/>
@@ -56,7 +56,7 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                <Label>
+                                <Label IsVisible="{Binding NotPromotional}">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{x:Static resources:AppResources.StatusText}" FontAttributes="Bold"/>
@@ -64,6 +64,14 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
+                                <Label IsVisible="{Binding Promotional}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static resources:AppResources.StatusText}" FontAttributes="Bold"/>
+                                            <Span Text="{x:Static resources:AppResources.AvailableToDonors}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                    </Label>
                                 <Button Text="{Binding ButtonInstallText}" HorizontalOptions="FillAndExpand"
                                             IsEnabled="{Binding InstallEnabled}" Command="{Binding InstallClick}">
                                 </Button>

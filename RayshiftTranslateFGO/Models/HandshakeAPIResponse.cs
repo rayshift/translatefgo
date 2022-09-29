@@ -23,6 +23,7 @@ namespace RayshiftTranslateFGO.Models
 
         public List<TranslationList> Translations { get; set; }
         public HandshakeAssetStatus AssetStatus { get; set; } = HandshakeAssetStatus.Missing;
+        public LinkedUserInfo AccountStatus { get; set; }
         private string _endpoint;
 
         public string Endpoint
@@ -43,6 +44,41 @@ namespace RayshiftTranslateFGO.Models
                 }
             }
         }
+    }
+
+    public class ArtAPIResponse: BaseAPIResponse
+    {
+        public new ArtResponse Response { get; set; }
+    }
+
+    public class ArtResponse
+    {
+        public string AppVer { get; set; }
+        public HandshakeAssetStatus JPAssetStatus { get; set; } = HandshakeAssetStatus.Missing;
+        public HandshakeAssetStatus NAAssetStatus { get; set; } = HandshakeAssetStatus.Missing;
+        public LinkedUserInfo AccountStatus { get; set; }
+        public List<ArtUrl> NAArtUrls { get; set; }
+        public List<ArtUrl> JPArtUrls { get; set; }
+    }
+
+    public class ArtUrl
+    {
+        // filename : checksum
+        public List<ArtDownload> Urls { get; set; } = new List<ArtDownload>();
+        public bool Starred { get; set; }
+        public bool IsNew { get; set; }
+        public long Size { get; set; } // only if new == false
+        public bool IsCurrentlyInstalled { get; set; } // currently in assetstorage
+        public bool ToBeInstalled { get; set; } = false;
+        public List<int> ServantIDs { get; set; } = new List<int>();
+
+    }
+
+    public class ArtDownload
+    {
+        public string Url { get; set; }
+        public string Hash { get; set; }
+        public string Filename { get; set; }
     }
 
     /// <summary>
@@ -67,6 +103,9 @@ namespace RayshiftTranslateFGO.Models
         public long TotalSize { get; set; }
         public FGORegion Region { get; set; }
         public bool Hidden { get; set; } = false;
+        public bool HasExtraStage { get; set; } = false;
+        public List<string> ExtraStages { get; set; } = new List<string>();
+        public bool IsDonorOnly { get; set; } = false;
     }
 
     public class ScriptLiveUpdate

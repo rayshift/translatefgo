@@ -118,485 +118,458 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutArtworkCredit" xml:space="preserve">
-    <value>Artwork credit: 冬木 @</value>
+    <value>Kredit karya ilustrasi: 冬木 @</value>
   </data>
   <data name="AboutChangeLanguage" xml:space="preserve">
-    <value>Change language</value>
+    <value>Ganti bahasa</value>
   </data>
   <data name="AboutFlavourText" xml:space="preserve">
-    <value>This app allows you to access various story translations for</value>
+    <value>Aplikasi ini mengizinkan anda untuk mengakses berbagai terjemahan cerita</value>
   </data>
   <data name="AboutLearnMore" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Pelajari selengkapnya</value>
   </data>
   <data name="AboutRetrySetup" xml:space="preserve">
-    <value>Reconfigure Android 11+ Setup</value>
+    <value>Mengkonfigurasi ulang penyiapan Android 11+</value>
   </data>
   <data name="AboutTab" xml:space="preserve">
-    <value>About</value>
+    <value>Tentang</value>
   </data>
   <data name="AboutVisitText" xml:space="preserve">
-    <value>Visit rayshift.io for more information.</value>
+    <value>Kunjungi rayshift.io untuk informasi lebih lanjut.</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Add Folder</value>
+    <value>Tambahkan Folder</value>
   </data>
   <data name="AddPreReleaseKey" xml:space="preserve">
-    <value>Enter pre-release key</value>
+    <value>Masukkan kunci pra-rilis</value>
   </data>
   <data name="Android11AskToSetup" xml:space="preserve">
-    <value>This device requires you to set up special access to write to Fate/Grand Order's files. Please click Yes to set this up now.</value>
+    <value>Perangkat ini membutuhkan anda untuk menyiapkan akses spesial agar bisa menulis pada berkas Fate/Grand Order. Tolong klik Ya untu menyiapkannya sekarang.</value>
   </data>
   <data name="Android11Setup" xml:space="preserve">
-    <value>Further setup required for Android 11+</value>
+    <value>Penyiapan lebih lanjut diperlukan untuk Android 11+</value>
   </data>
   <data name="Android11Setup0" xml:space="preserve">
-    <value>You must grant this app permission to write to the directories where Fate/Grand Order stores cached data.</value>
+    <value>Anda harus memberikan izin kepada aplikasi ini untuk menulis ke tempat direktori Fate/Grand Order menyimpan data cache.</value>
   </data>
   <data name="Android11Setup1" xml:space="preserve">
-    <value>Tap each button below, then tap "Use this folder".</value>
+    <value>Tap setiap tombol di bawah ini, kemudian pilih "Gunakan folder ini".</value>
   </data>
   <data name="Android11Setup2" xml:space="preserve">
-    <value>Return here with "About -&gt; Reconfigure Android 11+ Setup" if you install a new version of the game.</value>
+    <value>Kembali ke "Tentang -&gt; Mengkonfigurasi ulang penyiapan Android 11+" jika anda memasang sebuah versi baru dari game.</value>
   </data>
   <data name="Android11SetupSuccessful" xml:space="preserve">
-    <value>Success!</value>
+    <value>Sukses!</value>
   </data>
   <data name="Android1213" xml:space="preserve">
-    <value>I'm on Android 12/13</value>
+    <value>Saya berada di Android 12/13</value>
   </data>
   <data name="AndroidDataFolderEmpty" xml:space="preserve">
-    <value>The data folder is empty or inaccessible. Ensure you have launched FGO at least once.</value>
+    <value>Folder data kosong atau tidak dapat diakses. Pastikan anda telah membuka FGO setidaknya sekali.</value>
   </data>
   <data name="AndroidFolderNotSelected" xml:space="preserve">
-    <value>The selected folder was not "Android", instead found "{0}", please try again.</value>
+    <value>Folder yang dipilih bukanlah "Android",  alih-alih ditemukan "{0}", tolong coba lagi.</value>
   </data>
   <data name="ArtCount" xml:space="preserve">
-    <value>Art to Install: </value>
+    <value>Ilustrasi untuk dipasang:</value>
   </data>
   <data name="ArtInstallWarning" xml:space="preserve">
-    <value>You are about to install custom art to your game.
-Ensure you have made and written down your bind code before using this application.
-
-Do you want to continue?</value>
+    <value>Anda akan memasang ilustrasi kustom ke dalam game anda.
+Pastikan anda telah membuat dan menyimpan bind code sebelum menggunakan aplikasi ini.
+Ingin lanjut?</value>
   </data>
   <data name="ArtStatus" xml:space="preserve">
-    <value>{0}/{1} starred, {2}/{3} total</value>
+    <value>{0}/{1} berbintang, {2}/{3} total</value>
   </data>
   <data name="ArtTotalSize" xml:space="preserve">
-    <value>{0} starred, {1} total</value>
+    <value>{0} berbintang, {1} total</value>
   </data>
   <data name="ArtUninstallingButton" xml:space="preserve">
-    <value>Uninstalling...</value>
+    <value>Sedang mencopot...</value>
   </data>
   <data name="AssetWarningCorrupted" xml:space="preserve">
-    <value>Your asset database may be corrupted. Please try opening and closing Fate/Grand Order to fix the problem.</value>
+    <value>Database aset anda mungkin telah rusak. Harap buka dan tutup Fate/Grand Order untuk memperbaiki masalah anda.</value>
   </data>
   <data name="AssetWarningFutureUnreleased" xml:space="preserve">
-    <value>Your asset database version is up to date, but the story scripts have not been released yet. Please try again later, or report this as a bug.</value>
+    <value>Versi database aset Anda sudah diperbarui, tetapi skrip cerita belum dirilis. Silakan coba lagi nanti, atau laporkan ini sebagai bug.</value>
   </data>
   <data name="AssetWarningOutOfDate" xml:space="preserve">
-    <value>Your game does not have the newest assets. Please open Fate/Grand Order and download the data update before installing story scripts.</value>
+    <value>Game anda tidak memiliki aset terbaru. Harap buka Fate/Grand Order dan unduh pembaruan data sebelum memasang skrip cerita.</value>
   </data>
   <data name="AssetWarningUnrecognised" xml:space="preserve">
-    <value>Your asset database version was not recognised. Story scripts may not work properly. Please try again later, or report this as a bug.</value>
+    <value>Versi database aset Anda tidak dikenali. Skrip cerita mungkin tidak berfungsi dengan baik. Silakan coba lagi nanti, atau laporkan ini sebagai bug.</value>
   </data>
   <data name="AvailableToDonors" xml:space="preserve">
-    <value>Available for donors</value>
+    <value>Tersedia untuk donatur</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Batalkan</value>
   </data>
   <data name="ChunkUploadFailed" xml:space="preserve">
-    <value>Upload failed. Your phone likely has a poor connection to the internet, try again later.</value>
+    <value>Gagal mengunggah. Perangkat anda sepertinya memiliki koneksi internet yang buruk, coba lagi nanti.</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Konfirmasi</value>
   </data>
   <data name="ConnectAccount" xml:space="preserve">
-    <value>Connect Account</value>
+    <value>Hubungkan Akun</value>
   </data>
   <data name="ConnectAccountInfo" xml:space="preserve">
-    <value>UI translation (English only) and custom art are only available for donors.
-
-Connect your Rayshift account now?</value>
+    <value>Terjemahan antarmuka pengguna (hanya Inggris) dan ilustrasi kustom hanya tersedia untuk donatur.
+Hubungkan akun Rayshift anda sekarang?</value>
   </data>
   <data name="ConnectAccountNotDonatedInfo" xml:space="preserve">
-    <value>UI translation (English only) and custom art are only available for donors.
-
-If you have already donated, connect your account in your profile settings.</value>
+    <value>Terjemahan antarmuka pengguna (hanya Inggris) dan ilustrasi kustom hanya tersedia untuk donatur.
+Jika anda sudah memberi donasi, hubungkan akun anda di pengaturan profil.</value>
   </data>
   <data name="CustomArtTab" xml:space="preserve">
-    <value>Art</value>
+    <value>Ilustrasi</value>
   </data>
   <data name="DirectoryPermissionAccessBody" xml:space="preserve">
-    <value>Translate FGO requires write access to your storage to operate. Please allow this access when requested.</value>
+    <value>Translate FGO membutuhkan akses menulis ke penyimpanan anda untuk beroperasi. Tolong izinkan akses ketika diminta.</value>
   </data>
   <data name="DirectoryPermissionAccessTitle" xml:space="preserve">
-    <value>Storage access required</value>
+    <value>Dibutuhkan akses penyimpanan</value>
   </data>
   <data name="DirectoryPermissionDeniedBody" xml:space="preserve">
-    <value>The application was unable to get write access to your storage. If this persists, try re-installing the app, otherwise please report it as a bug. Retry?</value>
+    <value>Aplikasi tidak dapat memperoleh akses menulis ke penyimpanan anda. Jika ini masih muncul, coba pasang ulang aplikasi, jika tetap tidak bisa harap laporkan sebagai sebuah bug. Coba lagi?</value>
   </data>
   <data name="DirectoryPermissionDeniedTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Kesalahan</value>
   </data>
   <data name="DonateButton" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donasi</value>
   </data>
   <data name="DonorPrompt" xml:space="preserve">
-    <value>Donate</value>
+    <value>Donasi</value>
   </data>
   <data name="EnableAutoScriptUpdate" xml:space="preserve">
-    <value>Enable auto script update</value>
+    <value>Nyalakan pembaruan skrip otomatis</value>
   </data>
   <data name="EnterAuthKey" xml:space="preserve">
-    <value>Enter authentication key</value>
+    <value>Masukkan kunci autentikasi</value>
   </data>
   <data name="EnterAuthKeyClear" xml:space="preserve">
-    <value>Are you sure you would like to clear the current authentication key?</value>
+    <value>Anda yakin untuk membersihkan kunci autentikasi saat ini?</value>
   </data>
   <data name="EnterAuthKeyDescription" xml:space="preserve">
-    <value>If you have an authentication key to access content under development, enter it here.</value>
+    <value>Jika anda memiliki kunci autentikasi untuk mengakses konten yang sedang dikembangkan, masukkan di sini.</value>
   </data>
   <data name="EnterAuthKeyInvalid" xml:space="preserve">
-    <value>The format of the key is invalid.</value>
+    <value>Format dari kunci salah.</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Kesalahan</value>
   </data>
   <data name="FGOFolderNotSelected" xml:space="preserve">
-    <value>The selected folder was not a valid FGO installation, instead found "{0}", please try again.</value>
+    <value>Folder terpilih bukanlah instalasi FGO yang valid, alih-alih ditemukan "{0}", harap coba lagi.</value>
   </data>
   <data name="FGOWrongGameSelected" xml:space="preserve">
-    <value>Game never launched, or wrong folder selected.</value>
+    <value>Game tidak pernah dijalankan, atau folder yang dipilih salah.</value>
   </data>
   <data name="InstallAll" xml:space="preserve">
-    <value>Install All</value>
+    <value>Instal semua</value>
   </data>
   <data name="InstallAssetStorageAPIFailure" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Asset database update for {0} failed, error code {1}.
-Error message: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip.
+Pembaruan database aset untuk {0} gagal, kode kesalahan {1}.
+Pesan kesalahan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallChecksumFailure" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Checksum failure on {0}. Real file length: {1} 
-Download URL: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip.
+Kegagalan checksum pada {0}. Ukuran berkas sebenarnya: {1} 
+URL Unduhan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallDownloadingArts" xml:space="preserve">
-    <value>downloading art {0} of {1}...</value>
+    <value>Mengunduh skrip {0} dari {1}...</value>
   </data>
   <data name="InstallDownloadingScripts" xml:space="preserve">
-    <value>downloading script {0} of {1}...</value>
+    <value>Mengunduh ilustrasi {0} dari {1}...</value>
   </data>
   <data name="InstallDownloadNewAssetStorage" xml:space="preserve">
-    <value>updating asset databases...</value>
+    <value>memperbarui database aset...</value>
   </data>
   <data name="InstalledText" xml:space="preserve">
-    <value>Installed</value>
+    <value>Terpasang</value>
   </data>
   <data name="InstallEmptyAssetStorage" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Asset database update for {0} failed, path {1} inaccessible or empty.
-Error: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip. 
+Pembaruan database aset untuk {0} gagal, lokasi {1} tidak dapat diakses atau kosong.
+Kesalahan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallEmptyExtraFile" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Extra file update for {0} failed, path {1} inaccessible or empty.
-Error: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip. 
+Pembaruan berkas ekstra untuk {0} gagal, lokasi {1} tidak dapat diakses atau kosong.
+Kesalahan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallEmptyFileFailure" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Script {0} returned empty. URL: {1}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip. 
+Skrip {0} kosong. URL: {1}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallerTitle" xml:space="preserve">
-    <value>{0} Installer</value>
+    <value>{0} pemasang</value>
   </data>
   <data name="InstallExtraAPIFailure" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Extra file update for {0} failed, error code {1}.
-Error message: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip. 
+Pembaruan berkas ekstra untuk {0} gagal, kode kesalahan {1}.
+Pesan kesalahan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>processing extra files (this may take a while...)</value>
+    <value>Memproses berkas-berkas ekstra (ini mungkin memakan waktu beberapa lama...)</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
-    <value>finished!</value>
+    <value>selesai!</value>
   </data>
   <data name="InstallHandshakeFailure" xml:space="preserve">
-    <value>An error occurred while installing a script.
-
-Remote server unavailable, try again later. Error: {0}
-Message: {1}.
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip.
+Server remot tidak tersedia, coba lagi nanti. Kesalahan: {0}
+Pesan: {1}.
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallHiddenScriptFailure" xml:space="preserve">
-    <value>This script is not currently available for install.</value>
+    <value>Skrip ini tidak tersedia untuk dipasang saat ini.</value>
   </data>
   <data name="InstallingFetchingHandshake" xml:space="preserve">
-    <value>initializing...</value>
+    <value>inisialisasi...</value>
   </data>
   <data name="InstallingText" xml:space="preserve">
-    <value>Installing</value>
+    <value>Memasang</value>
   </data>
   <data name="InstallMissingExtraFile" xml:space="preserve">
-    <value>Unable to install the UI translation, as you are missing the files required. Please open all versions of Fate/Grand Order to the login screen, close them, and then try again.</value>
+    <value>Tidak dapat memasang terjemahan UI, dikarenakan beberapa berkas yang diperlukan hilang. Tolong buka semua versi Fate/Grand Order sampai ke layar login, kemudian tutup, dan coba lagi.</value>
   </data>
   <data name="InstallMissingScriptFailure" xml:space="preserve">
-    <value>An error occurred while installing a script.
-
-Script {0} not available.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip.
+Skrip {0} tidak tersedia.</value>
   </data>
   <data name="InstallScriptDownloadFailure" xml:space="preserve">
-    <value>An error occurred while installing a script. 
-
-Download for {0} returned failure. URL: {1}
-Message: {2}
-
-Please try again later, or report as a bug if the issue persists.</value>
+    <value>Sebuah kesalahan terjadi ketika memasang sebuah skrip. 
+Unduhan untuk {0} gagal. URL: {1}
+Pesan: {2}
+Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallStarred" xml:space="preserve">
-    <value>Install Starred</value>
+    <value>Instal Berbintang</value>
   </data>
   <data name="InstallText" xml:space="preserve">
-    <value>Install</value>
+    <value>Instal</value>
   </data>
   <data name="InstallWarning" xml:space="preserve">
-    <value>You are about to install a set of scripts to your game.
-Ensure you have made and written down your bind code before using this application.
-
-Total download size: {0}
-
-Do you want to continue?</value>
+    <value>Anda akan memasang sekumpulan skrip ke dalam game anda.
+Pastikan anda telah membuat dan menyimpan bind code sebelum menggunakan aplikasi ini.
+Total ukuran unduhan: {0}
+Ingin lanjut?</value>
   </data>
   <data name="InstallWriteFile" xml:space="preserve">
-    <value>writing file {0} of {1}...</value>
+    <value>Menulis berkas {0} dari {1}...</value>
   </data>
   <data name="InternalError" xml:space="preserve">
-    <value>Internal Error</value>
+    <value>Kesalahan internal</value>
   </data>
   <data name="InternalErrorDetails" xml:space="preserve">
-    <value>An internal error has occurred, please report this as a bug.
-
+    <value>Telah terjadi kesalahan internal, tolong laporkan ini sebagai sebuah bug.
 {0}</value>
   </data>
   <data name="JPArtName" xml:space="preserve">
-    <value>Custom Art (JP)</value>
+    <value>Ilustrasi kustom (JP)</value>
   </data>
   <data name="JPInstaller" xml:space="preserve">
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-    <value>Last Updated: </value>
+    <value>Terakhir diperbarui:</value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
-    <value>Connect Rayshift Account</value>
+    <value>Hubungkan akun Rayshift</value>
   </data>
   <data name="LinkAccountFailure" xml:space="preserve">
-    <value>Failed to link account, reason: {0}</value>
+    <value>Gagal menghubungkan akun, penyebab: {0}</value>
   </data>
   <data name="LinkAccountSuccess" xml:space="preserve">
-    <value>Linked Rayshift account {0}</value>
+    <value>Akun Rayshift yang terhubung {0}</value>
   </data>
   <data name="LoadingPleaseWait" xml:space="preserve">
-    <value>Loading, please wait...</value>
+    <value>Memuat, tolong tunggu...</value>
   </data>
   <data name="LoginPrompt" xml:space="preserve">
-    <value>Connect Rayshift Account</value>
+    <value>Hubungkan akun Rayshift</value>
   </data>
   <data name="NAArtName" xml:space="preserve">
-    <value>Custom Art (NA)</value>
+    <value>Ilustrasi kustom (NA)</value>
   </data>
   <data name="NAInstaller" xml:space="preserve">
     <value>FGO NA</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Tidak</value>
   </data>
   <data name="NoFGOFound" xml:space="preserve">
-    <value>{0} was not found on your system. Please install the game and ensure you have run it at least once.
-
-If you believe this is an error, try the "Android 11 Setup" in the about tab first. (error 1)</value>
+    <value>{0} tidak ditemukan dalam sistem anda. Harap pasang gamenya dan pastikan anda telah menjalankannya setidaknya sekali.
+Jika anda percaya ini sebuah kesalahan, coba "Penyiapan Android 11" di tab Tentang terlebih dahulu. (error 1)</value>
   </data>
   <data name="NoFGOInstallationFound2" xml:space="preserve">
-    <value>{0} was not found on your system. Please install the game and ensure you have run it at least once.
-
-If you believe this is an error, try the "Android 11 Setup" in the about tab first. (error 2)</value>
+    <value>{0} tidak ditemukan dalam sistem anda. Harap pasang gamenya dan pastikan anda telah menjalankannya setidaknya sekali.
+Jika anda percaya ini sebuah kesalahan, coba "Penyiapan Android 11" di tab Tentang terlebih dahulu. (error 2)</value>
   </data>
   <data name="NoFGOInstallationFoundToast" xml:space="preserve">
-    <value>No Fate/GO installation was found in this location. Please ensure you have launched Fate/GO at least once.</value>
+    <value>Tidak ada instalasi Fate/GO yang ditemukan di tempat ini. Pastikan anda menjalankan Fate/GO setidaknya sekali.</value>
   </data>
   <data name="NoScriptsAvailable" xml:space="preserve">
-    <value>No translation scripts are currently available for download. Please try again later.</value>
+    <value>Tidak ada skrip terjemahan yang tersedia untuk diunduh saat ini. Harap coba lagi nanti.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="RefreshText" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Segarkan</value>
   </data>
   <data name="Reinstall" xml:space="preserve">
-    <value>Reinstall</value>
+    <value>Pasang Ulang</value>
   </data>
   <data name="RemoveAutoScriptUpdate" xml:space="preserve">
-    <value>Disable auto script update</value>
+    <value>Matikan pembaruan skrip otomatis</value>
   </data>
   <data name="RemovePreReleaseKey" xml:space="preserve">
-    <value>Remove pre-release key</value>
+    <value>Hapus kunci pra-rilis</value>
   </data>
   <data name="ReopenAnnouncement" xml:space="preserve">
-    <value>Reopen Announcement</value>
+    <value>Buka ulang Pengumuman</value>
   </data>
   <data name="ResetApp" xml:space="preserve">
-    <value>Reset application</value>
+    <value>Reset aplikasi</value>
   </data>
   <data name="ResetAppText" xml:space="preserve">
-    <value>Are you sure you want to reset the application?</value>
+    <value>Anda yakin ingin mereset aplikasi?</value>
   </data>
   <data name="RetryText" xml:space="preserve">
-    <value>Retry</value>
+    <value>Coba lagi</value>
   </data>
   <data name="ReturnHome" xml:space="preserve">
-    <value>Continue</value>
+    <value>Lanjutkan</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Select your language:</value>
+    <value>Pilih bahasa anda:</value>
   </data>
   <data name="SetupButton" xml:space="preserve">
-    <value>Setup</value>
+    <value>Menyiapkan</value>
   </data>
   <data name="SetupFailedBody" xml:space="preserve">
-    <value>The setup failed or was cancelled. Failure point: </value>
+    <value>Penyiapan gagal atau dibatalkan. Poin kegagalan:</value>
   </data>
   <data name="SetupFailedTitle" xml:space="preserve">
-    <value>Setup Failed</value>
+    <value>Penyiapan gagal</value>
   </data>
   <data name="StatusErrorTryReinstall" xml:space="preserve">
-    <value>error, try reinstalling</value>
+    <value>kesalahan, coba pasang ulang</value>
   </data>
   <data name="StatusInstalled" xml:space="preserve">
-    <value>installed</value>
+    <value>terpasang</value>
   </data>
   <data name="StatusMismatch" xml:space="preserve">
-    <value>update required, launch game and download update first</value>
+    <value>dibutuhkan pembaruan, jalankan game dan unduh pembaruan terlebih dahulu</value>
   </data>
   <data name="StatusNotInstalled" xml:space="preserve">
-    <value>not installed</value>
+    <value>tidak terpasang</value>
   </data>
   <data name="StatusText" xml:space="preserve">
     <value>Status: </value>
   </data>
   <data name="StatusUnknown" xml:space="preserve">
-    <value>unknown state, try reinstalling</value>
+    <value>keadaan tidak diketahui, coba pasang ulang</value>
   </data>
   <data name="StatusUpdateAvailable" xml:space="preserve">
-    <value>update available</value>
+    <value>pembaruan tersedia</value>
   </data>
   <data name="StatusUpdateRequired" xml:space="preserve">
-    <value>update required</value>
+    <value>dibutuhkan pembaruan</value>
   </data>
   <data name="TimeAgo" xml:space="preserve">
-    <value>ago</value>
+    <value>yang lalu</value>
   </data>
   <data name="TooLowAndroidVersion" xml:space="preserve">
-    <value>Android 7.0+ required</value>
+    <value>dibutuhkan Android 7.0+</value>
   </data>
   <data name="TotalSize" xml:space="preserve">
-    <value>Install Size: </value>
+    <value>Ukuran instalasi: </value>
   </data>
   <data name="TranslateAPIError" xml:space="preserve">
-    <value>Translations are currently unavailable.</value>
+    <value>Terjemahan saat ini tidak tersedia.</value>
   </data>
   <data name="TryAgainLater" xml:space="preserve">
-    <value>The Translation API is currently down, please try again later.</value>
+    <value>API Terjamahan sedang down, harap coba lagi nanti.</value>
   </data>
   <data name="UninstallArtWarning" xml:space="preserve">
-    <value>You are about to uninstall any artwork currently installed.
-Ensure you have made and written down your bind code before using this application.
-
-Do you want to continue?</value>
+    <value>Anda akan mencopot ilustrasi yang saat ini terpasang.
+Pastikan anda telah membuat dan menyimpan bind code sebelum menggunakan aplikasi ini.
+Ingin lanjut?</value>
   </data>
   <data name="UninstallFinished" xml:space="preserve">
-    <value>Finished!</value>
+    <value>Berhasil!</value>
   </data>
   <data name="UninstallingText" xml:space="preserve">
-    <value>Uninstalling {0}/{1}...</value>
+    <value>Sedang mencopot {0}/{1}...</value>
   </data>
   <data name="UninstallText" xml:space="preserve">
-    <value>Uninstall</value>
+    <value>Mencopot</value>
   </data>
   <data name="UninstallWarning" xml:space="preserve">
-    <value>You are about to uninstall any translated scripts currently installed.
-Ensure you have made and written down your bind code before using this application.
-
-Do you want to continue?</value>
+    <value>Anda akan mencopot skrip terjemahan yang saat ini terpasang.
+Pastikan anda telah membuat dan menyimpan bind code sebelum menggunakan aplikasi ini.
+Ingin lanjut?</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
-    <value>An unknown error has occurred. {0}</value>
+    <value>Sebuah kesalahan tidak diketahui telah terjadi. {0}</value>
   </data>
   <data name="UnlinkAccount" xml:space="preserve">
-    <value>Unlink Rayshift Account</value>
+    <value>Memutuskan tautan Akun Rayshift</value>
   </data>
   <data name="UnlinkConfirmation" xml:space="preserve">
-    <value>Are you sure you want to unlink your account?</value>
+    <value>Anda yakin untuk memutuskan tautan akun anda?</value>
   </data>
   <data name="UpdateOptionalDescription" xml:space="preserve">
-    <value>An optional update is available for TranslateFGO. Do you want to download and install it?</value>
+    <value>Sebuah pembaruan opsional tersedia untuk TranslateFGO. Anda ingin mengunduh dan memasangnya?</value>
   </data>
   <data name="UpdateOptionalTitle" xml:space="preserve">
-    <value>Optional update available ({0} -&gt; {1})</value>
+    <value>Pembaruan opsional tersedia ({0} -&gt; {1})</value>
   </data>
   <data name="UpdateRequiredDescription" xml:space="preserve">
-    <value>An update is required to continue using TranslateFGO. Please download and install it from our GitHub or website.</value>
+    <value>Sebuah pembaruan memerlukan untuk menggunakan TranslateFGO. Tolong unduh dan pasang pembaruan dari GitHub atau situs kami.</value>
   </data>
   <data name="UpdateRequiredDownload" xml:space="preserve">
-    <value>Download now</value>
+    <value>Unduh sekarang</value>
   </data>
   <data name="UpdateRequiredTitle" xml:space="preserve">
-    <value>Update required ({0} -&gt; {1})</value>
+    <value>Pembaruan diperlukan ({0} -&gt; {1})</value>
   </data>
   <data name="UpdateSkip" xml:space="preserve">
-    <value>Skip this version</value>
+    <value>Lewati versi ini</value>
   </data>
   <data name="UpdateURL" xml:space="preserve">
     <value>https://github.com/rayshift/translatefgo/releases</value>
   </data>
   <data name="VersionErrorMessage" xml:space="preserve">
-    <value>An error has occurred with the translation server. Please try again later.</value>
+    <value>Sebuah kesalahan telah terjadi pada server terjemahan. Harap coba lagi nanti.</value>
   </data>
   <data name="VersionErrorTitle" xml:space="preserve">
-    <value>Server Error</value>
+    <value>Kesalahan server</value>
   </data>
   <data name="VersionExitButton" xml:space="preserve">
-    <value>Exit</value>
+    <value>Keluar</value>
   </data>
   <data name="VersionRetryButton" xml:space="preserve">
-    <value>Retry</value>
+    <value>Coba lagi</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+    <value>Peringatan</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ya</value>
   </data>
 </root>

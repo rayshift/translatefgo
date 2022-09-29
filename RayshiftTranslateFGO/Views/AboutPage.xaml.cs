@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using RayshiftTranslateFGO.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,17 +16,32 @@ namespace RayshiftTranslateFGO.Views
     [DesignTimeVisible(false)]
     public partial class AboutPage : ContentPage
     {
+        protected RestfulAPI API;
         public AboutPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             ShowCorrectAuthenticationButton();
             ShowCorrectAutoUpdateButton();
+            ShowCorrectLinkAccountButton();
             this.Version.Text = ScriptUtil.GetVersionName();
             RetryAndroid11.Clicked += RetryAndroid11OnClicked;
             ChangeLanguage.Clicked += ChangeLanguageOnClicked;
             ResetApp.Clicked += ResetAppOnClicked;
+            API = new RestfulAPI();
 
+            var sLock = App.GetViewModel<MainPageViewModel>().Cache.Get<bool>("AboutSubscribeLock");
+            if (!sLock)
+            {
+                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "connect_rayshift_account", async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () => await StartLinkAccount());
+                });
+
+                App.GetViewModel<MainPageViewModel>().Cache.Set("AboutSubscribeLock", true);
+            }
+
+            BindingContext = App.GetViewModel<AboutViewModel>();
         }
 
         protected override void OnAppearing()
@@ -38,7 +54,7 @@ namespace RayshiftTranslateFGO.Views
             }
             else
             {
-                ReopenAnnouncement.Clicked += OpenAnnouncementOnClicked;
+                ReopenAnnouncement.Command = new Command(OpenAnnouncementOnClicked);
             }
 
         }
@@ -50,9 +66,17 @@ namespace RayshiftTranslateFGO.Views
 
         private async void RetryAndroid11OnClicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+            }
+            else
+            {
+                var intentService = DependencyService.Get<IIntentService>();
+                intentService.MakeToast(AppResources.TooLowAndroidVersion);
+            }
         }
-        private async void OpenAnnouncementOnClicked(object sender, EventArgs e)
+        private async void OpenAnnouncementOnClicked()
         {
             MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
         }
@@ -62,8 +86,62 @@ namespace RayshiftTranslateFGO.Views
             if (await DisplayAlert(AppResources.Confirm, AppResources.ResetAppText, AppResources.Yes, AppResources.No))
             {
                 Preferences.Clear();
-                DependencyService.Get<IIntentService>()?.ExitApplication();
+                DependencyService.Get<IIntentService>().ExitApplication();
             }
+        }
+
+        private async Task StartLinkAccount()
+        {
+            var intentService = DependencyService.Get<IIntentService>();
+            var linkData = await intentService.LinkAccount();
+
+            if (linkData != null && !string.IsNullOrEmpty(linkData.AccessToken))
+            {
+                if (!Guid.TryParse(linkData.AccessToken, out Guid guid))
+                {
+                    intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, "invalid token returned"));
+                    return;
+                }
+                // test link
+                var test = await API.GetLinkedUserDetails(guid);
+
+                if (test.Data.Status != 200)
+                {
+                    intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, $"{test.Data.Status} - {test.Data.Message}"));
+                    return;
+                }
+
+                intentService.MakeToast(string.Format(AppResources.LinkAccountSuccess, test.Data.Response.userName));
+
+                // set link
+                Preferences.Set(EndpointURL.GetLinkedAccountKey(), linkData.AccessToken);
+
+                App.GetViewModel<AboutViewModel>().Cache.Set("LoggedUser", test.Data);
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
+                if (test.Data.Response.isPlus)
+                {
+                    MessagingCenter.Send(Xamarin.Forms.Application.Current, "add_art_tab_non_donor");
+                }
+                else
+                {
+                    MessagingCenter.Send(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor");
+                }
+            }
+
+            ShowCorrectLinkAccountButton();
+        }
+
+        private async Task StartUnlinkAccount()
+        {
+            if (await DisplayAlert(AppResources.Confirm, AppResources.UnlinkConfirmation, AppResources.Yes, AppResources.No))
+            {
+                Preferences.Remove(EndpointURL.GetLinkedAccountKey());
+                App.GetViewModel<AboutViewModel>().Cache.Remove("LoggedUser");
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor");
+                ShowCorrectLinkAccountButton();
+            }
+
         }
 
         public void ShowCorrectAuthenticationButton()
@@ -94,6 +172,20 @@ namespace RayshiftTranslateFGO.Views
             }
         }
 
+        public void ShowCorrectLinkAccountButton()
+        {
+            if (!Preferences.ContainsKey(EndpointURL.GetLinkedAccountKey()))
+            {
+                LinkAccount.Command = new Command(async () => await StartLinkAccount());
+                LinkAccount.Text = AppResources.LinkAccount;
+            }
+            else
+            {
+                LinkAccount.Command = new Command(async () => await StartUnlinkAccount());
+                LinkAccount.Text = AppResources.UnlinkAccount;
+            }
+        }
+
         public async Task Authenticate()
         {
             string result = await DisplayPromptAsync(AppResources.EnterAuthKey, AppResources.EnterAuthKeyDescription);
@@ -110,6 +202,7 @@ namespace RayshiftTranslateFGO.Views
                 }
 
                 Preferences.Set("AuthKey", result);
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
                 ShowCorrectAuthenticationButton();
             }
         }
@@ -123,6 +216,8 @@ namespace RayshiftTranslateFGO.Views
                     EndpointURL.EndPoint = EndpointURL.OldEndPoint;
                     EndpointURL.OldEndPoint = "";
                 }
+
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
                 ShowCorrectAuthenticationButton();
             }
         }

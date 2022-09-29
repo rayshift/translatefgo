@@ -10,10 +10,7 @@
              xmlns:models="clr-namespace:RayshiftTranslateFGO.Models;assembly=RayshiftTranslateFGO"
              xmlns:resources="clr-namespace:RayshiftTranslateFGO;assembly=RayshiftTranslateFGO"
              NavigationPage.HasNavigationBar="False">
-    
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
+
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -73,6 +70,10 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Button Margin="0,10,0,0" Text="{x:Static resources:AppResources.LinkAccount}"
+                        x:Name ="LinkAccount"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
                 <Button Margin="0,10,0,0" Text="{x:Static resources:AppResources.AboutLearnMore}"
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"

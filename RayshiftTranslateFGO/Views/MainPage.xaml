@@ -6,11 +6,12 @@
             mc:Ignorable="d"
             xmlns:views="clr-namespace:RayshiftTranslateFGO.Views"
             xmlns:services="clr-namespace:RayshiftTranslateFGO.Services;assembly=RayshiftTranslateFGO"
+            xmlns:resources="clr-namespace:RayshiftTranslateFGO;assembly=RayshiftTranslateFGO"
             x:Class="RayshiftTranslateFGO.Views.MainPage"
            >
 
     <TabbedPage.Children>
-        <NavigationPage Title="JP Installer">
+        <NavigationPage Title="{x:Static resources:AppResources.JPInstaller}">
             <x:Arguments>
                 <views:InstallerPage>
                     <x:Arguments>
@@ -20,7 +21,7 @@
                 </views:InstallerPage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="NA Installer">
+        <NavigationPage Title="{x:Static resources:AppResources.NAInstaller}">
             <x:Arguments>
                 <views:InstallerPage>
                     <x:Arguments>
@@ -30,7 +31,12 @@
                 </views:InstallerPage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="About">
+        <NavigationPage Title="{x:Static resources:AppResources.CustomArtTab}">
+            <x:Arguments>
+                <views:ArtPage x:Name="ArtPageRef"/>
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="{x:Static resources:AppResources.AboutTab}">
             <x:Arguments>
                 <views:AboutPage />
             </x:Arguments>

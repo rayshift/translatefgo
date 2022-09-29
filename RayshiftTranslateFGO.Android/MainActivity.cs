@@ -18,8 +18,10 @@ using Android.Provider;
 using Android.Util;
 using Firebase.Messaging;
 using Java.Interop;
+using Newtonsoft.Json;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using RayshiftTranslateFGO.ViewModels;
 using RayshiftTranslateFGO.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -57,6 +59,7 @@ namespace RayshiftTranslateFGO.Droid
             Context = this.ApplicationContext;
 
             base.OnCreate(savedInstanceState);
+
             Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
             AssetManager assets = this.Assets;
@@ -89,6 +92,12 @@ namespace RayshiftTranslateFGO.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            Xamarin.Essentials.Platform.OnResume();
+        }
+
         protected override async void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
             base.OnActivityResult(requestCode, resultCode, intent);
@@ -100,19 +109,30 @@ namespace RayshiftTranslateFGO.Droid
 
                 var uri = intent.Data;
                 var selectedFolder = DocumentsContract.GetTreeDocumentId(uri);
-
-                if (selectedFolder == null || !selectedFolder.EndsWith("Android"))
+                var whichFGO = selectedFolder?.Split("/").Last();
+                if (selectedFolder == null || !AppNames.ValidAppNames.Contains(whichFGO))
                 {
                     
                     var folderSplit = selectedFolder?.Split(":").Last();
-                    var infoText = UIFunctions.GetResourceString("AndroidFolderNotSelected");
+                    var infoText = UIFunctions.GetResourceString("FGOFolderNotSelected");
                     var errorMessage = String.Format(infoText, !string.IsNullOrEmpty(folderSplit) ? folderSplit : "none");
                     Toast.MakeText(this.Context, errorMessage, ToastLength.Long)?.Show();
                     return;
                 }
 
+                var pref = App.GetViewModel<PreInitializeViewModel>().Cache.Get<string>("TemporaryProcessName");
+                App.GetViewModel<PreInitializeViewModel>().Cache.Remove("TemporaryProcessName");
+
+                if (pref != whichFGO)
+                {
+                    var infoText = UIFunctions.GetResourceString("FGOWrongGameSelected");
+                    var errorMessage = infoText;
+                    Toast.MakeText(this.Context, errorMessage, ToastLength.Long)?.Show();
+                    return;
+                }
+
                 service.ClearCache();
-                var dataChildren = service.GetFolderChildren(uri, "data/"); // Get list of children to find FGO folders
+                var dataChildren = service.GetFolderChildren(uri, "/"); // Get list of children
 
                 if (dataChildren.Count == 0)
                 {
@@ -121,17 +141,19 @@ namespace RayshiftTranslateFGO.Droid
                     return;
                 }
 
-                var appNamesList = ContentManager.ValidAppNames.ToList();
-                bool found = false;
-                foreach (var folder in dataChildren)
-                {
-                    if (appNamesList.Contains(folder.Path.Split("/").Last()))
-                    {
-                        found = true;
-                    }
-                }
+                //var appNamesList = AppNames.ValidAppNames.ToList();
+                //bool found = false;
+                //foreach (var folder in dataChildren)
+                //{
+                    //if (appNamesList.Contains(folder.Path.Split("/").Last()))
+                    //{
+                        //found = true;
+                    //}
+                //}
 
-                if (!found)
+
+                if (dataChildren.FirstOrDefault(w => w.Path.EndsWith("files")) == null
+                    || dataChildren.FirstOrDefault(w => w.Path.EndsWith("cache")) == null)
                 {
                     var infoText = UIFunctions.GetResourceString("NoFGOInstallationFoundToast");
                     Toast.MakeText(this.Context, infoText, ToastLength.Long)?.Show();
@@ -158,9 +180,18 @@ namespace RayshiftTranslateFGO.Droid
                 Log.Info("BetterFGO", $"Saving URI: {uri?.ToString()}");
 
                 Preferences.Set("StorageType", (int)ContentType.StorageFramework);
-                Preferences.Set("StorageLocation", uri?.ToString());
 
-                MessagingCenter.Send(Xamarin.Forms.Application.Current, "return_to_main_page");
+                var locationJson = Preferences.Get("StorageLocations", "{}");
+                var locations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
+
+                locations[whichFGO] = uri?.ToString();
+
+                var locationSave = JsonConvert.SerializeObject(locations);
+                Preferences.Set("StorageLocations", locationSave);
+
+                //Preferences.Set("StorageLocation", uri?.ToString());
+
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "install_locations_updated");
             }
         }
 

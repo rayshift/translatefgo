@@ -27,7 +27,259 @@ namespace RayshiftTranslateFGO.Droid
             _cm = new ContentManager();
         }
 
-        public async Task<ScriptInstallStatus> InstallScript(ContentType contentType, FGORegion region, List<string> installPaths, string baseInstallPath, int installId, string assetStorageCheck = null,
+        // only being used for uninstall atm "temporary" but actually perm
+        public async Task GetArtAssetStorage(ContentType contentType, FGORegion region,
+            List<string> installPaths, List<ArtUrl> artUrls, bool isUninstall)
+        {
+            _cm.ClearCache();
+            var ftw = new List<FileToWrite>();
+            var restful = new RestfulAPI();
+            foreach (var game in installPaths)
+            {
+                var assetStoragePath = contentType != ContentType.DirectAccess
+                    ? $"files/data/d713/{InstallerPage._assetList}"
+                    : $"{game}/files/data/d713/{InstallerPage._assetList}";
+
+                var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, game);
+
+                if (!fileContents.Successful || fileContents.FileContents.Length == 0)
+                {
+                    return;
+                }
+
+
+                // remove bom
+                var base64 = "";
+                await using var inputStream = new MemoryStream(fileContents.FileContents);
+                using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                {
+                    base64 = await reader.ReadToEndAsync();
+                }
+
+                var svtIds = artUrls.SelectMany(s => s.ServantIDs).ToList();
+                var newAssetList = await restful.SendAssetList(base64, svtIds, region, true);
+
+                if (!newAssetList.IsSuccessful)
+                {
+                    return;
+                }
+
+                // add bom
+                await using var outputStream = new MemoryStream();
+                await using (var writer = new StreamWriter(outputStream, Encoding.ASCII))
+                {
+                    await writer.WriteAsync(newAssetList.Data.Response["data"]);
+                }
+
+                // for later
+                ftw.Add(new FileToWrite(assetStoragePath, game, outputStream.ToArray()));
+            }
+
+            foreach (var assetStorageFile in ftw)
+            {
+                // write assetstorage
+                await _cm.RemoveFileIfExists(contentType,
+                    assetStorageFile.FilePath, assetStorageFile.BaseInstallPath);
+                await _cm.WriteFileContents(contentType, assetStorageFile.FilePath, assetStorageFile.BaseInstallPath,
+                    assetStorageFile.Contents, true);
+            }
+        }
+        public async Task<ScriptInstallStatus> InstallArt(ContentType contentType, FGORegion region,
+            List<string> installPaths, List<ArtUrl> artUrls, ObservableCollection<ArtPage.ArtGUIObject> artGuiObjects = null, int button = 0)
+        {
+            _cm.ClearCache();
+            var gui = artGuiObjects != null;
+            var guiObject = gui ? artGuiObjects.First(w => w.Region == region) : null;
+            if (guiObject != null)
+            {
+                guiObject.Status =
+                    UIFunctions.GetResourceString("InstallingFetchingHandshake");
+                if (button == 1)
+                {
+                    guiObject.Button1InstallText = UIFunctions.GetResourceString("InstallingText");
+                }
+                else if (button == 2)
+                {
+                    guiObject.Button2InstallText = UIFunctions.GetResourceString("InstallingText");
+                }
+
+                guiObject.TextColor = Color.Chocolate;
+            }
+
+            var restful = new RestfulAPI();
+
+            if (guiObject != null)
+            {
+                guiObject.Status =
+                    String.Format(UIFunctions.GetResourceString("InstallDownloadNewAssetStorage"));
+            }
+
+            ConcurrentDictionary<string, byte[]> fileCache = new ConcurrentDictionary<string, byte[]>();
+
+            var arts = artUrls.SelectMany(s => s.Urls).ToList();
+            var totalArts = arts.Count;
+
+            // get new assetstorage.txt
+            foreach (var game in installPaths)
+            {
+                var assetStoragePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{InstallerPage._assetList}"
+                    : $"{game}/files/data/d713/{InstallerPage._assetList}";
+
+                var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, game);
+
+                if (!fileContents.Successful || fileContents.FileContents.Length == 0)
+                {
+                    return new ScriptInstallStatus()
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = String.Format(UIFunctions.GetResourceString("InstallEmptyAssetStorage"), "art", assetStoragePath, fileContents.Error)
+                    };
+                }
+
+
+                // remove bom
+                var base64 = "";
+                await using var inputStream = new MemoryStream(fileContents.FileContents);
+                using (var reader = new StreamReader(inputStream, Encoding.ASCII))
+                {
+                    base64 = await reader.ReadToEndAsync();
+                }
+
+                var svtIds = artUrls.SelectMany(s => s.ServantIDs).ToList();
+                var newAssetList = await restful.SendAssetList(base64, svtIds, region);
+
+                if (!newAssetList.IsSuccessful)
+                {
+                    return new ScriptInstallStatus()
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = string.Format(UIFunctions.GetResourceString("InstallAssetStorageAPIFailure"), "art", newAssetList.StatusCode, newAssetList.Data?.Message)
+                    };
+                }
+
+                // add bom
+                await using var outputStream = new MemoryStream();
+                await using (var writer = new StreamWriter(outputStream, Encoding.ASCII))
+                {
+                    await writer.WriteAsync(newAssetList.Data.Response["data"]);
+                }
+
+                // for later
+                var assetStorageFile = new FileToWrite(assetStoragePath, game, outputStream.ToArray());
+
+                // download each art
+
+                if (guiObject != null)
+                {
+                    guiObject.Status =
+                        String.Format(UIFunctions.GetResourceString("InstallDownloadingArts"), 1, totalArts);
+                }
+
+                int i = 0;
+                object lockObj = new Object();
+
+                // assuming writing can be async
+                try
+                {
+                    await arts.ParallelForEachAsync(async art =>
+                    {
+                        var filePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{art.Filename}"
+                            : $"{game}/files/data/d713/{art.Filename}";
+                        var downloadUrl = art.Url;
+                        byte[] artData;
+                        if (!fileCache.ContainsKey(downloadUrl))
+                        {
+                            var downloadResponse = await restful.GetScript(downloadUrl, true);
+                            var downloadedArt = downloadResponse.RawBytes;
+
+                            if (!downloadResponse.IsSuccessful)
+                            {
+                                throw new EndEarlyException(String.Format(
+                                    UIFunctions.GetResourceString("InstallScriptDownloadFailure"),
+                                    "art", downloadUrl, downloadResponse.ErrorMessage));
+                            }
+
+                            if (downloadedArt == null)
+                            {
+                                throw new EndEarlyException(String.Format(
+                                    UIFunctions.GetResourceString("InstallEmptyFileFailure"),
+                                    "art", downloadUrl));
+                            }
+
+                            fileCache.TryAdd(downloadUrl, downloadedArt);
+                            artData = downloadedArt;
+                        }
+                        else
+                        {
+                            artData = fileCache[downloadUrl];
+                        }
+
+                        var file = new FileToWrite(filePath, game, artData);
+
+                        // write
+                        if (file.FilePath.EndsWith(".bin"))
+                        {
+                            await _cm.RemoveFileIfExists(contentType,
+                                file.FilePath, file.BaseInstallPath);
+                        }
+
+                        await _cm.WriteFileContents(contentType, file.FilePath, file.BaseInstallPath, file.Contents, true);
+
+                        i++;
+                        lock (lockObj)
+                        {
+                            if (guiObject != null)
+                            {
+                                guiObject.Status =
+                                    String.Format(UIFunctions.GetResourceString("InstallDownloadingArts"),
+                                        Math.Min(i, totalArts), totalArts);
+                            }
+                        }
+                    }, maxDegreeOfParallelism: 4);
+                }
+                catch (EndEarlyException ex)
+                {
+                    return new ScriptInstallStatus()
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = ex.ToString()
+                    };
+                }
+
+                // write assetstorage
+                await _cm.RemoveFileIfExists(contentType,
+                    assetStorageFile.FilePath, assetStorageFile.BaseInstallPath);
+                await _cm.WriteFileContents(contentType, assetStorageFile.FilePath, assetStorageFile.BaseInstallPath, assetStorageFile.Contents, true);
+            }
+
+            if (guiObject != null)
+            {
+                guiObject.Status =
+                    String.Format(UIFunctions.GetResourceString("InstallFinished"));
+                guiObject.TextColor = Color.LimeGreen;
+            }
+
+            // Write checksum cache
+            var prefKey = region == FGORegion.Jp ? "JPArtChecksums" : "NAArtChecksums";
+            var chkPref = Preferences.Get(prefKey, "[]");
+
+            var checksums = JsonConvert.DeserializeObject<List<string>>(chkPref);
+            if (checksums == null) checksums = new List<string>();
+
+            checksums.AddRange(arts.Select(s => s.Hash));
+
+            var chkRewrite = JsonConvert.SerializeObject(checksums);
+            Preferences.Set(prefKey, chkRewrite);
+
+            return new ScriptInstallStatus()
+            {
+                IsSuccessful = true,
+                ErrorMessage = ""
+            };
+
+        }
+
+        public async Task<ScriptInstallStatus> InstallScript(ContentType contentType, FGORegion region, List<string> installPaths, int installId, string assetStorageCheck = null,
             ObservableCollection<InstallerPage.TranslationGUIObject> translationGuiObjects = null)
         {
             _cm.ClearCache();
@@ -86,6 +338,64 @@ namespace RayshiftTranslateFGO.Droid
                     IsSuccessful = false,
                     ErrorMessage = String.Format(UIFunctions.GetResourceString("InstallHiddenScriptFailure"), installId)
                 };
+            }
+
+            Task<AsyncUploader.ExtraAssetReturn> extraFileAwaitTask = null;
+            // get new extra files - do first as this takes longest to process
+            if (groupToInstall.HasExtraStage)
+            {
+                var buffer = new MemoryStream();
+                var writer = new BinaryWriter(buffer);
+                // File format: int32 install path count, int32 total file count, null-terminated string path, int32 length of data, byte[] data
+                writer.Write(installPaths.Count);
+                foreach (var game in installPaths)
+                {
+                    // pack
+                    writer.Write(groupToInstall.ExtraStages.Count);
+                    foreach (var path in groupToInstall.ExtraStages)
+                    {
+
+                        var directPath = contentType != ContentType.DirectAccess
+                            ? $"files/data/{path}"
+                            : $"{game}/files/data/{path}";
+
+                        var fileContents = await _cm.GetFileContents(contentType, directPath, game);
+
+                        if (!fileContents.Successful || fileContents.FileContents.Length == 0)
+                        {
+                            if (fileContents.Error == FileErrorCode.NotExists)
+                            {
+                                return new ScriptInstallStatus()
+                                {
+                                    IsSuccessful = false,
+                                    ErrorMessage = UIFunctions.GetResourceString("InstallMissingExtraFile")
+                                };
+                            }
+                            return new ScriptInstallStatus()
+                            {
+                                IsSuccessful = false,
+                                ErrorMessage = String.Format(UIFunctions.GetResourceString("InstallEmptyExtraFile"), installId, directPath, fileContents.Error)
+                            };
+                        }
+                        writer.Write(path);
+                        writer.Write(fileContents.FileContents.Length);
+                        writer.Write(fileContents.FileContents);
+                    }
+                }
+                writer.Flush();
+
+                // upload in the background
+                AsyncUploader uploader = new AsyncUploader();
+
+                if (Guid.TryParse(Preferences.Get(EndpointURL.GetLinkedAccountKey(), null), out var userToken))
+                {
+                    extraFileAwaitTask = uploader.GetExtraAssets(buffer, userToken, installId, region);
+                }
+                else
+                {
+                    throw new EndEarlyException("No user token found in storage.");
+                }
+                
             }
 
             var totalScripts = groupToInstall.Scripts.Count;
@@ -149,20 +459,65 @@ namespace RayshiftTranslateFGO.Droid
                 };
             }
 
+
+            //Dictionary<string, Tuple<string, byte[]>> filesToWrite = new Dictionary<string, Tuple<string, byte[]>>();
+            List<FileToWrite> filesToWrite = new List<FileToWrite>();
+            // process returned extra files
+            if (groupToInstall.HasExtraStage && extraFileAwaitTask != null)
+            {
+                if (guiObject != null)
+                {
+                    guiObject.Status =
+                        String.Format(UIFunctions.GetResourceString("InstallExtraFiles"));
+                }
+
+                var extraResult = await extraFileAwaitTask;
+
+                if (!extraResult.IsSuccessful)
+                {
+                    return extraResult;
+                }
+
+                var bytes = extraResult.Data;
+                await using var outputStream = new MemoryStream(bytes);
+                using var reader = new BinaryReader(outputStream);
+
+                var totalPaths = reader.ReadInt32();
+
+                for (int i = 0; i < totalPaths; i++)
+                {
+                    var totalFiles = reader.ReadInt32();
+                    for (int k = 0; k < totalFiles; k++)
+                    {
+                        var pathToWrite = reader.ReadString();
+                        var dataLength = reader.ReadInt32();
+                        var data = reader.ReadBytes(dataLength);
+
+                        var game = installPaths[i];
+
+                        var directPath = contentType != ContentType.DirectAccess
+                            ? $"files/data/{pathToWrite}"
+                            : $"{game}/files/data/{pathToWrite}";
+
+                        filesToWrite.Add(new FileToWrite(directPath, game, data));
+                    }
+                }
+                
+            }
+
             if (guiObject != null)
             {
                 guiObject.Status =
                     String.Format(UIFunctions.GetResourceString("InstallDownloadNewAssetStorage"));
             }
 
-            Dictionary<string, byte[]> newAssetStorages = new Dictionary<string, byte[]>();
             // get new assetstorage.txt
             foreach (var game in installPaths)
             {
-                var assetStoragePath = contentType != ContentType.DirectAccess ? $"data/{game}/files/data/d713/{InstallerPage._assetList}"
+                var assetStoragePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{InstallerPage._assetList}"
                     : $"{game}/files/data/d713/{InstallerPage._assetList}";
 
-                var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, baseInstallPath);
+                var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, game);
 
                 if (!fileContents.Successful || fileContents.FileContents.Length == 0)
                 {
@@ -199,22 +554,20 @@ namespace RayshiftTranslateFGO.Droid
                     await writer.WriteAsync(newAssetList.Data.Response["data"]);
                 }
 
-                newAssetStorages.Add(assetStoragePath, outputStream.ToArray());
+                filesToWrite.Add(new FileToWrite(assetStoragePath, game, outputStream.ToArray()));
             }
 
             // prepare files
-
-            Dictionary<string, byte[]> filesToWrite = newAssetStorages;
 
             foreach (var game in installPaths)
             {
                 foreach (var asset in scriptDictionary)
                 {
                     var assetInstallPath = contentType != ContentType.DirectAccess
-                        ? $"data/{game}/files/data/d713/{asset.Key}"
+                        ? $"files/data/d713/{asset.Key}"
                         : $"{game}/files/data/d713/{asset.Key}";
 
-                    filesToWrite.Add(assetInstallPath, asset.Value);
+                    filesToWrite.Add(new FileToWrite(assetInstallPath, game, asset.Value));
                 }
             }
 
@@ -224,10 +577,10 @@ namespace RayshiftTranslateFGO.Droid
             foreach (var file in filesToWrite)
             {
 
-                if (file.Key.EndsWith(".bin"))
+                if (file.FilePath.EndsWith(".bin"))
                 {
                     await _cm.RemoveFileIfExists(contentType,
-                        file.Key, baseInstallPath);
+                        file.FilePath, file.BaseInstallPath);
                 }
             }
             _cm.ClearCache();
@@ -240,7 +593,7 @@ namespace RayshiftTranslateFGO.Droid
                         String.Format(UIFunctions.GetResourceString("InstallWriteFile"), j, tot);
                 }
 
-                await _cm.WriteFileContents(contentType, file.Key, baseInstallPath, file.Value);
+                await _cm.WriteFileContents(contentType, file.FilePath, file.BaseInstallPath, file.Contents);
 
                 j += 1;
             }
@@ -252,8 +605,28 @@ namespace RayshiftTranslateFGO.Droid
                     String.Format(UIFunctions.GetResourceString("InstallFinished"));
                 guiObject.TextColor = Color.LimeGreen;
             }
-            Preferences.Set($"InstalledScript_{region}", JsonConvert.SerializeObject(groupToInstall));
 
+            if (!groupToInstall.HasExtraStage)
+            {
+                Preferences.Set($"InstalledScript_{region}", JsonConvert.SerializeObject(groupToInstall));
+            }
+
+            if (groupToInstall.HasExtraStage)
+            {
+                var pref = Preferences.Get($"UninstallPurgesExtras_{region}", "[]");
+                var existingExtras = JsonConvert.DeserializeObject<List<string>>(pref);
+                if (existingExtras == null) existingExtras = new List<string>();
+                foreach (var extra in groupToInstall.ExtraStages)
+                {
+                    if (!existingExtras.Contains(extra))
+                    {
+                        existingExtras.Add(extra);
+                    }
+                }
+
+                var extraSave = JsonConvert.SerializeObject(existingExtras);
+                Preferences.Set($"UninstallPurgesExtras_{region}", extraSave);
+            }
             return new ScriptInstallStatus()
             {
                 IsSuccessful = true,
@@ -265,15 +638,7 @@ namespace RayshiftTranslateFGO.Droid
         {
             throw new System.NotImplementedException(); // implemented locally
         }
-    }
 
-    public class EndEarlyException : Exception
-    {
-        public EndEarlyException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-        public EndEarlyException(string message) : base(message)
-        {
-        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Android.Content.PM;
@@ -89,6 +90,16 @@ namespace RayshiftTranslateFGO.Util
 
             return info.VersionName;
 
+        }
+    }
+
+    public class EndEarlyException : Exception
+    {
+        public EndEarlyException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+        public EndEarlyException(string message) : base(message)
+        {
         }
     }
     public enum TranslationFileStatus

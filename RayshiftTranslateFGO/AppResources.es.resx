@@ -118,315 +118,445 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutArtworkCredit" xml:space="preserve">
-    <value>Crédito de la obra: 冬木 @</value>
+    <value>Crédito del FanArt: 冬木 @</value>
   </data>
   <data name="AboutChangeLanguage" xml:space="preserve">
     <value>Cambiar Idioma</value>
   </data>
   <data name="AboutFlavourText" xml:space="preserve">
-    <value>Esta aplicación te permite acceder a varias traducciones de historias para la versión Japonesa de</value>
+    <value>Esta aplicación te permite acceder a varias traducciones de historias para </value>
   </data>
   <data name="AboutLearnMore" xml:space="preserve">
-    <value>Saber mas</value>
+    <value>Saber más</value>
   </data>
   <data name="AboutRetrySetup" xml:space="preserve">
-    <value>Reconfigurar Configuracion Android 11</value>
+    <value>Reconfigurar la Configuración para Android 11+</value>
+  </data>
+  <data name="AboutTab" xml:space="preserve">
+    <value>Acerca de</value>
   </data>
   <data name="AboutVisitText" xml:space="preserve">
-    <value>Visita rayshift.io para mas información</value>
+    <value>Visita rayshift.io para más información.</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Añadir Carpeta</value>
+    <value>Añadir carpeta</value>
   </data>
   <data name="AddPreReleaseKey" xml:space="preserve">
-    <value>Ingresar código de acceso anticipado</value>
+    <value>Ingresar código de acceso anticipado (BETA)</value>
   </data>
   <data name="Android11AskToSetup" xml:space="preserve">
-    <value>Este dispositivo requiere que establezcas acceso especial para escribir en los archivos de Fate/Grand Order. Por favor, dale a Sí para establecerlo ahora.</value>
+    <value>Este dispositivo requiere que establezcas un acceso especial para modificar y escribir los archivos en caché de Fate/Grand Order. Por favor, dale a Sí para establecerlo ahora.</value>
   </data>
   <data name="Android11Setup" xml:space="preserve">
-    <value>Más ajustes requeridos para Android 11</value>
+    <value>Más ajustes requeridos para Android 11+</value>
   </data>
   <data name="Android11Setup0" xml:space="preserve">
-    <value>Debe añadir manualmente la ubicación de la carpeta de Android en donde FGO almacena los datos en caché. Este probablemente se encuentre en su almacenamiento interno o tarjeta SD. Si no está seguro, agregue ambos.</value>
+    <value>Debes de conceder permisos a esta aplicación para escribir en el directorio donde Fate/Grand Order almacena los archivos caché.</value>
   </data>
   <data name="Android11Setup1" xml:space="preserve">
-    <value>En la ventana que aparece, seleccione "Android", luego haga click en "Usar esta carpeta", y permita que el app acceda al contenido de la carpeta Android.</value>
+    <value>Presiona cada botón abajo, y luego presione "Usar esta carpeta".</value>
   </data>
   <data name="Android11Setup2" xml:space="preserve">
-    <value>Este proceso podria tener que repetirse si actualizas TranslateFGO</value>
+    <value>Vuelva aquí con "Acerca de -&gt; Reconfigurar Android 11+ configuración" si usted instala una nueva versión del juego.</value>
   </data>
   <data name="Android11SetupSuccessful" xml:space="preserve">
-    <value>Realizado con exito, redirigiendo...</value>
+    <value>¡Éxito!</value>
+  </data>
+  <data name="Android1213" xml:space="preserve">
+    <value>Estoy en Android 12/13</value>
   </data>
   <data name="AndroidDataFolderEmpty" xml:space="preserve">
-    <value>La carpeta de datos está vacia o inaccesible. Por favor intente con otra carpeta de Android, o reinstale el app TranslateFGO.</value>
+    <value>Las carpetas de archivos están vacías o inaccesibles. Asegúrese de que haya iniciado FGO al menos una vez o este actualizado.</value>
   </data>
   <data name="AndroidFolderNotSelected" xml:space="preserve">
-    <value>La carpeta "Android" no fue encontrada, se encontró "{0}" en cambio, por favor intente otra vez.</value>
+    <value>La carpeta seleccionada no era "Android", en su lugar se encontró "{0}", inténtelo de nuevo.</value>
+  </data>
+  <data name="ArtCount" xml:space="preserve">
+    <value>Art a instalar:</value>
+  </data>
+  <data name="ArtInstallWarning" xml:space="preserve">
+    <value>Está a punto de instalar un Art personalizado a tu partida.                                                 Asegúrese de que haya creado y anotado su código de transferencia de FGO antes de usar esta sección de la aplicación.                                                                                                                                             ¿Quiere continuar?</value>
+  </data>
+  <data name="ArtStatus" xml:space="preserve">
+    <value>{0}/{1} destacados, {2}/{3} en total</value>
+  </data>
+  <data name="ArtTotalSize" xml:space="preserve">
+    <value>{0} destacado, {1} en total</value>
+  </data>
+  <data name="ArtUninstallingButton" xml:space="preserve">
+    <value>Desinstalando...</value>
   </data>
   <data name="AssetWarningCorrupted" xml:space="preserve">
-    <value>Los recursos de su base de datos pueden estar corruptos. Por favor intente abrir y cerrar Fate/Grand Order para solucionar el problema.</value>
+    <value>La base de datos principal esta dañada. Por favor intente abriendo y cerrando Fate/Grand Order para resolver el problema.</value>
   </data>
   <data name="AssetWarningFutureUnreleased" xml:space="preserve">
-    <value>Los recursos de la versión de su base de datos están actualizados, pero los archivos de historia no han sido liberados aún. Por favor intente de nuevo, o reporte este problema.</value>
+    <value>La base de datos principal está actualizada, pero los script de la historia no han sido liberados aún. Por favor inténtelo más tarde o repórtelo si se trata de un error.</value>
   </data>
   <data name="AssetWarningOutOfDate" xml:space="preserve">
-    <value>Su juego no tiene los recursos mas recientes. Por favor abra Fate/Grand Order y descargue la actualización antes de instalar los archivos de historia.</value>
+    <value>Tu juego no tiene los recursos más recientes. Por favor abre Fate/Grand Order y descarga la actualización más reciente antes de instalar las traducciones.</value>
   </data>
   <data name="AssetWarningUnrecognised" xml:space="preserve">
-    <value>Los recursos de su base de datos no fueron reconocidos. Los archivos de historia no funcionaran correctamente. Por favor intente de nuevo, o reporte este problema.</value>
+    <value>Tu versión de la base de datos no fue reconocida. Puede que los Scripts no funcionen correctamente. Por favor inténtalo de nuevo más tarde, o repórtalo como un error.</value>
+  </data>
+  <data name="AvailableToDonors" xml:space="preserve">
+    <value>Disponible solo para donadores</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ChunkUploadFailed" xml:space="preserve">
+    <value>Carga fallida. Tu teléfono o emulador parece tener una mala conexión a internet, intenta de nuevo más tarde.</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirmar</value>
   </data>
+  <data name="ConnectAccount" xml:space="preserve">
+    <value>Conectar cuenta</value>
+  </data>
+  <data name="ConnectAccountInfo" xml:space="preserve">
+    <value>Traducción de la Interfaz de Usuario (Actualmente solo JP/ENG) y Art personalizado solo disponible para donadores de Patreon.
+¿Conectar tu cuenta de Rayshift ahora?</value>
+  </data>
+  <data name="ConnectAccountNotDonatedInfo" xml:space="preserve">
+    <value>Traducción de la Interfaz de Usuario (Actualmente solo JP/ENG) y Art personalizado solo disponible para donadores de Patreon.
+Si ya has donado, conecta tu cuenta en la configuración de tu perfil.</value>
+  </data>
+  <data name="CustomArtTab" xml:space="preserve">
+    <value>Art</value>
+  </data>
   <data name="DirectoryPermissionAccessBody" xml:space="preserve">
-    <value>Translate FGO requiere acceso a tu almacenamiento para funcionar. Por favor permita los accesos requeridos.</value>
+    <value>Translate FGO requiere acceso al almacenamiento para funcionar. Por favor permita el acceso cuando se le solicite.</value>
   </data>
   <data name="DirectoryPermissionAccessTitle" xml:space="preserve">
-    <value>Se requiere acceso a almacenamiento.</value>
+    <value>Se requiere acceso al almacenamiento.</value>
   </data>
   <data name="DirectoryPermissionDeniedBody" xml:space="preserve">
-    <value>La aplicación no puede acceder a tu almacenamiento. Intente reinstalar el app, o reporte el problema como un bug si persiste. ¿Reintentar?</value>
+    <value>No fue posible obtener permiso de acceso al almacenamiento. Si esto continúa, intente reinstalar la app, de lo contrario por favor reporte el problema. ¿Reintentar?</value>
   </data>
   <data name="DirectoryPermissionDeniedTitle" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="DonateButton" xml:space="preserve">
+    <value>Donación</value>
+  </data>
+  <data name="DonorPrompt" xml:space="preserve">
+    <value>Donación</value>
+  </data>
   <data name="EnableAutoScriptUpdate" xml:space="preserve">
-    <value>Habilitar actualización automática de paquetes</value>
+    <value>Active la actualización de script automática</value>
   </data>
   <data name="EnterAuthKey" xml:space="preserve">
-    <value>Ingrese código de autenticación</value>
+    <value>Ingrese la clave de autentificación.</value>
   </data>
   <data name="EnterAuthKeyClear" xml:space="preserve">
-    <value>¿Está seguro que quiere quitar el código de autenticación actual?</value>
+    <value>¿Estás seguro de querer borrar la clave de autentificación actual?</value>
   </data>
   <data name="EnterAuthKeyDescription" xml:space="preserve">
-    <value>Si tiene un código de autenticación para acceder al contenido en desarrollo, ingreselo aquí.</value>
+    <value>Si tiene una clave de autentificación para acceder a contenido en desarrollo, ingrésela aquí.</value>
   </data>
   <data name="EnterAuthKeyInvalid" xml:space="preserve">
-    <value>El formato de la clave es incorrecto</value>
+    <value>El formato de la clave es inválida.</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="FGOFolderNotSelected" xml:space="preserve">
+    <value>La carpeta seleccionada no tiene una instalación de FGO válida, en su lugar se encontró "{0}", vuelva a intentarlo.</value>
+  </data>
+  <data name="FGOWrongGameSelected" xml:space="preserve">
+    <value>El juego nunca ha sido iniciado, o se seleccionó una carpeta inválida.</value>
+  </data>
+  <data name="InstallAll" xml:space="preserve">
+    <value>Instalar todo</value>
+  </data>
   <data name="InstallAssetStorageAPIFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete. 
-
-Falla en el recurso de base de datos para {0}, código de error {1}. Mensaje de error: {2} 
-
-Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+La actualización de la base de datos activa {0} falló, error {1}.
+Mensaje de error: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
   </data>
   <data name="InstallChecksumFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete.
-
-Falla en la suma de comprobación {0}. Extensión de archivo real: {1} URL de descarga: {2}
-
-Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+Falló la comparación de {0}. Tamaño real del archivo es: {1}
+URL de descarga: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
+  </data>
+  <data name="InstallDownloadingArts" xml:space="preserve">
+    <value>Descargando Art {0} de {1}...</value>
   </data>
   <data name="InstallDownloadingScripts" xml:space="preserve">
-    <value>descargando script {0} de {1}...</value>
+    <value>Descargando script {0} de {1}...</value>
   </data>
   <data name="InstallDownloadNewAssetStorage" xml:space="preserve">
-    <value>actualizando recursos de base de datos...</value>
+    <value>Actualizando bases de datos activas...</value>
   </data>
   <data name="InstalledText" xml:space="preserve">
     <value>Instalado</value>
   </data>
   <data name="InstallEmptyAssetStorage" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete. 
-
-Falla en el recurso de base de datos para {0}, fuente {1} inaccesible o vacia. Error: {2}
-
-Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+La actualización de la base de datos activa {0} falló, la ruta {1} es inaccesible o está vacía.
+Error: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
+  </data>
+  <data name="InstallEmptyExtraFile" xml:space="preserve">
+    <value>Ha ocurrido un error al estar instalando un script.
+La actualización del archivo adicional {0} falló, la ruta {1} es inaccesible o está vacía.
+Error: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
   </data>
   <data name="InstallEmptyFileFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete.
-
-El paquete {0} está vacio. URL: {1}
-
-Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+El script {0} devolvio un dato vacio. URL: {1}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
   </data>
   <data name="InstallerTitle" xml:space="preserve">
-    <value>{0} Instalador</value>
+    <value>Instalación de {0}</value>
+  </data>
+  <data name="InstallExtraAPIFailure" xml:space="preserve">
+    <value>Ha ocurrido un error al estar instalando un script.
+La actualización del archivo adicional {0} fallo, código de error {1}.
+Mensaje de error: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
+  </data>
+  <data name="InstallExtraFiles" xml:space="preserve">
+    <value>Procesando archivos adicionales (Esto puede tomar algo de tiempo...)</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
-    <value>completado!</value>
+    <value>¡Finalizado!</value>
   </data>
   <data name="InstallHandshakeFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete. Server remoto no disponible, intente más tarde. Error: {0} Message: {1}. Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+Servidor remoto no disponible, inténtelo más tarde. Error: {0}
+Mensaje: {1}
+Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
+  </data>
+  <data name="InstallHiddenScriptFailure" xml:space="preserve">
+    <value>Este script no está actualmente disponible para instalar.</value>
   </data>
   <data name="InstallingFetchingHandshake" xml:space="preserve">
-    <value>inicializando...</value>
+    <value>Comenzando...</value>
   </data>
   <data name="InstallingText" xml:space="preserve">
     <value>Instalando</value>
   </data>
+  <data name="InstallMissingExtraFile" xml:space="preserve">
+    <value>No es posible instalar la UI de traducción, ya que no cuentas con los archivos necesarios. Por favor inicia todas las versiones de Fate/Grand Order que tengas en la pantalla de inicio, cierra y vuelve a intentarlo.</value>
+  </data>
   <data name="InstallMissingScriptFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba el paquete.
-
-El paquete {0} no está disponible.</value>
+    <value>Un error ha ocurrido cuando se instalaba un script.
+El script {0} no está disponible.</value>
   </data>
   <data name="InstallScriptDownloadFailure" xml:space="preserve">
-    <value>Ocurrió un error mientras se instalaba un paquete.
-
-Falló la descarga para {0}. URL: {1} Message: {2}
-
-Por favor intente después, o reporte este bug si el problema persiste.</value>
+    <value>Ha ocurrido un error al estar instalando un script.
+Descarga para {0} devolvió un error. URL: {1}
+Mensaje: {2}
+Vuelve a intentarlo más tarde, o reporta este problema si continúa.</value>
+  </data>
+  <data name="InstallStarred" xml:space="preserve">
+    <value>Instalación iniciada</value>
   </data>
   <data name="InstallText" xml:space="preserve">
     <value>Instalar</value>
   </data>
   <data name="InstallWarning" xml:space="preserve">
-    <value>Estás a punto de instalar un paquete de traducción al juego. Asegúrate de haber guardado y escrito tu bind code antes de usar esta aplicación. 
-
-Descarga total: {0}
-
-¿Quieres continuar?</value>
+    <value>Estás a punto de instalar un conjunto de scripts a tu juego.
+Asegúrate de haber obtenido y guardado el código de transferencia antes de usar esta aplicación.
+Tamaño total de descarga: {0}
+¿Deseas continuar?</value>
   </data>
   <data name="InstallWriteFile" xml:space="preserve">
-    <value>Escribiendo el archivo {0} de {1}</value>
+    <value>escribiendo archivo {0} de {1}...</value>
   </data>
   <data name="InternalError" xml:space="preserve">
-    <value>Error Interno</value>
+    <value>Error interno</value>
   </data>
   <data name="InternalErrorDetails" xml:space="preserve">
-    <value>Un error interno acaba de ocurrir, por favor reporte esto como un bug {0}</value>
+    <value>Un error interno ha ocurrido, por favor reporta esto como un BUG.
+{0}</value>
+  </data>
+  <data name="JPArtName" xml:space="preserve">
+    <value>Custom Art (JP)</value>
+  </data>
+  <data name="JPInstaller" xml:space="preserve">
+    <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-    <value>Última Actualización: </value>
+    <value>Última actualización:</value>
+  </data>
+  <data name="LinkAccount" xml:space="preserve">
+    <value>Conectado a la cuenta de Rayshift</value>
+  </data>
+  <data name="LinkAccountFailure" xml:space="preserve">
+    <value>Error al sincronizar su cuenta, motivo: {0}</value>
+  </data>
+  <data name="LinkAccountSuccess" xml:space="preserve">
+    <value>Cuenta de Rayshift {0} vinculada</value>
   </data>
   <data name="LoadingPleaseWait" xml:space="preserve">
-    <value>Cargando, espere por favor...</value>
+    <value>Cargando, por favor espere...</value>
+  </data>
+  <data name="LoginPrompt" xml:space="preserve">
+    <value>Vincular cuenta de Rayshift</value>
+  </data>
+  <data name="NAArtName" xml:space="preserve">
+    <value>Custom Art (NA)</value>
+  </data>
+  <data name="NAInstaller" xml:space="preserve">
+    <value>FGO NA</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="NoFGOFound" xml:space="preserve">
-    <value>{0} no fue encontrado en su sistema. Por favor instale el juego, y asegúrese de que lo haya abierto al menos una vez.
-
-Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pestaña. (error 1)</value>
+    <value>{0} no se encontró en su sistema. Por favor instale el juego y asegúrese de haberlo iniciado por lo menos una vez.
+Si crees que esto es un error, intenta la "configuración para Android 11" en la pestaña de "acerca" primero. (error 1)</value>
   </data>
   <data name="NoFGOInstallationFound2" xml:space="preserve">
-    <value>{0} no fue encontrado en su sistema. Por favor instale el juego, y asegúrese de que lo haya abierto al menos una vez.
-
-Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pestaña. (error 1)</value>
+    <value>{0} no se encontró en su sistema. Por favor instale el juego y asegúrese de haberlo iniciado por lo menos una vez.
+Si crees que esto es un error, intenta la "configuración para Android 11" en la pestaña de "acerca" primero. (error 2)</value>
   </data>
   <data name="NoFGOInstallationFoundToast" xml:space="preserve">
-    <value>No se ha encontrado alguna instalación de Fate/GO. Por favor intente con otra carpeta (como el de su almacenamiento interno o tarjeta SD), y asegúrese de haber abierto Fate/GO al menos una vez. </value>
+    <value>Ninguna instalación de Fate/GO se detectó en esta ruta. Asegúrese de haber iniciado Fate/GO al menos una vez o que FGO este almacenado en dicha ruta de Almacenamiento (interno/externo)</value>
   </data>
   <data name="NoScriptsAvailable" xml:space="preserve">
-    <value>Ningún paquete de traducción está disponible para descargar. Por favor intente más tarde.</value>
+    <value>No existen scripts de traducción actualmente para descargar. Vuelva a intentarlo más tarde.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="RefreshText" xml:space="preserve">
-    <value>Actualiza</value>
+    <value>Actualizar</value>
+  </data>
+  <data name="Reinstall" xml:space="preserve">
+    <value>Reinstalar</value>
   </data>
   <data name="RemoveAutoScriptUpdate" xml:space="preserve">
-    <value>Deshabilitar actualización automática de paquetes</value>
+    <value>Deshabilitar actualización de script automática.</value>
   </data>
   <data name="RemovePreReleaseKey" xml:space="preserve">
-    <value>Remover código de acceso anticipado</value>
+    <value>Quitar clave de pre-relanzamiento</value>
+  </data>
+  <data name="ReopenAnnouncement" xml:space="preserve">
+    <value>Reabrir el anuncio</value>
   </data>
   <data name="ResetApp" xml:space="preserve">
     <value>Reiniciar aplicación</value>
   </data>
   <data name="ResetAppText" xml:space="preserve">
-    <value>Seguro que quieres reiniciar la aplicación?</value>
+    <value>¿Está seguro de querer reiniciar la aplicación?</value>
   </data>
   <data name="RetryText" xml:space="preserve">
     <value>Reintentar</value>
   </data>
+  <data name="ReturnHome" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Selecciona tu idioma:</value>
+    <value>Seleccione su idioma:</value>
   </data>
   <data name="SetupButton" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Configuración</value>
   </data>
   <data name="SetupFailedBody" xml:space="preserve">
-    <value>La configuración falló o se canceló. Punto de falla:</value>
+    <value>La configuración falló o fue cancelada. Indicador del error:</value>
   </data>
   <data name="SetupFailedTitle" xml:space="preserve">
-    <value>Ajuste Fallido</value>
+    <value>Error de configuración</value>
   </data>
   <data name="StatusErrorTryReinstall" xml:space="preserve">
-    <value>error, intenta reinstalar</value>
+    <value>Error, intente reinstalar</value>
   </data>
   <data name="StatusInstalled" xml:space="preserve">
-    <value>instalado</value>
+    <value>Instalado</value>
   </data>
   <data name="StatusMismatch" xml:space="preserve">
-    <value>actualización requerida, abra el juego y descargue la actualización primero</value>
+    <value>Se necesita actualizar, inicie el juego y descargue la actualización primero.</value>
   </data>
   <data name="StatusNotInstalled" xml:space="preserve">
-    <value>no instalado</value>
+    <value>No instalado</value>
   </data>
   <data name="StatusText" xml:space="preserve">
-    <value>Estado: </value>
+    <value>Estatus:</value>
   </data>
   <data name="StatusUnknown" xml:space="preserve">
-    <value>estado desconocido, intenta reinstalar</value>
+    <value>Estado desconocido, intente reinstalar.</value>
   </data>
   <data name="StatusUpdateAvailable" xml:space="preserve">
-    <value>actualizacion disponible</value>
+    <value>Actualización disponible</value>
   </data>
   <data name="StatusUpdateRequired" xml:space="preserve">
-    <value>actualizacion requerida</value>
+    <value>Se requiere actualización</value>
   </data>
   <data name="TimeAgo" xml:space="preserve">
-    <value>ago</value>
+    <value>Anteriormente</value>
+  </data>
+  <data name="TooLowAndroidVersion" xml:space="preserve">
+    <value>Se requiere Android 7.0+</value>
+  </data>
+  <data name="TotalSize" xml:space="preserve">
+    <value>Tamaño de la instalación:</value>
   </data>
   <data name="TranslateAPIError" xml:space="preserve">
-    <value>Las traducciones no están disponibles actualmente</value>
+    <value>No hay traducciones disponibles actualmente.</value>
   </data>
   <data name="TryAgainLater" xml:space="preserve">
-    <value>La interfaz de traducción no está disponible actualmente, por favor intente mas tarde.</value>
+    <value>El API de traducción actualmente esta desactivado, por favor intente más tarde.</value>
+  </data>
+  <data name="UninstallArtWarning" xml:space="preserve">
+    <value>Está a punto de desinstalar cualquier Artwork personalizado actualmente instalado.
+Asegúrese de que haya creado y anotado su código de transferencia de FGO antes de usar esta sección de la aplicación..
+¿Deseas continuar?</value>
   </data>
   <data name="UninstallFinished" xml:space="preserve">
-    <value>Completado!</value>
+    <value>¡Finalizado!</value>
   </data>
   <data name="UninstallingText" xml:space="preserve">
     <value>Desinstalando {0}/{1}...</value>
   </data>
   <data name="UninstallText" xml:space="preserve">
-    <value>Desinstalando</value>
+    <value>Desinstalar</value>
   </data>
   <data name="UninstallWarning" xml:space="preserve">
-    <value>Estás a punto de desinstalar cualquier paquete de traducción que tengas instalado. Asegúrate de haber guardado y escrito tu bind code antes de usar esta aplicación.
-
-¿Quieres continuar?</value>
+    <value>Estás a punto de desinstalar cualquier script traducido que tenga instalado.
+Asegúrese de que haya creado y anotado su código de transferencia de FGO antes de usar esta sección de la aplicación.
+¿Deseas continuar?</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
-    <value>Ha ocurrido un error desconocido. {0}</value>
+    <value>Un error desconocido ha ocurrido. {0}</value>
+  </data>
+  <data name="UnlinkAccount" xml:space="preserve">
+    <value>Desvinculando su cuenta de Rayshift</value>
+  </data>
+  <data name="UnlinkConfirmation" xml:space="preserve">
+    <value>¿Está seguro de querer desvincular su cuenta?</value>
   </data>
   <data name="UpdateOptionalDescription" xml:space="preserve">
-    <value>Una actualización opcional está disponible para TranslateFGO. ¿Quieres descargarla e instalarla?</value>
+    <value>Una actualización opcional está disponible en TranslateFGO. ¿Desea descargarla e instalarla?</value>
   </data>
   <data name="UpdateOptionalTitle" xml:space="preserve">
-    <value>Actualizacion opcional disponible ({0} -&gt; {1})</value>
+    <value>Se encuentra disponible una actualización opcional ({0} -&gt; {1})</value>
   </data>
   <data name="UpdateRequiredDescription" xml:space="preserve">
-    <value>Se requiere una actualización para seguir usando TranslateFGO. Por favor descarguelo e instalelo desde nuestra página web o GitHub.</value>
+    <value>Se necesita actualizar para continuar usando TranslateFGO. Por favor descargue desde nuestro GitHub o sitio web e instale la nueva versión.</value>
   </data>
   <data name="UpdateRequiredDownload" xml:space="preserve">
     <value>Descargar ahora</value>
   </data>
   <data name="UpdateRequiredTitle" xml:space="preserve">
-    <value>Actualizacion requerida ({0} -&gt; {1})</value>
+    <value>Se requiere actualizar ({0} -&gt; {1})</value>
   </data>
   <data name="UpdateSkip" xml:space="preserve">
-    <value>Saltar esta version</value>
+    <value>Saltar esta versión</value>
   </data>
   <data name="UpdateURL" xml:space="preserve">
     <value>https://github.com/rayshift/translatefgo/releases</value>
   </data>
   <data name="VersionErrorMessage" xml:space="preserve">
-    <value>Un error ha ocurrido con el servidor de traduccion. Por favor, intente mas tarde.</value>
+    <value>Un error ha ocurrido con la conexión al servidor. Por favor, intente más tarde.</value>
   </data>
   <data name="VersionErrorTitle" xml:space="preserve">
-    <value>Error de Servidor</value>
+    <value>Error del servidor</value>
   </data>
   <data name="VersionExitButton" xml:space="preserve">
     <value>Salir</value>
@@ -435,9 +565,9 @@ Si cree que esto es un error, pruebe el "Setup de Android 11" en la primera pest
     <value>Reintentar</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Importante</value>
+    <value>Advertencia</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Si</value>
+    <value>Sí</value>
   </data>
 </root>

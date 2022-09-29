@@ -14,6 +14,7 @@ using Android.Support.V4.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Core.App;
 using AndroidX.Work;
 using Firebase.Messaging;
 using RayshiftTranslateFGO.Services;
@@ -21,7 +22,7 @@ using Xamarin.Essentials;
 
 namespace RayshiftTranslateFGO.Droid
 {
-    [Service]
+    [Service(Exported = true)]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
     public class RayshiftFirebaseMessagingService : FirebaseMessagingService

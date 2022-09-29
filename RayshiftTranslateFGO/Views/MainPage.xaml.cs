@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Android;
@@ -12,6 +13,8 @@ using Java.Util;
 using Newtonsoft.Json;
 using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
+using RayshiftTranslateFGO.Util;
+using RayshiftTranslateFGO.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,13 +26,16 @@ namespace RayshiftTranslateFGO.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
-
+        private bool _artPageIsAdded = true;
         public MainPage()
         {
             // Check updates
             Device.BeginInvokeOnMainThread(async () => await UpdateCheck());
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+            
+            HideArtPage();
+            BindingContext = App.GetViewModel<MainPageViewModel>();
 
             MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize", async (sender) =>
             {
@@ -44,6 +50,36 @@ namespace RayshiftTranslateFGO.Views
                 Device.BeginInvokeOnMainThread(async () => await GotoAnnouncementPage());
             });
 
+            var sLock = App.GetViewModel<MainPageViewModel>().Cache.Get<bool>("GlobalSubscribeLock");
+            if (!sLock)
+            {
+                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor", async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var versionData = App.GetViewModel<MainPageViewModel>().Cache.Get<VersionAPIResponse.VersionUpdate>("VersionDetails");
+                        if (versionData.FeaturesEnabled.HasFlag(EnabledTranslationFeatures.ArtDonorOnly))
+                        {
+                            HideArtPage();
+                        }
+                    });
+                });
+
+                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "add_art_tab_non_donor", async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var versionData = App.GetViewModel<MainPageViewModel>().Cache.Get<VersionAPIResponse.VersionUpdate>("VersionDetails");
+                        if (versionData.FeaturesEnabled.HasFlag(EnabledTranslationFeatures.ArtDonorOnly))
+                        {
+                            ShowArtPage();
+                        }
+                    });
+                });
+
+                App.GetViewModel<MainPageViewModel>().Cache.Set("GlobalSubscribeLock", true);
+            }
+
             this.CurrentPageChanged += OnCurrentPageChanged;
         }
 
@@ -51,13 +87,17 @@ namespace RayshiftTranslateFGO.Views
         {
             var title = ((TabbedPage)sender).CurrentPage?.Title;
 
-            if (title.StartsWith("NA"))
+            if (title == UIFunctions.GetResourceString("NAInstaller"))
             {
                 MessagingCenter.Send(Xamarin.Forms.Application.Current, "na_initial_load");
             }
-            else if (title.StartsWith("JP"))
+            else if (title == UIFunctions.GetResourceString("JPInstaller"))
             {
                 MessagingCenter.Send(Xamarin.Forms.Application.Current, "jp_initial_load");
+            }
+            else if (title == UIFunctions.GetResourceString("CustomArtTab"))
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "art_initial_load");
             }
         }
 
@@ -120,6 +160,16 @@ namespace RayshiftTranslateFGO.Views
                 }
             }
 
+            // store in cache for settings
+            App.GetViewModel<MainPageViewModel>().Cache.Set("VersionDetails", response.Data.Response);
+
+            var artIsVisible = response.Data.Response.FeaturesEnabled.HasFlag(EnabledTranslationFeatures.Art);
+
+            if (artIsVisible)
+            {
+                ShowArtPage();
+            }
+
             var cm = DependencyService.Get<IContentManager>();
 
             if (cm.CheckBasicAccess())
@@ -138,7 +188,7 @@ namespace RayshiftTranslateFGO.Views
                 }
 
             }
-            else if (string.IsNullOrWhiteSpace(Preferences.Get("StorageLocation", "")))
+            else if (string.IsNullOrWhiteSpace(Preferences.Get("StorageLocations", "")))
             {
                 if (gotoUpdate)
                 {
@@ -178,6 +228,29 @@ namespace RayshiftTranslateFGO.Views
                 }
             }
 
+        }
+
+        public void HideArtPage()
+        {
+            var tabbedPage = this;
+            if (_artPageIsAdded)
+            {
+                _artPageIsAdded = false;
+                tabbedPage.Children.RemoveAt(2);
+            }
+        }
+
+        public void ShowArtPage()
+        {
+            var tabbedPage = this;
+            if (!_artPageIsAdded)
+            {
+                _artPageIsAdded = true;
+                ArtPageRef.Title = AppResources.CustomArtTab; // don't know why this is needed but ok
+                tabbedPage.Children.Insert(2, ArtPageRef);
+                //CustomArtTabPage.Title = AppResources.CustomArtTab;
+                OnPropertyChanged();
+            }
         }
 
         public async Task<Page> GotoUpdatePage(VersionAPIResponse.TranslationUpdateDetails details)

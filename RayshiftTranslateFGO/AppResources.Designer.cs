@@ -19,7 +19,7 @@ namespace RayshiftTranslateFGO {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -79,7 +79,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This app allows you to access various story translations for the Japanese version of.
+        ///   Looks up a localized string similar to This app allows you to access various story translations for.
         /// </summary>
         internal static string AboutFlavourText {
             get {
@@ -97,11 +97,20 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reconfigure Android 11 Setup.
+        ///   Looks up a localized string similar to Reconfigure Android 11+ Setup.
         /// </summary>
         internal static string AboutRetrySetup {
             get {
                 return ResourceManager.GetString("AboutRetrySetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string AboutTab {
+            get {
+                return ResourceManager.GetString("AboutTab", resourceCulture);
             }
         }
         
@@ -142,7 +151,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Further setup required for Android 11.
+        ///   Looks up a localized string similar to Further setup required for Android 11+.
         /// </summary>
         internal static string Android11Setup {
             get {
@@ -151,7 +160,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must manually add the location of the Android folder where FGO stores cached data. This will most likely be on your internal storage or SD card. If you aren&apos;t sure, add both..
+        ///   Looks up a localized string similar to You must grant this app permission to write to the directories where Fate/Grand Order stores cached data..
         /// </summary>
         internal static string Android11Setup0 {
             get {
@@ -160,7 +169,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the window that pops up, select &quot;Android&quot;, then click &quot;Use this Folder&quot;, and agree to allow the app to access the contents of the Android folder..
+        ///   Looks up a localized string similar to Tap each button below, then tap &quot;Use this folder&quot;..
         /// </summary>
         internal static string Android11Setup1 {
             get {
@@ -169,7 +178,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This process may have to be repeated if you update TranslateFGO..
+        ///   Looks up a localized string similar to Return here with &quot;About -&gt; Reconfigure Android 11+ Setup&quot; if you install a new version of the game..
         /// </summary>
         internal static string Android11Setup2 {
             get {
@@ -178,7 +187,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Success, redirecting....
+        ///   Looks up a localized string similar to Success!.
         /// </summary>
         internal static string Android11SetupSuccessful {
             get {
@@ -187,7 +196,16 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The data folder is empty or inaccessible. Please try another Android folder, or reinstall the TranslateFGO app..
+        ///   Looks up a localized string similar to I&apos;m on Android 12/13.
+        /// </summary>
+        internal static string Android1213 {
+            get {
+                return ResourceManager.GetString("Android1213", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data folder is empty or inaccessible. Ensure you have launched FGO at least once..
         /// </summary>
         internal static string AndroidDataFolderEmpty {
             get {
@@ -201,6 +219,54 @@ namespace RayshiftTranslateFGO {
         internal static string AndroidFolderNotSelected {
             get {
                 return ResourceManager.GetString("AndroidFolderNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Art to Install: .
+        /// </summary>
+        internal static string ArtCount {
+            get {
+                return ResourceManager.GetString("ArtCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to install custom art to your game.
+        ///Ensure you have made and written down your bind code before using this application.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        internal static string ArtInstallWarning {
+            get {
+                return ResourceManager.GetString("ArtInstallWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}/{1} starred, {2}/{3} total.
+        /// </summary>
+        internal static string ArtStatus {
+            get {
+                return ResourceManager.GetString("ArtStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} starred, {1} total.
+        /// </summary>
+        internal static string ArtTotalSize {
+            get {
+                return ResourceManager.GetString("ArtTotalSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uninstalling....
+        /// </summary>
+        internal static string ArtUninstallingButton {
+            get {
+                return ResourceManager.GetString("ArtUninstallingButton", resourceCulture);
             }
         }
         
@@ -241,11 +307,78 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available for donors.
+        /// </summary>
+        internal static string AvailableToDonors {
+            get {
+                return ResourceManager.GetString("AvailableToDonors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload failed. Your phone likely has a poor connection to the internet, try again later..
+        /// </summary>
+        internal static string ChunkUploadFailed {
+            get {
+                return ResourceManager.GetString("ChunkUploadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         internal static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect Account.
+        /// </summary>
+        internal static string ConnectAccount {
+            get {
+                return ResourceManager.GetString("ConnectAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UI translation (English only) and custom art are only available for donors.
+        ///
+        ///Connect your Rayshift account now?.
+        /// </summary>
+        internal static string ConnectAccountInfo {
+            get {
+                return ResourceManager.GetString("ConnectAccountInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UI translation (English only) and custom art are only available for donors.
+        ///
+        ///If you have already donated, connect your account in your profile settings..
+        /// </summary>
+        internal static string ConnectAccountNotDonatedInfo {
+            get {
+                return ResourceManager.GetString("ConnectAccountNotDonatedInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Art.
+        /// </summary>
+        internal static string CustomArtTab {
+            get {
+                return ResourceManager.GetString("CustomArtTab", resourceCulture);
             }
         }
         
@@ -282,6 +415,24 @@ namespace RayshiftTranslateFGO {
         internal static string DirectoryPermissionDeniedTitle {
             get {
                 return ResourceManager.GetString("DirectoryPermissionDeniedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        internal static string DonateButton {
+            get {
+                return ResourceManager.GetString("DonateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        internal static string DonorPrompt {
+            get {
+                return ResourceManager.GetString("DonorPrompt", resourceCulture);
             }
         }
         
@@ -340,6 +491,33 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected folder was not a valid FGO installation, instead found &quot;{0}&quot;, please try again..
+        /// </summary>
+        internal static string FGOFolderNotSelected {
+            get {
+                return ResourceManager.GetString("FGOFolderNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game never launched, or wrong folder selected..
+        /// </summary>
+        internal static string FGOWrongGameSelected {
+            get {
+                return ResourceManager.GetString("FGOWrongGameSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install All.
+        /// </summary>
+        internal static string InstallAll {
+            get {
+                return ResourceManager.GetString("InstallAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while installing a script. 
         ///
         ///Asset database update for {0} failed, error code {1}.
@@ -364,6 +542,15 @@ namespace RayshiftTranslateFGO {
         internal static string InstallChecksumFailure {
             get {
                 return ResourceManager.GetString("InstallChecksumFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to downloading art {0} of {1}....
+        /// </summary>
+        internal static string InstallDownloadingArts {
+            get {
+                return ResourceManager.GetString("InstallDownloadingArts", resourceCulture);
             }
         }
         
@@ -411,6 +598,20 @@ namespace RayshiftTranslateFGO {
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while installing a script. 
         ///
+        ///Extra file update for {0} failed, path {1} inaccessible or empty.
+        ///Error: {2}
+        ///
+        ///Please try again later, or report as a bug if the issue persists..
+        /// </summary>
+        internal static string InstallEmptyExtraFile {
+            get {
+                return ResourceManager.GetString("InstallEmptyExtraFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while installing a script. 
+        ///
         ///Script {0} returned empty. URL: {1}
         ///
         ///Please try again later, or report as a bug if the issue persists..
@@ -427,6 +628,29 @@ namespace RayshiftTranslateFGO {
         internal static string InstallerTitle {
             get {
                 return ResourceManager.GetString("InstallerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while installing a script. 
+        ///
+        ///Extra file update for {0} failed, error code {1}.
+        ///Error message: {2}
+        ///
+        ///Please try again later, or report as a bug if the issue persists..
+        /// </summary>
+        internal static string InstallExtraAPIFailure {
+            get {
+                return ResourceManager.GetString("InstallExtraAPIFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to processing extra files (this may take a while...).
+        /// </summary>
+        internal static string InstallExtraFiles {
+            get {
+                return ResourceManager.GetString("InstallExtraFiles", resourceCulture);
             }
         }
         
@@ -481,6 +705,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to install the UI translation, as you are missing the files required. Please open all versions of Fate/Grand Order to the login screen, close them, and then try again..
+        /// </summary>
+        internal static string InstallMissingExtraFile {
+            get {
+                return ResourceManager.GetString("InstallMissingExtraFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while installing a script.
         ///
         ///Script {0} not available..
@@ -502,6 +735,15 @@ namespace RayshiftTranslateFGO {
         internal static string InstallScriptDownloadFailure {
             get {
                 return ResourceManager.GetString("InstallScriptDownloadFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install Starred.
+        /// </summary>
+        internal static string InstallStarred {
+            get {
+                return ResourceManager.GetString("InstallStarred", resourceCulture);
             }
         }
         
@@ -558,6 +800,24 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Art (JP).
+        /// </summary>
+        internal static string JPArtName {
+            get {
+                return ResourceManager.GetString("JPArtName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FGO JP.
+        /// </summary>
+        internal static string JPInstaller {
+            get {
+                return ResourceManager.GetString("JPInstaller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Updated: .
         /// </summary>
         internal static string LastUpdatedText {
@@ -567,11 +827,65 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect Rayshift Account.
+        /// </summary>
+        internal static string LinkAccount {
+            get {
+                return ResourceManager.GetString("LinkAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to link account, reason: {0}.
+        /// </summary>
+        internal static string LinkAccountFailure {
+            get {
+                return ResourceManager.GetString("LinkAccountFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linked Rayshift account {0}.
+        /// </summary>
+        internal static string LinkAccountSuccess {
+            get {
+                return ResourceManager.GetString("LinkAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading, please wait....
         /// </summary>
         internal static string LoadingPleaseWait {
             get {
                 return ResourceManager.GetString("LoadingPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect Rayshift Account.
+        /// </summary>
+        internal static string LoginPrompt {
+            get {
+                return ResourceManager.GetString("LoginPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Art (NA).
+        /// </summary>
+        internal static string NAArtName {
+            get {
+                return ResourceManager.GetString("NAArtName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FGO NA.
+        /// </summary>
+        internal static string NAInstaller {
+            get {
+                return ResourceManager.GetString("NAInstaller", resourceCulture);
             }
         }
         
@@ -607,7 +921,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Fate/GO installation was found in this location. Please try another folder (such as your internal storage or SD card), and ensure you have launched Fate/GO at least once..
+        ///   Looks up a localized string similar to No Fate/GO installation was found in this location. Please ensure you have launched Fate/GO at least once..
         /// </summary>
         internal static string NoFGOInstallationFoundToast {
             get {
@@ -639,6 +953,15 @@ namespace RayshiftTranslateFGO {
         internal static string RefreshText {
             get {
                 return ResourceManager.GetString("RefreshText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reinstall.
+        /// </summary>
+        internal static string Reinstall {
+            get {
+                return ResourceManager.GetString("Reinstall", resourceCulture);
             }
         }
         
@@ -693,6 +1016,15 @@ namespace RayshiftTranslateFGO {
         internal static string RetryText {
             get {
                 return ResourceManager.GetString("RetryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        internal static string ReturnHome {
+            get {
+                return ResourceManager.GetString("ReturnHome", resourceCulture);
             }
         }
         
@@ -814,6 +1146,24 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Android 7.0+ required.
+        /// </summary>
+        internal static string TooLowAndroidVersion {
+            get {
+                return ResourceManager.GetString("TooLowAndroidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install Size: .
+        /// </summary>
+        internal static string TotalSize {
+            get {
+                return ResourceManager.GetString("TotalSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Translations are currently unavailable..
         /// </summary>
         internal static string TranslateAPIError {
@@ -828,6 +1178,18 @@ namespace RayshiftTranslateFGO {
         internal static string TryAgainLater {
             get {
                 return ResourceManager.GetString("TryAgainLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to uninstall any artwork currently installed.
+        ///Ensure you have made and written down your bind code before using this application.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        internal static string UninstallArtWarning {
+            get {
+                return ResourceManager.GetString("UninstallArtWarning", resourceCulture);
             }
         }
         
@@ -876,6 +1238,24 @@ namespace RayshiftTranslateFGO {
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlink Rayshift Account.
+        /// </summary>
+        internal static string UnlinkAccount {
+            get {
+                return ResourceManager.GetString("UnlinkAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to unlink your account?.
+        /// </summary>
+        internal static string UnlinkConfirmation {
+            get {
+                return ResourceManager.GetString("UnlinkConfirmation", resourceCulture);
             }
         }
         

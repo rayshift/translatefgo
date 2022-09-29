@@ -9,11 +9,12 @@ namespace RayshiftTranslateFGO.Models
         public new VersionUpdate Response { get; set; }
 
 
-        public struct VersionUpdate
+        public class VersionUpdate
         {
             public string Action { get; set; }
             public TranslationUpdateDetails Update { get; set; }
             public TranslationAnnouncements Announcement { get; set; }
+            public EnabledTranslationFeatures FeaturesEnabled { get; set; }
 
         }
         public class TranslationUpdateDetails
@@ -35,5 +36,16 @@ namespace RayshiftTranslateFGO.Models
             public bool IsActiveAnnouncement { get; set; }
             public string Url { get; set; }
         }
+    }
+
+    public enum EnabledTranslationFeatures
+    {
+        None = 0,
+        Translate = 1,
+        Art = 2,
+        UI = 4,
+        UIDonorOnly = 8,
+        ArtDonorOnly = 16,
+
     }
 }

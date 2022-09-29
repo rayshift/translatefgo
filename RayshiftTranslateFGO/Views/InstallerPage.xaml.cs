@@ -16,6 +16,7 @@ using RayshiftTranslateFGO.Annotations;
 using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using RayshiftTranslateFGO.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -39,12 +40,15 @@ namespace RayshiftTranslateFGO.Views
         private bool _pageOpened = false;
 
         private bool _android11Access = false;
-        private string _storageLocation = "";
+        private Dictionary<string, string> _storageLocations = new Dictionary<string, string>();
 
         private bool _isCurrentlyUpdating = false;
 
         private IContentManager _cm { get; set; }
         private IScriptManager _sm { get; set; }
+
+        private bool _isLoggedIn { get; set; } = false;
+        private bool _isDonor { get; set; } = false;
 
         public InstallerPage(Int32 region)
         {
@@ -96,6 +100,11 @@ namespace RayshiftTranslateFGO.Views
                     throw new ArgumentOutOfRangeException();
             }
 
+            MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "reset_initial_load", async (sender) =>
+            {
+                _pageOpened = false;
+            });
+
             if (Region == FGORegion.Jp)
             {
                 await InitialLoad();
@@ -144,10 +153,12 @@ namespace RayshiftTranslateFGO.Views
 
                 //await Task.Delay(1000);
 
+                var locationJson = Preferences.Get("StorageLocations", "{}");
+                var locations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
 
-                _storageLocation = Preferences.Get("StorageLocation", "");
+                _storageLocations = locations;
 
-                if (!string.IsNullOrEmpty(_storageLocation) || !_cm.CheckBasicAccess())
+                if (_storageLocations.Count > 0 || !_cm.CheckBasicAccess())
                 {
                     _android11Access = true;
 
@@ -159,7 +170,7 @@ namespace RayshiftTranslateFGO.Views
                 }
                 else
                 {
-                    _installedFgoInstances = _cm.GetInstalledGameApps(ContentType.StorageFramework, _storageLocation);
+                    _installedFgoInstances = _cm.GetInstalledGameApps(ContentType.StorageFramework, _storageLocations);
                 }
 
                 //TranslationName.Text = Region == FGORegion.Jp
@@ -178,11 +189,11 @@ namespace RayshiftTranslateFGO.Views
                 foreach (var instance in _installedFgoInstances.ToList())
                 {
                     var filePath = _android11Access
-                        ? $"data/{instance.Path}/files/data/d713/{_assetList}"
+                        ? $"files/data/d713/{_assetList}"
                         : $"{instance.Path}/files/data/d713/{_assetList}";
                     var assetStorage = await _cm.GetFileContents(
                         _android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
-                        filePath, _storageLocation);
+                        filePath, instance.Path);
 
 
                     if (!assetStorage.Successful)
@@ -220,10 +231,10 @@ namespace RayshiftTranslateFGO.Views
                     return;
                 }
 
+                // GET SCRIPT LIST
                 var rest = new RestfulAPI();
                 var handshake = await rest.GetHandshakeApiResponse(Region, instanceDict.AssetStorage);
                 _handshake = handshake.Data;
-
 
                 if (handshake.Data == null || handshake.Data.Status != 200)
                 {
@@ -232,6 +243,26 @@ namespace RayshiftTranslateFGO.Views
                         : $"{AppResources.TranslateAPIError}\n{handshake.Data?.Message}";
                     SwitchErrorObjects(true);
                     return;
+                }
+
+                if (_handshake.Response.AccountStatus != null)
+                {
+                    _isLoggedIn = _handshake.Response.AccountStatus.tokenStatus == UserTokenStatus.Active;
+                    _isDonor = _handshake.Response.AccountStatus.isPlus;
+
+                    if (_isDonor)
+                    {
+                        MessagingCenter.Send(Xamarin.Forms.Application.Current, "add_art_tab_non_donor");
+                    }
+                    else
+                    {
+                        MessagingCenter.Send(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor");
+                    }
+                }
+                else
+                {
+                    _isLoggedIn = false;
+                    _isDonor = false;
                 }
 
                 if (handshake.Data.Response.AssetStatus != HandshakeAssetStatus.Missing &&
@@ -262,12 +293,12 @@ namespace RayshiftTranslateFGO.Views
                 }
 
                 var baseFilePath = _android11Access
-                    ? $"data/{instanceDict.Path}/files/data/d713/"
+                    ? $"files/data/d713/"
                     : $"{instanceDict.Path}/files/data/d713/";
 
 
                 await ProcessAssets(_android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
-                    baseFilePath, _storageLocation, Region);
+                    baseFilePath, instanceDict.Path, Region);
 
                 // Add top bar
                 if (_handshake.Response.LiveStatus != null && _handshake.Response.LiveStatus.Enabled)
@@ -332,6 +363,8 @@ namespace RayshiftTranslateFGO.Views
         /// <returns></returns>
         public async Task ProcessAssets(ContentType storageType, string pathToCheckWith, string storageLocationBase, FGORegion region)
         {
+            var versionData = App.GetViewModel<InstallerPageModel>().Cache.Get<VersionAPIResponse.VersionUpdate>("VersionDetails");
+
             List<string> validSha = new List<string>();
             _translations?.Clear();
             _guiObjects?.Clear();
@@ -362,89 +395,123 @@ namespace RayshiftTranslateFGO.Views
 
             if (_handshake.Response.Translations.Count > 0)
             {
+                bool visibleExtras = versionData.FeaturesEnabled.HasFlag(EnabledTranslationFeatures.UI) ||
+                                     (_isDonor &&
+                                      versionData.FeaturesEnabled.HasFlag(EnabledTranslationFeatures.UIDonorOnly));
+
                 foreach (var scriptBundleSet in _handshake.Response.Translations)
                 {
-                    ConcurrentBag<Tuple<long,long>> results = new ConcurrentBag<Tuple<long, long>>();
-
-                    await scriptBundleSet.Scripts.ParallelForEachAsync(async scriptBundle =>
+                    string lastUpdated = "";
+                    if (scriptBundleSet.Scripts.Count > 0)
                     {
-                        // Check hashes
-                        var filePath = Path.Combine(pathToCheckWith, scriptBundle.Key);
+                        ConcurrentBag<Tuple<long, long>> results = new ConcurrentBag<Tuple<long, long>>();
 
-                        var fileContentsResult = await _cm.GetFileContents(storageType, filePath, storageLocationBase);
-
-                        if (scriptBundle.Key.Contains('/') || scriptBundle.Key.Contains('\\')) // for security purposes, don't allow directory traversal
+                        await scriptBundleSet.Scripts.ParallelForEachAsync(async scriptBundle =>
                         {
-                            throw new FileNotFoundException();
-                        }
+                            // Check hashes
+                            var filePath = Path.Combine(pathToCheckWith, scriptBundle.Key);
 
+                            var fileContentsResult =
+                                await _cm.GetFileContents(storageType, filePath, storageLocationBase);
 
-                        TranslationFileStatus status;
-
-                        var fileNotExists = fileContentsResult.Error == FileErrorCode.NotExists;
-                        if (!fileNotExists)
-                        {
-                            var sha1 = ScriptUtil.Sha1(fileContentsResult.FileContents); // SHA of file currently in use
-
-                            if (sha1 == scriptBundle.Value.GameSHA1) // Not modified
+                            if (scriptBundle.Key.Contains('/') ||
+                                scriptBundle.Key
+                                    .Contains('\\')) // for security purposes, don't allow directory traversal
                             {
-                                status = TranslationFileStatus.NotModified;
+                                throw new FileNotFoundException();
                             }
-                            else if (sha1 == scriptBundle.Value.TranslatedSHA1) // English is installed
+
+
+                            TranslationFileStatus status;
+
+                            var fileNotExists = fileContentsResult.Error == FileErrorCode.NotExists;
+                            if (!fileNotExists)
                             {
-                                status = TranslationFileStatus.Translated;
-                            }
-                            else if (validSha.Contains(sha1) && (_installedBundle == null || (_installedBundle != null && scriptBundleSet.Group != _installedBundle.Group)))
-                            {
-                                status = TranslationFileStatus.DifferentTranslation;
-                            }
-                            else if (_installedBundle != null && scriptBundleSet.Group == _installedBundle.Group)
-                            {
-                                status = TranslationFileStatus.UpdateAvailable;
+                                var sha1 = ScriptUtil.Sha1(fileContentsResult
+                                    .FileContents); // SHA of file currently in use
+
+                                if (sha1 == scriptBundle.Value.GameSHA1) // Not modified
+                                {
+                                    status = TranslationFileStatus.NotModified;
+                                }
+                                else if (sha1 == scriptBundle.Value.TranslatedSHA1) // English is installed
+                                {
+                                    status = TranslationFileStatus.Translated;
+                                }
+                                else if (validSha.Contains(sha1) && (_installedBundle == null ||
+                                                                     (_installedBundle != null &&
+                                                                      scriptBundleSet.Group != _installedBundle.Group)))
+                                {
+                                    status = TranslationFileStatus.DifferentTranslation;
+                                }
+                                else if (_installedBundle != null && scriptBundleSet.Group == _installedBundle.Group)
+                                {
+                                    status = TranslationFileStatus.UpdateAvailable;
+                                }
+                                else
+                                {
+                                    status = TranslationFileStatus.Invalid;
+                                }
                             }
                             else
                             {
-                                status = TranslationFileStatus.Invalid;
+                                status = TranslationFileStatus.Missing;
                             }
-                        }
-                        else
-                        {
-                            status = TranslationFileStatus.Missing;
-                        }
 
-                        scriptBundle.Value.Status = status;
+                            scriptBundle.Value.Status = status;
 
-                        results.Add(new Tuple<long, long>(scriptBundle.Value.LastModified, scriptBundle.Value.Size));
-                    }, maxDegreeOfParallelism:4);
+                            results.Add(new Tuple<long, long>(scriptBundle.Value.LastModified,
+                                scriptBundle.Value.Size));
+                        }, maxDegreeOfParallelism: 8);
 
-                    long lastModified = results.Max(m => m.Item1);
-                    long totalSize = results.Sum(s => s.Item2);
+                        long lastModified = results.Max(m => m.Item1);
+                        long totalSize = results.Sum(s => s.Item2);
+                        scriptBundleSet.TotalSize = totalSize;
+                        var timespan = DateTime.UtcNow.Subtract(DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime,
+                            DateTimeKind.Utc));
+                        lastUpdated = InstallerUtil.PeriodOfTimeOutput(timespan);
+                    }
 
-                    scriptBundleSet.TotalSize = totalSize;
+                    
                     _translations.Add(scriptBundleSet.Group, scriptBundleSet);
                     var statusString = InstallerUtil.GenerateStatusString(scriptBundleSet.Scripts);
-                    var timespan = DateTime.UtcNow.Subtract(DateTime.SpecifyKind(DateTimeOffset.FromUnixTimeSeconds((long)lastModified).DateTime,
-                        DateTimeKind.Utc));
-                    var lastUpdated = InstallerUtil.PeriodOfTimeOutput(timespan);
-                    bool enableButton = statusString.Item1 != AppResources.StatusInstalled;
+
+                    bool enableButton = statusString.Item1 != AppResources.StatusInstalled // either not installed
+                                        || (scriptBundleSet.HasExtraStage && _isDonor) // or installed and donor
+                                        || (scriptBundleSet.IsDonorOnly && !_isDonor); // or not donor and bundle is donor only (donor prompt)
                     var i1 = scriptBundleSet.Group;
 
-                    if (!scriptBundleSet.Hidden)
+                    if (!scriptBundleSet.Hidden && !(scriptBundleSet.HasExtraStage && !visibleExtras))
                     {
+
+                        var command = !scriptBundleSet.IsDonorOnly // if not donor only
+                            ? new Command(async () => await Install(region, i1), () => enableButton && ButtonsEnabled) // fine
+                            : ((_isLoggedIn && _isDonor) // if donor only and we are donor
+                                ? new Command(async () => await Install(region, i1), () => enableButton && ButtonsEnabled) // fine
+                                : !_isLoggedIn // if not logged in
+                                    ? new Command(async() => await ConnectAccount()) // log in
+                                    : new Command(async() => await DonorPrompt())); // otherwise donate
+
+                        var defaultInstallText = statusString.Item1 != AppResources.StatusInstalled
+                            ? AppResources.InstallText
+                            : (enableButton ? AppResources.Reinstall : AppResources.InstalledText);
+
+                        var buttonText = scriptBundleSet.IsDonorOnly && !_isDonor 
+                                ? (!_isLoggedIn ? AppResources.LoginPrompt : AppResources.DonorPrompt)
+                            : defaultInstallText;
+
                         _guiObjects.Add(new TranslationGUIObject()
                         {
                             BundleID = scriptBundleSet.Group,
                             BundleHidden = scriptBundleSet.Hidden,
                             InstallEnabled = enableButton,
-                            InstallClick = new Command(async () => await Install(region, i1),
-                                () => enableButton && ButtonsEnabled),
+                            InstallClick = command,
                             Name = scriptBundleSet.Name,
                             Status = statusString.Item1,
                             TextColor = statusString.Item2,
                             LastUpdated = lastUpdated,
-                            ButtonInstallText = statusString.Item1 != AppResources.StatusInstalled
-                                ? AppResources.InstallText
-                                : AppResources.InstalledText
+                            NotPromotional = !scriptBundleSet.IsDonorOnly || _isDonor,
+                            ButtonInstallText = buttonText
                         });
                     }
                 }
@@ -457,6 +524,35 @@ namespace RayshiftTranslateFGO.Views
                 SwitchErrorObjects(true);
                 return;
             }
+        }
+
+        private async Task DonorPrompt()
+        {
+            var alert = DependencyService.Get<IAlert>();
+            var answer = await alert.Display(AppResources.ConnectAccount, AppResources.ConnectAccountNotDonatedInfo, AppResources.DonateButton, AppResources.ConnectAccount, AppResources.Cancel);
+            if (answer == AppResources.Cancel)
+            {
+                return;
+            }
+
+            if (answer == AppResources.DonateButton)
+            {
+                await Browser.OpenAsync("https://rayshift.io/donate");
+            }
+            else if (answer == AppResources.ConnectAccount)
+            {
+                await Browser.OpenAsync("https://rayshift.io/identity/account/manage/plus");
+            }
+        }
+
+        private async Task ConnectAccount()
+        {
+            bool answer = await DisplayAlert(AppResources.ConnectAccount, AppResources.ConnectAccountInfo, AppResources.Yes, AppResources.No);
+            if (!answer)
+            {
+                return;
+            }
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "connect_rayshift_account");
         }
 
         public async Task Install(FGORegion region, int toInstall)
@@ -477,7 +573,6 @@ namespace RayshiftTranslateFGO.Views
                     _android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
                     region,
                     _installedFgoInstances.Where(w => w.Region == region).Select(s => s.Path).ToList(),
-                    _storageLocation,
                     toInstall,
                     null,
                     _guiObjects
@@ -547,10 +642,12 @@ namespace RayshiftTranslateFGO.Views
                 return;
             }
             SwitchButtons(false);
-            HashSet<string> filesToRemove = new HashSet<string>();
+            var filesToRemove = new List<KeyValuePair<string, string>>();
 
             try
             {
+                var extraRemoveJson = Preferences.Get($"UninstallPurgesExtras_{region}", "[]");
+                var extraRemove = JsonConvert.DeserializeObject<List<string>>(extraRemoveJson);
                 foreach (var game in _installedFgoInstances.Where(w => w.Region == region).Select(s => s.Path))
                 {
                     foreach (var basePath in from script
@@ -560,18 +657,22 @@ namespace RayshiftTranslateFGO.Views
                         select script2.Key
                         into file
                         select _android11Access
-                            ? $"data/{game}/files/data/d713/{file}"
+                            ? $"files/data/d713/{file}"
                             : $"{game}/files/data/d713/{file}")
                     {
-                        filesToRemove.Add(basePath);
+                        filesToRemove.Add(new KeyValuePair<string, string>(basePath, game));
+                    }
+
+                    // remove extra files if needed
+                    if (extraRemove != null && extraRemove.Count > 0)
+                    {
+                        foreach (var file in extraRemove)
+                        {
+                            var path = _android11Access ? $"files/data/{file}" : $"{game}/files/data/{file}";
+                            filesToRemove.Add(new KeyValuePair<string, string>(path, game));
+                        }
                     }
                 }
-
-                if (filesToRemove.Count == 0)
-                {
-                    return;
-                }
-
 
                 int i = 0;
                 foreach (var file in filesToRemove)
@@ -580,12 +681,13 @@ namespace RayshiftTranslateFGO.Views
                     RevertButton.Text = String.Format(AppResources.UninstallingText, i, filesToRemove.Count);
                     OnPropertyChanged();
                     await _cm.RemoveFileIfExists(_android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
-                        file, _storageLocation);
+                        file.Key, file.Value);
                 }
 
                 RevertButton.Text = AppResources.UninstallFinished;
                 OnPropertyChanged();
                 Preferences.Remove($"InstalledScript_{region}");
+                Preferences.Remove($"UninstallPurgesExtras_{region}");
                 await Task.Delay(1000);
             }
             catch (Exception ex)
@@ -681,6 +783,8 @@ namespace RayshiftTranslateFGO.Views
             }
 
             public bool BundleHidden { get; set; } = false;
+            public bool NotPromotional { get; set; } = true;
+            public bool Promotional => !NotPromotional;
 
             private string _buttonInstallText = AppResources.InstallText;
             public event PropertyChangedEventHandler PropertyChanged;

@@ -84,6 +84,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -122,6 +123,30 @@
                                     <Label Text="Português do Brasil"
                                        HorizontalOptions="Center"
                                        VerticalOptions="End" FontSize="10"/>
+                                </StackLayout>
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton Value="fr" Grid.Column="1" Grid.Row="1" Margin="0, 10, 0, 0" HorizontalOptions="CenterAndExpand" CheckedChanged="Language_OnCheckedChanged" x:Name="LanguageFrench">
+                            <RadioButton.Content>
+                                <StackLayout>
+                                    <Image Source="french.png"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="CenterAndExpand" />
+                                    <Label Text="Français"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End" FontSize="10"/>
+                                </StackLayout>
+                            </RadioButton.Content>
+                        </RadioButton>
+                        <RadioButton Value="id" Grid.Column="0" Grid.Row="2" Margin="0, 10, 0, 0" HorizontalOptions="CenterAndExpand" CheckedChanged="Language_OnCheckedChanged" x:Name="LanguageIndonesian">
+                            <RadioButton.Content>
+                                <StackLayout>
+                                    <Image Source="indonesian.png"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="CenterAndExpand" />
+                                    <Label Text="Bahasa Indonesia"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End" FontSize="10"/>
                                 </StackLayout>
                             </RadioButton.Content>
                         </RadioButton>
