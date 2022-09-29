@@ -3,12 +3,11 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Getting error "To protect your privacy, choose a different folder"?
-1. Wait a few days for a new version of the app which is being worked on.
+### Android 12 & 13 are now fully supported
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
-If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the app. There aren't currently any pre-releases available for the English translation.
+If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the app. Patreons have access to beta features.
 
 ![Example](https://i.imgur.com/1fO8L8Y.png)
 
@@ -19,19 +18,18 @@ Currently, English is supported for:
 - Machine & Edited: Everything else
 - Human: LB6 (Finished), Tunguska Sanctuary (Finished), LB6.5: Traum (Underway).
 
-A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
-A Portuguese Brazilian translation is also available.
+#### Languages
+- A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
+- A Portuguese Brazilian translation is also available.
 
 ### Installation
-Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12* are supported. Root is not required.
+Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12, 13 are supported. Root is not required.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
 3. Download and install the latest APK from the [releases page](https://github.com/rayshift/translatefgo/releases).
 4. Click "install" below the bundle you want to install. You only need to install 1 bundle at a time.
 5. Reopen Fate/Grand Order.
-
-\* Android 12 requires downgrading the files app first
 
 #### Updates
 The scripts will update on a regular basis. Please keep the app installed and check it regularly - the "installed" status will change to "update available" when an update is ready.
@@ -58,7 +56,7 @@ Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo
 Here is why:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
 - The game does not and can not detect the modification of cached story scripts. 
-- The app has 80,000+ downloads with 10,000+ active users, and has been operating for over 2 years without any bans or warnings being issued because of the app. 
+- The app has 100,000+ downloads with 15,000+ active users, and has been operating for nearly 3 years without any bans or warnings being issued because of the app. 
 - It is not in the interest of the game's developers or publishers to ban or otherwise punish people for translating story text.
 - The app is open source, so you can vet what it does, and build it yourself if you are worried.
 
@@ -117,12 +115,3 @@ The code in this repository, the bundles from our API, and any android applicati
 Google Play and the Google Play logo are trademarks of Google LLC.
 
 Fate/Grand Order is Copyright Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. All images and names owned and trademarked by Aniplex Inc., DELiGHTWORKS, Aniplex of America and Sony Music Entertainment (Japan) Inc. are property of their respective owners.
-
-## Script Changelog
-
-- 4th January 2021: All remaining Japanese text is now translated, and Atlantis and Olympus are now available for non-patreons.
-- 4th December 2020: LB5.5 is now available with a machine translation.
-- 11th November 2020: LB4.5: The Imaginary Naval Battle Imaginary Scramble: Raise the Nautilus! is now translated with a machine translation.
-- 9th October 2020: Lostbelt 4, Yuga Kshetra, is now fully translated. Atlantis and Olympus machine translations are available for [Patreons](https://www.patreon.com/rayshift).
-- 17th August 2020: Summer 5 "Servant Summer Camp!" is now translated with a machine translation.
-- 22nd July 2020: Ooku is fully translated using a human translation by PkFreeze.
