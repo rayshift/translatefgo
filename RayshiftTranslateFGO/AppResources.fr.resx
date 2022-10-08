@@ -203,6 +203,13 @@ Voulez-vous continuer ?</value>
   <data name="AvailableToDonors" xml:space="preserve">
     <value>Disponible aux donateurs</value>
   </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>Sur ce dispositif, vous devez localiser le dossier suivant : {0}.
+
+Assurez-vous que l'option " Afficher le stockage interne " (menu supérieur droit sur BlueStacks) est sélectionnée si vous ne pouvez pas le trouver.
+
+Une fois que vous voyez les dossiers "cache" et "files", appuyez sur "Utiliser ce dossier".</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>

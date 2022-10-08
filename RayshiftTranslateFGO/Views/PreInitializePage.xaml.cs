@@ -24,6 +24,7 @@ namespace RayshiftTranslateFGO.Views
     {
         protected IList<ApplicationInfo> InstalledApps { get; set; }
         public readonly ObservableCollection<FGOInstalledApp> GuiObjects = new ObservableCollection<FGOInstalledApp>();
+        public bool WarnAboutFolder = false;
         public PreInitializePage()
         {
             var locationJson = Preferences.Get("StorageLocations", "{}");
@@ -66,6 +67,8 @@ namespace RayshiftTranslateFGO.Views
                     UpdateRemainingItems();
                 });
 
+            WarnAboutFolder = DependencyService.Get<IIntentService>().TestManualLocationRequired();
+
         }
 
         private void UpdateRemainingItems()
@@ -93,10 +96,15 @@ namespace RayshiftTranslateFGO.Views
             }
         }
 
-        private void AddFolderButtonOnClicked(string processName)
+        private async Task AddFolderButtonOnClicked(string processName)
         {
-            App.GetViewModel<PreInitializeViewModel>().Cache.Set("TemporaryProcessName", processName);
-            DependencyService.Get<IIntentService>().OpenDocumentTreeIntent("", $"data%2F{processName}%2F");
+            
+            if (await DisplayAlert(AppResources.Warning,
+                    String.Format(AppResources.BluestacksWarning, $"Android/data/{processName}"), AppResources.OK, AppResources.Cancel))
+            {
+                App.GetViewModel<PreInitializeViewModel>().Cache.Set("TemporaryProcessName", processName);
+                DependencyService.Get<IIntentService>().OpenDocumentTreeIntent("", $"data%2F{processName}%2F");
+            }
         }
 
         public void Unsubscribe()

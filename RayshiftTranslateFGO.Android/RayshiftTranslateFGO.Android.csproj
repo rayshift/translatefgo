@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
     <LangVersion>8.0</LangVersion>
     <AotAssemblies>false</AotAssemblies>
@@ -198,7 +198,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

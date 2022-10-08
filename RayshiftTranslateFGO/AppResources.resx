@@ -204,6 +204,13 @@ Do you want to continue?</value>
   <data name="AvailableToDonors" xml:space="preserve">
     <value>Available for donors</value>
   </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>On this device you must locate the following folder: {0}.
+
+Ensure "Show internal storage" (top right menu on BlueStacks) is selected if you cannot find it.
+
+Once you see the folders "cache" and "files", tap "Use this folder".</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

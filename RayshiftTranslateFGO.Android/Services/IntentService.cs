@@ -41,6 +41,32 @@ namespace RayshiftTranslateFGO.Droid
             return Forms.Context.PackageManager.GetInstalledApplications(PackageInfoFlags.MatchAll);
         }
 
+        public bool TestManualLocationRequired()
+        {
+            var storageManager = Forms.Context.GetSystemService(Context.StorageService) as StorageManager;
+            Intent documentIntent;
+            try
+            {
+                documentIntent = storageManager.PrimaryStorageVolume.CreateOpenDocumentTreeIntent();
+            }
+            catch (Java.Lang.IncompatibleClassChangeError) // bluestacks
+            {
+                documentIntent = new Intent(Intent.ActionOpenDocumentTree);
+            }
+
+            var uri = documentIntent.GetParcelableExtra("android.provider.extra.INITIAL_URI") as Android.Net.Uri;
+            var scheme = uri?.ToString();
+
+            if (scheme == null)
+            {
+                documentIntent.Dispose();
+                return true;
+            }
+
+            documentIntent.Dispose();
+            return false;
+        }
+
         public void OpenDocumentTreeIntent(string what, string append = null)
         {
             /*
@@ -51,24 +77,41 @@ namespace RayshiftTranslateFGO.Droid
                And how can man die better
                Than facing fearful odds,
                For the ashes of his fathers,
-               And the temples of his gods"
+               And the temples of his gods'"
              */
 
             var activity = Forms.Context as Activity;
 
             var storageManager = Forms.Context.GetSystemService(Context.StorageService) as StorageManager;
-            var documentIntent = storageManager.PrimaryStorageVolume.CreateOpenDocumentTreeIntent();
+            Intent documentIntent;
+            try
+            {
+                documentIntent = storageManager.PrimaryStorageVolume.CreateOpenDocumentTreeIntent();
+            }
+            catch (Java.Lang.IncompatibleClassChangeError) // bluestacks
+            {
+                documentIntent = new Intent(Intent.ActionOpenDocumentTree);
+            }
 
 
             var uri = documentIntent.GetParcelableExtra("android.provider.extra.INITIAL_URI") as Android.Net.Uri;
             var scheme = uri?.ToString();
 
-            scheme = scheme.Replace("/root/", "/document/");
+            if (scheme != null)
+            {
+                scheme = scheme.Replace("/root/", "/document/");
 
-            scheme += "%3AAndroid%2F" + append;
+                scheme += "%3AAndroid%2F" + append;
 
 
-            documentIntent.PutExtra("android.provider.extra.INITIAL_URI", Android.Net.Uri.Parse(scheme));
+                documentIntent.PutExtra("android.provider.extra.INITIAL_URI", Android.Net.Uri.Parse(scheme));
+            }
+            else
+            {
+                var documentUri = "content://com.android.externalstorage.documents/document/primary%3AAndroid%2F" + append;
+                documentIntent.PutExtra("android.provider.extra.INITIAL_URI", Android.Net.Uri.Parse(documentUri));
+            }
+
             documentIntent.AddFlags(ActivityFlags.GrantReadUriPermission | ActivityFlags.GrantWriteUriPermission |
                                     ActivityFlags.GrantPrefixUriPermission |
                                     ActivityFlags.GrantPersistableUriPermission);

@@ -203,6 +203,13 @@ Ingin lanjut?</value>
   <data name="AvailableToDonors" xml:space="preserve">
     <value>Tersedia untuk donatur</value>
   </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>Pada perangkat ini, Anda harus menemukan folder berikut: {0}.
+
+Pastikan "Show internal storage" (menu kanan atas di BlueStacks) dipilih jika Anda tidak dapat menemukannya.
+
+Setelah Anda melihat folder "cache" dan "files", ketuk "Use this folder".</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Batalkan</value>
   </data>

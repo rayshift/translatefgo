@@ -201,6 +201,13 @@
   <data name="AvailableToDonors" xml:space="preserve">
     <value>Disponible solo para donadores</value>
   </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>En este dispositivo debe localizar la siguiente carpeta: {0}.
+
+Asegúrese de que "Mostrar almacenamiento interno" (menú superior derecho en BlueStacks) está seleccionado si no lo encuentra.
+
+Una vez que vea las carpetas "cache" y "files", toque "Usar esta carpeta".</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>

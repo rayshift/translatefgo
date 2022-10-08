@@ -17,6 +17,8 @@ namespace RayshiftTranslateFGO.Services
         [ItemCanBeNull]
         public Task<WebAuthenticatorResult> LinkAccount();
 
+        public bool TestManualLocationRequired();
+
         public void MakeToast(string message);
     }
 }

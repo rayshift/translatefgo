@@ -203,6 +203,13 @@ Deseja continuar?</value>
   <data name="AvailableToDonors" xml:space="preserve">
     <value>Disponível para doadores.</value>
   </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>Neste dispositivo, você deve localizar a seguinte pasta: {0}.
+
+Certifique-se de que "Mostrar armazenamento interno" (menu superior direito no BlueStacks) esteja selecionado se você não conseguir encontrá-lo.
+
+Uma vez que você veja as pastas "cache" e "files", toque em "Usar esta pasta".</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>

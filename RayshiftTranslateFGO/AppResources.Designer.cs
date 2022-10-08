@@ -316,6 +316,19 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On this device you must locate the following folder: {0}.
+        ///
+        ///Ensure &quot;Show internal storage&quot; (top right menu on BlueStacks) is selected if you cannot find it.
+        ///
+        ///Once you see the folders &quot;cache&quot; and &quot;files&quot;, tap &quot;Use this folder&quot;..
+        /// </summary>
+        internal static string BluestacksWarning {
+            get {
+                return ResourceManager.GetString("BluestacksWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
