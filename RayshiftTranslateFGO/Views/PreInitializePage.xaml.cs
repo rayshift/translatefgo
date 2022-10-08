@@ -98,9 +98,17 @@ namespace RayshiftTranslateFGO.Views
 
         private async Task AddFolderButtonOnClicked(string processName)
         {
-            
-            if (await DisplayAlert(AppResources.Warning,
-                    String.Format(AppResources.BluestacksWarning, $"Android/data/{processName}"), AppResources.OK, AppResources.Cancel))
+            if (WarnAboutFolder)
+            {
+                if (await DisplayAlert(AppResources.Warning,
+                        String.Format(AppResources.BluestacksWarning, $"Android/data/{processName}"), AppResources.OK,
+                        AppResources.Cancel))
+                {
+                    App.GetViewModel<PreInitializeViewModel>().Cache.Set("TemporaryProcessName", processName);
+                    DependencyService.Get<IIntentService>().OpenDocumentTreeIntent("", $"data%2F{processName}%2F");
+                }
+            }
+            else
             {
                 App.GetViewModel<PreInitializeViewModel>().Cache.Set("TemporaryProcessName", processName);
                 DependencyService.Get<IIntentService>().OpenDocumentTreeIntent("", $"data%2F{processName}%2F");
