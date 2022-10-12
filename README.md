@@ -21,6 +21,7 @@ Currently, English is supported for:
 #### Languages
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 - A Portuguese Brazilian translation is also available.
+- New! A French translation is now available.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12, 13 are supported. Root is not required.
