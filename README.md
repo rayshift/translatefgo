@@ -3,7 +3,7 @@
 
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
-### Android 12 & 13 are now fully supported
+### Android 12 & 13 are now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
@@ -13,10 +13,10 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help sup
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
-Currently, English is supported for:
+Currently, English translations are available for:
 - Official: Fuyuki to LB5.2 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
-- Human: LB6 (Finished), Tunguska Sanctuary (Finished), LB6.5: Traum.
+- Human: LB6, Tunguska Sanctuary, LB6.5: Traum.
 
 #### Languages
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
@@ -52,13 +52,13 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-**Yes, it is safe, no, you will not be banned.**
+**No action has been taken on players for using this app, as of 31/10/2022.**
 
-Here is why:
+The chance of being banned is unlikely for the following reasons:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
 - The game does not and can not detect the modification of cached story scripts. 
 - The app has 100,000+ downloads with 15,000+ active users, and has been operating for nearly 3 years without any bans or warnings being issued because of the app. 
-- It is not in the interest of the game's developers or publishers to ban or otherwise punish people for translating story text.
+- It is unlikely to be in the interest of the game's developers or publishers to ban or otherwise punish people for translating story text.
 - The app is open source, so you can vet what it does, and build it yourself if you are worried.
 
 However, there are some things you should do before using this app to ensure the safety of your account.
@@ -69,7 +69,14 @@ However, there are some things you should do before using this app to ensure the
 NA is supported for English to Spanish and PtBr translations starting with Translate/FGO version 2.0.0.
 
 ### Contact Information
-This tool operates in good faith to increase player accessibility to Fate/Grand Order. Please use the GitHub issues section for bug reports and suggestions. Should you wish to privately contact the creator of this application, please email webmaster at rayshift.io.
+This tool operates in good faith to increase player accessibility to Fate/Grand Order. Please use the GitHub issues section for bug reports and suggestions. Should you wish to privately contact the current maintainer of this application, please email webmaster at rayshift.io.
+
+## DMCA
+Rayshift takes no responsibility for translations uploaded by others. Should you wish to request the takedown of user-generated content, please send an email to dmca at rayshift dot io.
+
+Please provide a detailed description of where to find the content in question, and a written declaration that you are the copyright owner, or have permission to act on the copyright owner's behalf. We aim to respond to all DMCA requests within two working days.
+
+By submitting a DMCA report, you consent to us using your personal data (such as your email address) for the sole purposes of processing the report. 
 
 ## Build Instructions
 Should you wish to build the android app yourself, please follow these instructions.
