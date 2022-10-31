@@ -52,7 +52,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-**No action has been taken on players for using this app, as of 31/10/2022.**
+**No action has been taken against players for using this app, as of 31/10/2022.**
 
 The chance of being banned is unlikely for the following reasons:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
