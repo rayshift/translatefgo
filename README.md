@@ -14,7 +14,7 @@ If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help sup
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English translations are available for:
-- Official: Fuyuki to LB5.2 & Ooku (including events older than 2 years).
+- Official: Fuyuki to LB5.5 & Ooku (including events older than 2 years).
 - Machine & Edited: Everything else
 - Human: LB6, Tunguska Sanctuary, Traum, LB7.
 
@@ -22,6 +22,7 @@ Currently, English translations are available for:
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 - A Portuguese Brazilian translation is also available.
 - New! A French translation is now available.
+- New! An Indonesian translation is now available.
 
 ### Installation
 Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12, 13 are supported. Root is not required.
@@ -52,7 +53,7 @@ The application will also auto-update an installed set of scripts when they have
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
 ### Is this safe, will I get banned?
-**No action has been taken against players for using this app, as of 31/10/2022.**
+**No action has been taken against players for using this app.**
 
 The chance of being banned is unlikely for the following reasons:
 - The app modifies cached story scripts on your SD card (or internal storage), it does not modify or alter the base game.
