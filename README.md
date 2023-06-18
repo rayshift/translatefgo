@@ -52,6 +52,13 @@ The application will also auto-update an installed set of scripts when they have
 #### Troubleshooting
 Please check our [troubleshooting wiki](https://github.com/rayshift/translatefgo/wiki/Troubleshooting) for help with issues. Alternatively, visit the [discord server](https://discord.gg/6vncnjj) for help.
 
+### "An internal error has occurred"
+Try these troubleshooting steps:
+1. Restart your phone. If the error persists,
+2. Go to About -> Configure Android 11 Setup. If the error persists,
+3. Reinstall the translatefgo app. If the error still persists,
+4. Report as a bug on github.
+
 ### Is this safe, will I get banned?
 **No action has been taken against players for using this app.**
 
