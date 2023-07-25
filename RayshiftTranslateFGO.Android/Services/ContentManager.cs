@@ -317,6 +317,7 @@ namespace RayshiftTranslateFGO.Droid
                     {
                         foreach (var directory in directories)
                         {
+                            if (directory == null) continue;
                             var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
                             if (filesystem != null)
                             {
@@ -344,7 +345,7 @@ namespace RayshiftTranslateFGO.Droid
                                 }
                                 catch (Exception)
                                 {
-
+                                    continue;
                                 }
                             }
                         }

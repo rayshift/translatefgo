@@ -785,6 +785,7 @@ namespace RayshiftTranslateFGO.Views
             public bool BundleHidden { get; set; } = false;
             public bool NotPromotional { get; set; } = true;
             public bool Promotional => !NotPromotional;
+            public bool NoUpdateTimestamp => !(Promotional || string.IsNullOrWhiteSpace(LastUpdated));
 
             private string _buttonInstallText = AppResources.InstallText;
             public event PropertyChangedEventHandler PropertyChanged;

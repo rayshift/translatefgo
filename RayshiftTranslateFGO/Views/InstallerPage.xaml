@@ -48,7 +48,7 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label FontAttributes="Bold" FontSize="18" Text="{Binding Name}" />
-                                    <Label IsVisible="{Binding NotPromotional}">
+                                    <Label IsVisible="{Binding NoUpdateTimestamp}">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{x:Static resources:AppResources.LastUpdatedText}" FontAttributes="Bold"/>
