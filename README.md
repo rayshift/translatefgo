@@ -33,6 +33,12 @@ Requirements: Android 5, 6, 7, 8, 9, 10, 11, 12, 13 are supported. Root is not r
 4. Click "install" below the bundle you want to install. You only need to install 1 bundle at a time.
 5. Reopen Fate/Grand Order.
 
+#### Error "To protect your privacy, choose another folder."
+Downgrade files app with adb (even though it says uninstall, as it's a system app, it just downgrades it):
+```adb uninstall com.google.android.documentsui```
+
+There is no other fix for this.
+
 #### Updates
 The scripts will update on a regular basis. Please keep the app installed and check it regularly - the "installed" status will change to "update available" when an update is ready.
 
