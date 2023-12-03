@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutArtworkCredit" xml:space="preserve">
+    <value>图标鸣谢：冬木 @</value>
+  </data>
+  <data name="AboutChangeLanguage" xml:space="preserve">
+    <value>更改语言</value>
+  </data>
+  <data name="AboutFlavourText" xml:space="preserve">
+    <value>这个应用允许您获得多种语言翻译的</value>
+  </data>
+  <data name="AboutLearnMore" xml:space="preserve">
+    <value>了解更多</value>
+  </data>
+  <data name="AboutRetrySetup" xml:space="preserve">
+    <value>重新配置Android 11+</value>
+  </data>
+  <data name="AboutTab" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="AboutVisitText" xml:space="preserve">
+    <value>访问 rayshift.io以获得更多信息</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="AddPreReleaseKey" xml:space="preserve">
+    <value>输入测试密钥</value>
+  </data>
+  <data name="Android11AskToSetup" xml:space="preserve">
+    <value>设备需要您设置特殊权限以写入Fate/Grand Order的文件。请点击“是”立即设置。</value>
+  </data>
+  <data name="Android11Setup" xml:space="preserve">
+    <value>Android 11+ 需要进一步设置</value>
+  </data>
+  <data name="Android11Setup0" xml:space="preserve">
+    <value>您必须授予此应用程序权限，以便写入Fate/Grand Order存储缓存数据的目录。</value>
+  </data>
+  <data name="Android11Setup1" xml:space="preserve">
+    <value>点击下面的每个按钮，然后点击“使用此文件夹”。</value>
+  </data>
+  <data name="Android11Setup2" xml:space="preserve">
+    <value>如果您安装了游戏的新版本，请通过“关于 -&gt; 重新配置Android 11+设置”返回此处。</value>
+  </data>
+  <data name="Android11SetupSuccessful" xml:space="preserve">
+    <value>成功！</value>
+  </data>
+  <data name="Android1213" xml:space="preserve">
+    <value>我使用的是Android 12/13</value>
+  </data>
+  <data name="AndroidDataFolderEmpty" xml:space="preserve">
+    <value>数据文件夹为空或无法访问。请确保您至少启动过Fate/Grand Order一次。</value>
+  </data>
+  <data name="AndroidFolderNotSelected" xml:space="preserve">
+    <value>所选文件夹不是“Android”，而是“{0}”，请再试一次。</value>
+  </data>
+  <data name="ArtCount" xml:space="preserve">
+    <value>安装立绘：</value>
+  </data>
+  <data name="ArtInstallWarning" xml:space="preserve">
+    <value>您即将为游戏安装自定义立绘。
+在使用此应用程序之前，请确保您已获取并记录您的引继码。
+您是否想要继续？</value>
+  </data>
+  <data name="ArtStatus" xml:space="preserve">
+    <value>已收藏：{0}/{1} , 总计：{2}/{3} </value>
+  </data>
+  <data name="ArtTotalSize" xml:space="preserve">
+    <value>已收藏：{0}, 总计：{1} </value>
+  </data>
+  <data name="ArtUninstallingButton" xml:space="preserve">
+    <value>卸载中……</value>
+  </data>
+  <data name="AssetWarningCorrupted" xml:space="preserve">
+    <value>您的资源数据库可能已损坏。请尝试打开并关闭Fate/Grand Order来解决此问题。</value>
+  </data>
+  <data name="AssetWarningFutureUnreleased" xml:space="preserve">
+    <value>您的资源数据库版本是最新的，但翻译脚本尚未发布。请稍后再试，或报告此问题。</value>
+  </data>
+  <data name="AssetWarningOutOfDate" xml:space="preserve">
+    <value>您的游戏不具有最新的资源。请打开Fate/Grand Order并下载数据更新，然后再安装翻译脚本。</value>
+  </data>
+  <data name="AssetWarningUnrecognised" xml:space="preserve">
+    <value>您的资源数据库版本未被识别。翻译脚本可能无法正常工作。请稍后再试，或报告此问题。</value>
+  </data>
+  <data name="AvailableToDonors" xml:space="preserve">
+    <value>资助者可用</value>
+  </data>
+  <data name="BluestacksWarning" xml:space="preserve">
+    <value>在此设备上，您必须找到以下文件夹：{0}。
+如果您找不到它，请确保选择了“显示内部存储”（BlueStacks / 蓝叠 在右上角菜单）。
+当您看到“cache”和“files”这两个文件夹时，点击“使用此文件夹”按钮。</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ChunkUploadFailed" xml:space="preserve">
+    <value>上传失败。网络链接不稳定，请稍后再试。</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="ConnectAccount" xml:space="preserve">
+    <value>链接账号</value>
+  </data>
+  <data name="ConnectAccountInfo" xml:space="preserve">
+    <value>英语 UI 翻译以及自定义立绘只对资助者可用。
+现在链接你的 Rayshift 账号吗？</value>
+  </data>
+  <data name="ConnectAccountNotDonatedInfo" xml:space="preserve">
+    <value>英语 UI 翻译以及自定义立绘只对资助者可用。
+如果您已经资助，请在个人资料设置中连接您的账户。</value>
+  </data>
+  <data name="CustomArtTab" xml:space="preserve">
+    <value>立绘</value>
+  </data>
+  <data name="DirectoryPermissionAccessBody" xml:space="preserve">
+    <value>Translate FGO 需要访问您的存储来工作。请允许访问权限。</value>
+  </data>
+  <data name="DirectoryPermissionAccessTitle" xml:space="preserve">
+    <value>需要文件访问权限</value>
+  </data>
+  <data name="DirectoryPermissionDeniedBody" xml:space="preserve">
+    <value>应用程序无法获取对您存储的写入权限。如果这个问题持续，尝试重新安装应用程序，否则请反馈BUG。重试吗？</value>
+  </data>
+  <data name="DirectoryPermissionDeniedTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="DonateButton" xml:space="preserve">
+    <value>资助</value>
+  </data>
+  <data name="DonorPrompt" xml:space="preserve">
+    <value>资助</value>
+  </data>
+  <data name="EnableAutoScriptUpdate" xml:space="preserve">
+    <value>开启自动更新翻译脚本</value>
+  </data>
+  <data name="EnterAuthKey" xml:space="preserve">
+    <value>输入测试密钥</value>
+  </data>
+  <data name="EnterAuthKeyClear" xml:space="preserve">
+    <value>确定清除现在的测试密钥吗</value>
+  </data>
+  <data name="EnterAuthKeyDescription" xml:space="preserve">
+    <value>如果你有可用于访问开发中内容的测试密钥，在这里填入。</value>
+  </data>
+  <data name="EnterAuthKeyInvalid" xml:space="preserve">
+    <value>密钥格式不正确</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="FGOFolderNotSelected" xml:space="preserve">
+    <value>选择文件夹不是正确的Fate/Grand Order安装文件夹，而是{0}，请重试</value>
+  </data>
+  <data name="FGOWrongGameSelected" xml:space="preserve">
+    <value>游戏从未启动，或者选择了错误的文件夹</value>
+  </data>
+  <data name="InstallAll" xml:space="preserve">
+    <value>安装全部</value>
+  </data>
+  <data name="InstallAssetStorageAPIFailure" xml:space="preserve">
+    <value>确定清除现在的测试密钥吗</value>
+  </data>
+  <data name="InstallChecksumFailure" xml:space="preserve">
+    <value>安装翻译脚本时发生了一个错误。
+在{0}上的校验失败。真实文件长度：{1}
+下载URL：{2}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallDownloadingArts" xml:space="preserve">
+    <value>立绘下载中：{0} ，共计 {1}</value>
+  </data>
+  <data name="InstallDownloadingScripts" xml:space="preserve">
+    <value>下载脚本中：{0}，共计：{1}</value>
+  </data>
+  <data name="InstallDownloadNewAssetStorage" xml:space="preserve">
+    <value>更新资源数据库中</value>
+  </data>
+  <data name="InstalledText" xml:space="preserve">
+    <value>已安装</value>
+  </data>
+  <data name="InstallEmptyAssetStorage" xml:space="preserve">
+    <value>安装翻译脚本时发生了一个错误。
+{0}的资源数据库更新失败，路径{1}不可访问或为空。
+错误：{2}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallEmptyExtraFile" xml:space="preserve">
+    <value>安装翻译脚本时发生了一个错误。
+{0}的额外文件更新失败，路径{1}不可访问或为空。
+错误：{2}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallEmptyFileFailure" xml:space="preserve">
+    <value>安装翻译脚本时发生了一个错误。
+脚本 {0} 返回为空。URL：{1}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallerTitle" xml:space="preserve">
+    <value>{0} 安装器</value>
+  </data>
+  <data name="InstallExtraAPIFailure" xml:space="preserve">
+    <value>安装翻译脚本时发生了一个错误。
+{0}的额外文件更新失败，错误代码：{1}。
+错误信息：{2}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallExtraFiles" xml:space="preserve">
+    <value>处理额外文件中，这可能需要一段时间</value>
+  </data>
+  <data name="InstallFinished" xml:space="preserve">
+    <value>结束！</value>
+  </data>
+  <data name="InstallHandshakeFailure" xml:space="preserve">
+    <value>安装翻译时发生了一个错误。
+远程服务器不可用，稍后再试。错误：{0}
+信息：{1}。
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallHiddenScriptFailure" xml:space="preserve">
+    <value>翻译脚本目前不可用</value>
+  </data>
+  <data name="InstallingFetchingHandshake" xml:space="preserve">
+    <value>安装中</value>
+  </data>
+  <data name="InstallingText" xml:space="preserve">
+    <value>安装中</value>
+  </data>
+  <data name="InstallMissingExtraFile" xml:space="preserve">
+    <value>由于您缺少所需的文件，无法安装 UI 翻译。请打开所有版本的Fate/Grand Order至登录界面，然后关闭它们，并再试一次。</value>
+  </data>
+  <data name="InstallMissingScriptFailure" xml:space="preserve">
+    <value>安装翻译中出错。
+翻译 {0} 不可用。</value>
+  </data>
+  <data name="InstallScriptDownloadFailure" xml:space="preserve">
+    <value>安装翻译时发生了一个错误。
+{0}的下载失败。URL：{1}
+信息：{2}
+请稍后再试，或如果问题持续，请反馈此BUG。</value>
+  </data>
+  <data name="InstallStarred" xml:space="preserve">
+    <value>安装已收藏</value>
+  </data>
+  <data name="InstallText" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="InstallWarning" xml:space="preserve">
+    <value>您即将为您的游戏安装一组翻译脚本。
+请确保在使用此应用程序之前，您已创建并记录了您的引继码。
+总下载大小：{0}
+继续吗？</value>
+  </data>
+  <data name="InstallWriteFile" xml:space="preserve">
+    <value>文件写入中：{0}，共计：{1}</value>
+  </data>
+  <data name="InternalError" xml:space="preserve">
+    <value>内部错误</value>
+  </data>
+  <data name="InternalErrorDetails" xml:space="preserve">
+    <value>内部错误，请报告为BUG。
+{0}</value>
+  </data>
+  <data name="JPArtName" xml:space="preserve">
+    <value>自定义立绘 (日服)</value>
+  </data>
+  <data name="JPInstaller" xml:space="preserve">
+    <value>FGO 日服</value>
+  </data>
+  <data name="LastUpdatedText" xml:space="preserve">
+    <value>最近更新：</value>
+  </data>
+  <data name="LinkAccount" xml:space="preserve">
+    <value>链接 Rayshift 账号</value>
+  </data>
+  <data name="LinkAccountFailure" xml:space="preserve">
+    <value>链接账号失败，原因：{0}</value>
+  </data>
+  <data name="LinkAccountSuccess" xml:space="preserve">
+    <value>已链接到 Rayshift 账号：{0}</value>
+  </data>
+  <data name="LoadingPleaseWait" xml:space="preserve">
+    <value>加载中，请等待</value>
+  </data>
+  <data name="LoginPrompt" xml:space="preserve">
+    <value>链接 Rayshift 账号</value>
+  </data>
+  <data name="NAArtName" xml:space="preserve">
+    <value>自定义立绘 (美服)</value>
+  </data>
+  <data name="NAInstaller" xml:space="preserve">
+    <value>FGO 美服</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="NoFGOFound" xml:space="preserve">
+    <value>{0}未在您的系统中找到。请安装游戏并确保您至少运行了一次。
+如果您认为这是一个BUG，请先尝试关于标签中的“Android 11设置”。（错误1）</value>
+  </data>
+  <data name="NoFGOInstallationFound2" xml:space="preserve">
+    <value>{0}未在您的系统中找到。请安装游戏并确保您至少运行了一次。
+如果您认为这是一个BUG，请先尝试关于标签中的“Android 11设置”。（错误2）</value>
+  </data>
+  <data name="NoFGOInstallationFoundToast" xml:space="preserve">
+    <value>当前位置未发现Fate/Grand Order安装文件，请确保至少出现过一次Fate/Grand Order登陆界面</value>
+  </data>
+  <data name="NoScriptsAvailable" xml:space="preserve">
+    <value>现在没有翻译文件可供下载，请过段时间重试。</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>好的</value>
+  </data>
+  <data name="RefreshText" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Reinstall" xml:space="preserve">
+    <value>重新安装</value>
+  </data>
+  <data name="RemoveAutoScriptUpdate" xml:space="preserve">
+    <value>取消自动更新翻译脚本</value>
+  </data>
+  <data name="RemovePreReleaseKey" xml:space="preserve">
+    <value>移除测试密钥</value>
+  </data>
+  <data name="ReopenAnnouncement" xml:space="preserve">
+    <value>重新打开通知</value>
+  </data>
+  <data name="ResetApp" xml:space="preserve">
+    <value>重置应用</value>
+  </data>
+  <data name="ResetAppText" xml:space="preserve">
+    <value>确定要重置应用吗</value>
+  </data>
+  <data name="RetryText" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="ReturnHome" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>设置你的App语言：</value>
+  </data>
+  <data name="SetupButton" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SetupFailedBody" xml:space="preserve">
+    <value>设置失败或者被取消。是被位于：</value>
+  </data>
+  <data name="SetupFailedTitle" xml:space="preserve">
+    <value>设置失败</value>
+  </data>
+  <data name="StatusErrorTryReinstall" xml:space="preserve">
+    <value>错误，请尝试重新安装</value>
+  </data>
+  <data name="StatusInstalled" xml:space="preserve">
+    <value>已安装</value>
+  </data>
+  <data name="StatusMismatch" xml:space="preserve">
+    <value>需要更新，请先启动游戏并下载更新</value>
+  </data>
+  <data name="StatusNotInstalled" xml:space="preserve">
+    <value>未安装</value>
+  </data>
+  <data name="StatusText" xml:space="preserve">
+    <value>状态：</value>
+  </data>
+  <data name="StatusUnknown" xml:space="preserve">
+    <value>未知状态，请尝试重新安装</value>
+  </data>
+  <data name="StatusUpdateAvailable" xml:space="preserve">
+    <value>更新可用</value>
+  </data>
+  <data name="StatusUpdateRequired" xml:space="preserve">
+    <value>需要更新</value>
+  </data>
+  <data name="TimeAgo" xml:space="preserve">
+    <value>之前</value>
+  </data>
+  <data name="TooLowAndroidVersion" xml:space="preserve">
+    <value>需要Android 7及以上版本</value>
+  </data>
+  <data name="TotalSize" xml:space="preserve">
+    <value>安装大小：</value>
+  </data>
+  <data name="TranslateAPIError" xml:space="preserve">
+    <value>翻译暂时不可用</value>
+  </data>
+  <data name="TryAgainLater" xml:space="preserve">
+    <value>翻译API暂时不可用，请过段时间重试。</value>
+  </data>
+  <data name="UninstallArtWarning" xml:space="preserve">
+    <value>您即将卸载当前已安装的所有立绘。
+请确保在使用此应用程序之前，您已创建并记录了您的引继码。
+继续吗？</value>
+  </data>
+  <data name="UninstallFinished" xml:space="preserve">
+    <value>结束！</value>
+  </data>
+  <data name="UninstallingText" xml:space="preserve">
+    <value>卸载中： {0}，共计：{1} </value>
+  </data>
+  <data name="UninstallText" xml:space="preserve">
+    <value>卸载</value>
+  </data>
+  <data name="UninstallWarning" xml:space="preserve">
+    <value>您即将卸载当前已安装的所有翻译。
+请确保在使用此应用程序之前，您已创建并记录了您的引继码。
+继续吗？</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>未知错误：{0}</value>
+  </data>
+  <data name="UnlinkAccount" xml:space="preserve">
+    <value>解除 Rayshift 账号链接</value>
+  </data>
+  <data name="UnlinkConfirmation" xml:space="preserve">
+    <value>确定取消账号链接吗？</value>
+  </data>
+  <data name="UpdateOptionalDescription" xml:space="preserve">
+    <value>一个可选的 Translate FGO 更新可用。现在更新吗？</value>
+  </data>
+  <data name="UpdateOptionalTitle" xml:space="preserve">
+    <value>可选更新可用：({0} -&gt; {1})</value>
+  </data>
+  <data name="UpdateRequiredDescription" xml:space="preserve">
+    <value>Translate FGO 必须更新。请前往我们的GitHub或者网站下载并安装更新。</value>
+  </data>
+  <data name="UpdateRequiredDownload" xml:space="preserve">
+    <value>立刻下载</value>
+  </data>
+  <data name="UpdateRequiredTitle" xml:space="preserve">
+    <value>需要升级：({0} -&gt; {1})</value>
+  </data>
+  <data name="UpdateSkip" xml:space="preserve">
+    <value>跳过该版本</value>
+  </data>
+  <data name="UpdateURL" xml:space="preserve">
+    <value>https://github.com/rayshift/translatefgo/releases</value>
+  </data>
+  <data name="VersionErrorMessage" xml:space="preserve">
+    <value>翻译服务器错误，请过段时间重试。</value>
+  </data>
+  <data name="VersionErrorTitle" xml:space="preserve">
+    <value>服务器错误</value>
+  </data>
+  <data name="VersionExitButton" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="VersionRetryButton" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+</root>

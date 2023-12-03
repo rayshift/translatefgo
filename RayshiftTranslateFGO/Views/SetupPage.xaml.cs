@@ -37,6 +37,9 @@ namespace RayshiftTranslateFGO.Views
                 case "pt-BR":
                     LanguagePtBr.IsChecked = true;
                     break;
+                case "zh-CN":
+                    LanguageSimplifiedChinese.IsChecked = true;
+                    break;
             }
 
 

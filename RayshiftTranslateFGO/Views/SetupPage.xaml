@@ -150,6 +150,18 @@
                                 </StackLayout>
                             </RadioButton.Content>
                         </RadioButton>
+                        <RadioButton Value="zh-Hans" Grid.Column="1" Grid.Row="2" Margin="0, 10, 0, 0" HorizontalOptions="CenterAndExpand" CheckedChanged="Language_OnCheckedChanged" x:Name="LanguageSimplifiedChinese">
+                            <RadioButton.Content>
+                                <StackLayout>
+                                    <Image Source="zhCN.png"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="CenterAndExpand" />
+                                    <Label Text="简体中文"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End" FontSize="10"/>
+                                </StackLayout>
+                            </RadioButton.Content>
+                        </RadioButton>
                     </Grid>
 
                 </StackLayout>
