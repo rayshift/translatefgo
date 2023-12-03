@@ -10,6 +10,8 @@ Downgrade files app with adb (even though it says uninstall, as it's a system ap
 
 ```adb uninstall com.google.android.documentsui```
 
+(If this fails, try ```adb uninstall com.android.documentsui```)
+
 Some phones will let you downgrade (or uninstall) the Documents app directly in the android settings. If it's hidden, you must use adb.
 
 Why? Google doesn't want you to have full access to your own devices: https://twitter.com/MishaalRahman/status/1719416906174681554
