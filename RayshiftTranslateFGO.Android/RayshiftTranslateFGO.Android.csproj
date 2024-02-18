@@ -224,7 +224,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
