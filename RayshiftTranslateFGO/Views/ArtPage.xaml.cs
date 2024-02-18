@@ -16,6 +16,7 @@ using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace RayshiftTranslateFGO.Views
 {
@@ -29,7 +30,8 @@ namespace RayshiftTranslateFGO.Views
         private readonly ObservableCollection<ArtGUIObject> _guiObjects =
             new ObservableCollection<ArtGUIObject>();
 
-        private bool _android11Access = false;
+        private ContentType _accessMode = ContentType.DirectAccess;
+
         private bool _pageOpened = false;
 
         private bool _hasSubscribed = false;
@@ -42,6 +44,7 @@ namespace RayshiftTranslateFGO.Views
 
         private IContentManager _cm { get; set; }
         private IScriptManager _sm { get; set; }
+        private IIntentService _im { get; set; }
 
         private bool _isLoggedIn { get; set; } = false;
         private bool _isDonor { get; set; } = false;
@@ -57,6 +60,7 @@ namespace RayshiftTranslateFGO.Views
         {
             _cm = DependencyService.Get<IContentManager>();
             _sm = DependencyService.Get<IScriptManager>();
+            _im = DependencyService.Get<IIntentService>();
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             BindingContext = this;
@@ -111,7 +115,7 @@ namespace RayshiftTranslateFGO.Views
                         ? _handshake.Response.JPArtUrls
                         : _handshake.Response.NAArtUrls;
 
-                    await _sm.GetArtAssetStorage(_android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
+                    await _sm.GetArtAssetStorage(_accessMode,
                         region,
                         _installedFgoInstances.Where(w => w.Region == region).Select(s => s.Path).ToList(),
                         artUrls.ToList(),
@@ -122,7 +126,7 @@ namespace RayshiftTranslateFGO.Views
                     {
                         foreach (var file in removals)
                         {
-                            var path = _android11Access
+                            var path = _accessMode == ContentType.StorageFramework
                                 ? $"files/data/d713/{file}"
                                 : $"{game}/files/data/d713/{file}";
                             filesToRemove.Add(new KeyValuePair<string, string>(path, game));
@@ -137,7 +141,7 @@ namespace RayshiftTranslateFGO.Views
                     i += 1;
                     RevertButton.Text = String.Format(AppResources.UninstallingText, i, filesToRemove.Count);
                     OnPropertyChanged();
-                    await _cm.RemoveFileIfExists(_android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
+                    await _cm.RemoveFileIfExists(_accessMode,
                         file.Key, file.Value);
                 }
 
@@ -200,20 +204,56 @@ namespace RayshiftTranslateFGO.Views
 
                 _storageLocations = locations;
 
-                if (_storageLocations.Count > 0 || !_cm.CheckBasicAccess())
+                if (Preferences.Get("UseShizuku", false))
                 {
-                    _android11Access = true;
-
+                    _accessMode = ContentType.Shizuku;
                 }
-
-                if (!_android11Access)
+                else if (_storageLocations.Count > 0 || !_cm.CheckBasicAccess())
                 {
-                    _installedFgoInstances = _cm.GetInstalledGameApps(ContentType.DirectAccess);
+                    _accessMode = ContentType.StorageFramework;
                 }
                 else
                 {
-                    _installedFgoInstances = _cm.GetInstalledGameApps(ContentType.StorageFramework, _storageLocations);
+                    _accessMode = ContentType.DirectAccess;
                 }
+
+                // need to pause for a bit here if shizuku
+
+                if (_accessMode == ContentType.Shizuku)
+                {
+                    LoadingText.Text = AppResources.ShizukuLoading;
+                    if (!_im.IsShizukuAvailable())
+                    {
+                        LoadingText.Text = AppResources.ShizukuConnectFailure;
+                        SwitchErrorObjects(true);
+                        return;
+                    }
+                    if (!_im.IsShizukuServiceBound())
+                    {
+                        var maxTries = 10; // give it 5 seconds to bind, might not be long enough?
+                        while (!_im.IsShizukuServiceBound())
+                        {
+                            if (maxTries <= 0)
+                            {
+                                LoadingText.Text = AppResources.ShizukuConnectFailure;
+                                SwitchErrorObjects(true);
+                                return;
+                            }
+                            if (DependencyService.Get<IIntentService>().IsShizukuAvailable())
+                            {
+                                DependencyService.Get<IIntentService>().CheckShizukuPerm(true);
+                            }
+                            await Task.Delay(500);
+                            maxTries--;
+                        }
+
+                    }
+                    LoadingText.Text = AppResources.LoadingPleaseWait;
+                }
+
+
+                _installedFgoInstances = _cm.GetInstalledGameApps(_accessMode, _storageLocations);
+                
 
 
                 // Check region is installed
@@ -227,11 +267,11 @@ namespace RayshiftTranslateFGO.Views
 
                 foreach (var instance in _installedFgoInstances.ToList())
                 {
-                    var filePath = _android11Access
+                    var filePath = _accessMode == ContentType.StorageFramework
                         ? $"files/data/d713/{_assetList}"
                         : $"{instance.Path}/files/data/d713/{_assetList}";
                     var assetStorage = await _cm.GetFileContents(
-                        _android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
+                        _accessMode,
                         filePath, instance.Path);
 
 
@@ -430,7 +470,7 @@ namespace RayshiftTranslateFGO.Views
             try
             {
                 var installResult = await _sm.InstallArt(
-                    _android11Access ? ContentType.StorageFramework : ContentType.DirectAccess,
+                    _accessMode,
                     region,
                     _installedFgoInstances.Where(w => w.Region == region).Select(s => s.Path).ToList(),
                     artUrls.ToList(),
@@ -441,7 +481,7 @@ namespace RayshiftTranslateFGO.Views
                 if (!installResult.IsSuccessful)
                 {
                     successSendTask = rest.SendSuccess(region, -1, TranslationInstallType.Manual, -1,
-                        false, installResult.ErrorMessage, _android11Access, true);
+                        false, installResult.ErrorMessage, _accessMode == ContentType.StorageFramework, true);
                     await DisplayAlert(AppResources.Error,
                         installResult.ErrorMessage, AppResources.OK);
 
@@ -449,18 +489,18 @@ namespace RayshiftTranslateFGO.Views
                 else
                 {
                     successSendTask = rest.SendSuccess(region, -1, TranslationInstallType.Manual, -1,
-                        true, "", _android11Access, true);
+                        true, "", _accessMode == ContentType.StorageFramework, true);
                     await Task.Delay(1000);
                 }
 
             }
             catch (System.UnauthorizedAccessException ex)
             {
-                if (!_android11Access)
+                if (_accessMode != ContentType.StorageFramework)
                 {
 
                     successSendTask = rest.SendSuccess(region, -1, TranslationInstallType.Manual, -1,
-                        false, "Unauthorized error handler: " + ex.ToString(), _android11Access, true);
+                        false, "Unauthorized error handler: " + ex.ToString(), _accessMode == ContentType.StorageFramework, true);
                     var retry = await DisplayAlert(AppResources.DirectoryPermissionDeniedTitle,
                         AppResources.Android11AskToSetup, AppResources.Yes, AppResources.No);
 
@@ -482,7 +522,7 @@ namespace RayshiftTranslateFGO.Views
             catch (Exception ex)
             {
                 successSendTask = rest.SendSuccess(region, -1, TranslationInstallType.Manual, -1,
-                    false, ex.ToString(), _android11Access, true);
+                    false, ex.ToString(), _accessMode == ContentType.StorageFramework, true);
                 await DisplayAlert(AppResources.InternalError,
                     String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
             }

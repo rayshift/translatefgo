@@ -36,7 +36,7 @@ namespace RayshiftTranslateFGO.Droid
             var restful = new RestfulAPI();
             foreach (var game in installPaths)
             {
-                var assetStoragePath = contentType != ContentType.DirectAccess
+                var assetStoragePath = contentType == ContentType.StorageFramework
                     ? $"files/data/d713/{InstallerPage._assetList}"
                     : $"{game}/files/data/d713/{InstallerPage._assetList}";
 
@@ -122,7 +122,7 @@ namespace RayshiftTranslateFGO.Droid
             // get new assetstorage.txt
             foreach (var game in installPaths)
             {
-                var assetStoragePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{InstallerPage._assetList}"
+                var assetStoragePath = contentType == ContentType.StorageFramework ? $"files/data/d713/{InstallerPage._assetList}"
                     : $"{game}/files/data/d713/{InstallerPage._assetList}";
 
                 var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, game);
@@ -179,11 +179,12 @@ namespace RayshiftTranslateFGO.Droid
                 object lockObj = new Object();
 
                 // assuming writing can be async
+                var maxParallel = contentType == ContentType.Shizuku ? 1 : 4;
                 try
                 {
                     await arts.ParallelForEachAsync(async art =>
                     {
-                        var filePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{art.Filename}"
+                        var filePath = contentType == ContentType.StorageFramework ? $"files/data/d713/{art.Filename}"
                             : $"{game}/files/data/d713/{art.Filename}";
                         var downloadUrl = art.Url;
                         byte[] artData;
@@ -235,7 +236,7 @@ namespace RayshiftTranslateFGO.Droid
                                         Math.Min(i, totalArts), totalArts);
                             }
                         }
-                    }, maxDegreeOfParallelism: 4);
+                    }, maxDegreeOfParallelism: maxParallel);
                 }
                 catch (EndEarlyException ex)
                 {
@@ -355,7 +356,7 @@ namespace RayshiftTranslateFGO.Droid
                     foreach (var path in groupToInstall.ExtraStages)
                     {
 
-                        var directPath = contentType != ContentType.DirectAccess
+                        var directPath = contentType == ContentType.StorageFramework
                             ? $"files/data/{path}"
                             : $"{game}/files/data/{path}";
 
@@ -448,7 +449,7 @@ namespace RayshiftTranslateFGO.Droid
                                     Math.Min(scriptDictionary.Count, totalScripts), totalScripts);
                         }
                     }
-                },maxDegreeOfParallelism:4);
+                },maxDegreeOfParallelism: 4);
             }
             catch (EndEarlyException ex)
             {
@@ -495,7 +496,7 @@ namespace RayshiftTranslateFGO.Droid
 
                         var game = installPaths[i];
 
-                        var directPath = contentType != ContentType.DirectAccess
+                        var directPath = contentType == ContentType.StorageFramework
                             ? $"files/data/{pathToWrite}"
                             : $"{game}/files/data/{pathToWrite}";
 
@@ -514,7 +515,7 @@ namespace RayshiftTranslateFGO.Droid
             // get new assetstorage.txt
             foreach (var game in installPaths)
             {
-                var assetStoragePath = contentType != ContentType.DirectAccess ? $"files/data/d713/{InstallerPage._assetList}"
+                var assetStoragePath = contentType == ContentType.StorageFramework ? $"files/data/d713/{InstallerPage._assetList}"
                     : $"{game}/files/data/d713/{InstallerPage._assetList}";
 
                 var fileContents = await _cm.GetFileContents(contentType, assetStoragePath, game);
@@ -563,7 +564,7 @@ namespace RayshiftTranslateFGO.Droid
             {
                 foreach (var asset in scriptDictionary)
                 {
-                    var assetInstallPath = contentType != ContentType.DirectAccess
+                    var assetInstallPath = contentType == ContentType.StorageFramework
                         ? $"files/data/d713/{asset.Key}"
                         : $"{game}/files/data/d713/{asset.Key}";
 

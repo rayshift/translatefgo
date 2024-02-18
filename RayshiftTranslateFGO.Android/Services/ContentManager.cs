@@ -7,6 +7,7 @@ using Android.Content;
 using Android.Provider;
 using Android.Util;
 using AndroidX.DocumentFile.Provider;
+using IO.Rayshift.Translatefgo;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
@@ -67,8 +68,6 @@ namespace RayshiftTranslateFGO.Droid
         public async Task<bool> WriteFileContents(ContentType accessType, string filename, string storageLocationBase,
             byte[] contents, bool forceNew = false)
         {
-            var ctx = Android.App.Application.Context;
-
             switch (accessType)
             {
                 case ContentType.DirectAccess:
@@ -79,6 +78,16 @@ namespace RayshiftTranslateFGO.Droid
                 case ContentType.StorageFramework:
                     await WriteFileAsync(accessType, filename, storageLocationBase, contents, forceNew);
                     return true;
+
+                case ContentType.Shizuku:
+                    NGFSError error = new NGFSError();
+                    MainActivity.NextGenFS.WriteFileContents(filename, contents, error);
+                    if (error.IsSuccess)
+                    {
+                        return true;
+                    }
+                    throw new Exception($"Couldn't write file via Shizuku: {error.Error}");
+                    
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
@@ -102,6 +111,14 @@ namespace RayshiftTranslateFGO.Droid
                     DocumentFile file = DocumentFile.FromTreeUri(Android.App.Application.Context, doc);
                     await Task.Delay(50);
                     return file.Delete();
+                case ContentType.Shizuku:
+                    NGFSError error = new NGFSError();
+                    MainActivity.NextGenFS.RemoveFileIfExists(filename, error);
+                    if (error.IsSuccess)
+                    {
+                        return true;
+                    }
+                    throw new Exception($"Couldn't remove file via Shizuku: {error.Error}");
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
@@ -159,6 +176,27 @@ namespace RayshiftTranslateFGO.Droid
                         FileContents = dataBytes,
                         LastModified = meta2.LastModified
                     };
+
+                case ContentType.Shizuku:
+                    NGFSError error = new NGFSError();
+                    var metadata = GetPathIfFileExists(ContentType.Shizuku, filename, storageLocationBase);
+
+                    if (metadata.Exists)
+                    {
+                        var bytes = await ReadExistingFileAsync(ContentType.Shizuku, filename, storageLocationBase);
+                        return new FileContentsResult()
+                        {
+                            Error = FileErrorCode.None,
+                            Successful = true,
+                            FileContents = bytes,
+                            LastModified = metadata.LastModified
+                        };
+                    }
+                    return new FileContentsResult()
+                    {
+                        Error = FileErrorCode.NotExists,
+                        Successful = false
+                    };
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
@@ -204,6 +242,36 @@ namespace RayshiftTranslateFGO.Droid
                     }
                     return new FileMetadata();
 
+                case ContentType.Shizuku:
+                    NGFSError error = new NGFSError();
+                    var fileExists = MainActivity.NextGenFS.GetFileExists(filename, error);
+
+                    if (error.IsSuccess && !fileExists)
+                    {
+                        return new FileMetadata()
+                        {
+                            Exists = false
+                        };
+                    }
+                    if (!error.IsSuccess)
+                    {
+                        throw new Exception($"Couldn't check existence of file via Shizuku: {error.Error}");
+                    }
+
+                    var modTime = MainActivity.NextGenFS.GetFileModTime(filename, error);
+                    if (!error.IsSuccess)
+                    {
+                        throw new Exception($"Couldn't check moddtime of file via Shizuku: {error.Error}");
+                    }
+
+                    return new FileMetadata()
+                    {
+                        Exists = true,
+                        Path = filename,
+                        LastModified = modTime
+                    };
+
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
@@ -226,13 +294,24 @@ namespace RayshiftTranslateFGO.Droid
                     }
 
                     var readStream = descriptor.CreateInputStream();
-                    if (!readStream.CanRead)
+                    if (readStream == null || !readStream.CanRead)
                     {
                         throw new Exception("Cannot read the readStream.");
                     }
                     byte[] outputBuffer = new byte[readStream.Length];
                     await readStream.ReadAsync(outputBuffer);
                     return outputBuffer;
+                case ContentType.Shizuku:
+                    var error = new NGFSError();
+                    var fileContents = MainActivity.NextGenFS.ReadExistingFile(filePath, error);
+                    if (error.IsSuccess)
+                    {
+                        return fileContents;
+                    }
+                    else
+                    {
+                        throw new Exception($"Couldn't read file contents via Shizuku: {error.Error}");
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
@@ -292,12 +371,23 @@ namespace RayshiftTranslateFGO.Droid
                     }
 
                     var writeStream = descriptor.CreateOutputStream();
-                    if (!writeStream.CanWrite)
+                    if (writeStream == null || !writeStream.CanWrite)
                     {
                         throw new Exception("Cannot write the writeStream.");
                     }
                     await writeStream.WriteAsync(bytes);
                     return true;
+                case ContentType.Shizuku:
+                    var error = new NGFSError();
+                    var fileContents = MainActivity.NextGenFS.WriteFileContents(filePath, bytes, error);
+                    if (error.IsSuccess)
+                    {
+                        return fileContents;
+                    }
+                    else
+                    {
+                        throw new Exception($"Couldn't write file contents via Shizuku: {error.Error}");
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(accessType), accessType, null);
             }
@@ -310,7 +400,6 @@ namespace RayshiftTranslateFGO.Droid
             switch (accessType)
             {
                 case ContentType.DirectAccess:
-
                     var directories = ctx.GetExternalFilesDirs("");
 
                     if (directories != null)
@@ -379,9 +468,74 @@ namespace RayshiftTranslateFGO.Droid
                     }
 
                     break;
+                case ContentType.Shizuku:
+                    var directories2 = ctx.GetExternalFilesDirs("");
+
+                    if (directories2 != null)
+                    {
+                        foreach (var directory in directories2)
+                        {
+                            if (directory == null) continue;
+                            var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
+                            if (filesystem != null)
+                            {
+                                try
+                                {
+                                    var path = filesystem.ToString();
+                                    var directoryContents = GetShizukuDirectories(path);
+                                    foreach (var foundDirectory in directoryContents)
+                                    {
+                                        foreach (var validAppName in AppNames.ValidAppNames)
+                                        {
+                                            if (foundDirectory.Split("/").Last() == validAppName)
+                                            {
+                                                var region = foundDirectory.EndsWith(".en")
+                                                    ? FGORegion.Na
+                                                    : FGORegion.Jp;
+
+                                                apps.Add(new InstalledFGOInstances()
+                                                {
+                                                    Path = foundDirectory,
+                                                    Region = region
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Error("TranslateFGO", $"Error listing directory {filesystem.ToString()}, {ex}");
+                                    throw; // this one should be thrown as it'll just return empty if the dir doesn't exist
+                                }
+                            }
+                        }
+                    }
+                    break;
             }
 
             return apps;
+        }
+
+        List<string> GetShizukuDirectories(string path)
+        {
+            List<string> dirs = new List<string>();
+            var error = new NGFSError();
+            var directories = MainActivity.NextGenFS.ListDirectoryContents(path, error);
+
+            if (!error.IsSuccess)
+            {
+                throw new Exception($"Couldn't list directories with Shizuku: {error.Error}");
+            }
+            foreach (var dir in directories)
+            {
+                var type = dir.Split("|");
+                if (type[0] == "D")
+                {
+                    dirs.Add(type[1]);
+                }
+            }
+
+            return dirs;
         }
 
         /// <summary>
@@ -419,7 +573,7 @@ namespace RayshiftTranslateFGO.Droid
                 queryArgs.PutStringArray(ContentResolver.QueryArgSqlSelectionArgs, fileSelection);
             }*/ // https://github.com/xamarin/xamarin-android/issues/5788
 
-            if (_folderCache.ContainsKey(children!.ToString())) return _folderCache[children.ToString()!];
+            if (_folderCache.ContainsKey(children?.ToString() ?? throw new InvalidOperationException($"BuildChildDocumentsUriUsingTree returned null for {uri}, {newPath}"))) return _folderCache[children.ToString()!];
 
             try
             {

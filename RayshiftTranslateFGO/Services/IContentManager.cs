@@ -104,7 +104,8 @@ namespace RayshiftTranslateFGO.Services
     public enum ContentType
     {
         DirectAccess,
-        StorageFramework
+        StorageFramework,
+        Shizuku
     }
     [Flags]
     public enum FGORegion

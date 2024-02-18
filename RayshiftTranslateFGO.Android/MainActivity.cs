@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -17,18 +18,22 @@ using Android.Gms.Common;
 using Android.Provider;
 using Android.Util;
 using Firebase.Messaging;
+using IO.Rayshift.Translatefgo;
 using Java.Interop;
 using Newtonsoft.Json;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using RayshiftTranslateFGO.ViewModels;
 using RayshiftTranslateFGO.Views;
+using Rikka.Shizuku;
+using Rikka.Sui;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Environment = Android.OS.Environment;
 using Platform = Xamarin.Essentials.Platform;
 using Uri = Android.Net.Uri;
+using Android.Systems;
 
 namespace RayshiftTranslateFGO.Droid
 {
@@ -44,14 +49,22 @@ namespace RayshiftTranslateFGO.Droid
         public const string UPDATE_CHANNEL_NAME = "update_v2";
 #endif
 
+        public static int SHIZUKU_PERM = 1000;
+
         public enum RequestCodes
         {
             FolderIntentRequestCode
         }
-        
+
+        public static ShizukuPermissionResultListener ShizukuListener = new ShizukuPermissionResultListener();
+        public static NextGenFSServiceConnection NextGenFS = new NextGenFSServiceConnection();
+        public static bool ShizukuListenersSetup = false;
+
         internal static readonly int NOTIFICATION_ID = 100;
         public const string TAG = "MainActivity";
         public bool GooglePlayAvailable { get; set; }
+
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -82,6 +95,24 @@ namespace RayshiftTranslateFGO.Droid
 
             FirebaseMessaging.Instance.SubscribeToTopic(CHANNEL_ID);
             FirebaseMessaging.Instance.SubscribeToTopic(UPDATE_CHANNEL_NAME);
+
+            // shizuku
+
+            
+
+            Log.Info("TranslateFGO", "Base app pid=" + Os.Getpid() + ", uid=" + Os.Getuid());
+
+            var shizukuActive = Shizuku.PingBinder();
+
+            if (shizukuActive)
+            {
+                Shizuku.AddRequestPermissionResultListener(ShizukuListener);
+                ShizukuProvider.EnableMultiProcessSupport(true);
+                ShizukuListenersSetup = true;
+                //CheckShizukuPerm();
+            }
+
+            
 
             LoadApplication(new App());
         }
@@ -141,15 +172,6 @@ namespace RayshiftTranslateFGO.Droid
                     return;
                 }
 
-                //var appNamesList = AppNames.ValidAppNames.ToList();
-                //bool found = false;
-                //foreach (var folder in dataChildren)
-                //{
-                    //if (appNamesList.Contains(folder.Path.Split("/").Last()))
-                    //{
-                        //found = true;
-                    //}
-                //}
 
 
                 if (dataChildren.FirstOrDefault(w => w.Path.EndsWith("files")) == null
@@ -248,4 +270,19 @@ namespace RayshiftTranslateFGO.Droid
         }
     }
 
+    public class ShizukuPermissionResultListener: Java.Lang.Object, Shizuku.IOnRequestPermissionResultListener
+    {
+        public void OnRequestPermissionResult(int requestCode, int grantResult)
+        {
+            if (grantResult == (int)Permission.Granted)
+            {
+                var intent = new IntentService();
+                intent.BindShizuku();
+            }
+            else
+            {
+                Toast.MakeText(Android.App.Application.Context, "Shizuku permission not granted.", ToastLength.Long)?.Show();
+            }
+        }
+    }
 }

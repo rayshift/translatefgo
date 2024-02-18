@@ -40,6 +40,7 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <MandroidI18n />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <EnableLLVM>true</EnableLLVM>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -83,6 +85,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NextGenFSServiceConnection.cs" />
     <Compile Include="Services\ContentManager.cs" />
     <Compile Include="Services\IntentService.cs" />
     <Compile Include="MainActivity.cs" />
@@ -109,6 +112,26 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.AIDL\ShizukuX.AIDL.csproj">
+      <Project>{4467466a-c7e5-49ed-a126-e8bf76536fae}</Project>
+      <Name>ShizukuX.AIDL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.API\ShizukuX.API.csproj">
+      <Project>{6ff43ce6-b3b0-48a0-a09a-7388620a38ad}</Project>
+      <Name>ShizukuX.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Provider\ShizukuX.Provider.csproj">
+      <Project>{1c7c793b-eead-470b-9e26-4be6aabf6422}</Project>
+      <Name>ShizukuX.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Shared\ShizukuX.Shared.csproj">
+      <Project>{82262bc8-37b8-4fb4-adab-41ab1e5361bd}</Project>
+      <Name>ShizukuX.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RayshiftTranslateFGO.NextGenFS\RayshiftTranslateFGO.NextGenFS.csproj">
+      <Project>{043c6f56-2d7a-4212-8ad6-1afebc855ed3}</Project>
+      <Name>RayshiftTranslateFGO.NextGenFS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RayshiftTranslateFGO\RayshiftTranslateFGO.csproj">
       <Project>{7D7A0789-02F4-486D-978B-684E6E63293C}</Project>
       <Name>RayshiftTranslateFGO</Name>
@@ -201,7 +224,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

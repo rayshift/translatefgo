@@ -31,27 +31,33 @@
         </StackLayout>
 
           <ScrollView Grid.Row="1">
-                    <StackLayout Padding="20,30,20, 10">
-            <Label Margin="0,0,0,10" Text="{x:Static resources:AppResources.Android11Setup}" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" />
-            <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup0}" />
-            <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup1}" />
-            <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup2}" FontAttributes="Bold" />
+              <StackLayout Padding="20,30,20, 10">
+                <Label Margin="0,0,0,10" Text="{x:Static resources:AppResources.Android11Setup}" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" />
+                <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup0}" />
+                <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup1}" />
+                <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.Android11Setup2}" />
+                <Label HorizontalTextAlignment="Center" Text="{x:Static resources:AppResources.ShizukuAndroid11Notice}" FontAttributes="Bold" />
 
-            <FlexLayout Direction="Column" 
-                        x:Name="PreInitializeInstallView"
-                        AutomationId="FlexLayoutMain">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Button Margin="0,20,0,0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" 
-                                Text="{Binding ButtonPreconfigureText}" Command="{Binding ButtonClick}" VerticalOptions="End" 
-                                TextColor="White" IsVisible="{Binding ButtonEnabled}"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </FlexLayout>
-            <Button Margin="0,20,0,0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" 
-                    Text="{x:Static resources:AppResources.ReturnHome}" x:Name="ReturnHomeButton" VerticalOptions="End" 
-                    TextColor="White"/>
-        </StackLayout>
+                <FlexLayout Direction="Column" 
+                            x:Name="PreInitializeInstallView"
+                            AutomationId="FlexLayoutMain">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="0,20,0,0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" 
+                                    Text="{Binding ButtonPreconfigureText}" Command="{Binding ButtonClick}" VerticalOptions="End" 
+                                    TextColor="White" IsVisible="{Binding ButtonEnabled}"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Margin="0,20,0,0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" 
+            Text="{x:Static resources:AppResources.ReturnHome}" x:Name="ReturnHomeButton" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
+            TextColor="White"/>
+                    <Button Margin="0,20,0,0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" 
+            Text="{x:Static resources:AppResources.ShizukuUseInstead}" x:Name="ShizukuSetupButton" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
+            TextColor="White"/>
+                </StackLayout>
+            </StackLayout>
         </ScrollView>
 
       </Grid>

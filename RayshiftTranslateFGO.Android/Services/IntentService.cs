@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.OS;
 using Android.OS.Storage;
+using Android.Util;
 using Android.Widget;
+using IO.Rayshift.Translatefgo;
+using Java.Lang;
 using Java.Net;
 using RayshiftTranslateFGO.Annotations;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using Rikka.Shizuku;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using static Android.Content.PM.PackageManager;
 using Application = Xamarin.Forms.Application;
 using Environment = Android.OS.Environment;
 
@@ -41,6 +48,55 @@ namespace RayshiftTranslateFGO.Droid
             return Forms.Context.PackageManager.GetInstalledApplications(PackageInfoFlags.MatchAll);
         }
 
+        /// <summary>
+        /// DocumentsUI is patched if ver >= 340916000, need Shizuku
+        /// </summary>
+        /// <returns></returns>
+        public long GetDocumentsUiVersion()
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Q) // android 10
+            {
+                return 0;
+            }
+
+            var apps = GetInstalledApps().Where(w => w.ProcessName != null && w.ProcessName.Contains("documentsui")).ToList();
+            long version = -1;
+            long latestBuildTime = 0;
+            foreach (var app in apps)
+            {
+                if (app.ProcessName == null) continue;
+                try
+                {
+                    var package = Forms.Context.PackageManager.GetPackageInfo(app.ProcessName,
+                        PackageInfoFlags.MatchAll);
+
+                    if (package == null) continue;
+
+                    // if we find these just cancel out
+                    if (app.ProcessName == "com.google.android.documentsui" ||
+                        app.ProcessName == "com.android.documentsui")
+                    {
+                        version = package.LongVersionCode;
+                        return version;
+                    }
+
+                    // find the newest
+                    if (package.LastUpdateTime > latestBuildTime)
+                    {
+                        latestBuildTime = package.LastUpdateTime;
+                        version = package.LongVersionCode;
+                    }
+
+                }
+                catch (Android.Content.PM.PackageManager.NameNotFoundException)
+                {
+                    continue;
+                }
+            }
+
+            return version;
+        }
+
         public bool TestManualLocationRequired()
         {
             var storageManager = Forms.Context.GetSystemService(Context.StorageService) as StorageManager;
@@ -65,6 +121,88 @@ namespace RayshiftTranslateFGO.Droid
 
             documentIntent.Dispose();
             return false;
+        }
+
+        public bool CheckShizukuPerm(bool andBind = false)
+        {
+            if (Shizuku.IsPreV11)
+            {
+                // Pre-v11 is unsupported
+                MakeToast("Your Shizuku version is too old. Please upgrade.");
+                return false;
+            }
+
+            if (Shizuku.CheckSelfPermission() == 0)
+            {
+                // Granted
+                if (andBind)
+                {
+                    BindShizuku();
+                }
+
+                return true;
+            }
+            else if (Shizuku.ShouldShowRequestPermissionRationale())
+            {
+                Shizuku.RequestPermission(MainActivity.SHIZUKU_PERM);
+                return false;
+            }
+            else
+            {
+                // Request the permission
+                Shizuku.RequestPermission(MainActivity.SHIZUKU_PERM);
+                return false;
+            }
+        }
+
+        public bool IsShizukuAvailable()
+        {
+            var shizukuActive = Shizuku.PingBinder();
+
+            if (shizukuActive && !MainActivity.ShizukuListenersSetup)
+            {
+                Shizuku.AddRequestPermissionResultListener(MainActivity.ShizukuListener);
+                ShizukuProvider.EnableMultiProcessSupport(true);
+                MainActivity.ShizukuListenersSetup = true;
+            }
+
+
+            return shizukuActive;
+        }
+
+        public bool IsShizukuServiceBound()
+        {
+            return MainActivity.NextGenFS.Binder != null;
+        }
+
+        internal void BindShizuku()
+        {
+            if (!IsShizukuServiceBound())
+            {
+                Context context2 = Android.App.Application.Context;
+                var nextClass = Java.Lang.Class.FromType(typeof(NGFSService)).Name;
+                var package = context2.PackageName!;
+
+                Log.Info("TranslateFGO", $"Classname: {nextClass}");
+                Log.Info("TranslateFGO", $"Package name: {package}");
+
+                var pckManager = context2.PackageManager;
+
+                if (pckManager == null) throw new System.Exception("Null package manager. This should never happen.");
+                var verCode = pckManager.GetPackageInfo(package, 0)?.LongVersionCode;
+
+                if (verCode == null) throw new System.Exception("Null verCode. This should never happen.");
+
+                var shizukuArgs = new Shizuku.UserServiceArgs(
+                    Android.Content.ComponentName.CreateRelative(package,
+                        nextClass)).ProcessNameSuffix("user_service").Debuggable(true).Version((int)verCode);
+
+                Log.Info("TranslateFGO", $"Trying to bind NextGenFS.");
+
+                MainActivity.NextGenFS = new NextGenFSServiceConnection();
+
+                Shizuku.BindUserService(shizukuArgs, MainActivity.NextGenFS);
+            }
         }
 
         public void OpenDocumentTreeIntent(string what, string append = null)

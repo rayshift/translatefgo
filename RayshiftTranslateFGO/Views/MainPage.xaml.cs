@@ -77,6 +77,14 @@ namespace RayshiftTranslateFGO.Views
                     });
                 });
 
+                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "shizuku_unbound", async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        DependencyService.Get<IIntentService>().MakeToast(AppResources.ShizukuServiceLost);
+                    });
+                });
+
                 App.GetViewModel<MainPageViewModel>().Cache.Set("GlobalSubscribeLock", true);
             }
 
@@ -170,6 +178,14 @@ namespace RayshiftTranslateFGO.Views
                 ShowArtPage();
             }
 
+            if (Preferences.Get("UseShizuku", false))
+            {
+                if (DependencyService.Get<IIntentService>().IsShizukuAvailable())
+                {
+                    DependencyService.Get<IIntentService>().CheckShizukuPerm(true);
+                }
+            }
+
             var cm = DependencyService.Get<IContentManager>();
 
             if (cm.CheckBasicAccess())
@@ -187,6 +203,20 @@ namespace RayshiftTranslateFGO.Views
                     await GotoAnnouncementPage();
                 }
 
+            }
+            else if (Preferences.Get("UseShizuku", false))
+            {
+                if (gotoUpdate)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await GotoUpdatePage(response.Data.Response.Update);
+                    });
+                }
+                else if (addAnnouncementPage)
+                {
+                    await GotoAnnouncementPage();
+                }
             }
             else if (string.IsNullOrWhiteSpace(Preferences.Get("StorageLocations", "")))
             {
