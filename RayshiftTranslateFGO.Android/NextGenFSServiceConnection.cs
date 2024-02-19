@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Linq;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Systems;
 using Android.Util;
 using IO.Rayshift.Translatefgo;
 using Java.Interop;
+using Java.Lang;
 using Xamarin.Forms;
+using Math = System.Math;
 
 namespace RayshiftTranslateFGO.Droid
 {
@@ -14,6 +18,8 @@ namespace RayshiftTranslateFGO.Droid
     {
         static readonly JniPeerMembers _members = new XAPeerMembers("io/rayshift/translatefgo$Default", typeof(NGFSServiceDefault));
         public INGFSService Binder { get; private set; }
+
+        private static object FileTransferLock = new object();
 
         private static readonly string BinderError =
             "Shizuku binder dead. Make sure Shizuku is running, and restart the app.";
@@ -23,7 +29,7 @@ namespace RayshiftTranslateFGO.Droid
             Binder = null;
         }
 
-        private static int CHUNK_SIZE = 1024*400;
+        private static int CHUNK_SIZE = 1024*128;
 
         public void OnServiceConnected(ComponentName name, IBinder service)
         {
@@ -107,17 +113,26 @@ namespace RayshiftTranslateFGO.Droid
 
         public byte[] ReadExistingFile(string filename, int offset, int length, NGFSError error)
         {
-            var result = Binder?.ReadExistingFile(filename, offset, length, error);
+            lock (FileTransferLock)
+            {
+                var result = Binder?.ReadExistingFile(filename, offset, length, error);
 
-            if (result != null) return result;
+                if (result != null) return result;
 
-            error.IsSuccess = false;
-            error.Error = BinderError;
+                error.IsSuccess = false;
+                error.Error = BinderError;
 
-            return null;
+                return null;
+            }
         }
 
-        public byte[] ReadExistingFile(string filename, NGFSError error) // this is completely **ing dumb that buffer is 1MB, maybe could pass in temporary file, to try
+        /// <summary>
+        /// DO NOT USE
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public byte[] ReadExistingFileDirectly(string filename, NGFSError error)
         {
             // find length
             var size = GetExistingFileSize(filename, error);
@@ -148,6 +163,30 @@ namespace RayshiftTranslateFGO.Droid
             return buffer;
         }
 
+        public byte[] ReadExistingFile(string filename, NGFSError error)
+        {
+            var ctx = Android.App.Application.Context;
+            var cache = ctx.GetExternalCacheDirs()?.FirstOrDefault();
+
+            if (cache == null)
+            {
+                throw new System.Exception("External cache directory is null.");
+            }
+
+            var guid = Guid.NewGuid();
+            var path = System.IO.Path.Combine(cache.Path, guid + ".bin");
+
+            bool res = CopyFile(filename, path, error);
+
+            if (!res || !error.IsSuccess) return null;
+
+            var bytes = System.IO.File.ReadAllBytes(path);
+
+            System.IO.File.Delete(path);
+
+            return bytes;
+        }
+
         public bool RemoveFileIfExists(string filename, NGFSError error)
         {
             var result = Binder?.RemoveFileIfExists(filename, error);
@@ -161,16 +200,26 @@ namespace RayshiftTranslateFGO.Droid
 
         public bool WriteFileContents(string filename, byte[] contents, int offset, int length, NGFSError error)
         {
-            var result = Binder?.WriteFileContents(filename, contents, offset, length, error);
-            if (result != null) return (bool)result;
+            lock (FileTransferLock)
+            {
+                var result = Binder?.WriteFileContents(filename, contents, offset, length, error);
+                if (result != null) return (bool)result;
 
-            error.IsSuccess = false;
-            error.Error = BinderError;
+                error.IsSuccess = false;
+                error.Error = BinderError;
 
-            return false;
+                return false;
+            }
         }
 
-        public bool WriteFileContents(string filename, byte[] contents, NGFSError error)
+        /// <summary>
+        /// Do not use as incredibly unstable
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="contents"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool WriteFileContentsDirectly(string filename, byte[] contents, NGFSError error)
         {
             int currentOffset = 0;
             int finalLength = contents.Length;
@@ -193,6 +242,31 @@ namespace RayshiftTranslateFGO.Droid
                 }
                 currentOffset += thisWrite;
             }
+
+            return true;
+        }
+
+        public bool WriteFileContents(string filename, byte[] contents, NGFSError error)
+        {
+            
+
+            var ctx = Android.App.Application.Context;
+            var cache = ctx.GetExternalCacheDirs()?.FirstOrDefault();
+
+            if (cache == null)
+            {
+                throw new System.Exception("External cache directory is null.");
+            }
+
+            var guid = Guid.NewGuid();
+            var path = System.IO.Path.Combine(cache.Path, guid + ".bin");
+
+            System.IO.File.WriteAllBytes(path, contents);
+
+            bool res = CopyFile(path, filename, error);
+            System.IO.File.Delete(path);
+
+            if (!res || !error.IsSuccess) return false;
 
             return true;
         }

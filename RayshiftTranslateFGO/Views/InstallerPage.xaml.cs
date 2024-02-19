@@ -401,6 +401,7 @@ namespace RayshiftTranslateFGO.Views
         /// <returns></returns>
         public async Task ProcessAssets(ContentType storageType, string pathToCheckWith, string storageLocationBase, FGORegion region)
         {
+            var maxParallel = storageType == ContentType.Shizuku ? 1 : 8;
             var versionData = App.GetViewModel<InstallerPageModel>().Cache.Get<VersionAPIResponse.VersionUpdate>("VersionDetails");
 
             List<string> validSha = new List<string>();
@@ -500,7 +501,7 @@ namespace RayshiftTranslateFGO.Views
 
                             results.Add(new Tuple<long, long>(scriptBundle.Value.LastModified,
                                 scriptBundle.Value.Size));
-                        }, maxDegreeOfParallelism: 8);
+                        }, maxDegreeOfParallelism: maxParallel);
 
                         long lastModified = results.Max(m => m.Item1);
                         long totalSize = results.Sum(s => s.Item2);

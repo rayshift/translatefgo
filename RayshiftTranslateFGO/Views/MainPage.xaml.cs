@@ -41,6 +41,10 @@ namespace RayshiftTranslateFGO.Views
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToAndroid11Setup());
             });
+            MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_shizuku", async (sender) =>
+            {
+                Device.BeginInvokeOnMainThread(async () => await ReturnToShizukuSetup());
+            });
             MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_language", async (sender) =>
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToLanguage());
@@ -91,6 +95,14 @@ namespace RayshiftTranslateFGO.Views
             this.CurrentPageChanged += OnCurrentPageChanged;
         }
 
+        private async Task ReturnToShizukuSetup()
+        {
+            Unsubscribe();
+            var newInitPage = new ShizukuSetupPage(false);
+            Navigation.InsertPageBefore(newInitPage, this);
+            await Navigation.PopToRootAsync(true);
+        }
+
         private void OnCurrentPageChanged(object sender, EventArgs e)
         {
             var title = ((TabbedPage)sender).CurrentPage?.Title;
@@ -114,6 +126,7 @@ namespace RayshiftTranslateFGO.Views
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_language");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
+            MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_shizuku");
         }
         public async Task ReturnToAndroid11Setup()
         {
