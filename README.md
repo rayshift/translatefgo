@@ -5,6 +5,17 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 
 ### Android 12 & 13 are now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
+### Error "To protect your privacy, choose another folder."
+Downgrade files app with adb (even though it says uninstall, as it's a system app, it just downgrades it):
+
+```adb uninstall com.google.android.documentsui```
+
+(If this fails, try ```adb uninstall com.android.documentsui```)
+
+Some phones will let you downgrade (or uninstall) the Documents app directly in the android settings. If it's hidden, you must use adb.
+
+Why? Google doesn't want you to have full access to your own devices: https://twitter.com/MishaalRahman/status/1719416906174681554
+
 #### Video tutorial on how to use this app: https://www.youtube.com/watch?v=OCL6e62u5AI
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the hosting and maintenance costs of the app. Patreons have access to beta features.
