@@ -95,29 +95,6 @@
                         x:Name="ChangeLanguage"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
-
-                <Label FontSize="18" Margin="0,10,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="{x:Static resources:AppResources.AboutTitle2}" FontAttributes="Bold" FontSize="18" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.ReopenAnnouncement}"
-                        x:Name="ReopenAnnouncement"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.RemoveAutoScriptUpdate}"
-                        x:Name="AutoUpdate"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.EnterAuthKey}"
-                        x:Name="Authentication"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-
                 <Label FontSize="18" Margin="0,10,0,0">
                     <Label.FormattedText>
                         <FormattedString>
@@ -127,8 +104,29 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.ReopenAnnouncement}"
+                        x:Name="ReopenAnnouncement"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
                 <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.AboutLearnMore}"
                         Command="{Binding OpenWebCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+                <Label FontSize="18" Margin="0,10,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="{x:Static resources:AppResources.AboutTitle2}" FontAttributes="Bold" FontSize="18" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.RemoveAutoScriptUpdate}"
+                        x:Name="AutoUpdate"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.EnterAuthKey}"
+                        x:Name="Authentication"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
                 <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.ResetApp}"

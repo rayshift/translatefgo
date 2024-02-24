@@ -135,6 +135,15 @@
   <data name="AboutTab" xml:space="preserve">
     <value>Sobre o Rayshift</value>
   </data>
+  <data name="AboutTitle1" xml:space="preserve">
+    <value>Configuração</value>
+  </data>
+  <data name="AboutTitle2" xml:space="preserve">
+    <value>Preferências</value>
+  </data>
+  <data name="AboutTitle3" xml:space="preserve">
+    <value>Outros</value>
+  </data>
   <data name="AboutVisitText" xml:space="preserve">
     <value>Visite rayshift.io para mais informações.</value>
   </data>
@@ -472,6 +481,51 @@ Se você acha que isso é um erro, tente seguir os passos da "Reconfiguração d
   </data>
   <data name="SetupFailedTitle" xml:space="preserve">
     <value>Falha na configuração</value>
+  </data>
+  <data name="ShizukuAndroid11Notice" xml:space="preserve">
+    <value>Se aparecer o erro "Para proteger sua privacidade, escolha outra pasta", clique em "Usar Shizuku ao invés disso".</value>
+  </data>
+  <data name="ShizukuButtonVideo" xml:space="preserve">
+    <value>Assista ao Tutorial</value>
+  </data>
+  <data name="ShizukuConnect" xml:space="preserve">
+    <value>Checar a conexão com Shizuku</value>
+  </data>
+  <data name="ShizukuConnectFailure" xml:space="preserve">
+    <value>Shizuku não está conectado. Certifique-se que Shizuku foi iniciado.</value>
+  </data>
+  <data name="ShizukuDownload" xml:space="preserve">
+    <value>Baixe o Shizuku</value>
+  </data>
+  <data name="ShizukuLoading" xml:space="preserve">
+    <value>Carregando o Shizuku...</value>
+  </data>
+  <data name="ShizukuNotInstalled" xml:space="preserve">
+    <value>Shizuku não está instalado no seu dispositivo, ou não está ativo. Por favor, siga o vídeo tutorial se não conseguir prosseguir.</value>
+  </data>
+  <data name="ShizukuServiceLost" xml:space="preserve">
+    <value>Desconectado do serviço Shizuku. Talvez seja necessário reiniciar este aplicativo.</value>
+  </data>
+  <data name="ShizukuSetup1" xml:space="preserve">
+    <value>Se aparecer o erro "Para proteger sua privacidade, escolha outra pasta", é necessário instalar o Shizuku.</value>
+  </data>
+  <data name="ShizukuSetup2" xml:space="preserve">
+    <value>Por favor, assista ao vídeo tutorial abaixo se você nunca usou o Shizuku antes. Ele explica o que é o Shizuku e como instalá-lo.</value>
+  </data>
+  <data name="ShizukuSetup3" xml:space="preserve">
+    <value>Será necessário iniciar o Shizuku toda vez que seu dispositivo for reiniciado antes de utilizar o TranslateFGO.</value>
+  </data>
+  <data name="ShizukuSetup4" xml:space="preserve">
+    <value>Clique em "Checar conexão com Shizuku" quando ele for instalado e ativado.</value>
+  </data>
+  <data name="ShizukuSetupTitle" xml:space="preserve">
+    <value>Configurar Shizuku</value>
+  </data>
+  <data name="ShizukuTooLowAndroidVersion" xml:space="preserve">
+    <value>Requer Android 8.0+</value>
+  </data>
+  <data name="ShizukuUseInstead" xml:space="preserve">
+    <value>Use o Shizuku</value>
   </data>
   <data name="StatusErrorTryReinstall" xml:space="preserve">
     <value>Erro. Tente reinstalar.</value>
