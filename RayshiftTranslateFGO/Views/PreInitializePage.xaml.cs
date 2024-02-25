@@ -45,7 +45,7 @@ namespace RayshiftTranslateFGO.Views
                         AppName = app.ProcessName,
                         Name = AppNames.AppDescriptions[app.ProcessName],
                         ButtonPreconfigureText = $"{AppNames.AppDescriptions[app.ProcessName]}",
-                        ButtonClick = new Command(() => AddFolderButtonOnClicked(app.ProcessName)),
+                        ButtonClick = new Command(async () => await AddFolderButtonOnClicked(app.ProcessName)),
                         ButtonEnabled = !locations.ContainsKey(app.ProcessName)
                     };
 

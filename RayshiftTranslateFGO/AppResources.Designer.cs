@@ -133,7 +133,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other.
+        ///   Looks up a localized string similar to Information.
         /// </summary>
         internal static string AboutTitle3 {
             get {

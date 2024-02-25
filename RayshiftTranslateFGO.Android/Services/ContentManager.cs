@@ -261,7 +261,7 @@ namespace RayshiftTranslateFGO.Droid
                     var modTime = MainActivity.NextGenFS.GetFileModTime(filename, error);
                     if (!error.IsSuccess)
                     {
-                        throw new Exception($"Couldn't check moddtime of file via Shizuku: {error.Error}");
+                        throw new Exception($"Couldn't check modtime of file via Shizuku: {error.Error}");
                     }
 
                     return new FileMetadata()

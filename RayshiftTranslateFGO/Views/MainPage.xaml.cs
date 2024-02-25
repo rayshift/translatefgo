@@ -153,8 +153,7 @@ namespace RayshiftTranslateFGO.Views
 
             while (!response.IsSuccessful)
             {
-                string errorMessage;
-                errorMessage = !string.IsNullOrEmpty(response.Data?.Message) 
+                var errorMessage = !string.IsNullOrEmpty(response.Data?.Message) 
                     ? $"{AppResources.VersionErrorMessage}\n{response.Data.Status}: {response.Data.Message}" 
                     : $"{AppResources.VersionErrorMessage}\n{response.ResponseStatus}: {response.ErrorMessage}\n\n{response.Content}";
 
