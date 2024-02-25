@@ -135,6 +135,15 @@
   <data name="AboutTab" xml:space="preserve">
     <value>关于</value>
   </data>
+  <data name="AboutTitle1" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="AboutTitle2" xml:space="preserve">
+    <value>偏好</value>
+  </data>
+  <data name="AboutTitle3" xml:space="preserve">
+    <value>其他</value>
+  </data>
   <data name="AboutVisitText" xml:space="preserve">
     <value>访问 rayshift.io以获得更多信息</value>
   </data>
@@ -467,6 +476,51 @@
   </data>
   <data name="SetupFailedTitle" xml:space="preserve">
     <value>设置失败</value>
+  </data>
+  <data name="ShizukuAndroid11Notice" xml:space="preserve">
+    <value>如果报错"为了保护你的隐私，请选择其他文件夹"，请点击"改用Shizuku".</value>
+  </data>
+  <data name="ShizukuButtonVideo" xml:space="preserve">
+    <value>观看教程</value>
+  </data>
+  <data name="ShizukuConnect" xml:space="preserve">
+    <value>检查Shizuku连接</value>
+  </data>
+  <data name="ShizukuConnectFailure" xml:space="preserve">
+    <value>Shizuku未启动，请确认Shizuku正在运行</value>
+  </data>
+  <data name="ShizukuDownload" xml:space="preserve">
+    <value>下载Shizuku</value>
+  </data>
+  <data name="ShizukuLoading" xml:space="preserve">
+    <value>等待Shizuku...</value>
+  </data>
+  <data name="ShizukuNotInstalled" xml:space="preserve">
+    <value>Shizuku未安装或未激活，需要时请观看教程视频</value>
+  </data>
+  <data name="ShizukuServiceLost" xml:space="preserve">
+    <value>Shizuku服务断开连接，你可能需要重启本app</value>
+  </data>
+  <data name="ShizukuSetup1" xml:space="preserve">
+    <value>如果报错"为了保护你的隐私，请选择其他文件夹"，必须先安装Shizuku</value>
+  </data>
+  <data name="ShizukuSetup2" xml:space="preserve">
+    <value>如果第一次使用Shizuku，请观看下面的教程视频，视频中提供了Shizuku的介绍与安装教程</value>
+  </data>
+  <data name="ShizukuSetup3" xml:space="preserve">
+    <value>为了正常使用TranslateFGO，在每次设备重启后都需要启动Shizuku</value>
+  </data>
+  <data name="ShizukuSetup4" xml:space="preserve">
+    <value>在Shizuku安装并激活后，点击"检查Shizuku连接"</value>
+  </data>
+  <data name="ShizukuSetupTitle" xml:space="preserve">
+    <value>安装Shizuku</value>
+  </data>
+  <data name="ShizukuTooLowAndroidVersion" xml:space="preserve">
+    <value>设备要求Android 8.0+</value>
+  </data>
+  <data name="ShizukuUseInstead" xml:space="preserve">
+    <value>改用Shizuku</value>
   </data>
   <data name="StatusErrorTryReinstall" xml:space="preserve">
     <value>错误，请尝试重新安装</value>

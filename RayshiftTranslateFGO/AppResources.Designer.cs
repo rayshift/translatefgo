@@ -115,6 +115,33 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration.
+        /// </summary>
+        internal static string AboutTitle1 {
+            get {
+                return ResourceManager.GetString("AboutTitle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preferences.
+        /// </summary>
+        internal static string AboutTitle2 {
+            get {
+                return ResourceManager.GetString("AboutTitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string AboutTitle3 {
+            get {
+                return ResourceManager.GetString("AboutTitle3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visit rayshift.io for more information..
         /// </summary>
         internal static string AboutVisitText {
@@ -1074,6 +1101,141 @@ namespace RayshiftTranslateFGO {
         internal static string SetupFailedTitle {
             get {
                 return ResourceManager.GetString("SetupFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you get the error &quot;To protect your privacy, choose another folder&quot;, tap &quot;Use Shizuku Instead&quot;..
+        /// </summary>
+        internal static string ShizukuAndroid11Notice {
+            get {
+                return ResourceManager.GetString("ShizukuAndroid11Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch Tutorial.
+        /// </summary>
+        internal static string ShizukuButtonVideo {
+            get {
+                return ResourceManager.GetString("ShizukuButtonVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check Shizuku Connection.
+        /// </summary>
+        internal static string ShizukuConnect {
+            get {
+                return ResourceManager.GetString("ShizukuConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shizuku isn&apos;t running. Ensure Shizuku is started..
+        /// </summary>
+        internal static string ShizukuConnectFailure {
+            get {
+                return ResourceManager.GetString("ShizukuConnectFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Shizuku.
+        /// </summary>
+        internal static string ShizukuDownload {
+            get {
+                return ResourceManager.GetString("ShizukuDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for Shizuku....
+        /// </summary>
+        internal static string ShizukuLoading {
+            get {
+                return ResourceManager.GetString("ShizukuLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shizuku isn&apos;t installed on your device, or it isn&apos;t active. Please follow the tutorial video if you&apos;re stuck..
+        /// </summary>
+        internal static string ShizukuNotInstalled {
+            get {
+                return ResourceManager.GetString("ShizukuNotInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shizuku service disconnected. You may need to restart this app..
+        /// </summary>
+        internal static string ShizukuServiceLost {
+            get {
+                return ResourceManager.GetString("ShizukuServiceLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you get the error &quot;To protect your privacy, choose another folder&quot;, you must install Shizuku first..
+        /// </summary>
+        internal static string ShizukuSetup1 {
+            get {
+                return ResourceManager.GetString("ShizukuSetup1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check the tutorial video below if you have never used Shizuku before. It explains what Shizuku is and how to install it..
+        /// </summary>
+        internal static string ShizukuSetup2 {
+            get {
+                return ResourceManager.GetString("ShizukuSetup2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will need to start Shizuku every time your device restarts in order to use TranslateFGO..
+        /// </summary>
+        internal static string ShizukuSetup3 {
+            get {
+                return ResourceManager.GetString("ShizukuSetup3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap &quot;Check Shizuku Connection&quot; when it is installed and active..
+        /// </summary>
+        internal static string ShizukuSetup4 {
+            get {
+                return ResourceManager.GetString("ShizukuSetup4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shizuku Setup.
+        /// </summary>
+        internal static string ShizukuSetupTitle {
+            get {
+                return ResourceManager.GetString("ShizukuSetupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Android 8.0+ Required.
+        /// </summary>
+        internal static string ShizukuTooLowAndroidVersion {
+            get {
+                return ResourceManager.GetString("ShizukuTooLowAndroidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Shizuku Instead.
+        /// </summary>
+        internal static string ShizukuUseInstead {
+            get {
+                return ResourceManager.GetString("ShizukuUseInstead", resourceCulture);
             }
         }
         

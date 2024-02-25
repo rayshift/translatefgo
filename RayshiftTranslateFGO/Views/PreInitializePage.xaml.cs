@@ -27,6 +27,8 @@ namespace RayshiftTranslateFGO.Views
         public bool WarnAboutFolder = false;
         public PreInitializePage()
         {
+            //var documentsAppVer = DependencyService.Get<IIntentService>().GetDocumentsUiVersion(); not reliable, keeping unused
+
             var locationJson = Preferences.Get("StorageLocations", "{}");
             var locations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
 
@@ -43,7 +45,7 @@ namespace RayshiftTranslateFGO.Views
                         AppName = app.ProcessName,
                         Name = AppNames.AppDescriptions[app.ProcessName],
                         ButtonPreconfigureText = $"{AppNames.AppDescriptions[app.ProcessName]}",
-                        ButtonClick = new Command(() => AddFolderButtonOnClicked(app.ProcessName)),
+                        ButtonClick = new Command(async () => await AddFolderButtonOnClicked(app.ProcessName)),
                         ButtonEnabled = !locations.ContainsKey(app.ProcessName)
                     };
 
@@ -55,6 +57,7 @@ namespace RayshiftTranslateFGO.Views
             BindableLayout.SetItemsSource(PreInitializeInstallView, GuiObjects);
 
             ReturnHomeButton.Command = new Command(async () => await ReturnToMainPage());
+            ShizukuSetupButton.Command = new Command(async () => await ShizukuSetupInstead());
             NavigationPage.SetHasNavigationBar(this, false);
             MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "return_to_main_page",  (sender) =>
             {
@@ -119,6 +122,32 @@ namespace RayshiftTranslateFGO.Views
         {
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "return_to_main_page");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "install_locations_updated");
+        }
+
+        public async Task ShizukuSetupInstead()
+        {
+            //ShizukuSetupButton.IsEnabled = false;
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O) // api 26
+            {
+                IReadOnlyList<Page> navStack = Navigation.NavigationStack;
+                Unsubscribe();
+
+                if (navStack.Count == 0)
+                {
+                    await Navigation.PushAsync( new ShizukuSetupPage(true));
+                    await Navigation.PopToRootAsync(true);
+                }
+                else
+                {
+                    Navigation.InsertPageBefore( new ShizukuSetupPage(false), this);
+                    await Navigation.PopAsync(true);
+                }
+            }
+            else
+            {
+                var intentService = DependencyService.Get<IIntentService>();
+                intentService.MakeToast(AppResources.ShizukuTooLowAndroidVersion);
+            }
         }
 
         public async Task ReturnToMainPage()

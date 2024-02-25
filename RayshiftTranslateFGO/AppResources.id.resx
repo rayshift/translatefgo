@@ -135,6 +135,15 @@
   <data name="AboutTab" xml:space="preserve">
     <value>Tentang</value>
   </data>
+  <data name="AboutTitle1" xml:space="preserve">
+    <value>Konfigurasi</value>
+  </data>
+  <data name="AboutTitle2" xml:space="preserve">
+    <value>Preferensi</value>
+  </data>
+  <data name="AboutTitle3" xml:space="preserve">
+    <value>Informasi</value>
+  </data>
   <data name="AboutVisitText" xml:space="preserve">
     <value>Kunjungi rayshift.io untuk informasi lebih lanjut.</value>
   </data>
@@ -472,6 +481,51 @@ Jika anda percaya ini sebuah kesalahan, coba "Penyiapan Android 11" di tab Tenta
   </data>
   <data name="SetupFailedTitle" xml:space="preserve">
     <value>Penyiapan gagal</value>
+  </data>
+  <data name="ShizukuAndroid11Notice" xml:space="preserve">
+    <value>Jika Anda mendapatkan error "Untuk melindungi privasi Anda, pilih folder lain", ketuk "Gunakan Shizuku Saja".</value>
+  </data>
+  <data name="ShizukuButtonVideo" xml:space="preserve">
+    <value>Lihat Tutorial</value>
+  </data>
+  <data name="ShizukuConnect" xml:space="preserve">
+    <value>Mengecek Koneksi Shizuku</value>
+  </data>
+  <data name="ShizukuConnectFailure" xml:space="preserve">
+    <value>Shizuku tidak beroperasi. Pastikan Shizuku telah diaktifkan.</value>
+  </data>
+  <data name="ShizukuDownload" xml:space="preserve">
+    <value>Mengunduh Shizuku</value>
+  </data>
+  <data name="ShizukuLoading" xml:space="preserve">
+    <value>Menunggu Shizuku...</value>
+  </data>
+  <data name="ShizukuNotInstalled" xml:space="preserve">
+    <value>Shizuku tidak terinstal di perangkat Anda, atau tidak aktif. Silakan ikuti video tutorial jika Anda mengalami kesulitan.</value>
+  </data>
+  <data name="ShizukuServiceLost" xml:space="preserve">
+    <value>Layanan Shizuku terputus. Anda mungkin perlu me-restart aplikasi ini.</value>
+  </data>
+  <data name="ShizukuSetup1" xml:space="preserve">
+    <value>Jika Anda mendapatkan error "Untuk melindungi privasi Anda, pilih folder lain", Anda harus menginstal Shizuku terlebih dahulu.</value>
+  </data>
+  <data name="ShizukuSetup2" xml:space="preserve">
+    <value>Silakan lihat video tutorial di bawah ini jika Anda belum pernah menggunakan Shizuku. Video ini menjelaskan apa itu Shizuku dan bagaimana cara menginstalnya.</value>
+  </data>
+  <data name="ShizukuSetup3" xml:space="preserve">
+    <value>Anda harus me-restart Shizuku setiap kali perangkat Anda di-restart untuk menggunakan TranslateFGO.</value>
+  </data>
+  <data name="ShizukuSetup4" xml:space="preserve">
+    <value>Ketuk "Periksa Koneksi Shizuku" jika aplikasi sudah terpasang dan aktif.</value>
+  </data>
+  <data name="ShizukuSetupTitle" xml:space="preserve">
+    <value>Shizuku Setup</value>
+  </data>
+  <data name="ShizukuTooLowAndroidVersion" xml:space="preserve">
+    <value>Android 8.0+ Dibutuhkan</value>
+  </data>
+  <data name="ShizukuUseInstead" xml:space="preserve">
+    <value>Gunakan Shizuku Saja</value>
   </data>
   <data name="StatusErrorTryReinstall" xml:space="preserve">
     <value>kesalahan, coba pasang ulang</value>

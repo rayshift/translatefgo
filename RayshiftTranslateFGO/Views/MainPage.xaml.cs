@@ -41,6 +41,10 @@ namespace RayshiftTranslateFGO.Views
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToAndroid11Setup());
             });
+            MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_shizuku", async (sender) =>
+            {
+                Device.BeginInvokeOnMainThread(async () => await ReturnToShizukuSetup());
+            });
             MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_language", async (sender) =>
             {
                 Device.BeginInvokeOnMainThread(async () => await ReturnToLanguage());
@@ -77,10 +81,26 @@ namespace RayshiftTranslateFGO.Views
                     });
                 });
 
+                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "shizuku_unbound", async (sender) =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        DependencyService.Get<IIntentService>().MakeToast(AppResources.ShizukuServiceLost);
+                    });
+                });
+
                 App.GetViewModel<MainPageViewModel>().Cache.Set("GlobalSubscribeLock", true);
             }
 
             this.CurrentPageChanged += OnCurrentPageChanged;
+        }
+
+        private async Task ReturnToShizukuSetup()
+        {
+            Unsubscribe();
+            var newInitPage = new ShizukuSetupPage(false);
+            Navigation.InsertPageBefore(newInitPage, this);
+            await Navigation.PopToRootAsync(true);
         }
 
         private void OnCurrentPageChanged(object sender, EventArgs e)
@@ -106,6 +126,7 @@ namespace RayshiftTranslateFGO.Views
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_language");
             MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_reopen_announcement");
+            MessagingCenter.Unsubscribe<Application>(Xamarin.Forms.Application.Current, "installer_page_goto_shizuku");
         }
         public async Task ReturnToAndroid11Setup()
         {
@@ -132,8 +153,7 @@ namespace RayshiftTranslateFGO.Views
 
             while (!response.IsSuccessful)
             {
-                string errorMessage;
-                errorMessage = !string.IsNullOrEmpty(response.Data?.Message) 
+                var errorMessage = !string.IsNullOrEmpty(response.Data?.Message) 
                     ? $"{AppResources.VersionErrorMessage}\n{response.Data.Status}: {response.Data.Message}" 
                     : $"{AppResources.VersionErrorMessage}\n{response.ResponseStatus}: {response.ErrorMessage}\n\n{response.Content}";
 
@@ -170,6 +190,14 @@ namespace RayshiftTranslateFGO.Views
                 ShowArtPage();
             }
 
+            if (Preferences.Get("UseShizuku", false))
+            {
+                if (DependencyService.Get<IIntentService>().IsShizukuAvailable())
+                {
+                    DependencyService.Get<IIntentService>().CheckShizukuPerm(true);
+                }
+            }
+
             var cm = DependencyService.Get<IContentManager>();
 
             if (cm.CheckBasicAccess())
@@ -187,6 +215,20 @@ namespace RayshiftTranslateFGO.Views
                     await GotoAnnouncementPage();
                 }
 
+            }
+            else if (Preferences.Get("UseShizuku", false))
+            {
+                if (gotoUpdate)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await GotoUpdatePage(response.Data.Response.Update);
+                    });
+                }
+                else if (addAnnouncementPage)
+                {
+                    await GotoAnnouncementPage();
+                }
             }
             else if (string.IsNullOrWhiteSpace(Preferences.Get("StorageLocations", "")))
             {

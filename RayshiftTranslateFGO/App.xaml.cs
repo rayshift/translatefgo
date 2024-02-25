@@ -42,6 +42,7 @@ namespace RayshiftTranslateFGO
             services.AddTransient<MainPageViewModel>();
             services.AddTransient<AboutViewModel>();
             services.AddTransient<PreInitializeViewModel>();
+            services.AddTransient<ShizukuSetupViewModel>();
             services.AddTransient<InstallerPageModel>();
             services.AddSingleton<ICacheProvider, CacheProvider>();
 

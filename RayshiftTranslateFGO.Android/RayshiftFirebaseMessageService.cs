@@ -57,6 +57,13 @@ namespace RayshiftTranslateFGO.Droid
                     return;
                 }
 
+                if (Preferences.Get("UseShizuku", false))
+                {
+                    Log.Warn(TAG, "No background task support for Shizuku."); // maybe can add it later
+                    return;
+                }
+            
+
                 string preferencesKey = "";
                 switch (region)
                 {

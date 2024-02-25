@@ -27,6 +27,7 @@ namespace RayshiftTranslateFGO.Views
             this.Version.Text = ScriptUtil.GetVersionName();
             RetryAndroid11.Clicked += RetryAndroid11OnClicked;
             ChangeLanguage.Clicked += ChangeLanguageOnClicked;
+            ShizukuSetupButton.Clicked += OpenShizukuOnClicked;
             ResetApp.Clicked += ResetAppOnClicked;
             API = new RestfulAPI();
 
@@ -74,6 +75,19 @@ namespace RayshiftTranslateFGO.Views
             {
                 var intentService = DependencyService.Get<IIntentService>();
                 intentService.MakeToast(AppResources.TooLowAndroidVersion);
+            }
+        }
+
+        private async void OpenShizukuOnClicked(object sender, EventArgs e)
+        {
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O) // api 26
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_shizuku");
+            }
+            else
+            {
+                var intentService = DependencyService.Get<IIntentService>();
+                intentService.MakeToast(AppResources.ShizukuTooLowAndroidVersion);
             }
         }
         private async void OpenAnnouncementOnClicked()
