@@ -10,7 +10,6 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 #### NEW! Updated video tutorial on how to use this app: [https://www.youtube.com/watch?v=xjYcUaMOD4A](https://www.youtube.com/watch?v=xjYcUaMOD4A)
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the hosting and maintenance costs of the app. Patreons have access to beta features.
-Old video tutorial: [https://www.youtube.com/watch?v=OCL6e62u5AI](https://www.youtube.com/watch?v=OCL6e62u5AI).
 
 ![Example](https://i.imgur.com/1fO8L8Y.png)
 
