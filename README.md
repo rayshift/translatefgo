@@ -28,7 +28,7 @@ Currently, English translations are available for:
 - New! An Indonesian translation is now available.
 
 ### Installation
-Requirements: Android 7-14+ are supported. Root is not required. Shizuku is required 
+Requirements: Android 7-14+ are supported. Root is not required. Shizuku is required on some modern devices.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
