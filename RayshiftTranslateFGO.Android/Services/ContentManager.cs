@@ -8,8 +8,6 @@ using Android.Provider;
 using Android.Util;
 using AndroidX.DocumentFile.Provider;
 using IO.Rayshift.Translatefgo;
-using Java.Nio.FileNio;
-using Newtonsoft.Json;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
@@ -576,8 +574,6 @@ namespace RayshiftTranslateFGO.Droid
                     }
                     break;
             }
-
-            Log.Info("TranslateFGO", JsonConvert.SerializeObject(apps));
             return apps;
         }
 
