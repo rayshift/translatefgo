@@ -8,6 +8,8 @@ using Android.Provider;
 using Android.Util;
 using AndroidX.DocumentFile.Provider;
 using IO.Rayshift.Translatefgo;
+using Java.Nio.FileNio;
+using Newtonsoft.Json;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using Xamarin.Essentials;
@@ -470,12 +472,27 @@ namespace RayshiftTranslateFGO.Droid
                     break;
                 case ContentType.Shizuku:
                     var directories2 = ctx.GetExternalFilesDirs("");
+                    
+
+                    HashSet<string> seenDirectories = new HashSet<string>();
 
                     if (directories2 != null)
                     {
+                        if (directories2.Length == 0)
+                        {
+                            throw new Exception("Couldn't find any external storage directories on your device, returned none.");
+                        }
                         foreach (var directory in directories2)
                         {
-                            if (directory == null) continue;
+                            if (seenDirectories.Contains(directory.Path))
+                            {
+                                continue;
+                            }
+
+                            seenDirectories.Add(directory.Path);
+
+                            Log.Info("TranslateFGO", $"Checking path {directory.Path}");
+
                             var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
                             if (filesystem != null)
                             {
@@ -509,10 +526,58 @@ namespace RayshiftTranslateFGO.Droid
                                 }
                             }
                         }
+
+                        if (apps.Count == 0)
+                        {
+                            Log.Error("TranslateFGO", $"Caching bug, trying direct approach.");
+                            seenDirectories.Clear();
+                            foreach (var directory in directories2)
+                            {
+                                if (seenDirectories.Contains(directory.Path))
+                                {
+                                    continue;
+                                }
+
+                                seenDirectories.Add(directory.Path);
+
+                                var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
+
+                                foreach (var validAppName in AppNames.ValidAppNames)
+                                {
+                                    if (filesystem != null)
+                                    {
+                                        var manualCheck = Path.Combine(filesystem.ToString(), validAppName + "/");
+
+                                        NGFSError error = new NGFSError();
+                                        var contents = MainActivity.NextGenFS.ListDirectoryContents(manualCheck, error);
+
+                                        var region = validAppName.EndsWith(".en")
+                                            ? FGORegion.Na
+                                            : FGORegion.Jp;
+
+                                        if (error.IsSuccess && contents != null && contents.Length > 0)
+                                        {
+                                            apps.Add(new InstalledFGOInstances()
+                                            {
+                                                Path = manualCheck,
+                                                Region = region
+                                            });
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        
+                    }
+                    else
+                    {
+                        throw new Exception("Couldn't find any external storage directories on your device.");
                     }
                     break;
             }
 
+            Log.Info("TranslateFGO", JsonConvert.SerializeObject(apps));
             return apps;
         }
 
@@ -534,6 +599,8 @@ namespace RayshiftTranslateFGO.Droid
                     dirs.Add(type[1]);
                 }
             }
+
+            Log.Info("TranslateFGO", $"Directory listing: {path}, sizeof: {dirs.Count}");
 
             return dirs;
         }

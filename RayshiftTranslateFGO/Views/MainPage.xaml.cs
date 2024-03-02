@@ -99,8 +99,15 @@ namespace RayshiftTranslateFGO.Views
         {
             Unsubscribe();
             var newInitPage = new ShizukuSetupPage(false);
-            Navigation.InsertPageBefore(newInitPage, this);
-            await Navigation.PopToRootAsync(true);
+            if (Navigation.NavigationStack?.Count > 0)
+            {
+                Navigation.InsertPageBefore(newInitPage, this);
+                await Navigation.PopToRootAsync(true);
+            }
+            else
+            {
+                await Navigation.PushAsync(newInitPage);
+            }
         }
 
         private void OnCurrentPageChanged(object sender, EventArgs e)
@@ -132,9 +139,14 @@ namespace RayshiftTranslateFGO.Views
         {
             Unsubscribe();
             var newInitPage = new PreInitializePage();
-            Navigation.InsertPageBefore(newInitPage, this);
-            await Navigation.PopToRootAsync(true);
-            
+            if (Navigation.NavigationStack?.Count > 0) {
+                Navigation.InsertPageBefore(newInitPage, this);
+                await Navigation.PopToRootAsync(true);
+            }
+            else
+            {
+                await Navigation.PushAsync(newInitPage);
+            }
         }
         public async Task ReturnToLanguage()
         {
