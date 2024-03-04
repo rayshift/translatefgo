@@ -136,7 +136,7 @@ If the change you are suggesting requires an API change, as the API is not open 
 ## Licence
 The code in this repository is licenced MIT.
 
-Where original work is distributed by the Rayshift API, these bundles from our API are licenced under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence.
+Where copyrightable, original work is distributed by the Rayshift API, these works are licenced under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) licence.
 
 It is forbidden to use or distribute any translated bundle or text for commercial purposes. This is for the protection and longevity of the app.
 
