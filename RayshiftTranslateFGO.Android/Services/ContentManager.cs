@@ -470,7 +470,6 @@ namespace RayshiftTranslateFGO.Droid
                     break;
                 case ContentType.Shizuku:
                     var directories2 = ctx.GetExternalFilesDirs("");
-                    
 
                     HashSet<string> seenDirectories = new HashSet<string>();
 
@@ -478,10 +477,12 @@ namespace RayshiftTranslateFGO.Droid
                     {
                         if (directories2.Length == 0)
                         {
+                            Log.Error("TranslateFGO", "No external storage directories found.");
                             throw new Exception("Couldn't find any external storage directories on your device, returned none.");
                         }
                         foreach (var directory in directories2)
                         {
+                            Log.Info("TranslateFGO", $"Checking: {directory.Path}");
                             if (seenDirectories.Contains(directory.Path))
                             {
                                 continue;
@@ -523,57 +524,65 @@ namespace RayshiftTranslateFGO.Droid
                                     throw; // this one should be thrown as it'll just return empty if the dir doesn't exist
                                 }
                             }
-                        }
-
-                        if (apps.Count == 0)
-                        {
-                            Log.Error("TranslateFGO", $"Caching bug, trying direct approach.");
-                            seenDirectories.Clear();
-                            foreach (var directory in directories2)
+                            else
                             {
-                                if (seenDirectories.Contains(directory.Path))
-                                {
-                                    continue;
-                                }
-
-                                seenDirectories.Add(directory.Path);
-
-                                var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
-
-                                foreach (var validAppName in AppNames.ValidAppNames)
-                                {
-                                    if (filesystem != null)
-                                    {
-                                        var manualCheck = Path.Combine(filesystem.ToString(), validAppName + "/");
-
-                                        NGFSError error = new NGFSError();
-                                        var contents = MainActivity.NextGenFS.ListDirectoryContents(manualCheck, error);
-
-                                        var region = validAppName.EndsWith(".en")
-                                            ? FGORegion.Na
-                                            : FGORegion.Jp;
-
-                                        if (error.IsSuccess && contents != null && contents.Length > 0)
-                                        {
-                                            apps.Add(new InstalledFGOInstances()
-                                            {
-                                                Path = manualCheck,
-                                                Region = region
-                                            });
-                                        }
-                                    }
-                                }
-
+                                Log.Info("TranslateFGO", $"Null filesystem for {directory.Path}");
                             }
                         }
+
+                        seenDirectories.Clear();
+                        foreach (var directory in directories2)
+                        {
+                            if (seenDirectories.Contains(directory.Path))
+                            {
+                                continue;
+                            }
+
+                            seenDirectories.Add(directory.Path);
+
+                            var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
+
+                            foreach (var validAppName in AppNames.ValidAppNames)
+                            {
+                                if (filesystem != null)
+                                {
+                                    var manualCheck = Path.Combine(filesystem.ToString(), validAppName + "/");
+
+                                    NGFSError error = new NGFSError();
+                                    var contents = MainActivity.NextGenFS.ListDirectoryContents(manualCheck, error);
+
+                                    var region = validAppName.EndsWith(".en")
+                                        ? FGORegion.Na
+                                        : FGORegion.Jp;
+
+                                    if (error.IsSuccess && contents != null && contents.Length > 0 && apps.Count(w => w.Path == manualCheck) == 0)
+                                    {
+                                        apps.Add(new InstalledFGOInstances()
+                                        {
+                                            Path = manualCheck,
+                                            Region = region
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    Log.Info("TranslateFGO", $"Null filesystem for {directory.Path}");
+                                }
+                            }
+
+
+                        }
                         
+
                     }
                     else
                     {
+                        Log.Error("TranslateFGO", "No storage directories found.");
                         throw new Exception("Couldn't find any external storage directories on your device.");
                     }
                     break;
             }
+            
             return apps;
         }
 
