@@ -73,14 +73,14 @@ TranslateFGO has existed for over 4 years and is trusted by tens of thousands of
 
 Aniplex is well aware the app exists, and for the last 4 years has chosen not to take any action against it or its users. This is likely because this is a free, non-profit community tool designed to help more players access the game.
 
-However, we cannot provide any guarantee that action will not be taken in the future. Even so, it is far more likely the app would receive a takedown notice, than for players to be banned outright with no warning.
+However, we cannot provide any guarantee that action towards players will not be taken in the future. You use this app at your own risk, and Rayshift offers no liability for anything that might happen.
 
 There are some things you should do before using this app to ensure the safety of your account.
 - Always ensure you download the app from rayshift.io or this GitHub page. Do not trust third party downloads.
 - Create and write down a bind code for your account before using the app.
 
 ### Does this work on NA?
-NA is supported for English to Spanish and PtBr translations starting with Translate/FGO version 2.0.0.
+Yes, for all the non-english languages we provide.
 
 ### Contact Information
 This tool operates in good faith to increase player accessibility to Fate/Grand Order. Please use the GitHub issues section for bug reports and suggestions. Should you wish to privately contact the current maintainer of this application, please email webmaster at rayshift.io.
