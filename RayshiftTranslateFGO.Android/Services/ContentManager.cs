@@ -555,7 +555,7 @@ namespace RayshiftTranslateFGO.Droid
                                         ? FGORegion.Na
                                         : FGORegion.Jp;
 
-                                    if (error.IsSuccess && contents != null && contents.Length > 0 && apps.Count(w => w.Path == manualCheck) == 0)
+                                    if (error.IsSuccess && contents != null && contents.Length > 0 && apps.Count(w => w.Path.TrimEnd('/') == manualCheck.TrimEnd('/')) == 0)
                                     {
                                         apps.Add(new InstalledFGOInstances()
                                         {
