@@ -24,8 +24,8 @@ Currently, English translations are available for:
 #### Languages
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
 - A Portuguese Brazilian translation is also available.
-- New! A French translation is now available.
-- New! An Indonesian translation is now available.
+- A partial French translation is now available.
+- A partial Indonesian translation is now available.
 
 ### Installation
 Requirements: Android 7-14+ are supported. Root is not required. Shizuku is required on some modern devices.
@@ -71,7 +71,7 @@ Try these troubleshooting steps:
 
 TranslateFGO has existed for over 4 years and is trusted by tens of thousands of players.
 
-Aniplex is well aware the app exists, and for the last 4 years has chosen not to take any action against it or its users. This is likely because this is a free, non-profit community tool designed to help more players access the game.
+Aniplex has not taken any action against it or its users since its launch in early 2020. This is likely because this is a free, non-profit community tool designed to help more players access the game.
 
 However, we cannot provide any guarantee that action towards players will not be taken in the future. You use this app at your own risk, and Rayshift offers no liability for anything that might happen.
 
@@ -100,12 +100,14 @@ Should you wish to build the android app yourself, please follow these instructi
 Visual Studio 2019/2022 with the Xamarin application framework installed.
 
 #### Linux:
-Install the [mono development framework](https://www.mono-project.com/download/stable/#download-lin) and build [the Xamarin framework](https://github.com/xamarin/xamarin-android/blob/master/Documentation/building/unix/instructions.md).
+Linux builds are currently not in use. If you figure out how to build on Linux, please open a PR to this readme!
 
 ### Building
 Add your google services json file to `RayshiftTranslateFGO.Android/google-services.json`.
 
-Run commands similar to these, changing the paths as required:
+You can create a build through Visual Studio with the Build -> Publish feature.
+
+Or, to build via the CLI, run commands similar to these, changing the paths as required:
 ```
 msbuild /t:clean RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj
 msbuild /t:restore RayshiftTranslateFGO.Android/RayshiftTranslateFGO.Android.csproj
@@ -128,7 +130,7 @@ Please note all code relating to bundle creation, translation and the API is pri
 If the change you are suggesting requires an API change, as the API is not open source, please clearly state what changes need to be made in your pull request.
 
 ### Pull requests
-1. Ensure code written is compatible with .NET Standard 2.0.
+1. Ensure code written is compatible with .NET Standard / .NET Core.
 2. Test your changes in an android emulator or on a real device.
 3. Do not increase version numbers in your pull request. We will merge into a development branch and increase the version numbers before release.
 4. Submit a new pull request.
