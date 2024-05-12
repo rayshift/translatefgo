@@ -686,7 +686,7 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to processing extra files (this may take a while...).
+        ///   Looks up a localized string similar to processing extra files - stage {0}/{1} {2}%.
         /// </summary>
         internal static string InstallExtraFiles {
             get {

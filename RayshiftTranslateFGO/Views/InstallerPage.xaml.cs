@@ -516,7 +516,7 @@ namespace RayshiftTranslateFGO.Views
                     var statusString = InstallerUtil.GenerateStatusString(scriptBundleSet.Scripts);
 
                     bool enableButton = statusString.Item1 != AppResources.StatusInstalled // either not installed
-                                        || (scriptBundleSet.HasExtraStage && _isDonor) // or installed and donor
+                                        || (scriptBundleSet.HasExtraStage) // or installed
                                         || (scriptBundleSet.IsDonorOnly && !_isDonor); // or not donor and bundle is donor only (donor prompt)
                     var i1 = scriptBundleSet.Group;
 

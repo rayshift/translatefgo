@@ -229,6 +229,7 @@ namespace RayshiftTranslateFGO.Views
                 {
                     EndpointURL.EndPoint = EndpointURL.OldEndPoint;
                     EndpointURL.OldEndPoint = "";
+                    EndpointURL.NeedsRefresh = true;
                 }
 
                 MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");

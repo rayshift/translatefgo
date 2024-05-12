@@ -34,12 +34,12 @@ namespace RayshiftTranslateFGO.Models
                 _endpoint = value;
                 if (!string.IsNullOrEmpty(value))
                 {
-                    EndpointURL.OldEndPoint = EndpointURL.EndPoint;
+                    EndpointURL.OldEndPoint = $"{EndpointURL.EndPoint}";
                     EndpointURL.EndPoint = value;
                 }
                 else if (!string.IsNullOrEmpty(EndpointURL.OldEndPoint))
                 {
-                    EndpointURL.EndPoint = EndpointURL.OldEndPoint;
+                    EndpointURL.EndPoint = $"{EndpointURL.OldEndPoint}";
                     EndpointURL.OldEndPoint = "";
                 }
             }

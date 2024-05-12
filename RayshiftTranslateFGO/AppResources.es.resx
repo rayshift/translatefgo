@@ -336,7 +336,7 @@ Mensaje de error: {2}
 Vuelve a intentarlo más tarde, o reporta este problema si continua.</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>Procesando archivos adicionales (Esto puede tomar algo de tiempo...)</value>
+    <value>Procesando archivos adicionales - {0}/{1} {2}%</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
     <value>¡Finalizado!</value>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Android.Content.Res;
+using Android.OS;
 using Newtonsoft.Json;
 using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Util;
@@ -279,7 +280,7 @@ namespace RayshiftTranslateFGO.Services
         /// <param name="bundleId"></param>
         /// <param name="region"></param>
         /// <returns></returns>
-        public async Task<IRestResponse<ExtraAssetAPIResponse>> GetExtraAssets(Guid uploadGuid, Guid userGuid, int bundleId,
+        public async Task<IRestResponse<ExtraAssetAPIResponse>> GetExtraAssets(Guid uploadGuid, Guid? userGuid, int bundleId,
             FGORegion region)
         {
             if (EndpointURL.NeedsRefresh)
@@ -297,7 +298,7 @@ namespace RayshiftTranslateFGO.Services
             var sendObject = new Dictionary<string, object>()
             {
                 {"uploadKey", uploadGuid.ToString()},
-                {"accountToken", userGuid.ToString()},
+                {"accountToken", userGuid?.ToString() ?? Guid.Empty.ToString()},
                 {"group", bundleId},
                 {"region", (int)region}
             };
@@ -309,6 +310,64 @@ namespace RayshiftTranslateFGO.Services
             request.Timeout = 1000 * 120;
             request.ReadWriteTimeout = 1000 * 120;
             return await ExecuteAsync<ExtraAssetAPIResponse>(request);
+        }
+
+        public async Task<IRestResponse<ExtraStartAssetAPIResponse>> StartGetExtraAssets(Guid uploadGuid, Guid? userGuid,
+            int bundleId, FGORegion region)
+        {
+            if (EndpointURL.NeedsRefresh)
+            {
+                EndpointURL.NeedsRefresh = false;
+                RefreshEndpoint();
+            }
+
+            var request = new RestRequest("translate/start-extra-assets")
+            {
+                Method = Method.POST
+            };
+
+            request.AddHeader("Content-type", "application/json");
+            var sendObject = new Dictionary<string, object>()
+            {
+                {"uploadKey", uploadGuid.ToString()},
+                {"accountToken", userGuid?.ToString() ?? Guid.Empty.ToString()},
+                {"group", bundleId},
+                {"region", (int)region}
+            };
+            if (Preferences.ContainsKey("AuthKey"))
+            {
+                sendObject.Add("key", Preferences.Get("AuthKey", ""));
+            }
+            request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
+
+            return await ExecuteAsync<ExtraStartAssetAPIResponse>(request);
+        }
+
+        public async Task<IRestResponse<ExtraAssetPollAPIResponse>> PollGetExtraAssets(Guid pollGuid)
+        {
+            if (EndpointURL.NeedsRefresh)
+            {
+                EndpointURL.NeedsRefresh = false;
+                RefreshEndpoint();
+            }
+
+            var request = new RestRequest("translate/poll-extra-assets")
+            {
+                Method = Method.POST
+            };
+
+            request.AddHeader("Content-type", "application/json");
+            var sendObject = new Dictionary<string, object>()
+            {
+                {"uploadKey", pollGuid.ToString()},
+            };
+            if (Preferences.ContainsKey("AuthKey"))
+            {
+                sendObject.Add("key", Preferences.Get("AuthKey", ""));
+            }
+            request.AddParameter("application/json; charset=utf-8", SimpleJson.SerializeObject(sendObject), ParameterType.RequestBody);
+
+            return await ExecuteAsync<ExtraAssetPollAPIResponse>(request);
         }
 
         /// <summary>

@@ -353,7 +353,7 @@ Error message: {2}
 Please try again later, or report as a bug if the issue persists.</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>processing extra files (this may take a while...)</value>
+    <value>processing extra files - stage {0}/{1} {2}%</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
     <value>finished!</value>

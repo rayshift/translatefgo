@@ -343,6 +343,11 @@ namespace RayshiftTranslateFGO.Droid
 
             Task<AsyncUploader.ExtraAssetReturn> extraFileAwaitTask = null;
             // get new extra files - do first as this takes longest to process
+
+            int totalStages = 3;
+            // upload in the background
+            AsyncUploader uploader = new AsyncUploader();
+
             if (groupToInstall.HasExtraStage)
             {
                 var buffer = new MemoryStream();
@@ -385,10 +390,9 @@ namespace RayshiftTranslateFGO.Droid
                 }
                 writer.Flush();
 
-                // upload in the background
-                AsyncUploader uploader = new AsyncUploader();
 
-                if (Guid.TryParse(Preferences.Get(EndpointURL.GetLinkedAccountKey(), null), out var userToken))
+
+                if (Guid.TryParse(Preferences.Get(EndpointURL.GetLinkedAccountKey(), null), out var userToken) || !groupToInstall.IsDonorOnly)
                 {
                     extraFileAwaitTask = uploader.GetExtraAssets(buffer, userToken, installId, region);
                 }
@@ -469,9 +473,19 @@ namespace RayshiftTranslateFGO.Droid
                 if (guiObject != null)
                 {
                     guiObject.Status =
-                        String.Format(UIFunctions.GetResourceString("InstallExtraFiles"));
+                        String.Format(UIFunctions.GetResourceString("InstallExtraFiles"), uploader.Stage, totalStages, uploader.Percent);
                 }
 
+                while (!extraFileAwaitTask.IsCompleted)
+                {
+                    if (guiObject != null)
+                    {
+                        guiObject.Status =
+                            String.Format(UIFunctions.GetResourceString("InstallExtraFiles"), uploader.Stage, totalStages, uploader.Percent);
+                    }
+
+                    await Task.Delay(100);
+                }
                 var extraResult = await extraFileAwaitTask;
 
                 if (!extraResult.IsSuccessful)

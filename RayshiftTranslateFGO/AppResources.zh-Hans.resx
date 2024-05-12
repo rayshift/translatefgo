@@ -333,7 +333,7 @@
 请稍后再试，或如果问题持续，请反馈此BUG。</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>处理额外文件中，这可能需要一段时间</value>
+    <value>处理额外文件中 - {0}/{1} {2}%</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
     <value>结束！</value>

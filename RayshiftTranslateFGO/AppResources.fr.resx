@@ -338,7 +338,7 @@ Message d'erreur : {2}
 Veuillez réessayer ultérieurement ou signalez le bug si le problème persiste.</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>Traitement des fichiers supplémentaires (cela peut prendre un moment...)</value>
+    <value>Traitement des fichiers supplémentaires - {0}/{1} {2}%</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
     <value>Fini !</value>

@@ -8,6 +8,28 @@ namespace RayshiftTranslateFGO.Models
         public new Dictionary<string, string> Response { get; set; }
     }
 
+    public class ExtraStartAssetAPIResponse : BaseAPIResponse
+    {
+        public new StartAssetResponse Response { get; set; }
+    }
+
+    public class ExtraAssetPollAPIResponse : BaseAPIResponse
+    {
+        public new PollAssetResponse Response { get; set; }
+    }
+
+    public class PollAssetResponse
+    {
+        public int PercentStatus { get; set; }
+        public string DownloadUrl { get; set; }
+    }
+
+    public class StartAssetResponse
+    {
+        public Guid PollToken { get; set; }
+        public string DownloadUrl { get; set; }
+    }
+
     public class AsyncUploadStartResponse : BaseAPIResponse
     {
         public new Dictionary<string, AsyncUploadStartResponseGuid> Response { get; set; }

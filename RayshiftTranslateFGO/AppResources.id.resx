@@ -338,7 +338,7 @@ Pesan kesalahan: {2}
 Harap coba lagi nanti, atau laporkan sebagai bug jika masalah ini masih ada.</value>
   </data>
   <data name="InstallExtraFiles" xml:space="preserve">
-    <value>Memproses berkas-berkas ekstra (ini mungkin memakan waktu beberapa lama...)</value>
+    <value>Memproses berkas-berkas ekstra - {0}/{1} {2}%</value>
   </data>
   <data name="InstallFinished" xml:space="preserve">
     <value>selesai!</value>
