@@ -482,6 +482,12 @@ namespace RayshiftTranslateFGO.Droid
                         }
                         foreach (var directory in directories2)
                         {
+                            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                            if (directory == null)
+                            {
+                                continue;
+                            }
+
                             Log.Info("TranslateFGO", $"Checking: {directory.Path}");
                             if (seenDirectories.Contains(directory.Path))
                             {
@@ -533,6 +539,11 @@ namespace RayshiftTranslateFGO.Droid
                         seenDirectories.Clear();
                         foreach (var directory in directories2)
                         {
+                            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                            if (directory == null)
+                            {
+                                continue;
+                            }
                             if (seenDirectories.Contains(directory.Path))
                             {
                                 continue;
