@@ -10,6 +10,7 @@ using AndroidX.DocumentFile.Provider;
 using IO.Rayshift.Translatefgo;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using Sentry;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Uri = Android.Net.Uri;
@@ -686,6 +687,7 @@ namespace RayshiftTranslateFGO.Droid
             catch (Exception ex)
             {
                 Log.Warn("TranslateFGO", $"Exception on GetFolderChildren: {ex}");
+                SentrySdk.CaptureException(ex);
                 return new List<FolderChildren>();
             }
 

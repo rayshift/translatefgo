@@ -13,6 +13,7 @@ using RayshiftTranslateFGO.Annotations;
 using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
+using Sentry;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -153,6 +154,7 @@ namespace RayshiftTranslateFGO.Views
             }
             catch (Exception ex)
             {
+                SentrySdk.CaptureException(ex);
                 await DisplayAlert(AppResources.InternalError,
                     String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
             }
@@ -447,6 +449,7 @@ namespace RayshiftTranslateFGO.Views
             }
             catch (Exception ex)
             {
+                SentrySdk.CaptureException(ex);
                 await DisplayAlert(AppResources.InternalError,
                     String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
                 _isCurrentlyUpdating = false;
@@ -521,6 +524,7 @@ namespace RayshiftTranslateFGO.Views
             }
             catch (Exception ex)
             {
+                SentrySdk.CaptureException(ex);
                 successSendTask = rest.SendSuccess(region, -1, TranslationInstallType.Manual, -1,
                     false, ex.ToString(), _accessMode == ContentType.StorageFramework, true);
                 await DisplayAlert(AppResources.InternalError,

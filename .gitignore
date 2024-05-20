@@ -360,3 +360,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 RayshiftTranslateFGO.Android/google-services.json
+RayshiftTranslateFGO.Android/SentryKey.cs

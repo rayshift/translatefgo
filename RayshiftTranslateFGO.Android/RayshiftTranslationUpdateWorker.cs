@@ -14,6 +14,7 @@ using RayshiftTranslateFGO.Models;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using RayshiftTranslateFGO.Views;
+using Sentry;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -135,6 +136,7 @@ namespace RayshiftTranslateFGO.Droid
             }
             catch (Exception ex)
             {
+                SentrySdk.CaptureException(ex);
                 Log.Warn(TAG, $"Exception occurred during auto update, {ex}");
                 if (installedBundle != null)
                 {

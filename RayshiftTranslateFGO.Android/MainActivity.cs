@@ -34,6 +34,7 @@ using Environment = Android.OS.Environment;
 using Platform = Xamarin.Essentials.Platform;
 using Uri = Android.Net.Uri;
 using Android.Systems;
+using Sentry;
 
 namespace RayshiftTranslateFGO.Droid
 {
@@ -70,6 +71,27 @@ namespace RayshiftTranslateFGO.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             Context = this.ApplicationContext;
+
+            SentryXamarin.Init(options =>
+            {
+                // Tells which project in Sentry to send events to:
+                options.Dsn = SentryKey.Key;
+                // When configuring for the first time, to see what the SDK is doing:
+                options.Debug = false;
+                // Set TracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+                // We recommend adjusting this value in production.
+                options.TracesSampleRate = 0.1;
+                // If you installed Sentry.Xamarin.Forms:
+                options.AddXamarinFormsIntegration();
+
+                options.AttachScreenshots = false;
+
+#if DEBUG
+                options.Environment = "develop";
+#else
+                options.Environment = "production";
+#endif
+            });
 
             base.OnCreate(savedInstanceState);
 
@@ -189,6 +211,7 @@ namespace RayshiftTranslateFGO.Droid
                 }
                 catch (Exception ex)
                 {
+                    SentrySdk.CaptureException(ex);
                     Log.Error("BetterFGO", $"Error thrown while persisting uri: {ex}");
                     var errorText = UIFunctions.GetResourceString("UnknownError");
                     var errorMessage = String.Format(errorText, ex.ToString());
