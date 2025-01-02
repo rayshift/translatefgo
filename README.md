@@ -18,8 +18,8 @@ If the text is too fast or slow, you can change text speed in the [game settings
 Currently, English translations are available for:
 - Official: Anything the Global/US version of the app has.
 - Machine & Edited: Anything not mentioned here
-- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2
-- Human Events: Valentines 2022-2024, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab
+- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3
+- Human Events: Valentines 2022-2024, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab, Summer 2024
 
 #### Languages
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
