@@ -129,6 +129,10 @@
                         x:Name="Authentication"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.AboutFSPreferenceButton}"
+                        x:Name="AboutFSPreferenceButton"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
                 <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.ResetApp}"
                         x:Name="ResetApp"
                         BackgroundColor="{StaticResource Primary}"

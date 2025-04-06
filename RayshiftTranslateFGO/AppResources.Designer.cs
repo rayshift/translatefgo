@@ -88,6 +88,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filesystem Access Mode.
+        /// </summary>
+        internal static string AboutFSPreferenceButton {
+            get {
+                return ResourceManager.GetString("AboutFSPreferenceButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn more.
         /// </summary>
         internal static string AboutLearnMore {
@@ -1078,6 +1087,15 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select which filesystem access mode to use.
+        /// </summary>
+        internal static string SetFSPreferenceBody {
+            get {
+                return ResourceManager.GetString("SetFSPreferenceBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Setup.
         /// </summary>
         internal static string SetupButton {
@@ -1101,6 +1119,15 @@ namespace RayshiftTranslateFGO {
         internal static string SetupFailedTitle {
             get {
                 return ResourceManager.GetString("SetupFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ShizukuAndroid11 {
+            get {
+                return ResourceManager.GetString("ShizukuAndroid11", resourceCulture);
             }
         }
         

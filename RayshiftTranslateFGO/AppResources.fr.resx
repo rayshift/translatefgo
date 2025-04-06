@@ -319,7 +319,7 @@ Veuillez réessayer ultérieurement ou signalez le bug si le problème persiste.
   </data>
   <data name="InstallEmptyExtraFile" xml:space="preserve">
     <value>Une erreur est survenue lors de l'installation du script.
-Mise à jour du fichier supplémentaire {0} échoué, chemin inacessible ou vide.
+Mise à jour du fichier supplémentaire {0} échoué, chemin inacessible ou vide. {1}
 Erreur : {2}
 Veuillez réessayer ultérieurement ou signalez le bug si le problème persiste.</value>
   </data>
@@ -631,5 +631,11 @@ Souhaitez vous continuer ?</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>Mode Accès FS</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>Sélectionnez le mode d'accès au système de fichiers à utiliser</value>
   </data>
 </root>

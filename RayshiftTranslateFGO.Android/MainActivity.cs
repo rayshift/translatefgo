@@ -54,7 +54,8 @@ namespace RayshiftTranslateFGO.Droid
 
         public enum RequestCodes
         {
-            FolderIntentRequestCode
+            FolderIntentRequestCode,
+            ExternalStorageCode = 670
         }
 
         public static ShizukuPermissionResultListener ShizukuListener = new ShizukuPermissionResultListener();
@@ -156,7 +157,11 @@ namespace RayshiftTranslateFGO.Droid
             base.OnActivityResult(requestCode, resultCode, intent);
             Log.Info("TranslateFGO", $"ActivityResult Code: {resultCode}, Result: {resultCode}, Data: {intent?.DataString}");
 
-            if (resultCode == Result.Ok && requestCode == (int)RequestCodes.FolderIntentRequestCode)
+            if (requestCode == (int)RequestCodes.ExternalStorageCode)
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "manage_ext_storage_listen");
+            }
+            else if (resultCode == Result.Ok && requestCode == (int)RequestCodes.FolderIntentRequestCode)
             {
                 var service = new ContentManager();
 

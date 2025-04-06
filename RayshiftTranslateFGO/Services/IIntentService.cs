@@ -15,6 +15,9 @@ namespace RayshiftTranslateFGO.Services
         public long GetDocumentsUiVersion();
         public void ExitApplication();
 
+        public bool IsExternalStorageManager();
+        public void OpenExternalStoragePage();
+
         public bool IsShizukuAvailable();
         public bool IsShizukuServiceBound();
         public bool CheckShizukuPerm(bool andBind = false);

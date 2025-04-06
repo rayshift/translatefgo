@@ -633,4 +633,10 @@ Ingin lanjut?</value>
   <data name="Yes" xml:space="preserve">
     <value>Ya</value>
   </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>Mode Akses FS</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>Pilih mode akses sistem berkas yang akan digunakan</value>
+  </data>
 </root>

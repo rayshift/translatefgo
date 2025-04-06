@@ -161,17 +161,19 @@ namespace RayshiftTranslateFGO.Views
 
                 _storageLocations = locations;
 
-                if (Preferences.Get("UseShizuku", false))
-                {
-                    _accessMode = ContentType.Shizuku;
-                }
-                else if (_storageLocations.Count > 0 || !_cm.CheckBasicAccess())
-                {
-                    _accessMode = ContentType.StorageFramework;
-                }
-                else
+                if (_cm.CheckBasicAccess())
                 {
                     _accessMode = ContentType.DirectAccess;
+                }
+                else {
+                    if (Preferences.Get("UseShizuku", false))
+                    {
+                        _accessMode = ContentType.Shizuku;
+                    }
+                    else
+                    {
+                        _accessMode = ContentType.StorageFramework;
+                    }
                 }
 
                 // need to pause for a bit here if shizuku

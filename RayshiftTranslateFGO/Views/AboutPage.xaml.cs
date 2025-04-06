@@ -29,6 +29,7 @@ namespace RayshiftTranslateFGO.Views
             ChangeLanguage.Clicked += ChangeLanguageOnClicked;
             ShizukuSetupButton.Clicked += OpenShizukuOnClicked;
             ResetApp.Clicked += ResetAppOnClicked;
+            AboutFSPreferenceButton.Clicked += SetFSPreferenceOnClicked;
             API = new RestfulAPI();
 
             var sLock = App.GetViewModel<MainPageViewModel>().Cache.Get<bool>("AboutSubscribeLock");
@@ -60,6 +61,39 @@ namespace RayshiftTranslateFGO.Views
 
         }
 
+        private async void SetFSPreferenceOnClicked(object sender, EventArgs e)
+        {
+            var action = await Application.Current.MainPage.DisplayActionSheet(
+                AppResources.SetFSPreferenceBody, // Title
+                AppResources.Cancel,           // Cancel button
+                null,               // Destructive button (optional)
+                "Default",
+                "Native",         // Other buttons
+                "SAF",
+                "Shizuku");
+
+            if (action != "Default" && action != "Native" && action != "SAF" && action != "Shizuku") return;
+
+            Preferences.Set("DefaultFSMode", action);
+
+            if (action != "Shizuku" && action != "Default")
+            {
+                Preferences.Set("UseShizuku", false);
+            }
+
+            if (action != "SAF" && action != "Default")
+            {
+                Preferences.Set("StorageLocations", "{}");
+            }
+
+            if (action != "Native" && action != "Default")
+            {
+                Preferences.Set("IsAccessUpgraded", 0);
+            }
+
+
+            DependencyService.Get<IIntentService>().ExitApplication();
+        }
         private void ChangeLanguageOnClicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_language");
