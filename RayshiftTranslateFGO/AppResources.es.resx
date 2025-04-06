@@ -480,7 +480,7 @@ Si crees que esto es un error, intenta la "configuración para Android 11" en la
   <data name="SetupFailedTitle" xml:space="preserve">
     <value>Error de configuración</value>
   </data>
-  <data name="ShizukuAndroid11" xml:space="preserve">
+  <data name="ShizukuAndroid11Notice" xml:space="preserve">
     <value>Notice   Si recibes el error "Para proteger tu privacidad, elige otra carpeta", toca "Usar Shizuku en su lugar".</value>
   </data>
   <data name="ShizukuButtonVideo" xml:space="preserve">
@@ -630,5 +630,11 @@ Asegúrese de que haya creado y anotado su código de transferencia de FGO antes
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Sí</value>
+  </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>Modo de Acceso FS</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>Seleccione qué modo de acceso al sistema de archivos desea usar</value>
   </data>
 </root>

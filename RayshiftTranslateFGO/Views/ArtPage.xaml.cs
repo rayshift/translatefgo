@@ -205,18 +205,20 @@ namespace RayshiftTranslateFGO.Views
                 var locations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
 
                 _storageLocations = locations;
-
-                if (Preferences.Get("UseShizuku", false))
+                if (_cm.CheckBasicAccess())
                 {
-                    _accessMode = ContentType.Shizuku;
-                }
-                else if (_storageLocations.Count > 0 || !_cm.CheckBasicAccess())
-                {
-                    _accessMode = ContentType.StorageFramework;
+                    _accessMode = ContentType.DirectAccess;
                 }
                 else
                 {
-                    _accessMode = ContentType.DirectAccess;
+                    if (Preferences.Get("UseShizuku", false))
+                    {
+                        _accessMode = ContentType.Shizuku;
+                    }
+                    else
+                    {
+                        _accessMode = ContentType.StorageFramework;
+                    }
                 }
 
                 // need to pause for a bit here if shizuku

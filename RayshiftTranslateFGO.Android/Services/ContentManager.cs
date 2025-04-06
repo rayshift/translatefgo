@@ -27,12 +27,21 @@ namespace RayshiftTranslateFGO.Droid
             AppContentResolver = ctx.ContentResolver;
         }
 
-
+        public static string UpgradeUrl(string url, bool force = false)
+        {
+            bool upgradeDirectAccess = Preferences.Get("IsAccessUpgraded", 0) == 1;
+            return (upgradeDirectAccess || force) ? SentryKey.UpgradeUrlKey(url) : url;
+        }
 
         public Dictionary<string, List<FolderChildren>> _folderCache = new Dictionary<string, List<FolderChildren>>();
 
         public bool CheckBasicAccess()
         {
+            var fsPreference = Preferences.Get("DefaultFSMode", "Default");
+            if (fsPreference != "Default" && fsPreference != "Native")
+            {
+                return false;
+            }
             try
             { 
                 var ctx = Android.App.Application.Context;
@@ -52,6 +61,12 @@ namespace RayshiftTranslateFGO.Droid
                             {
                                 return true;
                             }
+                            var directoryContentsUpgrade = Directory.GetDirectories(UpgradeUrl(path, true));
+                            if (directoryContentsUpgrade.Length > 0)
+                            {
+                                Preferences.Set("IsAccessUpgraded", 1);
+                                return true;
+                            }
                         }
                     }
                 }
@@ -59,9 +74,40 @@ namespace RayshiftTranslateFGO.Droid
             
             catch (Exception)
             {
+                try
+                {
+                    var ctx = Android.App.Application.Context;
+                    var directories = ctx.GetExternalFilesDirs("");
+
+                    if (directories != null)
+                    {
+                        foreach (var directory in directories)
+                        {
+                            var filesystem = new DirectoryInfo(directory.AbsolutePath)?.Parent?.Parent;
+                            if (filesystem != null)
+                            {
+
+                                var path = filesystem.ToString();
+                                var upgradedUrl = UpgradeUrl(path, true);
+                                var directoryContentsUpgrade = Directory.GetDirectories(upgradedUrl);
+                                if (directoryContentsUpgrade.Length > 0)
+                                {
+                                    Preferences.Set("IsAccessUpgraded", 1);
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Preferences.Set("IsAccessUpgraded", 0);
+                    return false;
+                }
+                Preferences.Set("IsAccessUpgraded", 0);
                 return false;
             }
-
+            Preferences.Set("IsAccessUpgraded", 0);
             return false;
         }
 
@@ -72,8 +118,17 @@ namespace RayshiftTranslateFGO.Droid
             switch (accessType)
             {
                 case ContentType.DirectAccess:
-                    var fixedPath = filename;
-                    await File.WriteAllBytesAsync(fixedPath, contents);
+                    var fixedPath = UpgradeUrl(filename);
+                    if (File.Exists(fixedPath))
+                    {
+                        File.Delete(fixedPath);
+                    }
+
+                    var fileHandle = File.Create(fixedPath, 4096, FileOptions.None);
+
+                    await fileHandle.WriteAsync(contents);
+                    await fileHandle.FlushAsync();
+                    fileHandle.Close();
                     return true;
 
                 case ContentType.StorageFramework:
@@ -153,7 +208,7 @@ namespace RayshiftTranslateFGO.Droid
                         {
                             Error = FileErrorCode.None,
                             Successful = true,
-                            FileContents = await File.ReadAllBytesAsync(fixedPath),
+                            FileContents = await ReadExistingFileAsync(accessType, meta.Path, storageLocationBase),
                             LastModified = meta.LastModified
                         };
                     }
@@ -210,7 +265,7 @@ namespace RayshiftTranslateFGO.Droid
             switch (accessType)
             {
                 case ContentType.DirectAccess:
-                    var path = filename;
+                    var path = UpgradeUrl(filename);
                     if (File.Exists(path))
                     {
                         var lastModified = File.GetLastWriteTimeUtc(path);
@@ -221,7 +276,10 @@ namespace RayshiftTranslateFGO.Droid
                             Path = path
                         };
                     }
-                    else return new FileMetadata();
+                    else return new FileMetadata()
+                    {
+                        Exists = false
+                    };
 
                 case ContentType.StorageFramework:
                     var folderChildren = this.GetFolderChildren(Android.Net.Uri.Parse(storageLocationBase),
@@ -241,7 +299,10 @@ namespace RayshiftTranslateFGO.Droid
                             };
                         }
                     }
-                    return new FileMetadata();
+                    return new FileMetadata()
+                    {
+                        Exists = false
+                    };
 
                 case ContentType.Shizuku:
                     NGFSError error = new NGFSError();
@@ -322,9 +383,6 @@ namespace RayshiftTranslateFGO.Droid
         {
             switch (accessType)
             {
-                case ContentType.DirectAccess:
-                    await File.WriteAllBytesAsync(filePath, bytes);
-                    return true;
                 case ContentType.StorageFramework:
                     // check file exists
                     Uri contentPath;
@@ -413,7 +471,7 @@ namespace RayshiftTranslateFGO.Droid
                             {
                                 try
                                 {
-                                    var path = filesystem.ToString();
+                                    var path = UpgradeUrl(filesystem.ToString());
                                     var directoryContents = Directory.GetDirectories(path);
                                     foreach (var foundDirectory in directoryContents)
                                     {

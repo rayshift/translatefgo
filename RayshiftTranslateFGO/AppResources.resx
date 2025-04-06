@@ -660,4 +660,13 @@ Do you want to continue?</value>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="ShizukuAndroid11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>Filesystem Access Mode</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>Select which filesystem access mode to use</value>
+  </data>
 </root>

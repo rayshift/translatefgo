@@ -320,7 +320,7 @@ Tente novamente mais tarde ou relate como um bug se o problema persistir.</value
   <data name="InstallEmptyExtraFile" xml:space="preserve">
     <value>Ocorreu um erro ao instalar um script.
 A atualização de arquivo adicional para {0} falhou, o caminho {1} está inacessível ou vazio.
-Tente novamente mais tarde ou relate como um bug se o problema persistir.</value>
+Tente novamente mais tarde ou relate como um bug se o problema persistir. {2}</value>
   </data>
   <data name="InstallEmptyFileFailure" xml:space="preserve">
     <value>Ocorreu um erro ao instalar um script.
@@ -632,5 +632,11 @@ Você quer continuar?</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Sim</value>
+  </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>Modo de Acesso FS</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>Selecione qual modo de acesso ao sistema de arquivos usar</value>
   </data>
 </root>

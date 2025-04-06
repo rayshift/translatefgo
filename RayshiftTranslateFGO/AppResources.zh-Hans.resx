@@ -286,7 +286,12 @@
     <value>安装全部</value>
   </data>
   <data name="InstallAssetStorageAPIFailure" xml:space="preserve">
-    <value>确定清除现在的测试密钥吗</value>
+    <value>安装脚本时发生错误。
+
+资源数据库更新失败：{0}，错误代码：{1}。
+错误信息：{2}
+
+请稍后重试，如果问题持续存在，请报告为错误。</value>
   </data>
   <data name="InstallChecksumFailure" xml:space="preserve">
     <value>安装翻译脚本时发生了一个错误。
@@ -627,5 +632,11 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>是</value>
+  </data>
+  <data name="AboutFSPreferenceButton" xml:space="preserve">
+    <value>文件系统访问模式</value>
+  </data>
+  <data name="SetFSPreferenceBody" xml:space="preserve">
+    <value>请选择要使用的文件系统访问模式</value>
   </data>
 </root>

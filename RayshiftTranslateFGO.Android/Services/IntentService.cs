@@ -43,9 +43,43 @@ namespace RayshiftTranslateFGO.Droid
             return volumes;
         }
 
+        public void OpenExternalStoragePage()
+        {
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            {
+                var mainActivity = Forms.Context as Activity;
+                try
+                {
+
+                    Android.Net.Uri uri = Android.Net.Uri.Parse("package:" + Forms.Context.ApplicationInfo.PackageName);
+                    Intent intent = new Intent(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission, uri);
+                    mainActivity.StartActivityForResult(intent, 670);
+                }
+                catch (System.Exception ex)
+                {
+                    Intent intent = new Intent();
+                    intent.SetAction(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission);
+                    mainActivity.StartActivityForResult(intent, 670);
+                }
+            }
+        }
+
+        public bool IsExternalStorageManager()
+        {
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            {
+                return Environment.IsExternalStorageManager;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
         public IList<ApplicationInfo> GetInstalledApps()
         {
-            return Forms.Context.PackageManager.GetInstalledApplications(PackageInfoFlags.MatchAll);
+            return Forms.Context.PackageManager.GetInstalledApplications(Android.Content.PM.PackageInfoFlags.MatchAll);
         }
 
         /// <summary>
@@ -68,7 +102,7 @@ namespace RayshiftTranslateFGO.Droid
                 try
                 {
                     var package = Forms.Context.PackageManager.GetPackageInfo(app.ProcessName,
-                        PackageInfoFlags.MatchAll);
+                        Android.Content.PM.PackageInfoFlags.MatchAll);
 
                     if (package == null) continue;
 

@@ -25,7 +25,21 @@ namespace RayshiftTranslateFGO
             InitializeComponent();
             SetupServices();
 
-            MainPage = Preferences.Get("SetupV2", false) ? new NavigationPage(new MainPage()) : new NavigationPage(new SetupPage());
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            {
+                var dep = DependencyService.Get<IIntentService>();
+                var requestedAnd11Acc = dep.IsExternalStorageManager();
+
+                MainPage = Preferences.Get("SetupV2", false) && requestedAnd11Acc
+                    ? new NavigationPage(new MainPage())
+                    : new NavigationPage(new SetupPage());
+            }
+            else
+            {
+                MainPage = Preferences.Get("SetupV2", false)
+                    ? new NavigationPage(new MainPage())
+                    : new NavigationPage(new SetupPage());
+            }
         }
 
         public static BaseViewModel GetViewModel<TViewModel>()
