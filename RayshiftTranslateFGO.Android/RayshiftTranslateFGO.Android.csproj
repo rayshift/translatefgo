@@ -120,19 +120,19 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ShizukuX\ShizukuX.AIDL\ShizukuX.AIDL.csproj">
+    <ProjectReference Include="..\ShizukuX\ShizukuX.AIDL\ShizukuX.AIDL.csproj">
       <Project>{4467466a-c7e5-49ed-a126-e8bf76536fae}</Project>
       <Name>ShizukuX.AIDL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ShizukuX\ShizukuX.API\ShizukuX.API.csproj">
+    <ProjectReference Include="..\ShizukuX\ShizukuX.API\ShizukuX.API.csproj">
       <Project>{6ff43ce6-b3b0-48a0-a09a-7388620a38ad}</Project>
       <Name>ShizukuX.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Provider\ShizukuX.Provider.csproj">
+    <ProjectReference Include="..\ShizukuX\ShizukuX.Provider\ShizukuX.Provider.csproj">
       <Project>{1c7c793b-eead-470b-9e26-4be6aabf6422}</Project>
       <Name>ShizukuX.Provider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Shared\ShizukuX.Shared.csproj">
+    <ProjectReference Include="..\ShizukuX\ShizukuX.Shared\ShizukuX.Shared.csproj">
       <Project>{82262bc8-37b8-4fb4-adab-41ab1e5361bd}</Project>
       <Name>ShizukuX.Shared</Name>
     </ProjectReference>
