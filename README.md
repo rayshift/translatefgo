@@ -5,8 +5,6 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 
 ### Android 14+ is now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
-#### This app uses [Shizuku](https://shizuku.rikka.app/) to support Android 14+ devices that were previously getting a "choose another folder" error
-
 #### NEW! Updated video tutorial on how to use this app: [https://www.youtube.com/watch?v=xjYcUaMOD4A](https://www.youtube.com/watch?v=xjYcUaMOD4A)
 
 If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the hosting and maintenance costs of the app. Patreons have access to beta features.
@@ -18,7 +16,7 @@ If the text is too fast or slow, you can change text speed in the [game settings
 Currently, English translations are available for:
 - Official: Anything the Global/US version of the app has.
 - Machine & Edited: Anything not mentioned here
-- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3
+- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3, OC4
 - Human Events: Valentines 2022-2024, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab, Summer 2024
 
 #### Languages
@@ -28,7 +26,7 @@ Currently, English translations are available for:
 - A partial Indonesian translation is now available.
 
 ### Installation
-Requirements: Android 7-14+ are supported. Root is not required. Shizuku is required on some modern devices.
+Requirements: Android 7-15+ are supported. Root is not required. Shizuku may be required on some modern devices.
 
 1. Ensure you have the latest Fate/Grand Order installed.
 2. Log into Fate/Grand Order JP to ensure your game data is up to date - click "Download" if promoted for a data update. Afterwards, close the application.
@@ -58,6 +56,9 @@ If you're getting a long error, it may be your internet connection isn't stable.
 
 Visit the [discord server](https://discord.gg/6vncnjj) for help. If you've encountered a bug, please open an issue on GitHub.
 
+### "Asset database is corrupt" or "Failed to read beyond the end of the stream"
+Restart your phone. If this doesn't help, switch to using another Filesystem Access Mode in the "About" tab. For devices up to Android 12, select SAF, otherwise use Shizuku.
+
 ### "An internal error has occurred"
 Try these troubleshooting steps:
 1. Switch between Wifi and 4G. If the error persists,
@@ -69,7 +70,7 @@ Try these troubleshooting steps:
 ### Is this safe, will I get banned?
 **No action has been taken against players for using this app.**
 
-TranslateFGO has existed for over 4 years and is trusted by tens of thousands of players.
+TranslateFGO has existed for over 5 years and is trusted by tens of thousands of players.
 
 Aniplex has not taken any action against it or its users since its launch in early 2020. This is likely because this is a free, non-profit community tool designed to help more players access the game.
 
@@ -97,7 +98,7 @@ Should you wish to build the android app yourself, please follow these instructi
 
 ### Prerequisites
 #### Windows: 
-Visual Studio 2019/2022 with the Xamarin application framework installed.
+Visual Studio 2022 with the Xamarin application framework installed.
 
 #### Linux:
 Linux builds are currently not in use. If you figure out how to build on Linux, please open a PR to this readme!
