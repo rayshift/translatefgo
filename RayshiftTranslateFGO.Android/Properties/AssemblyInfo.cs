@@ -11,7 +11,7 @@ using Android.App;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("RayshiftTranslateFGO.Android")]
-[assembly: AssemblyCopyright("Copyright © Rayshift.io 2023")]
+[assembly: AssemblyCopyright("Copyright © Rayshift.io 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

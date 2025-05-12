@@ -638,4 +638,16 @@ Souhaitez vous continuer ?</value>
   <data name="SetFSPreferenceBody" xml:space="preserve">
     <value>Sélectionnez le mode d'accès au système de fichiers à utiliser</value>
   </data>
+  <data name="RestartNeededBody" xml:space="preserve">
+    <value>Redémarrez votre téléphone pour utiliser TranslateFGO !</value>
+  </data>
+  <data name="RestartNeededTitle" xml:space="preserve">
+    <value>Redémarrage du téléphone requis</value>
+  </data>
+  <data name="RestartNeededHelp" xml:space="preserve">
+    <value>Cela n’a pas aidé</value>
+  </data>
+  <data name="RestartNeededDialog2" xml:space="preserve">
+    <value>Voulez-vous plutôt utiliser l'ancienne méthode de patch ? Sur Android 12+, cela peut nécessiter Shizuku.</value>
+  </data>
 </root>

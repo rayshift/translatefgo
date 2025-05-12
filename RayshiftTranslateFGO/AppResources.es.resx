@@ -637,4 +637,16 @@ Asegúrese de que haya creado y anotado su código de transferencia de FGO antes
   <data name="SetFSPreferenceBody" xml:space="preserve">
     <value>Seleccione qué modo de acceso al sistema de archivos desea usar</value>
   </data>
+  <data name="RestartNeededBody" xml:space="preserve">
+    <value>¡Reinicia tu teléfono para usar TranslateFGO!</value>
+  </data>
+  <data name="RestartNeededTitle" xml:space="preserve">
+    <value>Se requiere reiniciar el teléfono</value>
+  </data>
+  <data name="RestartNeededHelp" xml:space="preserve">
+    <value>Eso no ayudó</value>
+  </data>
+  <data name="RestartNeededDialog2" xml:space="preserve">
+    <value>¿Quieres usar el método de parcheo antiguo en su lugar? En Android 12+, esto puede requerir Shizuku.</value>
+  </data>
 </root>

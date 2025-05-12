@@ -639,4 +639,16 @@ Você quer continuar?</value>
   <data name="SetFSPreferenceBody" xml:space="preserve">
     <value>Selecione qual modo de acesso ao sistema de arquivos usar</value>
   </data>
+  <data name="RestartNeededBody" xml:space="preserve">
+    <value>Reinicie seu telefone para usar o TranslateFGO!</value>
+  </data>
+  <data name="RestartNeededTitle" xml:space="preserve">
+    <value>É necessário reiniciar o telefone</value>
+  </data>
+  <data name="RestartNeededHelp" xml:space="preserve">
+    <value>Isso não ajudou</value>
+  </data>
+  <data name="RestartNeededDialog2" xml:space="preserve">
+    <value>Deseja usar o método antigo de patch? No Android 12+, isso pode exigir o Shizuku.</value>
+  </data>
 </root>

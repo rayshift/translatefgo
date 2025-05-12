@@ -35,12 +35,18 @@ namespace RayshiftTranslateFGO.Views
             if (!string.IsNullOrWhiteSpace(_announcementDetails.Url))
             {
                 this.OpenWebsite.Clicked += async (o, args) => await WebsiteButtonOnClicked(o, args);
+                this.TwoWide.IsVisible = true;
+                this.OneWide.IsVisible = false;
             }
             else
             {
+                this.TwoWide.IsVisible = false;
+                this.OneWide.IsVisible = true;
                 this.OpenWebsite.IsEnabled = false;
+                this.OpenWebsite.IsVisible = false;
             }
             this.Close.Clicked += async (o, args) => CloseAnnouncementButtonOnClicked(o, args);
+            this.CloseSingle.Clicked += async (o, args) => CloseAnnouncementButtonOnClicked(o, args);
 
             this.AnnouncementTitle.Text = _announcementDetails.Title;
             this.AnnouncementBody.Text = _announcementDetails.Message;
@@ -50,6 +56,7 @@ namespace RayshiftTranslateFGO.Views
                 this.DefaultLogo.IsVisible = false;
                 this.AnnouncementImage.Source = _announcementDetails.ImageUrl;
                 this.ImageLogo.IsVisible = true;
+
             }
         }
 

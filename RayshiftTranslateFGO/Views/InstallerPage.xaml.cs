@@ -165,7 +165,8 @@ namespace RayshiftTranslateFGO.Views
                 {
                     _accessMode = ContentType.DirectAccess;
                 }
-                else {
+                else
+                {
                     if (Preferences.Get("UseShizuku", false))
                     {
                         _accessMode = ContentType.Shizuku;
@@ -187,6 +188,7 @@ namespace RayshiftTranslateFGO.Views
                         SwitchErrorObjects(true);
                         return;
                     }
+
                     if (!_im.IsShizukuServiceBound())
                     {
                         var maxTries = 10; // give it 5 seconds to bind, might not be long enough?
@@ -198,24 +200,27 @@ namespace RayshiftTranslateFGO.Views
                                 SwitchErrorObjects(true);
                                 return;
                             }
+
                             if (DependencyService.Get<IIntentService>().IsShizukuAvailable())
                             {
                                 DependencyService.Get<IIntentService>().CheckShizukuPerm(true);
                             }
+
                             await Task.Delay(500);
                             maxTries--;
                         }
 
                     }
+
                     LoadingText.Text = AppResources.LoadingPleaseWait;
                 }
-   
+
                 _installedFgoInstances = _cm.GetInstalledGameApps(_accessMode, _storageLocations);
-                
+
 
                 //TranslationName.Text = Region == FGORegion.Jp
-                    //? String.Format(AppResources.InstallerTitle, "JP") + $": {handshake.Data.Response.AppVer}"
-                    //: String.Format(AppResources.InstallerTitle, "NA") + $": {handshake.Data.Response.AppVer}";
+                //? String.Format(AppResources.InstallerTitle, "JP") + $": {handshake.Data.Response.AppVer}"
+                //: String.Format(AppResources.InstallerTitle, "NA") + $": {handshake.Data.Response.AppVer}";
 
                 // Check region is installed
                 if (_installedFgoInstances.All(w => w.Region != Region))
@@ -231,7 +236,7 @@ namespace RayshiftTranslateFGO.Views
                     var filePath = _accessMode == ContentType.StorageFramework
                         ? $"files/data/d713/{_assetList}"
                         : $"{instance.Path}/files/data/d713/{_assetList}";
-                    
+
                     var assetStorage = await _cm.GetFileContents(
                         _accessMode,
                         filePath, instance.Path);
@@ -262,7 +267,8 @@ namespace RayshiftTranslateFGO.Views
                 }
 
                 var instanceDict =
-                    _installedFgoInstances.OrderByDescending(o => o.LastModified).FirstOrDefault(w => w.Region == Region);
+                    _installedFgoInstances.OrderByDescending(o => o.LastModified)
+                        .FirstOrDefault(w => w.Region == Region);
 
                 if (instanceDict == null)
                 {
@@ -320,7 +326,8 @@ namespace RayshiftTranslateFGO.Views
                             await DisplayAlert(warningTitle, AppResources.AssetWarningOutOfDate, AppResources.OK);
                             break;
                         case HandshakeAssetStatus.TimeTraveler:
-                            await DisplayAlert(warningTitle, AppResources.AssetWarningFutureUnreleased, AppResources.OK);
+                            await DisplayAlert(warningTitle, AppResources.AssetWarningFutureUnreleased,
+                                AppResources.OK);
                             break;
                         case HandshakeAssetStatus.Unrecognized:
                             await DisplayAlert(warningTitle, AppResources.AssetWarningUnrecognised, AppResources.OK);
@@ -375,7 +382,6 @@ namespace RayshiftTranslateFGO.Views
                     }
                 }
 
-
                 LoadingLayout.IsVisible = false;
                 TranslationListView.IsVisible = true;
                 MasterButtons.IsVisible = true;
@@ -385,9 +391,63 @@ namespace RayshiftTranslateFGO.Views
                 Refresh.IsEnabled = true;
                 SwitchButtons(true);
             }
+            catch (System.IO.EndOfStreamException ex)
+            {
+                if (Preferences.Get("IsAccessUpgraded", 0) == 1)
+                {
+                    var responseOk = await DisplayAlert(AppResources.RestartNeededTitle, AppResources.RestartNeededBody, AppResources.OK, AppResources.RestartNeededHelp);
+                    if (!responseOk)
+                    {
+                        var doUseShizuku = await DisplayAlert(AppResources.RestartNeededTitle,
+                            AppResources.RestartNeededDialog2, AppResources.Yes, AppResources.No);
+                        if (doUseShizuku)
+                        {
+                            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
+                            {
+                                Preferences.Set("IsAccessUpgraded", 0);
+                                _isCurrentlyUpdating = false;
+                                SwitchErrorObjects(true);
+                                MessagingCenter.Send(Xamarin.Forms.Application.Current, "installer_page_goto_pre_initialize");
+                                return;
+                            }
+                            else
+                            {
+                                var intentService = DependencyService.Get<IIntentService>();
+                                intentService.MakeToast(AppResources.TooLowAndroidVersion);
+                                _isCurrentlyUpdating = false;
+                                SwitchErrorObjects(true);
+                            }
+                        }
+                        else
+                        {
+                            SentrySdk.CaptureException(ex);
+
+                            await DisplayAlert(AppResources.InternalError,
+                                String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
+                            _isCurrentlyUpdating = false;
+                            SwitchErrorObjects(true);
+                        }
+                    }
+                    else
+                    {
+                        _isCurrentlyUpdating = false;
+                        SwitchErrorObjects(true);
+                    }
+                }
+                else
+                {
+                    SentrySdk.CaptureException(ex);
+
+                    await DisplayAlert(AppResources.InternalError,
+                        String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
+                    _isCurrentlyUpdating = false;
+                    SwitchErrorObjects(true);
+                }
+            }
             catch (Exception ex)
             {
                 SentrySdk.CaptureException(ex);
+                
                 await DisplayAlert(AppResources.InternalError,
                     String.Format(AppResources.InternalErrorDetails, ex.ToString()), AppResources.OK);
                 _isCurrentlyUpdating = false;

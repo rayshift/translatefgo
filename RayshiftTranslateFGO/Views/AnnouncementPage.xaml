@@ -41,13 +41,19 @@
 
                     <Label Margin="0,0,0,10" Text="Empty placeholder bug" x:Name="AnnouncementTitle" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" />
                     <Label HorizontalTextAlignment="Center" Text="Empty placeholder body bug" x:Name="AnnouncementBody" Margin="0,0,0,10"/>
-                    <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="CenterAndExpand" x:Name="TwoWide">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" Text="{x:Static resources:AppResources.AboutLearnMore}" VerticalOptions="End" TextColor="White" x:Name="OpenWebsite"/>
                         <Button Grid.Column="1" BackgroundColor="{StaticResource Primary}" BorderRadius="2" Text="{x:Static resources:AppResources.OK}" VerticalOptions="End" TextColor="White" x:Name="Close"/>
+                    </Grid>
+                    <Grid HorizontalOptions="CenterAndExpand" x:Name="OneWide" IsVisible="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" BackgroundColor="{StaticResource Primary}" BorderRadius="2" Text="{x:Static resources:AppResources.OK}" VerticalOptions="End" TextColor="White" x:Name="CloseSingle"/>
                     </Grid>
                 </StackLayout>
 

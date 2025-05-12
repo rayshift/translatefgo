@@ -660,13 +660,22 @@ Do you want to continue?</value>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ShizukuAndroid11" xml:space="preserve">
-    <value />
-  </data>
   <data name="AboutFSPreferenceButton" xml:space="preserve">
     <value>Filesystem Access Mode</value>
   </data>
   <data name="SetFSPreferenceBody" xml:space="preserve">
     <value>Select which filesystem access mode to use</value>
+  </data>
+  <data name="RestartNeededBody" xml:space="preserve">
+    <value>Restart your phone to use TranslateFGO!</value>
+  </data>
+  <data name="RestartNeededTitle" xml:space="preserve">
+    <value>Phone Restart Required</value>
+  </data>
+  <data name="RestartNeededHelp" xml:space="preserve">
+    <value>That didn't help</value>
+  </data>
+  <data name="RestartNeededDialog2" xml:space="preserve">
+    <value>Do you want to use the old patching method instead? On Android 12+, this may require Shizuku.</value>
   </data>
 </root>

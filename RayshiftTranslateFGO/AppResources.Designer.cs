@@ -1060,6 +1060,42 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restart your phone to use TranslateFGO!.
+        /// </summary>
+        internal static string RestartNeededBody {
+            get {
+                return ResourceManager.GetString("RestartNeededBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to use the old patching method instead? On Android 12+, this may require Shizuku..
+        /// </summary>
+        internal static string RestartNeededDialog2 {
+            get {
+                return ResourceManager.GetString("RestartNeededDialog2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That didn&apos;t help.
+        /// </summary>
+        internal static string RestartNeededHelp {
+            get {
+                return ResourceManager.GetString("RestartNeededHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Restart Required.
+        /// </summary>
+        internal static string RestartNeededTitle {
+            get {
+                return ResourceManager.GetString("RestartNeededTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
         internal static string RetryText {
@@ -1119,15 +1155,6 @@ namespace RayshiftTranslateFGO {
         internal static string SetupFailedTitle {
             get {
                 return ResourceManager.GetString("SetupFailedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string ShizukuAndroid11 {
-            get {
-                return ResourceManager.GetString("ShizukuAndroid11", resourceCulture);
             }
         }
         

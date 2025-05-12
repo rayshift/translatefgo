@@ -72,6 +72,8 @@ namespace RayshiftTranslateFGO.Views
             {
                 intentService.MakeToast(AppResources.Android11SetupSuccessful);
                 Preferences.Set("UseShizuku", true);
+                Preferences.Set("DefaultFSMode", "Shizuku");
+                Preferences.Set("IsAccessUpgraded", 0);
                 await ReturnToMainPage();
                 return;
             }
@@ -80,6 +82,8 @@ namespace RayshiftTranslateFGO.Views
             {
                 intentService.MakeToast(AppResources.Android11SetupSuccessful);
                 Preferences.Set("UseShizuku", true);
+                Preferences.Set("DefaultFSMode", "Shizuku");
+                Preferences.Set("IsAccessUpgraded", 0);
                 Device.BeginInvokeOnMainThread(async () => await ReturnToMainPage());
             });
 

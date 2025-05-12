@@ -79,6 +79,12 @@ namespace RayshiftTranslateFGO.Views
             var locationJson = Preferences.Get("StorageLocations", "{}");
             var locations = JsonConvert.DeserializeObject<Dictionary<string, string>>(locationJson);
 
+            if (locations.Count > 0)
+            {
+                Preferences.Set("IsAccessUpgraded", 0);
+                Preferences.Set("DefaultFSMode", "SAF");
+            }
+
             bool allSeen = true;
             foreach (var app in GuiObjects)
             {

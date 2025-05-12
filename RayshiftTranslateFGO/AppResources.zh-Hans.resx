@@ -639,4 +639,16 @@
   <data name="SetFSPreferenceBody" xml:space="preserve">
     <value>请选择要使用的文件系统访问模式</value>
   </data>
+  <data name="RestartNeededBody" xml:space="preserve">
+    <value>重启手机以使用 TranslateFGO！</value>
+  </data>
+  <data name="RestartNeededTitle" xml:space="preserve">
+    <value>需要重启手机</value>
+  </data>
+  <data name="RestartNeededHelp" xml:space="preserve">
+    <value>那没有帮助</value>
+  </data>
+  <data name="RestartNeededDialog2" xml:space="preserve">
+    <value>要改用旧的修补方法吗？在 Android 12+ 上可能需要 Shizuku。</value>
+  </data>
 </root>

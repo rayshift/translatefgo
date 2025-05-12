@@ -30,7 +30,7 @@ namespace RayshiftTranslateFGO.Droid
         public static string UpgradeUrl(string url, bool force = false)
         {
             bool upgradeDirectAccess = Preferences.Get("IsAccessUpgraded", 0) == 1;
-            return (upgradeDirectAccess || force) ? SentryKey.UpgradeUrlKey(url) : url;
+            return ((upgradeDirectAccess || force) && Android.OS.Build.VERSION.SdkInt > Android.OS.BuildVersionCodes.R) ? SentryKey.UpgradeUrlKey(url) : url;
         }
 
         public Dictionary<string, List<FolderChildren>> _folderCache = new Dictionary<string, List<FolderChildren>>();

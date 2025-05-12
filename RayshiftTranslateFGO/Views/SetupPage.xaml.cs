@@ -163,6 +163,12 @@ namespace RayshiftTranslateFGO.Views
                             }
                         });
                 }
+                else
+                {
+                    Preferences.Set("SetupV2", true);
+                    Navigation.InsertPageBefore(new MainPage(), this);
+                    await Navigation.PopAsync(true);
+                }
             }
         }
 
