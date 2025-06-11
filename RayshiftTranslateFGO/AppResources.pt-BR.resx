@@ -400,7 +400,7 @@ Você quer continuar?</value>
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-    <value>Ultima atualização:</value>
+	  <value>Ultima atualização: </value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
     <value>Conectar conta do Rayshift</value>
@@ -540,7 +540,7 @@ Se você acha que isso é um erro, tente seguir os passos da "Reconfiguração d
     <value>Não instalado.</value>
   </data>
   <data name="StatusText" xml:space="preserve">
-    <value>Status:</value>
+	  <value>Status: </value>
   </data>
   <data name="StatusUnknown" xml:space="preserve">
     <value>Situação desconhecida. Tente reinstalar.</value>

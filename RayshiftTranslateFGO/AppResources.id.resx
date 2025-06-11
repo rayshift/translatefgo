@@ -181,7 +181,7 @@
     <value>Folder yang dipilih bukanlah "Android",  alih-alih ditemukan "{0}", tolong coba lagi.</value>
   </data>
   <data name="ArtCount" xml:space="preserve">
-    <value>Ilustrasi untuk dipasang:</value>
+	  <value>Ilustrasi untuk dipasang: </value>
   </data>
   <data name="ArtInstallWarning" xml:space="preserve">
     <value>Anda akan memasang ilustrasi kustom ke dalam game anda.
@@ -400,7 +400,7 @@ Ingin lanjut?</value>
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-    <value>Terakhir diperbarui:</value>
+	  <value>Terakhir diperbarui: </value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
     <value>Hubungkan akun Rayshift</value>

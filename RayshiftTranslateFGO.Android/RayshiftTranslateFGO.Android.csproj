@@ -69,8 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors">
-	<Version>4.5.0</Version>
-	</PackageReference>
+      <Version>4.5.0</Version>
+    </PackageReference>
     <PackageReference Include="Sentry.Xamarin.Forms">
       <Version>2.1.0</Version>
     </PackageReference>
@@ -84,8 +84,8 @@
       <Version>122.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
-	<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1" />
-	<PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.7.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.5" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
       <Version>117.6.0.3</Version>
@@ -120,19 +120,19 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShizukuX\ShizukuX.AIDL\ShizukuX.AIDL.csproj">
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.AIDL\ShizukuX.AIDL.csproj">
       <Project>{4467466a-c7e5-49ed-a126-e8bf76536fae}</Project>
       <Name>ShizukuX.AIDL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ShizukuX\ShizukuX.API\ShizukuX.API.csproj">
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.API\ShizukuX.API.csproj">
       <Project>{6ff43ce6-b3b0-48a0-a09a-7388620a38ad}</Project>
       <Name>ShizukuX.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ShizukuX\ShizukuX.Provider\ShizukuX.Provider.csproj">
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Provider\ShizukuX.Provider.csproj">
       <Project>{1c7c793b-eead-470b-9e26-4be6aabf6422}</Project>
       <Name>ShizukuX.Provider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ShizukuX\ShizukuX.Shared\ShizukuX.Shared.csproj">
+    <ProjectReference Include="..\..\ShizukuX\ShizukuX.Shared\ShizukuX.Shared.csproj">
       <Project>{82262bc8-37b8-4fb4-adab-41ab1e5361bd}</Project>
       <Name>ShizukuX.Shared</Name>
     </ProjectReference>
@@ -229,10 +229,15 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\zhCN.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\italian.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadXFormsNugetUpgradeInfoBarRayshiftTranslateFGOAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionRayshiftTranslateFGOAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
