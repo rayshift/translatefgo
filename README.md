@@ -24,6 +24,7 @@ Currently, English translations are available for:
 - A Portuguese Brazilian translation is also available.
 - A partial French translation is now available.
 - A partial Indonesian translation is now available.
+- A partial Italian translation is now available.
 
 ### Installation
 Requirements: Android 7-15+ are supported. Root is not required. Shizuku may be required on some modern devices.
