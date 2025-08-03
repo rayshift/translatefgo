@@ -83,6 +83,10 @@
                         x:Name ="LinkAccount"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+                <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.LinkAccountManual}"
+                        x:Name ="LinkAccountManual"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
                 <Button Margin="0,5,0,0" Text="{x:Static resources:AppResources.AboutRetrySetup}"
                         x:Name="RetryAndroid11"
                         BackgroundColor="{StaticResource Primary}"

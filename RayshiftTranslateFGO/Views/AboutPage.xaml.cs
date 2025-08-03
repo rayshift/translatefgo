@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Android.App;
 using RayshiftTranslateFGO.Services;
 using RayshiftTranslateFGO.Util;
 using RayshiftTranslateFGO.ViewModels;
@@ -35,7 +36,7 @@ namespace RayshiftTranslateFGO.Views
             var sLock = App.GetViewModel<MainPageViewModel>().Cache.Get<bool>("AboutSubscribeLock");
             if (!sLock)
             {
-                MessagingCenter.Subscribe<Application>(Xamarin.Forms.Application.Current, "connect_rayshift_account", async (sender) =>
+                MessagingCenter.Subscribe<Xamarin.Forms.Application>(Xamarin.Forms.Application.Current, "connect_rayshift_account", async (sender) =>
                 {
                     Device.BeginInvokeOnMainThread(async () => await StartLinkAccount());
                 });
@@ -63,7 +64,7 @@ namespace RayshiftTranslateFGO.Views
 
         private async void SetFSPreferenceOnClicked(object sender, EventArgs e)
         {
-            var action = await Application.Current.MainPage.DisplayActionSheet(
+            var action = await Xamarin.Forms.Application.Current.MainPage.DisplayActionSheet(
                 AppResources.SetFSPreferenceBody, // Title
                 AppResources.Cancel,           // Cancel button
                 null,               // Destructive button (optional)
@@ -138,6 +139,64 @@ namespace RayshiftTranslateFGO.Views
             }
         }
 
+        private async Task StartLinkAccountManual()
+        {
+            string result = await DisplayPromptAsync(AppResources.LinkAccountManual, AppResources.EnterLinkKeyDescription);
+
+            if (result != null)
+            {
+
+                var (resCode, token) = await API.GetManualLinkToken(result);
+
+                if (resCode != 200)
+                {
+                    var errorMsg = resCode == 403 ? AppResources.EnterLinkKeyExpired : token;
+                    await DisplayAlert(AppResources.Error, string.Format(AppResources.EnterLinkKeyInvalid, errorMsg), AppResources.OK);
+                    return;
+                }
+                
+                await LinkAccountLogic(token);
+                
+
+                ShowCorrectLinkAccountButton();
+            }
+        }
+
+        private async Task LinkAccountLogic(string token)
+        {
+            var intentService = DependencyService.Get<IIntentService>();
+            if (!Guid.TryParse(token, out Guid guid))
+            {
+                intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, "invalid token returned"));
+                return;
+            }
+            
+            // test link
+            var test = await API.GetLinkedUserDetails(guid);
+
+            if (test.Data.Status != 200)
+            {
+                intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, $"{test.Data.Status} - {test.Data.Message}"));
+                return;
+            }
+
+            intentService.MakeToast(string.Format(AppResources.LinkAccountSuccess, test.Data.Response.userName));
+
+            // set link
+            Preferences.Set(EndpointURL.GetLinkedAccountKey(), guid.ToString());
+
+            App.GetViewModel<AboutViewModel>().Cache.Set("LoggedUser", test.Data);
+            MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
+            if (test.Data.Response.isPlus)
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "add_art_tab_non_donor");
+            }
+            else
+            {
+                MessagingCenter.Send(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor");
+            }
+        }
+
         private async Task StartLinkAccount()
         {
             var intentService = DependencyService.Get<IIntentService>();
@@ -145,35 +204,7 @@ namespace RayshiftTranslateFGO.Views
 
             if (linkData != null && !string.IsNullOrEmpty(linkData.AccessToken))
             {
-                if (!Guid.TryParse(linkData.AccessToken, out Guid guid))
-                {
-                    intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, "invalid token returned"));
-                    return;
-                }
-                // test link
-                var test = await API.GetLinkedUserDetails(guid);
-
-                if (test.Data.Status != 200)
-                {
-                    intentService.MakeToast(string.Format(AppResources.LinkAccountFailure, $"{test.Data.Status} - {test.Data.Message}"));
-                    return;
-                }
-
-                intentService.MakeToast(string.Format(AppResources.LinkAccountSuccess, test.Data.Response.userName));
-
-                // set link
-                Preferences.Set(EndpointURL.GetLinkedAccountKey(), linkData.AccessToken);
-
-                App.GetViewModel<AboutViewModel>().Cache.Set("LoggedUser", test.Data);
-                MessagingCenter.Send(Xamarin.Forms.Application.Current, "reset_initial_load");
-                if (test.Data.Response.isPlus)
-                {
-                    MessagingCenter.Send(Xamarin.Forms.Application.Current, "add_art_tab_non_donor");
-                }
-                else
-                {
-                    MessagingCenter.Send(Xamarin.Forms.Application.Current, "remove_art_tab_non_donor");
-                }
+                await LinkAccountLogic(linkData.AccessToken);
             }
 
             ShowCorrectLinkAccountButton();
@@ -226,11 +257,15 @@ namespace RayshiftTranslateFGO.Views
             {
                 LinkAccount.Command = new Command(async () => await StartLinkAccount());
                 LinkAccount.Text = AppResources.LinkAccount;
+                LinkAccountManual.Command = new Command(async () => await StartLinkAccountManual());
+                LinkAccountManual.Text = AppResources.LinkAccountManual;
+                LinkAccountManual.IsVisible = true;
             }
             else
             {
                 LinkAccount.Command = new Command(async () => await StartUnlinkAccount());
                 LinkAccount.Text = AppResources.UnlinkAccount;
+                LinkAccountManual.IsVisible = false;
             }
         }
 

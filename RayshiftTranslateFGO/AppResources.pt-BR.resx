@@ -400,7 +400,7 @@ Você quer continuar?</value>
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-	  <value>Ultima atualização: </value>
+    <value>Ultima atualização: </value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
     <value>Conectar conta do Rayshift</value>
@@ -540,7 +540,7 @@ Se você acha que isso é um erro, tente seguir os passos da "Reconfiguração d
     <value>Não instalado.</value>
   </data>
   <data name="StatusText" xml:space="preserve">
-	  <value>Status: </value>
+    <value>Status: </value>
   </data>
   <data name="StatusUnknown" xml:space="preserve">
     <value>Situação desconhecida. Tente reinstalar.</value>
@@ -650,5 +650,19 @@ Você quer continuar?</value>
   </data>
   <data name="RestartNeededDialog2" xml:space="preserve">
     <value>Deseja usar o método antigo de patch? No Android 12+, isso pode exigir o Shizuku.</value>
+  </data>
+  <data name="LinkAccountManual" xml:space="preserve">
+    <value>Conectar conta do Rayshift via código</value>
+  </data>
+  <data name="EnterLinkKeyDescription" xml:space="preserve">
+    <value>Acesse https://rayshift.io/link no seu navegador e insira o código que você vê aqui.</value>
+  </data>
+  <data name="EnterLinkKeyExpired" xml:space="preserve">
+    <value>O código usado expirou ou está incorreto.</value>
+  </data>
+  <data name="EnterLinkKeyInvalid" xml:space="preserve">
+    <value>Não foi possível vincular sua conta.
+
+Erro: {0}</value>
   </data>
 </root>

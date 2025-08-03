@@ -531,6 +531,35 @@ namespace RayshiftTranslateFGO {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to https://rayshift.io/link in your browser and enter the code you see here..
+        /// </summary>
+        internal static string EnterLinkKeyDescription {
+            get {
+                return ResourceManager.GetString("EnterLinkKeyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The code used has expired or is incorrect..
+        /// </summary>
+        internal static string EnterLinkKeyExpired {
+            get {
+                return ResourceManager.GetString("EnterLinkKeyExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not link your account.
+        ///
+        ///Error: {0}.
+        /// </summary>
+        internal static string EnterLinkKeyInvalid {
+            get {
+                return ResourceManager.GetString("EnterLinkKeyInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -890,6 +919,15 @@ namespace RayshiftTranslateFGO {
         internal static string LinkAccountFailure {
             get {
                 return ResourceManager.GetString("LinkAccountFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect Rayshift Account via Code.
+        /// </summary>
+        internal static string LinkAccountManual {
+            get {
+                return ResourceManager.GetString("LinkAccountManual", resourceCulture);
             }
         }
         

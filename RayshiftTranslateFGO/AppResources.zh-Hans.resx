@@ -651,4 +651,18 @@
   <data name="RestartNeededDialog2" xml:space="preserve">
     <value>要改用旧的修补方法吗？在 Android 12+ 上可能需要 Shizuku。</value>
   </data>
+  <data name="LinkAccountManual" xml:space="preserve">
+    <value>通过代码连接 Rayshift 账号</value>
+  </data>
+  <data name="EnterLinkKeyDescription" xml:space="preserve">
+    <value>在浏览器中打开 https://rayshift.io/link，然后输入你在这里看到的代码。</value>
+  </data>
+  <data name="EnterLinkKeyExpired" xml:space="preserve">
+    <value>使用的验证码已过期或不正确。</value>
+  </data>
+  <data name="EnterLinkKeyInvalid" xml:space="preserve">
+    <value>无法链接您的账户。
+
+错误：{0}</value>
+  </data>
 </root>

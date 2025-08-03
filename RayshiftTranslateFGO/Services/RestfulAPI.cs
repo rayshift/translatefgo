@@ -198,6 +198,25 @@ namespace RayshiftTranslateFGO.Services
             return response;
         }
 
+        public async Task<(int, string)> GetManualLinkToken(string code)
+        {
+            if (EndpointURL.NeedsRefresh)
+            {
+                EndpointURL.NeedsRefresh = false;
+                RefreshEndpoint();
+            }
+
+            var request = new RestRequest($"translate/link-code/{code}")
+            {
+                Method = Method.GET
+            };
+
+
+            var result = await ExecuteAsync<BaseAPIResponse>(request);
+
+            return (result?.Data?.Status ?? 500, result?.Data?.Message ?? "server error");
+        }
+
         /// <summary>
         /// Get new asset list
         /// </summary>

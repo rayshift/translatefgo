@@ -678,4 +678,18 @@ Do you want to continue?</value>
   <data name="RestartNeededDialog2" xml:space="preserve">
     <value>Do you want to use the old patching method instead? On Android 12+, this may require Shizuku.</value>
   </data>
+  <data name="LinkAccountManual" xml:space="preserve">
+    <value>Connect Rayshift Account via Code</value>
+  </data>
+  <data name="EnterLinkKeyDescription" xml:space="preserve">
+    <value>Go to https://rayshift.io/link in your browser and enter the code you see here.</value>
+  </data>
+  <data name="EnterLinkKeyExpired" xml:space="preserve">
+    <value>The code used has expired or is incorrect.</value>
+  </data>
+  <data name="EnterLinkKeyInvalid" xml:space="preserve">
+    <value>Could not link your account.
+
+Error: {0}</value>
+  </data>
 </root>

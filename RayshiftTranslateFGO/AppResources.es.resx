@@ -398,7 +398,7 @@ Tamaño total de descarga: {0}
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-	  <value>Última actualización: </value>
+    <value>Última actualización: </value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
     <value>Conectado a la cuenta de Rayshift</value>
@@ -538,7 +538,7 @@ Si crees que esto es un error, intenta la "configuración para Android 11" en la
     <value>No instalado</value>
   </data>
   <data name="StatusText" xml:space="preserve">
-	  <value>Estatus: </value>
+    <value>Estatus: </value>
   </data>
   <data name="StatusUnknown" xml:space="preserve">
     <value>Estado desconocido, intente reinstalar.</value>
@@ -556,7 +556,7 @@ Si crees que esto es un error, intenta la "configuración para Android 11" en la
     <value>Se requiere Android 7.0+</value>
   </data>
   <data name="TotalSize" xml:space="preserve">
-	  <value>Tamaño de la instalación: </value>
+    <value>Tamaño de la instalación: </value>
   </data>
   <data name="TranslateAPIError" xml:space="preserve">
     <value>No hay traducciones disponibles actualmente.</value>
@@ -648,5 +648,19 @@ Asegúrese de que haya creado y anotado su código de transferencia de FGO antes
   </data>
   <data name="RestartNeededDialog2" xml:space="preserve">
     <value>¿Quieres usar el método de parcheo antiguo en su lugar? En Android 12+, esto puede requerir Shizuku.</value>
+  </data>
+  <data name="LinkAccountManual" xml:space="preserve">
+    <value>Conectar cuenta de Rayshift mediante código</value>
+  </data>
+  <data name="EnterLinkKeyDescription" xml:space="preserve">
+    <value>Ve a https://rayshift.io/link en tu navegador e ingresa el código que ves aquí.</value>
+  </data>
+  <data name="EnterLinkKeyExpired" xml:space="preserve">
+    <value>El código utilizado ha expirado o es incorrecto.</value>
+  </data>
+  <data name="EnterLinkKeyInvalid" xml:space="preserve">
+    <value>No se pudo vincular tu cuenta.
+
+Error: {0}</value>
   </data>
 </root>

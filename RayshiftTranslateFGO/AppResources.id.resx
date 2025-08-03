@@ -181,7 +181,7 @@
     <value>Folder yang dipilih bukanlah "Android",  alih-alih ditemukan "{0}", tolong coba lagi.</value>
   </data>
   <data name="ArtCount" xml:space="preserve">
-	  <value>Ilustrasi untuk dipasang: </value>
+    <value>Ilustrasi untuk dipasang: </value>
   </data>
   <data name="ArtInstallWarning" xml:space="preserve">
     <value>Anda akan memasang ilustrasi kustom ke dalam game anda.
@@ -400,7 +400,7 @@ Ingin lanjut?</value>
     <value>FGO JP</value>
   </data>
   <data name="LastUpdatedText" xml:space="preserve">
-	  <value>Terakhir diperbarui: </value>
+    <value>Terakhir diperbarui: </value>
   </data>
   <data name="LinkAccount" xml:space="preserve">
     <value>Hubungkan akun Rayshift</value>
@@ -650,5 +650,19 @@ Ingin lanjut?</value>
   </data>
   <data name="RestartNeededDialog2" xml:space="preserve">
     <value>Ingin menggunakan metode patch lama? Di Android 12+, ini mungkin memerlukan Shizuku.</value>
+  </data>
+  <data name="LinkAccountManual" xml:space="preserve">
+    <value>Hubungkan akun Rayshift melalui kode</value>
+  </data>
+  <data name="EnterLinkKeyDescription" xml:space="preserve">
+    <value>Buka https://rayshift.io/link di browser Anda dan masukkan kode yang Anda lihat di sini.</value>
+  </data>
+  <data name="EnterLinkKeyExpired" xml:space="preserve">
+    <value>Kode yang digunakan telah kedaluwarsa atau salah.</value>
+  </data>
+  <data name="EnterLinkKeyInvalid" xml:space="preserve">
+    <value>Tidak dapat menautkan akun Anda.
+
+Kesalahan: {0}</value>
   </data>
 </root>
