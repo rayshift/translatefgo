@@ -1,22 +1,26 @@
 ﻿## Rayshift.io Translate Fate/Grand Order
 [![GitHub Release](https://img.shields.io/github/release/rayshift/translatefgo.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![Github All Releases](https://img.shields.io/github/downloads/rayshift/translatefgo/total.svg?style=flat)](https://github.com/rayshift/translatefgo/releases)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Discord Chat](https://img.shields.io/discord/665980614998097941.svg)](https://discord.gg/6vncnjj)  
 
+[![Discord Banner 2](https://discordapp.com/api/guilds/665980614998097941/widget.png?style=banner2)](https://discord.gg/6vncnjj)
+
 This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
 ### Android 14+ is now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
-#### NEW! Updated video tutorial on how to use this app: [https://www.youtube.com/watch?v=xjYcUaMOD4A](https://www.youtube.com/watch?v=xjYcUaMOD4A)
+#### If you're having issues, first try restarting your phone, otherwise try to downgrade Shizuku.
 
-If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the hosting and maintenance costs of the app. Patreons have access to beta features.
+#### Video tutorial on how to use this app: [https://www.youtube.com/watch?v=xjYcUaMOD4A](https://www.youtube.com/watch?v=xjYcUaMOD4A)
 
-![Example](https://i.imgur.com/1fO8L8Y.png)
+#### If you're able, become a [Patreon](https://www.patreon.com/rayshift) to help support the hosting and maintenance costs of the app. Patreons have access to beta features.
+
+![Example](https://i.imgur.com/cYurGrI.png)
 
 If the text is too fast or slow, you can change text speed in the [game settings](https://i.imgur.com/UhmoZI9.png). (Top = text speed, bottom = scroll speed)
 
 Currently, English translations are available for:
 - Official: Anything the Global/US version of the app has.
 - Machine & Edited: Anything not mentioned here
-- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3, OC4
+- Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3, OC4, Final Chapter
 - Human Events: Valentines 2022-2024, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab, Summer 2024
 
 #### Languages
@@ -73,7 +77,7 @@ Try these troubleshooting steps:
 
 TranslateFGO has existed for over 5 years and is trusted by tens of thousands of players.
 
-Aniplex has not taken any action against it or its users since its launch in early 2020. This is likely because this is a free, non-profit community tool designed to help more players access the game.
+Aniplex has not taken any action against it or its 100,000+ users since its launch in early 2020. This is likely because this is a free, non-profit community tool designed to help more players access the game.
 
 However, we cannot provide any guarantee that action towards players will not be taken in the future. You use this app at your own risk, and Rayshift offers no liability for anything that might happen.
 
