@@ -3,7 +3,7 @@
 
 [![Discord Banner 2](https://discordapp.com/api/guilds/665980614998097941/widget.png?style=banner2)](https://discord.gg/6vncnjj)
 
-This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [DeepL](https://www.deepl.com/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
+This application translates cutscenes in Fate/Grand Order JP & NA into a variety of different languages. It features real time machine translation of the most recent event using [GPT-5](https://openai.com/gpt-5/). Older content uses the official translation from the North American region. Teams of translators are working on human translations in various different languages.
 
 ### Android 14+ is now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
@@ -21,7 +21,7 @@ Currently, English translations are available for:
 - Official: Anything the Global/US version of the app has.
 - Machine & Edited: Anything not mentioned here
 - Human Main Story: LB6, Tunguska Sanctuary, Traum, LB7, OC1, OC2, OC3, OC4, Final Chapter
-- Human Events: Valentines 2022-2024, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab, Summer 2024
+- Human Events: Valentines 2022-2026, Xmas 2023, Lilim Harlot Collab, Samurai Remnant Collab, Mahoyo Collab, Summer 2024
 
 #### Languages
 - A Spanish translation for F/GO is also available through this app. Please see https://proyectograndorder.es/ for more information.
