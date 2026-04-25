@@ -7,7 +7,7 @@ This application translates cutscenes in Fate/Grand Order JP & NA into a variety
 
 ### Android 14+ is now fully supported. [Click to download.](https://github.com/rayshift/translatefgo/releases)
 
-#### If you're having issues, first try restarting your phone, otherwise try to downgrade Shizuku.
+#### If you're having issues, first try restarting your phone, otherwise try using a special version of Shizuku: https://github.com/thedjchi/Shizuku/releases
 
 #### Video tutorial on how to use this app: [https://www.youtube.com/watch?v=xjYcUaMOD4A](https://www.youtube.com/watch?v=xjYcUaMOD4A)
 
